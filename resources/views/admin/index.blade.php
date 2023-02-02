@@ -1,4 +1,9 @@
 @extends('admin.admin_master')
+
+@section('title')
+    Admin Dashboard
+@endsection
+
 @section('admin_content')
 
 <div class="content-wrapper">
@@ -31,9 +36,8 @@
                     <div class="row">
                         <div class="col-9">
                             <div class="d-flex align-items-center align-self-start">
-{{--                                <h3 class="mb-0">{{ count($category) }}</h3>--}}
-                                <h3 class="mb-0">3</h3>
-                                <p class="text-success ml-2 mb-0 font-weight-medium">Categories</p>
+                                <h3 class="mb-0">{{ $usersCount }}</h3>
+                                <p class="text-success ml-2 mb-0 font-weight-medium">Users</p>
                             </div>
                         </div>
                         <div class="col-3">

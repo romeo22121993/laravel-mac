@@ -34,8 +34,9 @@ class AdminController extends Controller
 
         $category = [ 'a', 'b', 'c' ];
         $post     = [ 'a', 'b', 'c' ];
+        $usersCount = User::count();
 
-        return view('admin.index',compact('category',  'post'));
+        return view('admin.index', compact('category',  'usersCount'));
 
     }
 

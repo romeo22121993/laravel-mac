@@ -24,7 +24,7 @@
                         </div>
                     @endif
 
-                    <form class="forms-sample" method="POST" action="{{ route('wpadmin.users.update', $user->id) }}">
+                    <form class="forms-sample" method="POST" action="{{ route('wpadmin.update.password', $user->id) }}">
                         @csrf
 
                         <div class="form-group">
