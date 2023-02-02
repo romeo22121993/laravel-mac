@@ -6,6 +6,7 @@ use App\Enums\Category;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\PostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,16 @@ Route::group(['prefix'=> 'wpadmin'], function(){
         Route::get('/edit/{id}',    [UsersController::class, 'EditUser'])->name('wpadmin.users.edit');
         Route::post('/update/{id}', [UsersController::class, 'UpdateUser'])->name('wpadmin.users.update');
         Route::get('/delete/{id}',  [UsersController::class, 'DeleteUser'])->name('wpadmin.users.delete');
+    });
+
+
+    Route::group(['prefix'=> 'posts'], function() {
+        Route::get('/',             [UsersController::class, 'usersPage'])->name('wpadmin.posts');
+        Route::get('/add',          [UsersController::class, 'addUser'])->name('wpadmin.posts.add');
+        Route::post('/store',       [UsersController::class, 'StoreUser'])->name('wpadmin.posts.store');
+        Route::get('/edit/{id}',    [UsersController::class, 'EditUser'])->name('wpadmin.posts.edit');
+        Route::post('/update/{id}', [UsersController::class, 'UpdateUser'])->name('wpadmin.posts.update');
+        Route::get('/delete/{id}',  [UsersController::class, 'DeleteUser'])->name('wpadmin.posts.delete');
     });
 
 });

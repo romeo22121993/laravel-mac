@@ -18,7 +18,7 @@
                     </div>
                     <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
                     <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
-                        <a href="#" class="dropdown-item preview-item">
+                        <a href="{{ route('wpadmin.change.profile') }}" class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
                                 <div class="preview-icon bg-dark rounded-circle">
                                     <i class="mdi mdi-settings text-primary"></i>
@@ -29,7 +29,7 @@
                             </div>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item preview-item">
+                        <a href="{{ route('wpadmin.change.password') }}" class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
                                 <div class="preview-icon bg-dark rounded-circle">
                                     <i class="mdi mdi-onepassword  text-info"></i>
@@ -84,6 +84,21 @@
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.users') }}">Users</a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.users.add') }}">Add User</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item menu-items">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-laptop"></i>
+                    </span>
+                    <span class="menu-title">Posts</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.posts') }}">Posts</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.posts.add') }}">Add Post</a></li>
                     </ul>
                 </div>
             </li>
