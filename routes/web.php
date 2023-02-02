@@ -22,7 +22,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
+/* Routes with passwords */
 Route::get('/logout', [UserController::class, 'logout'])->middleware('auth');
+Route::get('/forgot-password',        [UserController::class, 'forgotPassword' ])->middleware('guest')->name('password.forgot');
+Route::post('/forgot-password',       [UserController::class, 'requestPassword'])->middleware('guest')->name('password.email');
+Route::get('/reset-password/{token}', [UserController::class, 'resetPasswordPage'])->middleware('guest')->name('password.reset');
+Route::post('/reset-password',        [UserController::class, 'changePassword'])->middleware('guest')->name('password.update');
+/* */
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
