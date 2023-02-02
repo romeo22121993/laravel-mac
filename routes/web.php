@@ -33,6 +33,7 @@ Route::view('/welcome/', 'set', [ 'environment' => 'aaa'] );
 //    return $name;
 //});
 
+
 Route::get('/users/{user}', function (User $user) {
     return $user->email;
 });
