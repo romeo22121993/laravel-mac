@@ -73,30 +73,20 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('wpadmin.users') }}">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                     <span class="menu-icon">
-                    <i class="mdi mdi-speedometer"></i>
+                        <i class="mdi mdi-laptop"></i>
                     </span>
                     <span class="menu-title">Users</span>
+                    <i class="menu-arrow"></i>
                 </a>
+                <div class="collapse" id="ui-basic">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.users') }}">Users</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.users.add') }}">Add User</a></li>
+                    </ul>
+                </div>
             </li>
-            @if(Auth::user()->category == 1)
-                <li class="nav-item menu-items">
-                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-laptop"></i>
-                        </span>
-                        <span class="menu-title">Categories</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="ui-basic">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('categories') }}">Category</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('subcategories') }}">SubCategory</a></li>
-                        </ul>
-                    </div>
-                </li>
-            @endif
             @if(Auth::user()->district == 1)
             <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#district" aria-expanded="false" aria-controls="district">

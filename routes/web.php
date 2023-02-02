@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Enums\Category;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,21 @@ Route::group(['prefix'=> 'dashboard'], function(){
 /** All Pages with Admin dashboards */
 Route::group(['prefix'=> 'wpadmin'], function(){
     Route::get('/', [AdminController::class, 'mainPage'])->name('wpadmin.main');
-    Route::get('/users', [AdminController::class, 'usersPage'])->name('wpadmin.users');
+
+    Route::get('/change-user-settings',  [UsersController::class, 'changeSettings'])->name('wpadmin.change.profile');
+    Route::post('/change-user-settings', [UsersController::class, 'updateSettings'])->name('wpadmin.update.profile');
+    Route::get('/change-password',       [UsersController::class, 'changePassword'])->name('wpadmin.change.password');
+    Route::post('/change-password',      [UsersController::class, 'updatePassword'])->name('wpadmin.update.password');
+
+    Route::group(['prefix'=> 'users'], function() {
+        Route::get('/',             [UsersController::class, 'usersPage'])->name('wpadmin.users');
+        Route::get('/add',          [UsersController::class, 'addUser'])->name('wpadmin.users.add');
+        Route::post('/store',       [UsersController::class, 'StoreUser'])->name('wpadmin.users.store');
+        Route::get('/edit/{id}',    [UsersController::class, 'EditUser'])->name('wpadmin.users.edit');
+        Route::post('/update/{id}', [UsersController::class, 'UpdateUser'])->name('wpadmin.users.update');
+        Route::get('/delete/{id}',  [UsersController::class, 'DeleteUser'])->name('wpadmin.users.delete');
+    });
+
 });
 
 /** All Pages without needed to log in */

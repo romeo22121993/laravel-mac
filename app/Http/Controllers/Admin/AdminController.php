@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -24,28 +25,20 @@ class AdminController extends Controller
         $this->middleware('isAdmin');
     }
 
+    /**
+     * Function setting main admin page
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function mainPage() {
 
-        $category = ['aa', 'bbb', 'ccc'];
-        $subcategory = ['aa', 'bbb', 'ccc'];
-        $post = ['aa', 'bbb', 'ccc'];
+        $category = [ 'a', 'b', 'c' ];
+        $post     = [ 'a', 'b', 'c' ];
 
-        return view('admin.index',compact('category',  'subcategory', 'post'));
-
-    }
-
-
-    public function usersPage() {
-
-        $category = ['aa', 'bbb', 'ccc'];
-        $subcategory = ['aa', 'bbb', 'ccc'];
-        $post = ['aa', 'bbb', 'ccc'];
-
-
-        return view('admin.index',compact('category',  'subcategory', 'post'));
-
+        return view('admin.index',compact('category',  'post'));
 
     }
+
 
     /**
      * Function getting forgot password page

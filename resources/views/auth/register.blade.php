@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password"  > Password </label>
+                        <label for="password"> Password </label>
                         <input id="password" class="block mt-1 w-full form-control p_input" type="password" name="password" required  />
                     </div>
 
