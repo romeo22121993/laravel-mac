@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Enums\Category;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/logout', [UserController::class, 'logout'])->middleware('auth');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 //Route::get('/user', [UserController::class, 'index']);
 Route::get('/greeting', function () {
     return 'Hello World';
@@ -42,3 +46,7 @@ Route::get('/categories/{category}', function (Category $category) {
 //    var_dump( '$category', $category );
     return $category->value;
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

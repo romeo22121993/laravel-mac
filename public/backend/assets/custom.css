@@ -1,0 +1,6 @@
+.register_page .register_form .left,
+.register_page .register_form .right {
+    display: inline-block;
+    width: 48%;
+    margin: 0 6px 0 6px;
+}
