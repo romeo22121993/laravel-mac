@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 
@@ -20,10 +21,29 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('is_admim');
+        $this->middleware('isAdmin');
     }
 
     public function mainPage() {
+
+        $category = ['aa', 'bbb', 'ccc'];
+        $subcategory = ['aa', 'bbb', 'ccc'];
+        $post = ['aa', 'bbb', 'ccc'];
+
+        return view('admin.index',compact('category',  'subcategory', 'post'));
+
+    }
+
+
+    public function usersPage() {
+
+        $category = ['aa', 'bbb', 'ccc'];
+        $subcategory = ['aa', 'bbb', 'ccc'];
+        $post = ['aa', 'bbb', 'ccc'];
+
+
+        return view('admin.index',compact('category',  'subcategory', 'post'));
+
 
     }
 

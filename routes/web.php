@@ -34,12 +34,13 @@ Route::post('/reset-password',        [UserController::class, 'changePassword'])
 
 /** All Pages with User dashboards */
 Route::group(['prefix'=> 'dashboard'], function(){
-    Route::get('/logout', [UserController::class, 'logout'])->middleware('dashboard.main');
+    Route::get('/', [AdminController::class, 'mainPage'])->name('dashboard.main');
 });
 
 /** All Pages with Admin dashboards */
 Route::group(['prefix'=> 'wpadmin'], function(){
-
+    Route::get('/', [AdminController::class, 'mainPage'])->name('wpadmin.main');
+    Route::get('/users', [AdminController::class, 'usersPage'])->name('wpadmin.users');
 });
 
 /** All Pages without needed to log in */
