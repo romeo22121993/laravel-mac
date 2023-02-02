@@ -26,20 +26,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         View::composer('*', function ($view) {
             $user = auth()->user();
-
-//            if ($userId = auth()->id()) {
-//                $rating = Cache::rememberForever("rating_{$storeId}", function () use ($userId) {
-//                    $res = Rating::where('user_id', $userId)->orderByDesc('created_at')->first(['stars', 'blocked_at']);
-//                    return !empty($res) ? $res : 0;
-//                });
-//            }
+            $avatarImg = ( !empty( $user->avatar_img ) ) ? url( 'uploads/users/'.$user->avatar_img ) : asset('img/face.jpeg');
 
             $view->with([
                 'instructionPopup' => $a ?? 0,
-                'currentUser' => $user ?? [],
-                'storeUrl' => $store->domain ?? '',
+                'currentUser'      => $user ?? [],
+                'avatarImg'        => $avatarImg ?? '',
             ]);
 
         });

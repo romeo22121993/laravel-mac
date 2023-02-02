@@ -43,7 +43,7 @@ Route::group(['prefix'=> 'wpadmin'], function(){
     Route::get('/', [AdminController::class, 'mainPage'])->name('wpadmin.main');
 
     Route::get('/change-user-settings',  [UsersController::class, 'changeSettings'])->name('wpadmin.change.profile');
-    Route::post('/change-user-settings', [UsersController::class, 'updateSettings'])->name('wpadmin.update.profile');
+    Route::post('/change-user-settings/{id}', [UsersController::class, 'updateSettings'])->name('wpadmin.update.profile');
     Route::get('/change-password',       [UsersController::class, 'changePassword'])->name('wpadmin.change.password');
     Route::post('/change-password/{id}', [UsersController::class, 'updatePassword'])->name('wpadmin.update.password');
 

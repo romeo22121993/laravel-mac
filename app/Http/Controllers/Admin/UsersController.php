@@ -162,6 +162,7 @@ class UsersController extends Controller
     public function updateSettings( Request $request, $id ) {
 
         $data  = $request->all();
+        $user  = User::find($id);
 
         User::whereId($id)->update([
             'name'      => $data['name'],
@@ -174,7 +175,18 @@ class UsersController extends Controller
             'position'  => $data['position'],
         ]);
 
-        return Redirect()->route('wpadmin.main');
+        if ( $request->file('avatar_img' ) ) {
+            $file = $request->file('avatar_img');
+            @unlink(public_path('uploads/users/'.$user->avatar_img));
+            $filename = date('YmdHi').$file->getClientOriginalName();
+            $file->move(public_path('uploads/users'),$filename);
+            $user['avatar_img'] = $filename;
+
+            $user->save();
+        }
+
+
+        return redirect()->back();
     }
 
     /**

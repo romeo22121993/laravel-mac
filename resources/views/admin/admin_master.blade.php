@@ -59,6 +59,7 @@
     <script src="{{ asset('backend/assets/js/todolist.js') }}"></script>
     <script src="{{ asset('backend/assets/js/todolist.js') }}"></script>
     <script src="{{ asset('backend/assets/js/scripts-custom.js') }}"></script>
+    <script src="{{ asset('backend/assets/custom.js') }}"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="{{ asset('backend/assets/js/dashboard.js') }}"></script>
