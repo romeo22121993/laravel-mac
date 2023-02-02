@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Enums\Category;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,22 @@ Route::post('/forgot-password',       [UserController::class, 'requestPassword']
 Route::get('/reset-password/{token}', [UserController::class, 'resetPasswordPage'])->middleware('guest')->name('password.reset');
 Route::post('/reset-password',        [UserController::class, 'changePassword'])->middleware('guest')->name('password.update');
 /* */
+
+
+/** All Pages with User dashboards */
+Route::group(['prefix'=> 'dashboard'], function(){
+    Route::get('/logout', [UserController::class, 'logout'])->middleware('dashboard.main');
+});
+
+/** All Pages with Admin dashboards */
+Route::group(['prefix'=> 'wpadmin'], function(){
+
+});
+
+/** All Pages without needed to log in */
+Route::group(['middleware' => ['web', 'guest']], function () {
+
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

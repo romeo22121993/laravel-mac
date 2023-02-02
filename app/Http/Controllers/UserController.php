@@ -23,7 +23,7 @@ class UserController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Function for Log Out
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -62,7 +62,12 @@ class UserController extends Controller
             : back()->withErrors(['email' => __($status)]);
     }
 
-
+    /**
+     * Function getting
+     *
+     * @param $token
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function resetPasswordPage ( $token )
     {
         return view('auth.passwords.reset', ['token' => $token]);
