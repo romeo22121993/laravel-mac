@@ -64,6 +64,7 @@ Route::group(['prefix'=> 'wpadmin'], function(){
         Route::get('/edit/{id}',    [PostsController::class, 'EditPost'])->name('wpadmin.posts.edit');
         Route::post('/update/{id}', [PostsController::class, 'UpdatePost'])->name('wpadmin.posts.update');
         Route::get('/delete/{id}',  [PostsController::class, 'DeletePost'])->name('wpadmin.posts.delete');
+        Route::get('/category/{id}',  [PostsController::class, 'postsPageByCategory'])->name('wpadmin.posts.by,categories');
 
         Route::group(['prefix'=> 'categories'], function() {
             Route::get('/',             [PostsController::class, 'postsCategoryPage'])->name('wpadmin.posts.categories');

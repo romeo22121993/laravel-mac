@@ -32,6 +32,20 @@ class PostsController extends Controller
         return view('admin.posts.index', compact( 'posts' ) );
     }
 
+    /**
+     * Function main of category controller
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function postsPageByCategory( $id ) {
+
+        $postCategory = PostCategory::find( $id );
+        $posts        = $postCategory->posts->pluck(['id']);
+        $posts        = Post::whereIn('id',$posts )->paginate(3);
+
+        return view('admin.posts.postsbycategories', compact( 'posts', 'postCategory' ) );
+    }
+
 
     /**
      * Function for add category page
@@ -301,43 +315,13 @@ class PostsController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function DeletePostCategory($id){
+    public function DeletePostCategory( $id ){
 
         PostCategory::whereId($id)->delete();
+        DB::table('posts_and_cats')->where('cat_id', $id)->delete();
 
         return redirect()->back();
 
-    }
-
-
-    public function updateSettings( Request $request, $id ) {
-
-        $data  = $request->all();
-        $user  = User::find($id);
-
-        User::whereId($id)->update([
-            'name'      => $data['name'],
-            'email'     => $data['email'],
-            'firstname' => $data['firstname'],
-            'lastname'  => $data['lastname'],
-            'phone'     => $data['phone'],
-            'role'      => $data['role'],
-            'company'   => $data['company'],
-            'position'  => $data['position'],
-        ]);
-
-        if ( $request->file('avatar_img' ) ) {
-            $file = $request->file('avatar_img');
-            @unlink(public_path('uploads/users/'.$user->avatar_img));
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('uploads/users'),$filename);
-            $user['avatar_img'] = $filename;
-
-            $user->save();
-        }
-
-
-        return redirect()->back();
     }
 
 }

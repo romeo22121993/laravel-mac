@@ -70,9 +70,11 @@
                                     @foreach( $categories as $category )
                                         <tr>
                                             <td> {{ $i++ }} </td>
-                                            <td> {{ $category->title }}</td>
+                                            <td>
+                                                <a href="{{ route('wpadmin.posts.by,categories', $category->id) }}">{{ $category->title }}</a>
+                                            </td>
                                             <td> {{ $category->slug }}</td>
-                                            <td> Will be done</td>
+                                            <td>{{ $category->posts->count() }}</td>
                                             <td>
                                                 <a href="{{ route('wpadmin.posts.categories.edit',  $category->id) }}" class="btn btn-info">Edit</a>
                                                 <a href="{{ route('wpadmin.posts.categories.delete', $category->id) }}" onclick="return confirm('Are you sure to delete')" class="btn btn-danger">Delete</a>
