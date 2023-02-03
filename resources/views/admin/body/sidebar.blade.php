@@ -88,16 +88,17 @@
                 </div>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
                     <span class="menu-icon">
                         <i class="mdi mdi-laptop"></i>
                     </span>
                     <span class="menu-title">Posts</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse" id="ui-basic">
+                <div class="collapse" id="ui-basic1">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.posts') }}">Posts</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.posts.categories') }}">Post Categories</a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.posts.add') }}">Add Post</a></li>
                     </ul>
                 </div>

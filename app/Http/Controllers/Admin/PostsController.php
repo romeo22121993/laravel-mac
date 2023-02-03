@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
+use App\Models\PostCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class PostsController extends Controller
 {
@@ -20,11 +23,11 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function usersPage() {
+    public function postsPage() {
 
         $users = User::paginate(3);
 
-        return view('admin.users.index', compact( 'users' ) );
+        return view('admin.posts.index', compact( 'users' ) );
     }
 
 
@@ -33,8 +36,8 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function addUser() {
-        return view('admin.users.create');
+    public function addPost() {
+        return view('admin.posts.create');
     }
 
 
@@ -44,7 +47,7 @@ class PostsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function StoreUser( Request $request ){
+    public function StorePost( Request $request ){
 
         $request->validate([
             'name'      => ['required', 'string', 'max:255'],
@@ -93,10 +96,10 @@ class PostsController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function EditUser( $id ) {
+    public function EditPost( $id ) {
         $user = User::find( $id );
 
-        return view('admin.users.edit', compact( 'user' ) );
+        return view('admin.posts.edit', compact( 'user' ) );
     }
 
     /**
@@ -106,7 +109,7 @@ class PostsController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function UpdateUser( Request $request, $id ) {
+    public function UpdatePost( Request $request, $id ) {
 
         $data  = $request->all();
 
@@ -130,7 +133,7 @@ class PostsController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function DeleteUser($id){
+    public function DeletePost($id){
 
         User::whereId($id)->delete();
 
@@ -138,7 +141,60 @@ class PostsController extends Controller
 
     }
 
-    /* Profile changes */
+    /* Posts Categories changes */
+
+    /**
+     * Function updating user
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    /**
+     * Function main of category controller
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function postsCategoryPage() {
+
+        $categories = PostCategory::paginate(3);
+
+        return view('admin.posts.categories.index', compact( 'categories' ) );
+    }
+
+
+    /**
+     * Function for add category page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function addPostCategory() {
+        return view('admin.posts.categories.create');
+    }
+
+
+    /**
+     * Function saving new category
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function StorePostCategory( Request $request ){
+
+        $request->validate([
+            'title' => ['required', 'string', 'min:3', 'max:255', 'unique:postCategories'],
+            'slug'  => ['unique:postCategories'],
+        ]);
+
+        $postCat = new PostCategory();
+        $postCat->title = $request->title;
+        $postCat->slug = !empty( $request->slug ) ? str_replace( ' ','-', strtolower( $request->slug ) ) : str_replace( ' ','-', strtolower( $request->title ) );
+        $postCat->save();
+
+        return Redirect()->route('wpadmin.posts.categories');
+
+    }
+
 
     /**
      * Function for edit user page
@@ -146,10 +202,10 @@ class PostsController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function changeSettings( ) {
-        $user = Auth::user();
+    public function EditPostCategory( $id ) {
+        $category = PostCategory::find( $id );
 
-        return view('admin.profile.edit', compact( 'user' ) );
+        return view('admin.posts.categories.edit', compact( 'category' ) );
     }
 
     /**
@@ -159,6 +215,38 @@ class PostsController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
+    public function UpdatePostCategory( Request $request, $id ) {
+
+        $post = PostCategory::find( $id );
+
+        $request->validate([
+            'title' => ['required', 'string', 'min:3', 'max:255', Rule::unique('postCategories')->ignore( $post )],
+            'slug'  => ['required', Rule::unique('postCategories')->ignore( $post )]
+        ]);
+
+        PostCategory::whereId( $id )->update([
+            'title' => $request->title,
+            'slug'  => $request->slug,
+        ]);
+
+        return Redirect()->route('wpadmin.posts.categories');
+    }
+
+    /**
+     * Function deleting
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function DeletePostCategory($id){
+
+        PostCategory::whereId($id)->delete();
+
+        return redirect()->back();
+
+    }
+
+
     public function updateSettings( Request $request, $id ) {
 
         $data  = $request->all();
@@ -189,32 +277,4 @@ class PostsController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Function for edit user page
-     *
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function changePassword( ) {
-        $user = Auth::user();
-
-        return view('admin.profile.password', compact( 'user' ) );
-    }
-
-    /**
-     * Function updating user
-     *
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function updatePassword( Request $request, $id ) {
-
-        User::whereId($id)->update([
-            'password'  => Hash::make( $request->password ),
-        ]);
-
-        return Redirect()->route('wpadmin.main');
-
-    }
 }

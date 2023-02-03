@@ -57,14 +57,22 @@ Route::group(['prefix'=> 'wpadmin'], function(){
         Route::get('/delete/{id}',  [UsersController::class, 'DeleteUser'])->name('wpadmin.users.delete');
     });
 
-
     Route::group(['prefix'=> 'posts'], function() {
-        Route::get('/',             [UsersController::class, 'usersPage'])->name('wpadmin.posts');
-        Route::get('/add',          [UsersController::class, 'addUser'])->name('wpadmin.posts.add');
-        Route::post('/store',       [UsersController::class, 'StoreUser'])->name('wpadmin.posts.store');
-        Route::get('/edit/{id}',    [UsersController::class, 'EditUser'])->name('wpadmin.posts.edit');
-        Route::post('/update/{id}', [UsersController::class, 'UpdateUser'])->name('wpadmin.posts.update');
-        Route::get('/delete/{id}',  [UsersController::class, 'DeleteUser'])->name('wpadmin.posts.delete');
+        Route::get('/',             [PostsController::class, 'postsPage'])->name('wpadmin.posts');
+        Route::get('/add',          [PostsController::class, 'addPost'])->name('wpadmin.posts.add');
+        Route::post('/store',       [PostsController::class, 'StorePost'])->name('wpadmin.posts.store');
+        Route::get('/edit/{id}',    [PostsController::class, 'EditPost'])->name('wpadmin.posts.edit');
+        Route::post('/update/{id}', [PostsController::class, 'UpdatePost'])->name('wpadmin.posts.update');
+        Route::get('/delete/{id}',  [PostsController::class, 'DeletePost'])->name('wpadmin.posts.delete');
+
+        Route::group(['prefix'=> 'categories'], function() {
+            Route::get('/',             [PostsController::class, 'postsCategoryPage'])->name('wpadmin.posts.categories');
+            Route::get('/add',          [PostsController::class, 'addPostCategory'])->name('wpadmin.posts.categories.add');
+            Route::post('/store',       [PostsController::class, 'StorePostCategory'])->name('wpadmin.posts.categories.store');
+            Route::get('/edit/{id}',    [PostsController::class, 'EditPostCategory'])->name('wpadmin.posts.categories.edit');
+            Route::post('/update/{id}', [PostsController::class, 'UpdatePostCategory'])->name('wpadmin.posts.categories.update');
+            Route::get('/delete/{id}',  [PostsController::class, 'DeletePostCategory'])->name('wpadmin.posts.categories.delete');
+        });
     });
 
 });

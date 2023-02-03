@@ -15,16 +15,11 @@ class PostCategory extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'firstname',
-        'lastname',
-        'phone',
-        'role',
-        'company',
-        'position',
-        'password',
+        'title',
+        'slug',
     ];
+
+    protected $table = 'postCategories';
 
     // TODO: many to many
 
