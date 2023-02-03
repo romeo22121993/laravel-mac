@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
+use App\Models\Post;
 use App\Models\PostCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
+use Image;
 
 class PostsController extends Controller
 {
@@ -25,9 +27,9 @@ class PostsController extends Controller
      */
     public function postsPage() {
 
-        $users = User::paginate(3);
+        $posts = Post::paginate(3);
 
-        return view('admin.posts.index', compact( 'users' ) );
+        return view('admin.posts.index', compact( 'posts' ) );
     }
 
 
@@ -37,7 +39,10 @@ class PostsController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function addPost() {
-        return view('admin.posts.create');
+
+        $categories = PostCategory::all();
+
+        return view('admin.posts.create', compact( 'categories' ) );
     }
 
 
@@ -47,48 +52,46 @@ class PostsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function StorePost( Request $request ){
+    public function StorePost( Request $request ) {
 
         $request->validate([
-            'name'      => ['required', 'string', 'max:255'],
-            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'firstname' => ['required', 'string', 'min:3' ],
-            'lastname'  => ['required', 'string', 'min:3'],
-            'phone'     => ['required', 'string', 'min:3'],
-            'role'      => ['required', 'string'],
-            'company'   => ['required', 'string', 'min:3'],
-            'position'  => ['required', 'string', 'min:3'],
-            'password'  => ['required', 'min:4',  'string'],
+            'title'      => ['required', 'string', 'max:255', 'unique:posts'],
+            'slug'       => [ 'max:255', 'unique:posts'],
+            'content'    => ['required', 'string', 'max:955'],
+            'categories' => ['required'],
         ]);
 
-        $data  = $request->all();
-        $check = $this->create( $data );
+        $categories = $request->categories;
+        $data1      = $request->all();
 
-        return Redirect()->route('wpadmin.users');
+        $post = new Post();
+        $slug = !empty( $request->slug ) ? str_replace( ' ','-', strtolower( $request->slug ) ) : str_replace( ' ','-', strtolower( $request->title ) );
+
+        $post->content   = $data1['content'];
+        $post->title     = $request->title;
+        $post->slug      = $slug;
+        $post->author_id = Auth::id();
+        $post->check1    = $request->check1;
+        $post->check2    = $request->check2;
+        $post->check3    = $request->check3;
+
+        $image_src = 'none';
+        if ( $request->file('image' ) ) {
+            $file = $request->file('image');
+            $filename = date('YmdHi').$file->getClientOriginalName();
+            $file->move( public_path('uploads/posts' ), $filename );
+            $image_src = $filename;
+        }
+
+        $post->img = $image_src;
+        $post->save();
+
+        $this->setCategoriesByPost ( $categories, $post->id );
+
+        return Redirect()->route('wpadmin.posts');
 
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create( array $data )
-    {
-
-        return User::create([
-            'name'      => $data['name'],
-            'email'     => $data['email'],
-            'firstname' => $data['firstname'],
-            'lastname'  => $data['lastname'],
-            'phone'     => $data['phone'],
-            'role'      => $data['role'],
-            'company'   => $data['company'],
-            'position'  => $data['position'],
-            'password'  => Hash::make( $data['password'] ),
-        ]);
-    }
 
     /**
      * Function for edit user page
@@ -97,9 +100,13 @@ class PostsController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function EditPost( $id ) {
-        $user = User::find( $id );
 
-        return view('admin.posts.edit', compact( 'user' ) );
+        $post = Post::find( $id );
+
+        $postCategories = $post->categories->pluck('id')->toArray();
+        $categories     = PostCategory::all();
+
+        return view('admin.posts.edit', compact( 'post', 'categories', 'postCategories' ) );
     }
 
     /**
@@ -111,20 +118,46 @@ class PostsController extends Controller
      */
     public function UpdatePost( Request $request, $id ) {
 
-        $data  = $request->all();
+        $post  = Post::find( $id );
 
-        User::whereId($id)->update([
-            'name'      => $data['name'],
-            'email'     => $data['email'],
-            'firstname' => $data['firstname'],
-            'lastname'  => $data['lastname'],
-            'phone'     => $data['phone'],
-            'role'      => $data['role'],
-            'company'   => $data['company'],
-            'position'  => $data['position'],
+        $request->validate([
+            'title'      => ['required', 'string', 'max:255', Rule::unique('posts')->ignore( $post )],
+            'slug'       => [ 'max:255', Rule::unique('posts')->ignore( $post )],
+            'content'    => ['required', 'string', 'max:955'],
+            'categories' => ['required'],
         ]);
 
-        return Redirect()->route('wpadmin.users');
+        $data1 = $request->all();
+
+        $categories = $request->categories;
+        $data1      = $request->all();
+
+        $slug = !empty( $request->slug ) ? str_replace( ' ','-', strtolower( $request->slug ) ) : str_replace( ' ','-', strtolower( $request->title ) );
+
+        $post->content   = $data1['content'];
+        $post->title     = $request->title;
+        $post->slug      = $slug;
+        $post->author_id = Auth::id();
+        $post->check1    = $request->check1;
+        $post->check2    = $request->check2;
+        $post->check3    = $request->check3;
+
+        if ( $request->file('image' ) ) {
+            @unlink( public_path( 'uploads/posts/'.$post->img ) );
+            $file = $request->file('image');
+            $filename = date('YmdHi').$file->getClientOriginalName();
+            $file->move( public_path('uploads/posts' ), $filename );
+            $image_src = $filename;
+
+            $post->img = $image_src;
+        }
+
+
+        $post->save();
+
+        $this->setCategoriesByPost ( $categories, $id, true );
+
+        return redirect()->back();
     }
 
     /**
@@ -133,12 +166,42 @@ class PostsController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function DeletePost($id){
+    public function DeletePost( $id ){
 
-        User::whereId($id)->delete();
+        DB::table('posts_and_cats')->where('post_id', $id)->delete();
+        Post::whereId( $id )->delete();
 
         return redirect()->back();
 
+    }
+
+
+    /**
+     * Function setting Posts-Categories table
+     *
+     * @param $categories
+     * @param $postId
+     * @param $deletingPrevious
+     *
+     * @return bool
+     */
+    protected function setCategoriesByPost ( $categories, $postId, $deletingPrevious = false ) {
+        $postAndCats = [];
+
+        if ( !empty( $deletingPrevious ) ) {
+            DB::table('posts_and_cats')->where('post_id', $postId)->delete();
+        }
+
+        foreach ( $categories as $category ) {
+            $postAndCats[] = [
+                'post_id' => $postId,
+                'cat_id'  => $category,
+            ];
+        }
+
+        DB::table('posts_and_cats')->insert( $postAndCats );
+
+        return true;
     }
 
     /* Posts Categories changes */

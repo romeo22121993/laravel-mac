@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts_cats', function (Blueprint $table) {
-            $table->id();
-            $table->string('post_id')->index();
-            $table->string('cat_id')->index();
-            $table->timestamps();
+        Schema::table('posts', function($table) {
+            $table->text('check1')->nullable();
+            $table->text('check2')->nullable();
+            $table->text('check3')->nullable();
         });
     }
 
@@ -28,6 +27,5 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts_cats');
     }
 };
