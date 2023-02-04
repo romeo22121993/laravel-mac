@@ -10,7 +10,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class UserController extends Controller
+class UserAuthController extends Controller
 {
     /**
      * Create a new controller instance.

@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Enums\Category;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Frontend\FrontendController;
 
@@ -23,11 +24,11 @@ use App\Http\Controllers\Frontend\FrontendController;
 Auth::routes();
 
 /* Routes with passwords */
-Route::get('/logout', [UserController::class, 'logout'])->middleware('auth');
-Route::get('/forgot-password',        [UserController::class, 'forgotPassword' ])->middleware('guest')->name('password.forgot1');
-Route::post('/forgot-password',       [UserController::class, 'requestPassword'])->middleware('guest')->name('password.email1');
-Route::get('/reset-password/{token}', [UserController::class, 'resetPasswordPage'])->middleware('guest')->name('password.reset1');
-Route::post('/reset-password',        [UserController::class, 'changePassword'])->middleware('guest')->name('password.update1');
+Route::get('/logout',                 [UserAuthController::class, 'logout'])->middleware('auth');
+Route::get('/forgot-password',        [UserAuthController::class, 'forgotPassword' ])->middleware('guest')->name('password.forgot1');
+Route::post('/forgot-password',       [UserAuthController::class, 'requestPassword'])->middleware('guest')->name('password.email1');
+Route::get('/reset-password/{token}', [UserAuthController::class, 'resetPasswordPage'])->middleware('guest')->name('password.reset1');
+Route::post('/reset-password',        [UserAuthController::class, 'changePassword'])->middleware('guest')->name('password.update1');
 /* */
 
 
@@ -40,10 +41,10 @@ Route::group(['prefix'=> 'dashboard'], function(){
 Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], function(){
     Route::get('/', [AdminController::class, 'mainPage'])->name('wpadmin.main');
 
-    Route::get('/change-user-settings',  [UsersController::class, 'changeSettings'])->name('wpadmin.change.profile');
-    Route::post('/change-user-settings/{id}', [UsersController::class, 'updateSettings'])->name('wpadmin.update.profile');
-    Route::get('/change-password',       [UsersController::class, 'changePassword'])->name('wpadmin.change.password');
-    Route::post('/change-password/{id}', [UsersController::class, 'updatePassword'])->name('wpadmin.update.password');
+    Route::get('/change-user-settings',       [ProfileController::class, 'changeSettings'])->name('wpadmin.change.profile');
+    Route::post('/change-user-settings/{id}', [ProfileController::class, 'updateSettings'])->name('wpadmin.update.profile');
+    Route::get('/change-password',            [ProfileController::class, 'changePassword'])->name('wpadmin.change.password');
+    Route::post('/change-password/{id}',      [ProfileController::class, 'updatePassword'])->name('wpadmin.update.password');
 
     Route::group(['prefix'=> 'users'], function() {
         Route::get('/',             [UsersController::class, 'usersPage'])->name('wpadmin.users');
@@ -79,6 +80,10 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', [FrontendController::class, 'mainPage'])->name('home');
     Route::get('/platform', [FrontendController::class, 'platformPage'])->name('platform');
+    Route::get('/sign-up',  [FrontendController::class, 'signUpPage'])->name('signup');
+    Route::get('/podcast',  [FrontendController::class, 'signUpPage'])->name('podcast');
+    Route::get('/blog',     [FrontendController::class, 'signUpPage'])->name('blog');
+    Route::get('/contact',  [FrontendController::class, 'signUpPage'])->name('contact');
 });
 
 

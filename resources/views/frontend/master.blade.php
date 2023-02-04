@@ -40,6 +40,7 @@
 
         @yield('content')
 
+        @include('frontend.body.banner')
         @include('frontend.body.footer')
 
     </div>

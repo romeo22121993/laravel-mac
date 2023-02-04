@@ -31,7 +31,6 @@ class FrontendController extends Controller
     public function mainPage() {
 
         $category = [ 'a', 'b', 'c' ];
-        $post     = [ 'a', 'b', 'c' ];
         $usersCount = User::count();
 
         return view('frontend.index', compact('category',  'usersCount'));
@@ -39,17 +38,31 @@ class FrontendController extends Controller
     }
 
     /**
-     * Function setting main admin page
+     * Function setting platform page
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function platformPage() {
 
         $category = [ 'a', 'b', 'c' ];
-        $post     = [ 'a', 'b', 'c' ];
         $usersCount = User::count();
 
         return view('frontend.platform', compact('category',  'usersCount'));
+
+    }
+
+
+    /**
+     * Function setting sign up page
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function signUpPage() {
+
+        $category = [ 'a', 'b', 'c' ];
+        $usersCount = User::count();
+
+        return view('frontend.signup', compact('category',  'usersCount'));
 
     }
 

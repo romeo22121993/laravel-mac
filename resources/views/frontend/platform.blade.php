@@ -299,7 +299,7 @@
                     <div class="sv-slider-pagination">
 
                         <div class="slider-menu__dots">
-                            <div class="loc_slider_nav prev"><img src="./dist/img/slider-arrow-left.svg" alt="arrow left"/></div>
+                            <div class="loc_slider_nav prev"><img src="{{ asset('frontend-dashboard/themes-assets/dist/img/arrow-left.svg') }}" alt="arrow left"/></div>
                             <div class="dot active"
                                  data-next="Investor Content"
                             >
@@ -315,7 +315,7 @@
                             >
                                 <div></div>
                             </div>
-                            <div class="loc_slider_nav next"><img src="./dist/img/slider-arrow-right.svg" alt="arrow right"/></div>
+                            <div class="loc_slider_nav next"><img src="{{ asset('frontend-dashboard/themes-assets/dist/img/arrow-right.png') }}" alt="arrow right"/></div>
 
                             <div class="up-next">
                                 <span>Next: </span>Investor Content                                </div>
@@ -325,15 +325,5 @@
             </div>
         </div>
     </div>
-    <div class="default-padding ">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-10 offset-lg-1">
-                    <img src="./dist/img/icon-logo_io.png" style="max-width: 50px" alt="site logo" />
 
-                    <h2>Interested in learning more? <span><a href="http://seven.loc/contact/">Let's connect.</a></span></h2>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
