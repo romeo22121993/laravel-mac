@@ -51,6 +51,7 @@ class UserController extends Controller
      */
     public function requestPassword ( Request $request )
     {
+
         $request->validate( ['email' => 'required|email'] );
 
         $status = Password::sendResetLink(

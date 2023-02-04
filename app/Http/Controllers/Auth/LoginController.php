@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Auth;
 
 class LoginController extends Controller
 {
@@ -26,7 +27,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/wpadmin/';
+    protected $redirectTo = 'wpadmin.main';
+
 
     /**
      * Create a new controller instance.
@@ -36,6 +38,17 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Function authenteficated
+     *
+     * @return \Illuminate\Http\RedirectResponse|void
+     */
+    protected function authenticated() {
+        if ( auth()->user() ) {
+            return redirect()->route( $this->redirectTo );
+        }
     }
 
 }

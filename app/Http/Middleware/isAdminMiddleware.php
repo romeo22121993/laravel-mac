@@ -24,7 +24,13 @@ class isAdminMiddleware
 
         $role = Auth::user()->role;
 
-        if ( $role !== 'admin' ) {
+        if ( $role == 'admin' ) {
+//            return redirect()->route('wpadmin.main');
+        }
+        elseif ( $role == 'subscriber' ) {
+            return redirect()->route('dashboard.main');
+        }
+        else {
             return redirect()->route('home');
         }
 

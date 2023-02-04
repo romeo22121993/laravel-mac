@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     {
 
         View::composer('*', function ($view) {
-            $user = auth()->user();
+            $user      = auth()->user();
             $avatarImg = ( !empty( $user->avatar_img ) ) ? url( 'uploads/users/'.$user->avatar_img ) : asset('img/face.jpeg');
 
             $view->with([

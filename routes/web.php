@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\Frontend\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,28 +20,24 @@ use App\Http\Controllers\Admin\PostsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 /* Routes with passwords */
 Route::get('/logout', [UserController::class, 'logout'])->middleware('auth');
-Route::get('/forgot-password',        [UserController::class, 'forgotPassword' ])->middleware('guest')->name('password.forgot');
-Route::post('/forgot-password',       [UserController::class, 'requestPassword'])->middleware('guest')->name('password.email');
-Route::get('/reset-password/{token}', [UserController::class, 'resetPasswordPage'])->middleware('guest')->name('password.reset');
-Route::post('/reset-password',        [UserController::class, 'changePassword'])->middleware('guest')->name('password.update');
+Route::get('/forgot-password',        [UserController::class, 'forgotPassword' ])->middleware('guest')->name('password.forgot1');
+Route::post('/forgot-password',       [UserController::class, 'requestPassword'])->middleware('guest')->name('password.email1');
+Route::get('/reset-password/{token}', [UserController::class, 'resetPasswordPage'])->middleware('guest')->name('password.reset1');
+Route::post('/reset-password',        [UserController::class, 'changePassword'])->middleware('guest')->name('password.update1');
 /* */
 
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 /** All Pages with User dashboards */
 Route::group(['prefix'=> 'dashboard'], function(){
     Route::get('/', [AdminController::class, 'mainPage'])->name('dashboard.main');
 });
 
 /** All Pages with Admin dashboards */
-Route::group(['prefix'=> 'wpadmin'], function(){
+Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], function(){
     Route::get('/', [AdminController::class, 'mainPage'])->name('wpadmin.main');
 
     Route::get('/change-user-settings',  [UsersController::class, 'changeSettings'])->name('wpadmin.change.profile');
@@ -79,33 +76,27 @@ Route::group(['prefix'=> 'wpadmin'], function(){
 });
 
 /** All Pages without needed to log in */
-Route::group(['middleware' => ['web', 'guest']], function () {
-
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/', [FrontendController::class, 'mainPage'])->name('home1');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Route::get('/user', [UserController::class, 'index']);
-Route::get('/greeting', function () {
-    return 'Hello World';
-});
-
-//Route::redirect('/greeting', '/home', 301);
-Route::view('/welcome/', 'set', [ 'environment' => 'aaa'] );
 //Route::get('/users/{name?}', function ($name = 'John') {
 //    return $name;
 //});
 
+/*
+Route::fallback(function () {
+    return '404 Page!!';
+});
 
 Route::get('/users/{user}', function (User $user) {
     return $user->email;
 });
 
 Route::get('/categories/{category}', function (Category $category) {
-//    var_dump( '$category', $category );
+
     return $category->value;
 });
+*/
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

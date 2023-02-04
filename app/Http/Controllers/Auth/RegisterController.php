@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/wpadmin/';
+    protected $redirectTo = '/wpadmin';
 
     /**
      * Create a new controller instance.
@@ -40,6 +40,7 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -65,7 +66,8 @@ class RegisterController extends Controller
         $data  = $request->all();
         $check = $this->create( $data );
 
-        return redirect("dashboard")->withSuccess('You have signed-in');
+//        return redirect("dashboard")->withSuccess('You have signed-in');
+        return redirect()->route($this->redirectTo);
 
     }
 
@@ -77,7 +79,6 @@ class RegisterController extends Controller
      */
     protected function create( array $data )
     {
-
         return User::create([
             'name'      => $data['name'],
             'email'     => $data['email'],

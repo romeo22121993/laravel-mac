@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Frontend;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class AdminController extends Controller
+class FrontendController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,8 +21,6 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
-//        $this->middleware('isAdmin');
     }
 
     /**
@@ -32,11 +30,14 @@ class AdminController extends Controller
      */
     public function mainPage() {
 
+        dd('aaa');
         $category = [ 'a', 'b', 'c' ];
         $post     = [ 'a', 'b', 'c' ];
         $usersCount = User::count();
 
-        return view('admin.index', compact('category',  'usersCount'));
+        var_dump( 'aa');
+
+        return view('frontend.index', compact('category',  'usersCount'));
 
     }
 

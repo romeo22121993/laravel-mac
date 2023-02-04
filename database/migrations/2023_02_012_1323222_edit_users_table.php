@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function($table) {
-            $table->text('avatar_img');
+            $table->text('avatar_img')->nullable();
         });
     }
 
