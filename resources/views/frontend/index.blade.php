@@ -1,240 +1,175 @@
 @extends('frontend.master')
 
 @section('title')
-    Admin Dashboard
+    Home Page
 @endsection
 
-@section('admin_content')
+@section('content')
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content">
+                        <div class="col-lg-6 col-sm-12">
+                            <h1 style="	font-size:45px;	font-weight:300;">
+                                The content marketing platform and coaching system built for the independent financial advisor.</h1>
+                            <a href="http://seven.loc/sign-up/" target="" class="btn btn-primary">Create an Account</a>
+                        </div>
+                        <div class="video-holder video-holder-home" style="background: url(http://seven.loc/wp-content/uploads/2022/07/Group-72-min.png);"><a></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="default-padding sv-social-proof">
+        <div class="container container-wide">
+            <div class="row">
+                <div class="col-12 col-lg-10 mx-auto text-center">
+                    <h2 class="sv-social-proof__title">
+                        <span>As Featured In</span>
+                    </h2>
+                </div>
+            </div>
 
-<div class="content-wrapper">
-    <div class="row">
-        <div class="col-12 grid-margin stretch-card">
-            <div class="card corona-gradient-card">
-                <div class="card-body py-0 px-0 px-sm-3">
-                    <div class="row align-items-center">
-                        <div class="col-4 col-sm-3 col-xl-2">
-                            <img src="{{ asset('backend/assets/images/dashboard/Group126@2x.png') }}" class="gradient-corona-img img-fluid" alt="">
-                        </div>
-                        <div class="col-5 col-sm-7 col-xl-8 p-0">
-                            <h4 class="mb-1 mb-sm-0">Want even more features?</h4>
-                            <p class="mb-0 font-weight-normal d-none d-sm-block">Check out our Pro version with 5 unique layouts!</p>
-                        </div>
-                        <div class="col-3 col-sm-2 col-xl-2 pl-0 text-center">
-                        <span>
-                          <a href="https://www.bootstrapdash.com/product/corona-admin-template/" target="_blank" class="btn btn-outline-light btn-rounded get-started-btn">Upgrade to PRO</a>
-                        </span>
-                        </div>
+            <div class="row justify-content-center justify-content-sm-start justify-content-lg-center">
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <div class="sv-social-proof__img">
+                        <img src="http://seven.loc/wp-content/uploads/2020/08/Bitmap.png"
+                             alt="Wealth Management"
+                             class=""
+                        >
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <div class="sv-social-proof__img">
+                        <img src="http://seven.loc/wp-content/uploads/2020/08/header-logo-2.png"
+                             alt="Financial advisor"
+                             class=""
+                        >
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <div class="sv-social-proof__img">
+                        <img src="http://seven.loc/wp-content/uploads/2020/08/Think-Advisor-Logo.png"
+                             alt="Think Advisor"
+                             class=""
+                        >
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <div class="sv-social-proof__img">
+                        <img src="http://seven.loc/wp-content/uploads/2022/05/XY_Planning_Network_Logo-transparent-1.png"
+                             alt="XY_Planning_Network_Logo-transparent (1)"
+                             class=""
+                        >
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
+                    <div class="sv-social-proof__img">
+                        <img src="http://seven.loc/wp-content/uploads/2022/05/Kitcescom-1.png"
+                             alt="Kitcescom-1"
+                             class="last"
+                        >
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="d-flex align-items-center align-self-start">
-                                <h3 class="mb-0">{{ $usersCount }}</h3>
-                                <p class="text-success ml-2 mb-0 font-weight-medium">Users</p>
-                            </div>
+
+    <div class="default-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 text-center text-lg-left mb-lg-0 mb-4">
+                    <div class="home-video-container" >
+                        <div id="video_module_block"
+                             style='width:640px; height:390px'
+                             data-vimeo-url="https://vimeo.com/513770381/a721b23165"
+                             data-video-current-seconds="0">
                         </div>
-                        <div class="col-3">
-                            <div class="icon icon-box-success ">
-                                <span class="mdi mdi-arrow-top-right icon-item"></span>
-                            </div>
-                        </div>
+                        <script src="https://player.vimeo.com/api/player.js" defer async></script>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Category</h6>
                 </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="d-flex align-items-center align-self-start">
-{{--                                <h3 class="mb-0">{{ count($subcategory) }}</h3>--}}
-                                <h3 class="mb-0">12</h3>
-                                <p class="text-success ml-2 mb-0 font-weight-medium">SubCategory</p>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="icon icon-box-success">
-                                <span class="mdi mdi-arrow-top-right icon-item"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <h6 class="text-muted font-weight-normal">SubCategory</h6>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="d-flex align-items-center align-self-start">
-                                <h3 class="mb-0">333</h3>
-{{--                                <h3 class="mb-0">{{ count($post) }}</h3>--}}
-                                <p class="text-danger ml-2 mb-0 font-weight-medium">Posts</p>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="icon icon-box-danger">
-                                <span class="mdi mdi-arrow-bottom-left icon-item"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <h6 class="text-muted font-weight-normal">Posts</h6>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="d-flex align-items-center align-self-start">
-{{--                                <h3 class="mb-0">{{ count($district) }}</h3>--}}
-                                <h3 class="mb-0">56</h3>
-                                <p class="text-success ml-2 mb-0 font-weight-medium">Districts</p>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="icon icon-box-success ">
-                                <span class="mdi mdi-arrow-top-right icon-item"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <h6 class="text-muted font-weight-normal">Districts</h6>
+                <div class="col-lg-4">
+                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/icon-logo_io.png') }}" style="max-width: 50px" alt="seven icon"/>
+                    <h2>Why Advisor I/O?</h2>
+                    <p class="bigger bigger_video_block" >Advisor I/O helps financial advisors get clear on their marketing and succeed in a digital world. With on-demand coaching, engaging content, and scalable tools, the platform and process help advisors drive growth and lower marketing costs over time.</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Transaction History</h4>
-                    <canvas id="transaction-history" class="transaction-chart"></canvas>
-                    <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
-                        <div class="text-md-center text-xl-left">
-                            <h6 class="mb-1">Transfer to Paypal</h6>
-                            <p class="text-muted mb-0">07 Jan 2019, 09:12AM</p>
-                        </div>
-                        <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                            <h6 class="font-weight-bold mb-0">$236</h6>
-                        </div>
-                    </div>
-                    <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
-                        <div class="text-md-center text-xl-left">
-                            <h6 class="mb-1">Tranfer to Stripe</h6>
-                            <p class="text-muted mb-0">07 Jan 2019, 09:12AM</p>
-                        </div>
-                        <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                            <h6 class="font-weight-bold mb-0">$593</h6>
-                        </div>
+    <div class="default-padding our-philosophy">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Our Philosophy</h2>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <img src="http://seven.loc/wp-content/uploads/2019/11/timley_topics.png" alt=""/>
+                    <h3>We Help You Save Time</h3>
+                    <p>We've built our content and coaching system to help you scale rapidly. We pair content with coaching so you have assets you need, and the know-how to deploy them.</p>
+                </div>
+
+
+                <div class="col-lg-6">
+                    <img src="http://seven.loc/wp-content/uploads/2019/11/icon_care.svg" alt=""/>
+                    <h3>We Coach You Through It All</h3>
+                    <p>We are only successful if our members are successful, which is why we act as your coach to help you build and maintain marketing excellence.</p>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <img src="http://seven.loc/wp-content/uploads/2019/11/icon_build-1.svg" alt=""/>
+                    <h3>We Provide You With 100% Customizable Content</h3>
+                    <p>Your marketing needs to be unique to your practice. No cookie-cutter marketing content - our content is 100% customizable for your voice.</p>
+                </div>
+
+
+                <div class="col-lg-6">
+                    <img src="http://seven.loc/wp-content/uploads/2019/11/icon_practice.svg" alt=""/>
+                    <h3>We Practice What We Preach</h3>
+                    <p>We’ve done this ourselves, so we know what it takes to build a valuable marketing engine within the financial services industry. All of our strategies and tactics are battle tested. </p>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <a href="http://seven.loc/about/">See More <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/arrow-right.png') }}" alt="arrow right"/></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sv-pricing default-padding container">
+        <div class="sv-pricing__heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-10 mx-auto text-center">
+                        <span>PRICING</span>
+                        <h2>The Perfect Plan for Your Practice</h2>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-8 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-row justify-content-between">
-                        <h4 class="card-title mb-1">Open Projects</h4>
-                        <p class="text-muted mb-1">Your data status</p>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="preview-list">
-                                <div class="preview-item border-bottom">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-primary">
-                                            <i class="mdi mdi-file-document"></i>
-                                        </div>
-                                    </div>
-                                    <div class="preview-item-content d-sm-flex flex-grow">
-                                        <div class="flex-grow">
-                                            <h6 class="preview-subject">Admin dashboard design</h6>
-                                            <p class="text-muted mb-0">Broadcast web app mockup</p>
-                                        </div>
-                                        <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                            <p class="text-muted">15 minutes ago</p>
-                                            <p class="text-muted mb-0">30 tasks, 5 issues </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="preview-item border-bottom">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-success">
-                                            <i class="mdi mdi-cloud-download"></i>
-                                        </div>
-                                    </div>
-                                    <div class="preview-item-content d-sm-flex flex-grow">
-                                        <div class="flex-grow">
-                                            <h6 class="preview-subject">Wordpress Development</h6>
-                                            <p class="text-muted mb-0">Upload new design</p>
-                                        </div>
-                                        <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                            <p class="text-muted">1 hour ago</p>
-                                            <p class="text-muted mb-0">23 tasks, 5 issues </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="preview-item border-bottom">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-info">
-                                            <i class="mdi mdi-clock"></i>
-                                        </div>
-                                    </div>
-                                    <div class="preview-item-content d-sm-flex flex-grow">
-                                        <div class="flex-grow">
-                                            <h6 class="preview-subject">Project meeting</h6>
-                                            <p class="text-muted mb-0">New project discussion</p>
-                                        </div>
-                                        <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                            <p class="text-muted">35 minutes ago</p>
-                                            <p class="text-muted mb-0">15 tasks, 2 issues</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="preview-item border-bottom">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-danger">
-                                            <i class="mdi mdi-email-open"></i>
-                                        </div>
-                                    </div>
-                                    <div class="preview-item-content d-sm-flex flex-grow">
-                                        <div class="flex-grow">
-                                            <h6 class="preview-subject">Broadcast Mail</h6>
-                                            <p class="text-muted mb-0">Sent release details to team</p>
-                                        </div>
-                                        <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                            <p class="text-muted">55 minutes ago</p>
-                                            <p class="text-muted mb-0">35 tasks, 7 issues </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="preview-item">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-warning">
-                                            <i class="mdi mdi-chart-pie"></i>
-                                        </div>
-                                    </div>
-                                    <div class="preview-item-content d-sm-flex flex-grow">
-                                        <div class="flex-grow">
-                                            <h6 class="preview-subject">UI Design</h6>
-                                            <p class="text-muted mb-0">New application planning</p>
-                                        </div>
-                                        <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                            <p class="text-muted">50 minutes ago</p>
-                                            <p class="text-muted mb-0">27 tasks, 4 issues </p>
-                                        </div>
-                                    </div>
+
+        <div class="container sv-pricing__container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="sv-pricing__content mx-auto sv-price-new">
+                        <div class="sv-price ">
+                            <div class="sv-price__header text-center">
+                                <span class="sv-price__subtitle">We provide you with the content, coaching, and peer learning to help you grow. All at a simple price.</span>
+                            </div>
+                            <div class="sv-price__body">
+                                <div class="sv-price__body-left">
+                                    <p class="sv-price__price text-center">$74.99</p>
+                                    <span class="sv-price__payment-repeat text-center">/month</span>
+                                    <h5 class="sv-price__title text-center">Per Advisor or Team Member. Minimum Initial Term of Six (6) Months.</h5>
+                                    <a class="sv-price__button text-center" href="http://seven.loc/sign-up/" >Create an Account</a>
                                 </div>
                             </div>
                         </div>
@@ -243,432 +178,42 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-4 grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <h5>Revenue</h5>
-                    <div class="row">
-                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                            <div class="d-flex d-sm-block d-md-flex align-items-center">
-                                <h2 class="mb-0">$32123</h2>
-                                <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
-                            </div>
-                            <h6 class="text-muted font-weight-normal">11.38% Since last month</h6>
-                        </div>
-                        <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                            <i class="icon-lg mdi mdi-codepen text-primary ml-auto"></i>
-                        </div>
-                    </div>
+
+    <div class="default-padding platform">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 text-center">
+                    <h2>The Platform</h2>
+                    <p class="bigger">You receive full access to our platform that includes coaching, ready-to-go content, presentations, sales scripts, and email campaigns.</p>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-4 grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <h5>Sales</h5>
-                    <div class="row">
-                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                            <div class="d-flex d-sm-block d-md-flex align-items-center">
-                                <h2 class="mb-0">$45850</h2>
-                                <p class="text-success ml-2 mb-0 font-weight-medium">+8.3%</p>
-                            </div>
-                            <h6 class="text-muted font-weight-normal"> 9.61% Since last month</h6>
-                        </div>
-                        <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                            <i class="icon-lg mdi mdi-wallet-travel text-danger ml-auto"></i>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <h3>Deploy Content Faster</h3>
+                    <p>We’ve thought through the most effective ways to connect you to your clients by focusing on the issues that are meaningful to them. We’ve created quality, timely ready-to-send content and campaigns that expand your brand. </p>
+                    <h3>Drive More Leads</h3>
+                    <p>Your marketing program is only is good as the impact it's having. Our campaign tools and tactics help you drive more leads into your practice.</p>
+                    <h3>Stay on Track</h3>
+                    <p>A strategy is only as good as the execution of it. Digital marketing morphs and expands continually – we keep you up-to-date on the latest strategies performing. </p>
+                    <h3>Get Smart on Marketing</h3>
+                    <p>We want to make you dangerous. In-depth coaching on every element of digital marketing, in quick, scalable steps. We breakdown: building a marketing strategy, driving growth through social platforms, successful email campaigns, unique content marketing, and more.</p>
+                    <a href=" http://seven.loc/contact/" class="read-more">
+                        LEARN MORE   <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/arrow-right.png') }}" alt="arrow right"/>
+                    </a>
                 </div>
+                <img src="http://seven.loc/wp-content/uploads/2022/07/Group-71-min.png" class="position-absolute" alt=""/>
             </div>
         </div>
-        <div class="col-sm-4 grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <h5>Purchase</h5>
-                    <div class="row">
-                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                            <div class="d-flex d-sm-block d-md-flex align-items-center">
-                                <h2 class="mb-0">$2039</h2>
-                                <p class="text-danger ml-2 mb-0 font-weight-medium">-2.1% </p>
-                            </div>
-                            <h6 class="text-muted font-weight-normal">2.27% Since last month</h6>
-                        </div>
-                        <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                            <i class="icon-lg mdi mdi-monitor text-success ml-auto"></i>
-                        </div>
-                    </div>
+    </div>
+    <div class="default-padding ">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 offset-lg-1">
+                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/icon-logo_io.png') }}" style="max-width: 50px" alt="site logo" />
+
+                    <h2>Interested in learning more? <span><a href="http://seven.loc/contact/">Let's connect.</a></span></h2>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row ">
-        <div class="col-12 grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Order Status</h4>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>
-                                    <div class="form-check form-check-muted m-0">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input">
-                                        </label>
-                                    </div>
-                                </th>
-                                <th> Client Name </th>
-                                <th> Order No </th>
-                                <th> Product Cost </th>
-                                <th> Project </th>
-                                <th> Payment Mode </th>
-                                <th> Start Date </th>
-                                <th> Payment Status </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <div class="form-check form-check-muted m-0">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input">
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="backend/assets/images/faces/face1.jpg" alt="image" />
-                                    <span class="pl-2">Henry Klein</span>
-                                </td>
-                                <td> 02312 </td>
-                                <td> $14,500 </td>
-                                <td> Dashboard </td>
-                                <td> Credit card </td>
-                                <td> 04 Dec 2019 </td>
-                                <td>
-                                    <div class="badge badge-outline-success">Approved</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check form-check-muted m-0">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input">
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="backend/assets/images/faces/face2.jpg" alt="image" />
-                                    <span class="pl-2">Estella Bryan</span>
-                                </td>
-                                <td> 02312 </td>
-                                <td> $14,500 </td>
-                                <td> Website </td>
-                                <td> Cash on delivered </td>
-                                <td> 04 Dec 2019 </td>
-                                <td>
-                                    <div class="badge badge-outline-warning">Pending</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check form-check-muted m-0">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input">
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="backend/assets/images/faces/face5.jpg" alt="image" />
-                                    <span class="pl-2">Lucy Abbott</span>
-                                </td>
-                                <td> 02312 </td>
-                                <td> $14,500 </td>
-                                <td> App design </td>
-                                <td> Credit card </td>
-                                <td> 04 Dec 2019 </td>
-                                <td>
-                                    <div class="badge badge-outline-danger">Rejected</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check form-check-muted m-0">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input">
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="assets/images/faces/face3.jpg" alt="image" />
-                                    <span class="pl-2">Peter Gill</span>
-                                </td>
-                                <td> 02312 </td>
-                                <td> $14,500 </td>
-                                <td> Development </td>
-                                <td> Online Payment </td>
-                                <td> 04 Dec 2019 </td>
-                                <td>
-                                    <div class="badge badge-outline-success">Approved</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check form-check-muted m-0">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input">
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <img src="backend/assets/images/faces/face4.jpg" alt="image" />
-                                    <span class="pl-2">Sallie Reyes</span>
-                                </td>
-                                <td> 02312 </td>
-                                <td> $14,500 </td>
-                                <td> Website </td>
-                                <td> Credit card </td>
-                                <td> 04 Dec 2019 </td>
-                                <td>
-                                    <div class="badge badge-outline-success">Approved</div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-xl-4 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-row justify-content-between">
-                        <h4 class="card-title">Messages</h4>
-                        <p class="text-muted mb-1 small">View all</p>
-                    </div>
-                    <div class="preview-list">
-                        <div class="preview-item border-bottom">
-                            <div class="preview-thumbnail">
-                                <img src="backend/assets/images/faces/face6.jpg" alt="image" class="rounded-circle" />
-                            </div>
-                            <div class="preview-item-content d-flex flex-grow">
-                                <div class="flex-grow">
-                                    <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                        <h6 class="preview-subject">Leonard</h6>
-                                        <p class="text-muted text-small">5 minutes ago</p>
-                                    </div>
-                                    <p class="text-muted">Well, it seems to be working now.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="preview-item border-bottom">
-                            <div class="preview-thumbnail">
-                                <img src="backend/assets/images/faces/face8.jpg" alt="image" class="rounded-circle" />
-                            </div>
-                            <div class="preview-item-content d-flex flex-grow">
-                                <div class="flex-grow">
-                                    <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                        <h6 class="preview-subject">Luella Mills</h6>
-                                        <p class="text-muted text-small">10 Minutes Ago</p>
-                                    </div>
-                                    <p class="text-muted">Well, it seems to be working now.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="preview-item border-bottom">
-                            <div class="preview-thumbnail">
-                                <img src="backend/assets/images/faces/face9.jpg" alt="image" class="rounded-circle" />
-                            </div>
-                            <div class="preview-item-content d-flex flex-grow">
-                                <div class="flex-grow">
-                                    <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                        <h6 class="preview-subject">Ethel Kelly</h6>
-                                        <p class="text-muted text-small">2 Hours Ago</p>
-                                    </div>
-                                    <p class="text-muted">Please review the tickets</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="preview-item border-bottom">
-                            <div class="preview-thumbnail">
-                                <img src="backend/assets/images/faces/face11.jpg" alt="image" class="rounded-circle" />
-                            </div>
-                            <div class="preview-item-content d-flex flex-grow">
-                                <div class="flex-grow">
-                                    <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                        <h6 class="preview-subject">Herman May</h6>
-                                        <p class="text-muted text-small">4 Hours Ago</p>
-                                    </div>
-                                    <p class="text-muted">Thanks a lot. It was easy to fix it .</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-4 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Portfolio Slide</h4>
-                    <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel" id="owl-carousel-basic">
-                        <div class="item">
-                            <img src="backend/assets/images/dashboard/Rectangle.jpg" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="backend/assets/images/dashboard/Img_5.jpg" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="backend/assets/images/dashboard/img_6.jpg" alt="">
-                        </div>
-                    </div>
-                    <div class="d-flex py-4">
-                        <div class="preview-list w-100">
-                            <div class="preview-item p-0">
-                                <div class="preview-thumbnail">
-                                    <img src="backend/assets/images/faces/face12.jpg" class="rounded-circle" alt="">
-                                </div>
-                                <div class="preview-item-content d-flex flex-grow">
-                                    <div class="flex-grow">
-                                        <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                            <h6 class="preview-subject">CeeCee Bass</h6>
-                                            <p class="text-muted text-small">4 Hours Ago</p>
-                                        </div>
-                                        <p class="text-muted">Well, it seems to be working now.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-muted">Well, it seems to be working now. </p>
-                    <div class="progress progress-md portfolio-progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 col-xl-4 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">To do list</h4>
-                    <div class="add-items d-flex">
-                        <input type="text" class="form-control todo-list-input" placeholder="enter task..">
-                        <button class="add btn btn-primary todo-list-add-btn">Add</button>
-                    </div>
-                    <div class="list-wrapper">
-                        <ul class="d-flex flex-column-reverse text-white todo-list todo-list-custom">
-                            <li>
-                                <div class="form-check form-check-primary">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox"> Create invoice </label>
-                                </div>
-                                <i class="remove mdi mdi-close-box"></i>
-                            </li>
-                            <li>
-                                <div class="form-check form-check-primary">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox"> Meeting with Alita </label>
-                                </div>
-                                <i class="remove mdi mdi-close-box"></i>
-                            </li>
-                            <li class="completed">
-                                <div class="form-check form-check-primary">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox" checked> Prepare for presentation </label>
-                                </div>
-                                <i class="remove mdi mdi-close-box"></i>
-                            </li>
-                            <li>
-                                <div class="form-check form-check-primary">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox"> Plan weekend outing </label>
-                                </div>
-                                <i class="remove mdi mdi-close-box"></i>
-                            </li>
-                            <li>
-                                <div class="form-check form-check-primary">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox"> Pick up kids from school </label>
-                                </div>
-                                <i class="remove mdi mdi-close-box"></i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Visitors by Countries</h4>
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <i class="flag-icon flag-icon-us"></i>
-                                        </td>
-                                        <td>USA</td>
-                                        <td class="text-right"> 1500 </td>
-                                        <td class="text-right font-weight-medium"> 56.35% </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <i class="flag-icon flag-icon-de"></i>
-                                        </td>
-                                        <td>Germany</td>
-                                        <td class="text-right"> 800 </td>
-                                        <td class="text-right font-weight-medium"> 33.25% </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <i class="flag-icon flag-icon-au"></i>
-                                        </td>
-                                        <td>Australia</td>
-                                        <td class="text-right"> 760 </td>
-                                        <td class="text-right font-weight-medium"> 15.45% </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <i class="flag-icon flag-icon-gb"></i>
-                                        </td>
-                                        <td>United Kingdom</td>
-                                        <td class="text-right"> 450 </td>
-                                        <td class="text-right font-weight-medium"> 25.00% </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <i class="flag-icon flag-icon-ro"></i>
-                                        </td>
-                                        <td>Romania</td>
-                                        <td class="text-right"> 620 </td>
-                                        <td class="text-right font-weight-medium"> 10.25% </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <i class="flag-icon flag-icon-br"></i>
-                                        </td>
-                                        <td>Brasil</td>
-                                        <td class="text-right"> 230 </td>
-                                        <td class="text-right font-weight-medium"> 75.00% </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div id="audience-map" class="vector-map"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

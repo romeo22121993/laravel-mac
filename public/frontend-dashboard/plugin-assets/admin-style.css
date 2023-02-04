@@ -1,0 +1,12 @@
+
+#unsubscribers_admin_table, .admin_unsubscribers_page {
+	margin: 30px 0;
+}
+
+#unsubscribers_admin_table  th {
+	padding: 10px;
+}
+
+.wp-menu-separator.wp-not-current-submenu {
+	display: none;
+}

@@ -30,7 +30,7 @@ Route::get('/reset-password/{token}', [UserController::class, 'resetPasswordPage
 Route::post('/reset-password',        [UserController::class, 'changePassword'])->middleware('guest')->name('password.update1');
 /* */
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 /** All Pages with User dashboards */
 Route::group(['prefix'=> 'dashboard'], function(){
     Route::get('/', [AdminController::class, 'mainPage'])->name('dashboard.main');
@@ -77,7 +77,8 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
 
 /** All Pages without needed to log in */
 Route::group(['middleware' => ['web']], function () {
-    Route::get('/', [FrontendController::class, 'mainPage'])->name('home1');
+    Route::get('/', [FrontendController::class, 'mainPage'])->name('home');
+    Route::get('/platform', [FrontendController::class, 'platformPage'])->name('platform');
 });
 
 

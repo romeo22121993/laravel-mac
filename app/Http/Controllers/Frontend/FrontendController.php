@@ -34,9 +34,22 @@ class FrontendController extends Controller
         $post     = [ 'a', 'b', 'c' ];
         $usersCount = User::count();
 
-        var_dump( 'aa');
-
         return view('frontend.index', compact('category',  'usersCount'));
+
+    }
+
+    /**
+     * Function setting main admin page
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function platformPage() {
+
+        $category = [ 'a', 'b', 'c' ];
+        $post     = [ 'a', 'b', 'c' ];
+        $usersCount = User::count();
+
+        return view('frontend.platform', compact('category',  'usersCount'));
 
     }
 

@@ -1,74 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>@yield('title')</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}" >
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend-dashboard/fav.ico') }}">
+    <link rel="icon" type="image/x-icon"  href="{{ asset('frontend-dashboard/fav.ico') }}">
 
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/css/vendor.bundle.base.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/jvectormap/jquery-jvectormap.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/owl-carousel-2/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/owl-carousel-2/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" id="owl-carousel-css" href="{{ asset('frontend-dashboard/themes-assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}" type="text/css" media="all">
+    <link rel='stylesheet' id='campaign-items-style-home-css' href='{{ asset('frontend-dashboard/plugin-assets/scss/blocks/campaign-items.css') }} type='text/css' media='all' />
+    <link rel='stylesheet' id='template-modal-home-css' href='{{ asset('frontend-dashboard/plugin-assets/scss/blocks/template-modal.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' id='style-css' href='{{ asset('frontend-dashboard/plugin-assets/style.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' id='seven-css' href='{{ asset('frontend-dashboard/plugin-assets/seven.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' id='podcast-css' href='{{ asset('frontend-dashboard/plugin-assets/scss/blocks/podcast.css') }}' type='text/css' media='all' />
 
-    <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+    <link rel='stylesheet' id='bootstrap-css' href='{{ asset('frontend-dashboard/themes-assets/styles/bootstrap4/bootstrap.min.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' id='main_styles-css' href='{{ asset('frontend-dashboard/themes-assets/styles/main_styles.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' id='font-awesome-css' href='{{ asset('frontend-dashboard/themes-assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}' type='text/css' media='all' />
+    <link rel='preload' as='font' type='font/woff2' id='font-awesome-font-css' href='{{ asset('frontend-dashboard/themes-assets/plugins/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2') }}' type='text/css' media='all' />
+    <link rel='stylesheet' id='responsive-css' href='{{ asset('frontend-dashboard/themes-assets/styles/responsive.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' id='home-css' href='{{ asset('frontend-dashboard/themes-assets/styles/home.css') }}' type='text/css' media='all' />
 
-    <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.png') }}" />
+    <script src="{{ asset('frontend-dashboard/jquery.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('frontend-dashboard/themes-assets/plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}" id="owl-carousel-js-js"></script>
+
+    <script src="{{ asset('frontend-dashboard/plugin-assets/js/moment.min.js') }}"></script>
+    <script src="{{ asset('frontend-dashboard/plugin-assets/js/moment-timezone.js') }}"></script>
+    <script src="{{ asset('frontend-dashboard/plugin-assets/js/sv-calendar.js') }}"></script>
+    <script src="{{ asset('frontend-dashboard/plugin-assets/js/jquery.easypiechart.js') }}"></script>
+    <script src="{{ asset('frontend-dashboard/plugin-assets/table-sorter.min.js') }}"></script>
+
 </head>
-<body>
-    <div class="container-scroller">
-        <!-- partial:partials/_sidebar.html -->
-        @include('admin.body.sidebar')
-        <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
-            <!-- partial:partials/_navbar.html -->
-            @include('admin.body.header')
-            <!-- partial -->
-            <div class="main-panel">
-                @yield('admin_content')
-                <!-- content-wrapper ends -->
-                <!-- partial:partials/_footer.html -->
-                @include('admin.body.footer')
-                <!-- partial -->
-            </div>
-            <!-- main-panel ends -->
-        </div>
-        <!-- page-body-wrapper ends -->
-    </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="{{ asset('backend/assets/vendors/js/vendor.bundle.base.js') }}"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="{{ asset('backend/assets/vendors/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/vendors/progressbar.js/progressbar.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/vendors/jvectormap/jquery-jvectormap.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-    <script src="{{ asset('backend/assets/vendors/owl-carousel-2/owl.carousel.min.js') }}"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="{{ asset('backend/assets/js/off-canvas.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/misc.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/settings.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/todolist.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/todolist.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/scripts-custom.js') }}"></script>
-    <script src="{{ asset('backend/assets/custom.js') }}"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <script src="{{ asset('backend/assets/js/dashboard.js') }}"></script>
-    <!-- End custom js for this page -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<body  class="home page-template page-template-templates page-template-home page-template-templateshome-php page page-id-654 logged-in admin-bar no-customize-support cookies-set cookies-refused  page-home">
+    <div class="super_container1">
+        @include('frontend.body.mobile_menu')
 
-    <!-- summernote css/js -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+        @include('frontend.body.header')
+
+        @yield('content')
+
+        @include('frontend.body.footer')
+
+    </div>
+
+    <script src="{{ asset('frontend-dashboard/plugin-assets/admin-script.js') }}"></script>
+    <script src="{{ asset('frontend-dashboard/plugin-assets/script.js') }}"></script>
+    <script src="{{ asset('frontend-dashboard/plugin-assets/audio-podcast.js') }}"></script>
+
+    <script src="{{ asset('frontend-dashboard/themes-assets/styles/bootstrap4/popper.js') }}"></script>
+    <script src="{{ asset('frontend-dashboard/themes-assets/styles/bootstrap4/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('frontend-dashboard/themes-assets/js/jscustom.js') }}"></script>
 
 </body>
 </html>
+
