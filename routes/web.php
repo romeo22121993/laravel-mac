@@ -81,15 +81,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', [FrontendController::class, 'mainPage'])->name('home');
     Route::get('/platform', [FrontendController::class, 'platformPage'])->name('platform');
     Route::get('/sign-up',  [FrontendController::class, 'signUpPage'])->name('signup');
-    Route::get('/podcast',  [FrontendController::class, 'signUpPage'])->name('podcast');
-    Route::get('/blog',     [FrontendController::class, 'signUpPage'])->name('blog');
-    Route::get('/contact',  [FrontendController::class, 'signUpPage'])->name('contact');
+    Route::get('/podcast',  [FrontendController::class, 'podcastPage'])->name('podcast');
+    Route::get('/blog',     [FrontendController::class, 'blogPage'])->name('blog');
+    Route::get('/contact',  [FrontendController::class, 'contactPage'])->name('contact');
+    Route::get('/about',    [FrontendController::class, 'aboutPage'])->name('about');
 });
 
-
-//Route::get('/users/{name?}', function ($name = 'John') {
-//    return $name;
-//});
 
 /*
 Route::fallback(function () {
@@ -101,7 +98,6 @@ Route::get('/users/{user}', function (User $user) {
 });
 
 Route::get('/categories/{category}', function (Category $category) {
-
     return $category->value;
 });
 */

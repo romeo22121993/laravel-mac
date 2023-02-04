@@ -1830,7 +1830,7 @@ jQuery(document).ready(function ($) {
     login_page_form();
     contact_page_exit_popup_forms();
     profile_function();
-    header_function();
+    // header_function();
     admin_scripts_function();
     scroll_function();
     documentTooltip();

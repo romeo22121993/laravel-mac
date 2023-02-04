@@ -68,36 +68,59 @@ class FrontendController extends Controller
 
 
     /**
-     * Function getting forgot password page
+     * Function setting podcast page
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function forgotPassword ()
-    {
-        return view('auth.passwords.forgot-password');
+    public function podcastPage() {
+
+        $category = [ 'a', 'b', 'c' ];
+        $usersCount = User::count();
+
+        return view('frontend.podcast', compact('category',  'usersCount'));
+
+    }
+
+    /**
+     * Function setting contact page
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function contactPage() {
+
+        $category = [ 'a', 'b', 'c' ];
+        $usersCount = User::count();
+
+        return view('frontend.contact', compact('category',  'usersCount'));
+
     }
 
 
+    /**
+     * Function setting contact page
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function blogPage() {
+
+        $category = [ 'a', 'b', 'c' ];
+        $usersCount = User::count();
+
+        return view('frontend.blog', compact('category',  'usersCount'));
+
+    }
+
 
     /**
-     * Function changing password from reset page
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function changePassword (Request $request) {
+    public function aboutPage() {
 
-        $request->validate([
-            'token'    => 'required',
-            'email'    => 'required|email',
-            'password' => 'required|min:8|confirmed',
-        ]);
+        $category = [ 'a', 'b', 'c' ];
+        $usersCount = User::count();
 
+        return view('frontend.about', compact('category',  'usersCount'));
 
-
-        return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
     }
 
 }

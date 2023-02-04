@@ -1,339 +1,618 @@
 @extends('frontend.master')
 
 @section('title')
-    Sign Up Page
+    Podcast Page
 @endsection
 
 @section('content')
 
-    <div class="inner_container services_block platform_block">
+    <div class=" page-podcast">
+        <div class="inner_container services_block platform_block">
+            <div class="container">
+                <!--			<div class="podcast_block-banner-title">Episodes</div>-->
+                <div class="podcast_block-banner" style="background-image: url(http://seven.loc/wp-content/uploads/2021/05/Group_7-min.png)">
+                    <div class="podcast_block-banner-left">
+                        <img src="http://seven.loc/wp-content/uploads/2022/10/Advisor-Lab-by-Cion-white-and-teal-Logo2-e1666192251495.png" class="podcast_block-banner-left-image" alt="left image">				</div>
+                    <div class="podcast_block-banner-center">
+                        <h4>Advisor Lab by CION</h4>
+                        <h1>Browse Through Our Episodes</h1>
+                    </div>
+                    <div class="podcast_block-banner-right">
+                        <div class="podcast_block-banner-right-text">
+                            <div class="podcast_block-banner-right-text1">Hosted by</div>
+                            <div class="podcast_block-banner-right-text2">Derek Schwartz</div>
+                            <div class="podcast_block-banner-right-text3">Managing Director</div>
+                        </div>
+                        <img src="http://seven.loc/wp-content/uploads/2022/10/Derek-headshot_rt-side4-e1665516710448.png" class="podcast_block-banner-right-image" alt="right image">				</div>
+                </div>
+                <div class="podcast_block-banner-bottom">
+                    <a href="https://advisorlab.libsyn.com/" target="_blank"><img src="http://seven.loc/wp-content/uploads/2021/05/Bitmap-1.png" class="podcast_block-banner-bottom-image" alt="bottom image"></a>				<a href="https://advisorlab.libsyn.com/" target="_blank"><img src="http://seven.loc/wp-content/uploads/2021/05/Bitmap-2.png" class="podcast_block-banner-bottom-image" alt="bottom image"></a>			</div>
+            </div>
+
+        </div>
+
+        <div class="podcast_block-list">
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="inner_content">
-                        <div class="row">
-                            <div class="col-lg-6 col-sm-12 mb-2">
-                                <h1>Simple pricing, <br> no hidden fees. </h1>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3 col-sm-12">
-                                <a class="btn btn-signup btn-lg js-scroll-to" data-scroll="#signup" href="http://laravel.loc/sign-up#signup">
-                                    CHECK PRICING                                        </a>
-                            </div>
-                        </div>
-                    </div>
+            <h2>The Advisor Lab by CION</h2>
+
+
+            <div class="podcast_block-item" data-num="1">
+                <div class="podcast_block-item-image">
+                    <img src="https://ssl-static.libsyn.com/p/assets/8/5/2/2/85227af2863e1f38bafc7308ab683e82/Advisor_Lab_-_Logo.png " alt="podcast image">
                 </div>
-            </div>
-        </div>
-    </div>
+                <div class="podcast_block-item-text">
+                    <div class="podcast_block-item-top-text">
+                        Tue Jan 31 2023 | Episode 117 | CION Investments
+                    </div>
+                    <h4 class="podcast_block-item-title">
+                        Evolving Your Practice and Selecting a Platform Partner
+                    </h4>
 
-    <div class="sign_up_custom_content">
-        <div class="smaller-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-sm-12">
-                        <p class="bigger"> Whether you’re an advisor and know what you want to accomplish from a marketing perspective, or you don't know where to start, we can help your practice. </p>
+                    <div class="podcast_block-item-desc">
+                        <p>Amit Dogra is President and COO of tru Independence, a platform that helps financial advisors optimize their independence with guidance, expertise and support. In this episode, we go deep into the continually evolving financial advisory landscape, the trends Amit sees now, and some very good advice for what advisors should be thinking about, from asset growth to succession planning.</p>
                     </div>
-                    <div class="col-lg-6 col-sm-12">
-                        <p class="bigger">No setup fees. Each element of the platform is exclusive to you through your membership. </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="smaller-padding programs">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 offset-lg-2 text-center">
-                        <h5>THE BENEFITS</h5>
-                        <h2>What The Platform Provides</h2>
-                    </div>
-                </div>
-
-                <div class="row d-flex justify-content-between">
-                    <div class="col-lg-4 one-program-card">
-                        <h3>A Clear, Concise Plan</h3>
-                        <p>We provide you with a marketing framework which includes what content you should be creating, what channels you should market on, and how to execute on everything. </p>
-                    </div>
-                    <div class="col-lg-4 one-program-card">
-                        <h3>Unlimited Ready-to-Go Content</h3>
-                        <p>You receive access to ready-to-go, downloadable content that can be sent and deployed directly from the platform or by adding it to your website. Add your branding, send it out. Done.</p>
-                    </div>
-                    <div class="col-lg-4 one-program-card">
-                        <h3>All-Access to Coaching Lab</h3>
-                        <p>We enable your marketing through on-demand, digital coaching modules covering a number of marketing topics. This allows you to access them anywhere, anytime, getting up to speed at your own pace.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="smaller-padding our-philosophy platform-holder signup-video">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 col-xs-12 text-center">
-                        <h2>The Platform</h2>
-                        <p class="bigger p_before_video">Paired with our cohort training programs and community - you get access to our platform.</p>
-                        <iframe src="https://player.vimeo.com/video/758451249?h=decfec953d" width="880"
-                                height="700" frameborder="0"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="sv-pricing default-padding sign_up_custom_page container" id="signup" >
-            <div class="sv-pricing__heading">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-10 mx-auto text-center">
-                            <span>PRICING</span>
-                            <h2>The Perfect Plan for Your Practice</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container sv-pricing__container">
-                <div class="row">
-                    <div class="col-12">
-
-                        <div class="sv-pricing__content mx-auto sv-price-new">
-                            <div class="sv-price ">
-                                <div class="sv-price__header text-center">
-                                    <span class="sv-price__subtitle">We provide you with the content, coaching, and peer learning to help you grow. All at a simple price.</span>
+                    <audio src="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_Amit_Dogra_FINAL.mp3?dest-id=1706015" id="track"></audio>
+                    <div class="player-container">
+                        <div class="box">
+                            <div class="next-prev">
+                                <i title="Back 30 seconds" id="back30"></i>
+                                <div class="play-pause">
+                                    <i id="play"></i>
+                                    <i id="pause"></i>
                                 </div>
-                                <div class="sv-price__body">
-                                    <div class="sv-price__body-left">
-                                        <p class="sv-price__price text-center">$74.99</p>
-                                        <span class="sv-price__payment-repeat text-center">/month</span>
-                                        <h5 class="sv-price__title text-center">Per Advisor or Team Member. Minimum Initial Term of Six (6) Months.</h5>
+                                <i title="Forward 30 seconds" id="forward30"></i>
+                            </div>
+                            <div class="progress-bar">
+                                <input type="range" id="progressBar" min="0" max="1335.915417" value="0">
+                            </div>
+                            <div class="track-time">
+                                <div id="currentTime">0:00</div>
+                                <div id="durationTime">22:15</div>
+                            </div>
+                            <div class="volume-container">
+                                <div class="volume-button">
+                                    <div class="volume icono-volumeMedium"></div>
+                                </div>
+                                <div class="volume-slider">
+                                    <span class="slide" style="width: 100%;"><span class="slide-icon"></span></span>
+                                    <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+                                </div>
+                            </div>
+                            <div class="audio-buttons">
+                                <div class="audio-buttons-share">
+                                    <div class="audio-buttons-share-container">
+                                        <a href="http://www.facebook.com/sharer.php?u=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_Amit_Dogra_FINAL.mp3?dest-id=1706015" title="facebook" target="_blank"></a>
+                                        <a href="https://twitter.com/share?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_Amit_Dogra_FINAL.mp3?dest-id=1706015" title="twitter" target="_blank"></a>
+                                        <a href=" http://www.linkedin.com/shareArticle?mini=true&amp;url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_Amit_Dogra_FINAL.mp3?dest-id=1706015" title="linkedin" target="_blank"></a>
+                                        <a href=" http://pinterest.com/pin/create/button/?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_Amit_Dogra_FINAL.mp3?dest-id=1706015" title="pinterest" target="_blank"></a>
                                     </div>
                                 </div>
+                                <a class="audio-buttons-download" href="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_Amit_Dogra_FINAL.mp3?dest-id=1706015" target="_blank">	</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="podcast_block-item" data-num="2">
+                <div class="podcast_block-item-image">
+                    <img src="https://ssl-static.libsyn.com/p/assets/8/5/2/2/85227af2863e1f38bafc7308ab683e82/Advisor_Lab_-_Logo.png " alt="podcast image">
+                </div>
+                <div class="podcast_block-item-text">
+                    <div class="podcast_block-item-top-text">
+                        Tue Jan 17 2023 | Episode 116 | CION Investments
+                    </div>
+                    <h4 class="podcast_block-item-title">
+                        2023 Outlook - The Beginning of a New Recovery Cycle?
+                    </h4>
 
-        <div class="container registration-form-container">
-            <div class="row">
-                <div class="col">
-                    <div class="box box-form pxy-20">
-                        <div class="discount_block">
-                            <div class="rcp_custom_discounts_fieldset ">
-                                <fieldset class="rcp_custom_discounts_fieldset">
-                                    <p id="rcpcustom_discount_code_wrap">
-                                        <label >
-                                            Discount Code                                                <span class="rcp_custom_discount_valid" style="display: none;"> - Success! Your discount has been applied!</span>
-                                            <span class="rcp_custom_discount_invalid" style="display: none;"> - That code isn't quite right - please enter the code again</span>
-                                            <img src="./dist/img/loader.gif" alt="loader"  id="loader" style=" display: none; width: 20px;  height: 20px;  margin-bottom: 5px;   margin-left: 16px;" />
-                                        </label>
-                                        <span class="rcp_discount_code_field_wrap">
-                                                <input type="text" id="custom_rcp_discount_code" name="custom_rcp_discount" class="rcp_discount_code" value="">
-                                                <button class="rcp_button custom_rcp_button" id="custom_rcp_apply_discount"> Apply</button>
-                                            </span>
-                                    </p>
-                                </fieldset>
+                    <div class="podcast_block-item-desc">
+                        <p>On this episode of Advisor Lab by CION, we welcome Brian Levitt, Global Market Strategist. We sat down with Brian to discuss his view on the volatility and uncertainty of last year, how things changed in the last few months, and what he thinks may be in store for the economy and the markets in 2023. Along the way, we hit the Fed’s terminal rate, the debt ceiling, the 60/40 portfolio, and got into alternatives. It’s a great listen to set you up for 2023.</p>
+                    </div>
+                    <audio src="https://traffic.libsyn.com/secure/advisorlab/REVISED_brianlevitt_FINAL.mp3?dest-id=1706015" id="track"></audio>
+                    <div class="player-container">
+                        <div class="box">
+                            <div class="next-prev">
+                                <i title="Back 30 seconds" id="back30"></i>
+                                <div class="play-pause">
+                                    <i id="play"></i>
+                                    <i id="pause"></i>
+                                </div>
+                                <i title="Forward 30 seconds" id="forward30"></i>
                             </div>
-                        </div>
-
-                        <div class="form_shortcode sign_up_form_inner" data-subscription_plan="Standard">
-
-                            <h3 class="rcp_header">
-                                Register New Account	</h3>
-
-                            <form id="rcp_registration_form" class="rcp_form" method="POST" action="http://laravel.loc/sign-up/">
-                                <p class="totat_area_text">Monthly Access Fee: $74.99 Per Month for a Minimum Initial Term of Six (6) Months. Cancel any time after six (6) months.</p>
-                                <div class="">
-                                    <fieldset class="rcp_user_fieldset">
-                                        <div class="d-flex" style="flex-wrap: wrap;">
-                                            <div class="col-lg-8 offset-lg-2 case-studies text-center">
-                                                <h3>Your Information</h3>
-                                            </div>
-                                            <div class="col-lg-4 col-sm-12">
-                                                <p id="rcp_user_login_wrap">
-                                                    <label for="rcp_user_login">Username</label>
-                                                    <input name="rcp_user_login" id="rcp_user_login" class="required" type="text" />
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-4 col-sm-12">
-                                                <p id="rcp_user_first_wrap">
-                                                    <label for="rcp_user_first">First Name</label>
-                                                    <input name="rcp_user_first" id="rcp_user_first" type="text" />
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-4 col-sm-12">
-                                                <p id="rcp_user_last_wrap">
-                                                    <label for="rcp_user_last">Last Name</label>
-                                                    <input name="rcp_user_last" id="rcp_user_last" type="text" />
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-6 col-sm-12" id="email_block" >
-                                                <p id="rcp_user_email_wrap">
-                                                    <label for="rcp_user_email">Email</label>
-                                                    <input name="rcp_user_email" id="rcp_user_email" class="required" type="email" />
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-6 col-sm-12">
-                                                <p id="rcp_password_wrap">
-                                                    <label for="rcp_password">Password</label>
-                                                    <input name="rcp_user_pass" id="rcp_password" class="required" type="password"/>
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-6 col-sm-12">
-                                                <p id="rcp_password_again_wrap">
-                                                    <label for="rcp_password_again">Confirm Password</label>
-                                                    <input name="rcp_user_pass_confirm" id="rcp_password_again" class="required" type="password"/>
-                                                </p>
-                                            </div>
-                                        </div>
-
-
-                                        <input name="rcp_user_phase" id="rcp_user_phase" class="required" type="hidden" value="phase1"/>
-
-                                        <div class="d-flex" style="flex-wrap: wrap;" id="additional_fields_rcp">
-                                            <div class="col-lg-6 col-sm-12">
-                                                <p id="rcp_user_phone_wrap">
-                                                    <label for="rcp_user_phone">Phone number</label>
-                                                    <input name="rcp_user_phone" id="rcp_user_phone" class="required" type="tel" value=""/>
-                                                </p>
-                                            </div>
-
-                                            <div class="col-lg-6 col-sm-12">
-                                                <p id="rcp_user_company_wrap">
-                                                    <label for="rcp_user_company">Company name</label>
-                                                    <input name="rcp_user_company" id="rcp_user_company" class="required" type="tel" value=""/>
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-6 col-sm-12">
-                                                <p id="rcp_user_position_wrap">
-                                                    <label for="rcp_user_position">Position</label>
-                                                    <input name="rcp_user_position" id="rcp_user_position" class="required" type="tel" value=""/>
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-
-                                    </fieldset>
-
-                                    <div class="col-lg-8 offset-lg-2 col-sm-12 case-studies text-center">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <h3>Payment information</h3>
-                                                <p class="bigger">Monthly Access Fee: $74.99 Per Month for a Minimum Initial Term of Six (6) Months. Cancel any time after six (6) months.</p>
-                                            </div>
-                                            <div class="col-lg-12">
-                                            </div>
-                                        </div>
+                            <div class="progress-bar">
+                                <input type="range" id="progressBar" min="0" max="1265.959917" value="0">
+                            </div>
+                            <div class="track-time">
+                                <div id="currentTime">0:00</div>
+                                <div id="durationTime">21:05</div>
+                            </div>
+                            <div class="volume-container">
+                                <div class="volume-button">
+                                    <div class="volume icono-volumeMedium"></div>
+                                </div>
+                                <div class="volume-slider">
+                                    <span class="slide" style="width: 100%;"><span class="slide-icon"></span></span>
+                                    <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+                                </div>
+                            </div>
+                            <div class="audio-buttons">
+                                <div class="audio-buttons-share">
+                                    <div class="audio-buttons-share-container">
+                                        <a href="http://www.facebook.com/sharer.php?u=https://traffic.libsyn.com/secure/advisorlab/REVISED_brianlevitt_FINAL.mp3?dest-id=1706015" title="facebook" target="_blank"></a>
+                                        <a href="https://twitter.com/share?url=https://traffic.libsyn.com/secure/advisorlab/REVISED_brianlevitt_FINAL.mp3?dest-id=1706015" title="twitter" target="_blank"></a>
+                                        <a href=" http://www.linkedin.com/shareArticle?mini=true&amp;url=https://traffic.libsyn.com/secure/advisorlab/REVISED_brianlevitt_FINAL.mp3?dest-id=1706015" title="linkedin" target="_blank"></a>
+                                        <a href=" http://pinterest.com/pin/create/button/?url=https://traffic.libsyn.com/secure/advisorlab/REVISED_brianlevitt_FINAL.mp3?dest-id=1706015" title="pinterest" target="_blank"></a>
                                     </div>
-
                                 </div>
-
-
-                                <fieldset class="rcp_subscription_fieldset">
-                                    <p class="rcp_subscription_message">Choose your membership level</p>
-                                    <ul id="rcp_subscription_levels">
-                                        <li class="rcp_subscription_level rcp_subscription_level_25">
-                                            <input type="radio" id="rcp_subscription_level_25" class="required rcp_level" checked="checked" name="rcp_level" rel="74.99" value="25" />
-                                            <label for="rcp_subscription_level_25">
-                                                <span class="rcp_subscription_level_name">No discount code Self-Sign Up</span><span class="rcp_separator">&nbsp;-&nbsp;</span><span class="rcp_price" rel="74.99">&#36;74.99</span><span class="rcp_separator">&nbsp;-&nbsp;</span>
-                                                <span class="rcp_level_duration">1&nbsp;Month</span>
-                                                <div class="rcp_level_description"> No discount code, they be charge the $74.99/m</div>
-                                            </label>
-
-                                        </li>
-                                        <li class="rcp_subscription_level rcp_subscription_level_26">
-                                            <input type="radio" id="rcp_subscription_level_26" class="required rcp_level"  name="rcp_level" rel="60" value="26" data-has-trial="true"/>
-                                            <label for="rcp_subscription_level_26">
-                                                <span class="rcp_subscription_level_name">XYPNAI/O Self-Sign Up</span><span class="rcp_separator">&nbsp;-&nbsp;</span><span class="rcp_price" rel="60">&#36;60.00</span><span class="rcp_separator">&nbsp;-&nbsp;</span>
-                                                <span class="rcp_level_duration">1&nbsp;Month</span>
-                                                <div class="rcp_level_description"> XYPNAI/O they'd be charge $60/m with 3 months free</div>
-                                            </label>
-
-                                        </li>
-                                        <li class="rcp_subscription_level rcp_subscription_level_27">
-                                            <input type="radio" id="rcp_subscription_level_27" class="required rcp_level"  name="rcp_level" rel="0" value="27" />
-                                            <label for="rcp_subscription_level_27">
-                                                <span class="rcp_subscription_level_name">CIONFREE Self-Sign Up</span><span class="rcp_separator">&nbsp;-&nbsp;</span><span class="rcp_price" rel="0">free</span><span class="rcp_separator">&nbsp;-&nbsp;</span>
-                                                <span class="rcp_level_duration">1&nbsp;Month</span>
-                                                <div class="rcp_level_description"> CIONFREE they'd be charge $0</div>
-                                            </label>
-
-                                        </li>
-                                        <li class="rcp_subscription_level rcp_subscription_level_28">
-                                            <input type="radio" id="rcp_subscription_level_28" class="required rcp_level"  name="rcp_level" rel="60" value="28" data-has-trial="true"/>
-                                            <label for="rcp_subscription_level_28">
-                                                <span class="rcp_subscription_level_name">SANCAI/O Self Sign up</span><span class="rcp_separator">&nbsp;-&nbsp;</span><span class="rcp_price" rel="60">&#36;60.00</span><span class="rcp_separator">&nbsp;-&nbsp;</span>
-                                                <span class="rcp_level_duration">1&nbsp;Month</span>
-                                                <div class="rcp_level_description"> SANCAI/O Self Sign up</div>
-                                            </label>
-
-                                        </li>
-                                    </ul>
-                                </fieldset>
-
-                                <div class="rcp_registration_total"></div>
-
-                                <div class="rcp_gateway_fields">
-                                    <input type="hidden" name="rcp_gateway" value="stripe" data-supports-recurring="yes" data-supports-trial="yes"/>
-                                </div>
-
-
-                                <input type="hidden" id="rcp-registration-type" name="registration_type" value="" />
-                                <input type="hidden" id="rcp-membership-id" name="membership_id" value="0" />
-                                <input type="hidden" id="rcp-payment-id" name="rcp_registration_payment_id" value="0" />
-
-                                <p id="rcp_submit_wrap">
-                                    <input type="hidden" name="rcp_register_nonce" value="2b8d14f399"/>
-                                    <input type="submit" name="rcp_submit_registration" id="rcp_submit" class="rcp-button" value="Register"/>
-                                </p>
-                            </form>
-                            <a href="#" id="custom_signup_form_before_submit" class="sv-button sv-button--green">Register</a>
-                        </div>
-                        <form action="" id="custom_signup_form" class="d-none">
-                            <label>Company</label>
-                            <input type="text" name="company"/>
-                            <label>First Name*</label>
-                            <input type="text" name="name"  required/>
-                            <label>Last Name*</label>
-                            <input type="text" name="lastname"  required/>
-                            <label>Email*</label>
-                            <input type="email" name="email" required/>
-                            <input type="text" id="subscription_plan" name="subscription_plan" value="Standard" />
-                            <input type="submit" value="Send" class="btn btn-primary contact_submit"/>
-                        </form>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="privacy_block">
-        <div class="col-lg-8 offset-lg-2 col-sm-12 case-studies text-center">
-            <div class="row">
-                <div class="col-12 one-card pxy-20 mt-3 ">
-                    <div class="row">
-                        <div class="col-lg-12 d-flex justify-content-start align-items-center flex-row">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" name="privacy" required id="privacyPolicy" >
-                                <label class="form-check-label" for="privacyPolicy" style="display: inline-block;font-weight: normal;">
-                                    I have read and agree to the                                        <a class="terms_signup_links" target="_blank" href="http://laravel.loc/privacy-policy/">
-                                        Privacy Policy                                        </a>
-                                    &                                        <a class="terms_signup_links" target="_blank" href="http://laravel.loc/terms-of-service/">
-                                        Terms of Service                                        </a>
-                                </label>
+                                <a class="audio-buttons-download" href="https://traffic.libsyn.com/secure/advisorlab/REVISED_brianlevitt_FINAL.mp3?dest-id=1706015" target="_blank">	</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="podcast_block-item" data-num="3">
+                <div class="podcast_block-item-image">
+                    <img src="https://ssl-static.libsyn.com/p/assets/8/5/2/2/85227af2863e1f38bafc7308ab683e82/Advisor_Lab_-_Logo.png " alt="podcast image">
+                </div>
+                <div class="podcast_block-item-text">
+                    <div class="podcast_block-item-top-text">
+                        Wed Dec 07 2022 | Episode 115 | CION Investments
+                    </div>
+                    <h4 class="podcast_block-item-title">
+                        Pathways to Growth - The Limits of Scale
+                    </h4>
+
+                    <div class="podcast_block-item-desc">
+                        <p>On this episode of Advisor Lab by CION, we sit down with Josh Reidinger, CEO of Waverly Advisors. Waverly has grown organically and through acquisitions, backed with private equity. We get into how Waverly built a unique culture, what they see going forward in the independent advisor space, and how they develop niche-based offerings for clients. Waverly believes in scaling your business, but not your relationships.&nbsp;</p>
+                    </div>
+                    <audio src="https://traffic.libsyn.com/secure/advisorlab/REVISED_cioninvestments_mixdown_1.mp3?dest-id=1706015" id="track"></audio>
+                    <div class="player-container">
+                        <div class="box">
+                            <div class="next-prev">
+                                <i title="Back 30 seconds" id="back30"></i>
+                                <div class="play-pause">
+                                    <i id="play"></i>
+                                    <i id="pause"></i>
+                                </div>
+                                <i title="Forward 30 seconds" id="forward30"></i>
+                            </div>
+                            <div class="progress-bar">
+                                <input type="range" id="progressBar" min="0" max="1527.367083" value="0">
+                            </div>
+                            <div class="track-time">
+                                <div id="currentTime">0:00</div>
+                                <div id="durationTime">25:27</div>
+                            </div>
+                            <div class="volume-container">
+                                <div class="volume-button">
+                                    <div class="volume icono-volumeMedium"></div>
+                                </div>
+                                <div class="volume-slider">
+                                    <span class="slide" style="width: 100%;"><span class="slide-icon"></span></span>
+                                    <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+                                </div>
+                            </div>
+                            <div class="audio-buttons">
+                                <div class="audio-buttons-share">
+                                    <div class="audio-buttons-share-container">
+                                        <a href="http://www.facebook.com/sharer.php?u=https://traffic.libsyn.com/secure/advisorlab/REVISED_cioninvestments_mixdown_1.mp3?dest-id=1706015" title="facebook" target="_blank"></a>
+                                        <a href="https://twitter.com/share?url=https://traffic.libsyn.com/secure/advisorlab/REVISED_cioninvestments_mixdown_1.mp3?dest-id=1706015" title="twitter" target="_blank"></a>
+                                        <a href=" http://www.linkedin.com/shareArticle?mini=true&amp;url=https://traffic.libsyn.com/secure/advisorlab/REVISED_cioninvestments_mixdown_1.mp3?dest-id=1706015" title="linkedin" target="_blank"></a>
+                                        <a href=" http://pinterest.com/pin/create/button/?url=https://traffic.libsyn.com/secure/advisorlab/REVISED_cioninvestments_mixdown_1.mp3?dest-id=1706015" title="pinterest" target="_blank"></a>
+                                    </div>
+                                </div>
+                                <a class="audio-buttons-download" href="https://traffic.libsyn.com/secure/advisorlab/REVISED_cioninvestments_mixdown_1.mp3?dest-id=1706015" target="_blank">	</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="podcast_block-item" data-num="4">
+                <div class="podcast_block-item-image">
+                    <img src="https://ssl-static.libsyn.com/p/assets/8/5/2/2/85227af2863e1f38bafc7308ab683e82/Advisor_Lab_-_Logo.png " alt="podcast image">
+                </div>
+                <div class="podcast_block-item-text">
+                    <div class="podcast_block-item-top-text">
+                        Tue Nov 15 2022 | Episode 114 | CION Investments
+                    </div>
+                    <h4 class="podcast_block-item-title">
+                        Episode 114: Building Authenticity and Flexibility into Your Business Model
+                    </h4>
+
+                    <div class="podcast_block-item-desc">
+                        <p>On this episode of Advisor Lab by CION, we welcome Anna N’Jie-Konte, the Founder of Dare-To-Dream Financial Planning. Anna N’Jie Konte has built a unique and successful business by looking at what attracted her, and adapting it to her own firm. She’s a firm believer in creating marketing rooted in the advisor’s personal story and value system to create client trust. We discuss Anna’s journey, and how her commitment to fitness and self-care was critical to her success.</p>
+                    </div>
+                    <audio src="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown.mp3?dest-id=1706015" id="track"></audio>
+                    <div class="player-container">
+                        <div class="box">
+                            <div class="next-prev">
+                                <i title="Back 30 seconds" id="back30"></i>
+                                <div class="play-pause">
+                                    <i id="play"></i>
+                                    <i id="pause"></i>
+                                </div>
+                                <i title="Forward 30 seconds" id="forward30"></i>
+                            </div>
+                            <div class="progress-bar">
+                                <input type="range" id="progressBar" min="0" max="1577.551417" value="0">
+                            </div>
+                            <div class="track-time">
+                                <div id="currentTime">0:00</div>
+                                <div id="durationTime">26:17</div>
+                            </div>
+                            <div class="volume-container">
+                                <div class="volume-button">
+                                    <div class="volume icono-volumeMedium"></div>
+                                </div>
+                                <div class="volume-slider">
+                                    <span class="slide" style="width: 100%;"><span class="slide-icon"></span></span>
+                                    <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+                                </div>
+                            </div>
+                            <div class="audio-buttons">
+                                <div class="audio-buttons-share">
+                                    <div class="audio-buttons-share-container">
+                                        <a href="http://www.facebook.com/sharer.php?u=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown.mp3?dest-id=1706015" title="facebook" target="_blank"></a>
+                                        <a href="https://twitter.com/share?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown.mp3?dest-id=1706015" title="twitter" target="_blank"></a>
+                                        <a href=" http://www.linkedin.com/shareArticle?mini=true&amp;url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown.mp3?dest-id=1706015" title="linkedin" target="_blank"></a>
+                                        <a href=" http://pinterest.com/pin/create/button/?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown.mp3?dest-id=1706015" title="pinterest" target="_blank"></a>
+                                    </div>
+                                </div>
+                                <a class="audio-buttons-download" href="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown.mp3?dest-id=1706015" target="_blank">	</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="podcast_block-item" data-num="5">
+                <div class="podcast_block-item-image">
+                    <img src="https://ssl-static.libsyn.com/p/assets/8/5/2/2/85227af2863e1f38bafc7308ab683e82/Advisor_Lab_-_Logo.png " alt="podcast image">
+                </div>
+                <div class="podcast_block-item-text">
+                    <div class="podcast_block-item-top-text">
+                        Tue Oct 25 2022 | Episode 113 | CION Investments
+                    </div>
+                    <h4 class="podcast_block-item-title">
+                        Market Uncertainty: How to Define Your Outcome
+                    </h4>
+
+                    <div class="podcast_block-item-desc">
+                        <p>In this episode, we welcome Jason Barsema, president and co-founder of Halo Investing. This fintech platform provides financial advisors with solutions for their clients that historically have only been available to ultra high net worth individuals. Be it bonds or equities, the 60/40 portfolios have had the worst first half of any year going back to 1932. Downside risk is on everyone's mind. Find out why Jason and Halo Investing are seeing such a huge demand for their platform and their business.</p>
+                    </div>
+                    <audio src="https://traffic.libsyn.com/secure/advisorlab/rev_cioninvestments_mixdown.mp3?dest-id=1706015" id="track"></audio>
+                    <div class="player-container">
+                        <div class="box">
+                            <div class="next-prev">
+                                <i title="Back 30 seconds" id="back30"></i>
+                                <div class="play-pause">
+                                    <i id="play"></i>
+                                    <i id="pause"></i>
+                                </div>
+                                <i title="Forward 30 seconds" id="forward30"></i>
+                            </div>
+                            <div class="progress-bar">
+                                <input type="range" id="progressBar" min="0" max="1598.079" value="0">
+                            </div>
+                            <div class="track-time">
+                                <div id="currentTime">0:00</div>
+                                <div id="durationTime">26:38</div>
+                            </div>
+                            <div class="volume-container">
+                                <div class="volume-button">
+                                    <div class="volume icono-volumeMedium"></div>
+                                </div>
+                                <div class="volume-slider">
+                                    <span class="slide" style="width: 100%;"><span class="slide-icon"></span></span>
+                                    <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+                                </div>
+                            </div>
+                            <div class="audio-buttons">
+                                <div class="audio-buttons-share">
+                                    <div class="audio-buttons-share-container">
+                                        <a href="http://www.facebook.com/sharer.php?u=https://traffic.libsyn.com/secure/advisorlab/rev_cioninvestments_mixdown.mp3?dest-id=1706015" title="facebook" target="_blank"></a>
+                                        <a href="https://twitter.com/share?url=https://traffic.libsyn.com/secure/advisorlab/rev_cioninvestments_mixdown.mp3?dest-id=1706015" title="twitter" target="_blank"></a>
+                                        <a href=" http://www.linkedin.com/shareArticle?mini=true&amp;url=https://traffic.libsyn.com/secure/advisorlab/rev_cioninvestments_mixdown.mp3?dest-id=1706015" title="linkedin" target="_blank"></a>
+                                        <a href=" http://pinterest.com/pin/create/button/?url=https://traffic.libsyn.com/secure/advisorlab/rev_cioninvestments_mixdown.mp3?dest-id=1706015" title="pinterest" target="_blank"></a>
+                                    </div>
+                                </div>
+                                <a class="audio-buttons-download" href="https://traffic.libsyn.com/secure/advisorlab/rev_cioninvestments_mixdown.mp3?dest-id=1706015" target="_blank">	</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="podcast_block-item" data-num="6">
+                <div class="podcast_block-item-image">
+                    <img src="https://ssl-static.libsyn.com/p/assets/8/5/2/2/85227af2863e1f38bafc7308ab683e82/Advisor_Lab_-_Logo.png " alt="podcast image">
+                </div>
+                <div class="podcast_block-item-text">
+                    <div class="podcast_block-item-top-text">
+                        Wed Sep 21 2022 | Episode 112 | CION Investments
+                    </div>
+                    <h4 class="podcast_block-item-title">
+                        Scaling Client and Prospect Engagement: A Guide to Launching an Educational Platform for Your Niche
+                    </h4>
+
+                    <div class="podcast_block-item-desc">
+                        <p>In this episode, we welcome Ann Garcia, she’s owner of Independent Progressive Advisors, and the author of how to pay for college book and course. Ann has built a pretty incredible media portfolio around the topic of college, and in this episode, we dive into how she did it while running her practice. Let’s get into the conversation with Ann Garcia.</p> <p>Check out the course: https://howtopayforcollege.com</p>
+                    </div>
+                    <audio src="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_17.mp3?dest-id=1706015" id="track"></audio>
+                    <div class="player-container">
+                        <div class="box">
+                            <div class="next-prev">
+                                <i title="Back 30 seconds" id="back30"></i>
+                                <div class="play-pause">
+                                    <i id="play"></i>
+                                    <i id="pause"></i>
+                                </div>
+                                <i title="Forward 30 seconds" id="forward30"></i>
+                            </div>
+                            <div class="progress-bar">
+                                <input type="range" id="progressBar" min="0" max="2000.257917" value="0">
+                            </div>
+                            <div class="track-time">
+                                <div id="currentTime">0:00</div>
+                                <div id="durationTime">33:20</div>
+                            </div>
+                            <div class="volume-container">
+                                <div class="volume-button">
+                                    <div class="volume icono-volumeMedium"></div>
+                                </div>
+                                <div class="volume-slider">
+                                    <span class="slide" style="width: 100%;"><span class="slide-icon"></span></span>
+                                    <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+                                </div>
+                            </div>
+                            <div class="audio-buttons">
+                                <div class="audio-buttons-share">
+                                    <div class="audio-buttons-share-container">
+                                        <a href="http://www.facebook.com/sharer.php?u=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_17.mp3?dest-id=1706015" title="facebook" target="_blank"></a>
+                                        <a href="https://twitter.com/share?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_17.mp3?dest-id=1706015" title="twitter" target="_blank"></a>
+                                        <a href=" http://www.linkedin.com/shareArticle?mini=true&amp;url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_17.mp3?dest-id=1706015" title="linkedin" target="_blank"></a>
+                                        <a href=" http://pinterest.com/pin/create/button/?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_17.mp3?dest-id=1706015" title="pinterest" target="_blank"></a>
+                                    </div>
+                                </div>
+                                <a class="audio-buttons-download" href="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_17.mp3?dest-id=1706015" target="_blank">	</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="podcast_block-item" data-num="7">
+                <div class="podcast_block-item-image">
+                    <img src="https://ssl-static.libsyn.com/p/assets/8/5/2/2/85227af2863e1f38bafc7308ab683e82/Advisor_Lab_-_Logo.png " alt="podcast image">
+                </div>
+                <div class="podcast_block-item-text">
+                    <div class="podcast_block-item-top-text">
+                        Wed Sep 14 2022 | Episode 111 | CION Investments
+                    </div>
+                    <h4 class="podcast_block-item-title">
+                        Creating More Self-Awareness to Drive Better Client Relationships
+                    </h4>
+
+                    <div class="podcast_block-item-desc">
+                        <p>In this episode, we sit down with Joy Lere, Co-Founder of Shaping Wealth. Joy is a clinical psychologist, founder, consultant, educator, and writer - and she has an incredibly unique point of view on how advisors can create more self-awareness in their practice to improve their client relationships.&nbsp;</p> <p>Shaping Wealth just launched a new program, OCBO, your Outsourced Chief Behaviorial Office. You can learn more about it here: https://www.shapingwealth.com/ocbo</p>
+                    </div>
+                    <audio src="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_16.mp3?dest-id=1706015" id="track"></audio>
+                    <div class="player-container">
+                        <div class="box">
+                            <div class="next-prev">
+                                <i title="Back 30 seconds" id="back30"></i>
+                                <div class="play-pause">
+                                    <i id="play"></i>
+                                    <i id="pause"></i>
+                                </div>
+                                <i title="Forward 30 seconds" id="forward30"></i>
+                            </div>
+                            <div class="progress-bar">
+                                <input type="range" id="progressBar" min="0" max="2000.257917" value="0">
+                            </div>
+                            <div class="track-time">
+                                <div id="currentTime">0:00</div>
+                                <div id="durationTime">33:20</div>
+                            </div>
+                            <div class="volume-container">
+                                <div class="volume-button">
+                                    <div class="volume icono-volumeMedium"></div>
+                                </div>
+                                <div class="volume-slider">
+                                    <span class="slide" style="width: 100%;"><span class="slide-icon"></span></span>
+                                    <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+                                </div>
+                            </div>
+                            <div class="audio-buttons">
+                                <div class="audio-buttons-share">
+                                    <div class="audio-buttons-share-container">
+                                        <a href="http://www.facebook.com/sharer.php?u=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_16.mp3?dest-id=1706015" title="facebook" target="_blank"></a>
+                                        <a href="https://twitter.com/share?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_16.mp3?dest-id=1706015" title="twitter" target="_blank"></a>
+                                        <a href=" http://www.linkedin.com/shareArticle?mini=true&amp;url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_16.mp3?dest-id=1706015" title="linkedin" target="_blank"></a>
+                                        <a href=" http://pinterest.com/pin/create/button/?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_16.mp3?dest-id=1706015" title="pinterest" target="_blank"></a>
+                                    </div>
+                                </div>
+                                <a class="audio-buttons-download" href="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_16.mp3?dest-id=1706015" target="_blank">	</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="podcast_block-item" data-num="8">
+                <div class="podcast_block-item-image">
+                    <img src="https://ssl-static.libsyn.com/p/assets/8/5/2/2/85227af2863e1f38bafc7308ab683e82/Advisor_Lab_-_Logo.png " alt="podcast image">
+                </div>
+                <div class="podcast_block-item-text">
+                    <div class="podcast_block-item-top-text">
+                        Wed Aug 31 2022 | Episode 110 | CION Investments
+                    </div>
+                    <h4 class="podcast_block-item-title">
+                        Introducing New Tech Into Your Practice, and Your Clients Lives
+                    </h4>
+
+                    <div class="podcast_block-item-desc">
+                        <p>In this episode, we sit down with Scott Frank, founder of Stone Steps Financial, who has built a unique client experience for years leveraging new tech and different life planning approaches. We get into his experience introducing life planning into his practice and the latest tech he is using to improve his client experience and get back his time.&nbsp;</p> <p>Check out Stone Steps: <a href="https://www.stonestepsfinancial.com/">https://www.stonestepsfinancial.com/</a></p> <p>Check out Elements: <a href="https://getelements.com/">https://getelements.com/</a>&nbsp;</p>
+                    </div>
+                    <audio src="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_15.mp3?dest-id=1706015" id="track"></audio>
+                    <div class="player-container">
+                        <div class="box">
+                            <div class="next-prev">
+                                <i title="Back 30 seconds" id="back30"></i>
+                                <div class="play-pause">
+                                    <i id="play"></i>
+                                    <i id="pause"></i>
+                                </div>
+                                <i title="Forward 30 seconds" id="forward30"></i>
+                            </div>
+                            <div class="progress-bar">
+                                <input type="range" id="progressBar" min="0" max="1990.137583" value="0">
+                            </div>
+                            <div class="track-time">
+                                <div id="currentTime">0:00</div>
+                                <div id="durationTime">33:10</div>
+                            </div>
+                            <div class="volume-container">
+                                <div class="volume-button">
+                                    <div class="volume icono-volumeMedium"></div>
+                                </div>
+                                <div class="volume-slider">
+                                    <span class="slide" style="width: 100%;"><span class="slide-icon"></span></span>
+                                    <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+                                </div>
+                            </div>
+                            <div class="audio-buttons">
+                                <div class="audio-buttons-share">
+                                    <div class="audio-buttons-share-container">
+                                        <a href="http://www.facebook.com/sharer.php?u=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_15.mp3?dest-id=1706015" title="facebook" target="_blank"></a>
+                                        <a href="https://twitter.com/share?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_15.mp3?dest-id=1706015" title="twitter" target="_blank"></a>
+                                        <a href=" http://www.linkedin.com/shareArticle?mini=true&amp;url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_15.mp3?dest-id=1706015" title="linkedin" target="_blank"></a>
+                                        <a href=" http://pinterest.com/pin/create/button/?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_15.mp3?dest-id=1706015" title="pinterest" target="_blank"></a>
+                                    </div>
+                                </div>
+                                <a class="audio-buttons-download" href="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_15.mp3?dest-id=1706015" target="_blank">	</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="podcast_block-item" data-num="9">
+                <div class="podcast_block-item-image">
+                    <img src="https://ssl-static.libsyn.com/p/assets/8/5/2/2/85227af2863e1f38bafc7308ab683e82/Advisor_Lab_-_Logo.png " alt="podcast image">
+                </div>
+                <div class="podcast_block-item-text">
+                    <div class="podcast_block-item-top-text">
+                        Wed Aug 10 2022 | Episode 109 | Advisor I/O, A CION Investments Company
+                    </div>
+                    <h4 class="podcast_block-item-title">
+                        Building an Engaged Audience on Social: How Callie Cox and eToro Do It
+                    </h4>
+
+                    <div class="podcast_block-item-desc">
+                        <p>In this episode, we catch up with Callie Cox, an investment analyst at eToro who has built an incredibly engaged audience on Twitter talking all things macro and the market. Everything Callie puts out pulls and engages new readers, so we wanted to get into the details of her blueprint, personality, and thought process. We also discuss her take on what's happening in the macro economy.&nbsp;</p>
+                    </div>
+                    <audio src="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_14.mp3?dest-id=1706015" id="track"></audio>
+                    <div class="player-container">
+                        <div class="box">
+                            <div class="next-prev">
+                                <i title="Back 30 seconds" id="back30"></i>
+                                <div class="play-pause">
+                                    <i id="play"></i>
+                                    <i id="pause"></i>
+                                </div>
+                                <i title="Forward 30 seconds" id="forward30"></i>
+                            </div>
+                            <div class="progress-bar">
+                                <input type="range" id="progressBar" min="0" max="2425.72925" value="0">
+                            </div>
+                            <div class="track-time">
+                                <div id="currentTime">0:00</div>
+                                <div id="durationTime">40:25</div>
+                            </div>
+                            <div class="volume-container">
+                                <div class="volume-button">
+                                    <div class="volume icono-volumeMedium"></div>
+                                </div>
+                                <div class="volume-slider">
+                                    <span class="slide" style="width: 100%;"><span class="slide-icon"></span></span>
+                                    <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+                                </div>
+                            </div>
+                            <div class="audio-buttons">
+                                <div class="audio-buttons-share">
+                                    <div class="audio-buttons-share-container">
+                                        <a href="http://www.facebook.com/sharer.php?u=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_14.mp3?dest-id=1706015" title="facebook" target="_blank"></a>
+                                        <a href="https://twitter.com/share?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_14.mp3?dest-id=1706015" title="twitter" target="_blank"></a>
+                                        <a href=" http://www.linkedin.com/shareArticle?mini=true&amp;url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_14.mp3?dest-id=1706015" title="linkedin" target="_blank"></a>
+                                        <a href=" http://pinterest.com/pin/create/button/?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_14.mp3?dest-id=1706015" title="pinterest" target="_blank"></a>
+                                    </div>
+                                </div>
+                                <a class="audio-buttons-download" href="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_14.mp3?dest-id=1706015" target="_blank">	</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="podcast_block-item" data-num="10">
+                <div class="podcast_block-item-image">
+                    <img src="https://ssl-static.libsyn.com/p/assets/8/5/2/2/85227af2863e1f38bafc7308ab683e82/Advisor_Lab_-_Logo.png " alt="podcast image">
+                </div>
+                <div class="podcast_block-item-text">
+                    <div class="podcast_block-item-top-text">
+                        Wed Aug 03 2022 | Episode 108 | Advisor I/O, A CION Investments Company
+                    </div>
+                    <h4 class="podcast_block-item-title">
+                        Shifting From Busy to Productive: A Conversation with SEI's Shauna Mace
+                    </h4>
+
+                    <div class="podcast_block-item-desc">
+                        <p>In this episode, we sit down with SEI's Head of Practice Management, Shauna Mace. We get into her experience in working with advisors on how to go from busy to productive. We also dive into the launch of SEI's Growth Lab - a place where advisors can find resources and tools to help them build their practice.&nbsp;</p> <p>Learn more: <a href="https://info.seic.com/welcome-to-the-sei-growth-lab">https://info.seic.com/welcome-to-the-sei-growth-lab</a></p> <p>Learn more about us: advisorio.co</p>
+                    </div>
+                    <audio src="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_12.mp3?dest-id=1706015" id="track"></audio>
+                    <div class="player-container">
+                        <div class="box">
+                            <div class="next-prev">
+                                <i title="Back 30 seconds" id="back30"></i>
+                                <div class="play-pause">
+                                    <i id="play"></i>
+                                    <i id="pause"></i>
+                                </div>
+                                <i title="Forward 30 seconds" id="forward30"></i>
+                            </div>
+                            <div class="progress-bar">
+                                <input type="range" id="progressBar" min="0" max="1670.903667" value="0">
+                            </div>
+                            <div class="track-time">
+                                <div id="currentTime">0:00</div>
+                                <div id="durationTime">27:50</div>
+                            </div>
+                            <div class="volume-container">
+                                <div class="volume-button">
+                                    <div class="volume icono-volumeMedium"></div>
+                                </div>
+                                <div class="volume-slider">
+                                    <span class="slide" style="width: 100%;"><span class="slide-icon"></span></span>
+                                    <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+                                </div>
+                            </div>
+                            <div class="audio-buttons">
+                                <div class="audio-buttons-share">
+                                    <div class="audio-buttons-share-container">
+                                        <a href="http://www.facebook.com/sharer.php?u=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_12.mp3?dest-id=1706015" title="facebook" target="_blank"></a>
+                                        <a href="https://twitter.com/share?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_12.mp3?dest-id=1706015" title="twitter" target="_blank"></a>
+                                        <a href=" http://www.linkedin.com/shareArticle?mini=true&amp;url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_12.mp3?dest-id=1706015" title="linkedin" target="_blank"></a>
+                                        <a href=" http://pinterest.com/pin/create/button/?url=https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_12.mp3?dest-id=1706015" title="pinterest" target="_blank"></a>
+                                    </div>
+                                </div>
+                                <a class="audio-buttons-download" href="https://traffic.libsyn.com/secure/advisorlab/cioninvestments_mixdown_12.mp3?dest-id=1706015" target="_blank">	</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div></div>
+        <a href="#" class="podcast_loadmore">Load More Episodes</a>
+    </div>
     </div>
 
 @endsection
+
+{{--@section('individual_scripts')--}}
+{{--    <link rel="stylesheet" id="podcast-css" href="http://seven.loc/wp-content/plugins/seven-plugin/src/../assets/scss/blocks/podcast.css?ver=20.52" type="text/css" media="all">--}}
+{{--    <script type="text/javascript" src="http://seven.loc/wp-content/plugins/seven-plugin/src/../assets/audio-podcast.js?ver=20.52" id="audio-podcast-js"></script>--}}
+{{--@endsection--}}

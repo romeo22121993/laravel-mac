@@ -6,7 +6,7 @@
                     <div class="col">
                         <div class="header_top_content d-flex flex-row align-items-center justify-content-start">
                             <div class="logo">
-                                <a href="http://seven.loc">
+                                <a href="http://laravel.loc">
                                     <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/logo_new.svg') }}" alt="logo" class="logo-desktop"/>
                                     <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/logo_new.svg') }}" alt="logo-mobile" class="logo-mobile"/>
                                 </a>
@@ -20,9 +20,21 @@
                                                 <li id="menu-item-767" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-767"><a href="http://laravel.loc/blog/" class="a_blog_block  ">Blog</a></li>
                                                 <li id="menu-item-3679" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3679"><a href="http://laravel.loc/podcast/" class="a_podcast_block  ">Podcast</a></li>
                                                 <li id="menu-item-768" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-768"><a href="http://laravel.loc/contact/" class="a_contact_block ">Contact Us</a></li>
-                                                <li id="menu-item-2469" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2469"><a href="http://laravel.loc/sign-up/" class="a_create an account_block  ">Create an Account</a></li>
-                                                <li id="menu-item-911" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-911"><a href="http://laravel.loc/admin-dashboard/" class="a_your dashboard_block  ">Your Dashboard</a></li>
-                                                <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-769"><a href="http://laravel.loc/advisorlogin/" class="a_login_block  ">Login</a></li>
+
+                                                @if ( empty( $currentUser ) )
+                                                    <li id="menu-item-2469" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2469">
+                                                        <div class="sv-login-wrapper">
+                                                            <a href="http://laravel.loc/sign-up/" class="a_create an account_block btn btn-primary login">Create an Account</a>
+                                                            <div class="sv-login-link">Already a Member?
+                                                            <a href="http://laravel.loc/login/">Login Now</a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                @else
+                                                    <li id="menu-item-911" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-911">
+                                                        <a href="http://laravel.loc/admin-dashboard/" class="a_your dashboard_block " >Your Dashboard</a>
+                                                    </li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </ul>

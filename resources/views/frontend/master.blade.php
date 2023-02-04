@@ -32,7 +32,7 @@
     <script src="{{ asset('frontend-dashboard/plugin-assets/table-sorter.min.js') }}"></script>
 
 </head>
-<body  class="home page-template page-template-templates page-template-home page-template-templateshome-php page page-id-654 logged-in admin-bar no-customize-support cookies-set cookies-refused  page-home">
+<body  class="home page-template page-template-templates page-template-home page-template-templateshome-php page page-podcast page-id-654 logged-in admin-bar no-customize-support cookies-set cookies-refused  page-home">
     <div class="super_container1">
         @include('frontend.body.mobile_menu')
 
@@ -53,6 +53,7 @@
     <script src="{{ asset('frontend-dashboard/themes-assets/styles/bootstrap4/bootstrap.min.js') }}"></script>
     <script src="{{ asset('frontend-dashboard/themes-assets/js/jscustom.js') }}"></script>
 
+    @yield('individual_scripts')
 </body>
 </html>
 
