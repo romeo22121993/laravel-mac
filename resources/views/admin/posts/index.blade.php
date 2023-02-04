@@ -30,6 +30,7 @@
                                         <th>{{ __('Post Slug') }}</th>
                                         <th>{{ __('Categories') }}</th>
                                         <th>{{ __('Featured Image') }}</th>
+                                        <th>{{ __('Time') }}</th>
                                         <th>{{ __('Action') }}</th>
                                     </tr>
                                 </thead>
@@ -45,6 +46,7 @@
                                                 <img style="width: 50px; height: auto;"
                                                     src="@if( $post->img != 'none' ) {{ asset('/uploads/posts/'.$post->img) }} @else {{ asset('/img/none.jpg') }} @endif">
                                             </td>
+                                            <td>{{ $post->updated_at->diffForHumans() }}</td>
                                             <td>
                                                 <a href="{{ route('wpadmin.posts.edit',  $post->id) }}" class="btn btn-info">Edit</a>
                                                 <a href="{{ route('wpadmin.posts.delete', $post->id) }}" onclick="return confirm('Are you sure to delete')" class="btn btn-danger">Delete</a>

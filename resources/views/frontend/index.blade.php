@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('frontend.master')
 
 @section('title')
     Admin Dashboard

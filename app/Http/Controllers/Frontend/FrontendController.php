@@ -30,7 +30,6 @@ class FrontendController extends Controller
      */
     public function mainPage() {
 
-        dd('aaa');
         $category = [ 'a', 'b', 'c' ];
         $post     = [ 'a', 'b', 'c' ];
         $usersCount = User::count();

@@ -29,6 +29,7 @@
                                     <th>{{ __('User Email') }}</th>
                                     <th>{{ __('User Role') }}</th>
                                     <th>{{ __('User Avater') }}</th>
+                                    <th>{{ __('Time Updated') }}</th>
                                     <th>{{ __('Action') }}</th>
                                 </tr>
                                 </thead>
@@ -44,6 +45,7 @@
                                                 <img style="width: 50px; height: auto;"
                                                      src="@if( !empty( $user->avatar_img ) ) {{ asset('/uploads/users/'.$user->avatar_img) }} @else {{ asset('/img/face.jpeg') }} @endif">
                                             </td>
+                                            <td>{{ $user->updated_at->diffForHumans() }}</td>
                                             <td>
                                                 <a href="{{ route('wpadmin.users.edit',  $user->id) }}" class="btn btn-info">Edit</a>
                                                 <a href="{{ route('wpadmin.users.delete', $user->id) }}" onclick="return confirm('Are you sure to delete')" class="btn btn-danger">Delete</a>
