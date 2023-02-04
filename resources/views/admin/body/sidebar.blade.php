@@ -103,6 +103,22 @@
                     </ul>
                 </div>
             </li>
+
+            <li class="nav-item menu-items">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-laptop"></i>
+                    </span>
+                    <span class="menu-title">Pages</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic2">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.pages') }}">Pages</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.pages.add') }}">Add Page</a></li>
+                    </ul>
+                </div>
+            </li>
             @if(Auth::user()->district == 1)
             <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#district" aria-expanded="false" aria-controls="district">

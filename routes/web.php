@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\Admin\PostsCategoriesController;
+use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Frontend\FrontendController;
 
 /*
@@ -62,16 +64,25 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
         Route::get('/edit/{id}',    [PostsController::class, 'EditPost'])->name('wpadmin.posts.edit');
         Route::post('/update/{id}', [PostsController::class, 'UpdatePost'])->name('wpadmin.posts.update');
         Route::get('/delete/{id}',  [PostsController::class, 'DeletePost'])->name('wpadmin.posts.delete');
-        Route::get('/category/{id}',  [PostsController::class, 'postsPageByCategory'])->name('wpadmin.posts.by,categories');
+        Route::get('/category/{id}', [PostsController::class, 'postsPageByCategory'])->name('wpadmin.posts.by.categories');
 
         Route::group(['prefix'=> 'categories'], function() {
-            Route::get('/',             [PostsController::class, 'postsCategoryPage'])->name('wpadmin.posts.categories');
-            Route::get('/add',          [PostsController::class, 'addPostCategory'])->name('wpadmin.posts.categories.add');
-            Route::post('/store',       [PostsController::class, 'StorePostCategory'])->name('wpadmin.posts.categories.store');
-            Route::get('/edit/{id}',    [PostsController::class, 'EditPostCategory'])->name('wpadmin.posts.categories.edit');
-            Route::post('/update/{id}', [PostsController::class, 'UpdatePostCategory'])->name('wpadmin.posts.categories.update');
-            Route::get('/delete/{id}',  [PostsController::class, 'DeletePostCategory'])->name('wpadmin.posts.categories.delete');
+            Route::get('/',             [PostsCategoriesController::class, 'postsCategoryPage'])->name('wpadmin.posts.categories');
+            Route::get('/add',          [PostsCategoriesController::class, 'addPostCategory'])->name('wpadmin.posts.categories.add');
+            Route::post('/store',       [PostsCategoriesController::class, 'StorePostCategory'])->name('wpadmin.posts.categories.store');
+            Route::get('/edit/{id}',    [PostsCategoriesController::class, 'EditPostCategory'])->name('wpadmin.posts.categories.edit');
+            Route::post('/update/{id}', [PostsCategoriesController::class, 'UpdatePostCategory'])->name('wpadmin.posts.categories.update');
+            Route::get('/delete/{id}',  [PostsCategoriesController::class, 'DeletePostCategory'])->name('wpadmin.posts.categories.delete');
         });
+    });
+
+    Route::group(['prefix'=> 'pages'], function() {
+        Route::get('/',             [PagesController::class, 'pagesPage'])->name('wpadmin.pages');
+        Route::get('/add',          [PagesController::class, 'addPage'])->name('wpadmin.pages.add');
+        Route::post('/store',       [PagesController::class, 'StorePage'])->name('wpadmin.pages.store');
+        Route::get('/edit/{id}',    [PagesController::class, 'EditPage'])->name('wpadmin.pages.edit');
+        Route::post('/update/{id}', [PagesController::class, 'UpdatePage'])->name('wpadmin.pages.update');
+        Route::get('/delete/{id}',  [PagesController::class, 'DeletePage'])->name('wpadmin.pages.delete');
     });
 
 });

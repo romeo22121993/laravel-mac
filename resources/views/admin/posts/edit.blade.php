@@ -1,7 +1,7 @@
 @extends('admin.admin_master')
 
 @section('title')
-    Edit Pose
+    Edit Post
 @endsection
 
 @section('admin_content')

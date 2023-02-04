@@ -32,7 +32,7 @@
                                                     </li>
                                                 @else
                                                     <li id="menu-item-911" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-911">
-                                                        <a href="http://laravel.loc/admin-dashboard/" class="a_your dashboard_block " >Your Dashboard</a>
+                                                        <a href="http://laravel.loc/wpadmin/" class="a_your dashboard_block " >Your Dashboard</a>
                                                     </li>
                                                 @endif
                                             </ul>
