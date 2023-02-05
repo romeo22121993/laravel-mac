@@ -51,7 +51,6 @@ class FrontendController extends Controller
 
     }
 
-
     /**
      * Function setting sign up page
      *
@@ -122,5 +121,6 @@ class FrontendController extends Controller
         return view('frontend.about', compact('category',  'usersCount'));
 
     }
+
 
 }

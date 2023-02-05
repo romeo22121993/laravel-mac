@@ -525,48 +525,6 @@ jQuery(document).ready(function ($) {
     }
 
     /**
-     * Function of submitting functionality for Contact page and Exit popup
-     *
-     */
-    function contact_page_exit_popup_forms() {
-
-        $("#contact_form").on('submit', function (e) {
-            e.preventDefault();
-            $("#loader").show();
-            var info = {
-                data: $(this).serialize(),
-                action: 'contact_page'
-            };
-
-            var contact_form = ( $(this).parents('.exit_popup_block').length == 1 ) ? false : true;
-
-            $.post({
-                url: get.ajaxurl,
-                data: info,
-                success: function (data) {
-                    $("#loader").hide();
-                    if ( !contact_form ) {
-                        $(".exit_popup_block #contact_form").trigger('reset');
-                        $(".exit_popup_block #contact_form").hide();
-                        $(".exit_popup_block .success_message_block h3").text("Sent.");
-                        setCookie('e_popup_closed', 1, 720 );
-                        $(".exit_popup_block .success_message_block").show();
-                    }
-                    else {
-                        $(".contact_page_block #contact_form").trigger('reset');
-                        $(".contact_page_block .form_contact_box").hide();
-                        $(".contact_page_block .success_message_block").show();
-                    }
-                },
-                error: function (data) {
-                    console.log('error');
-                },
-            });
-
-        });
-    }
-
-    /**
      * Function for profile
      *
      */
@@ -647,53 +605,6 @@ jQuery(document).ready(function ($) {
                 $("#rcp_gateway_extra_fields").append(total_price_html);
             }, 5500);
         }
-    }
-
-    /**
-     * Function for replacing login page button when user is logged
-     *
-     */
-    function header_function() {
-        const header = $('#header');
-        const dashboard = $('.menu-item .dashboard_block');
-        const dashboardMobile = $('.mobile_menu .dashboard_block');
-        const scheduleItem = $('.menu-item .a_create');
-        const scheduleMobile = $('.mobile_menu .a_create');
-        const login = header.find('.a_login_block').parent();
-        const topNav = $('.header_top_nav');
-        const loginLink = $(`<div class="sv-login-link">Already a Member?<a href="${header.data('base')}/advisorlogin/">Login Now</a></div>`);
-
-        const isloggedIn    = header.data('logged');
-
-        scheduleItem.addClass('btn').addClass('btn-primary').addClass('login');
-        dashboardMobile.hide();
-        dashboard.hide();
-        login.remove();
-        scheduleItem.show();
-
-        if ( isloggedIn === 'yes' ) {
-            scheduleMobile.hide();
-            dashboardMobile.show();
-
-            let url   = dashboard.attr('href');
-            let title = dashboard.text();
-
-            scheduleItem.text(title).attr('href', url);
-
-            $('.footer .menu_item, .menu.trans_500 .menu_item').each( function () {
-                let href =  $(this).find('a').attr('href');
-                if ( href.indexOf('login') >= 0 ) {
-                    $(this).hide();
-                }
-            });
-        } else {
-            topNav.find(scheduleItem).wrap('<div class="sv-login-wrapper"></div>');
-            const loginWrapper = $('.sv-login-wrapper');
-            loginWrapper.append(loginLink);
-            // scheduleItem.attr('target', '_blank');
-            // scheduleMobile.attr('target', '_blank');
-        }
-
     }
 
     /**
@@ -1828,9 +1739,7 @@ jQuery(document).ready(function ($) {
     welcome();
     header_custom_pages();
     login_page_form();
-    contact_page_exit_popup_forms();
     profile_function();
-    // header_function();
     admin_scripts_function();
     scroll_function();
     documentTooltip();

@@ -7,6 +7,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend-dashboard/fav.ico') }}">
     <link rel="icon" type="image/x-icon"  href="{{ asset('frontend-dashboard/fav.ico') }}">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="stylesheet" id="owl-carousel-css" href="{{ asset('frontend-dashboard/themes-assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}" type="text/css" media="all">
     <link rel='stylesheet' id='campaign-items-style-home-css' href='{{ asset('frontend-dashboard/plugin-assets/scss/blocks/campaign-items.css') }} type='text/css' media='all' />
     <link rel='stylesheet' id='template-modal-home-css' href='{{ asset('frontend-dashboard/plugin-assets/scss/blocks/template-modal.css') }}' type='text/css' media='all' />
@@ -52,6 +54,7 @@
     <script src="{{ asset('frontend-dashboard/themes-assets/styles/bootstrap4/popper.js') }}"></script>
     <script src="{{ asset('frontend-dashboard/themes-assets/styles/bootstrap4/bootstrap.min.js') }}"></script>
     <script src="{{ asset('frontend-dashboard/themes-assets/js/jscustom.js') }}"></script>
+    <script src="{{ asset('frontend-dashboard/custom-frontend-script.js') }}"></script>
 
     @yield('individual_scripts')
 </body>

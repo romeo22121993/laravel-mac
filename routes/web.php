@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\PostsCategoriesController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,6 +97,20 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/blog',     [FrontendController::class, 'blogPage'])->name('blog');
     Route::get('/contact',  [FrontendController::class, 'contactPage'])->name('contact');
     Route::get('/about',    [FrontendController::class, 'aboutPage'])->name('about');
+
+    // Ajax requests for frontend pages
+    Route::group(['prefix'=> 'ajax'], function(){
+
+        Route::post('/contactForm', [ContactController::class, 'contactFormAjax']);
+
+        // Add to Cart Store Data
+//        Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
+//
+//        // Get Data from mini cart
+//        Route::get('/product/mini/cart/',    [CartController::class, 'AddMiniCart']);
+
+    });
+
 });
 
 
