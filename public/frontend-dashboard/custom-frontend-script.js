@@ -23,6 +23,9 @@ $(document).ready(function() {
             data: info,
             success: function( response ) {
                 console.log( 'response', response );
+                $("#contact_form, .form_contact_box").hide();
+                $("#loader").hide();
+                $(".success_message_block h3").text("Sent.").show();
             }
         });
 

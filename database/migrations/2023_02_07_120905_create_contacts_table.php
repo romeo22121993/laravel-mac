@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('company');
             $table->string('lastname');
             $table->text('message')->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }

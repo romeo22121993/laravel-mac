@@ -40,12 +40,6 @@
                             </div>
                         @endif
 
-                        @if(Session::has('success'))
-                            <div class="alert alert-success">
-                                {{Session::get('success')}}
-                            </div>
-                        @endif
-
                         <form action="" id="contact_form" method="post">
                             @csrf
                             <label>Company</label>
@@ -54,6 +48,7 @@
                             <input type="text" name="name" required="">
                             <label>Last Name*</label>
                             <input type="text" name="lastname" required="">
+                            <input type="hidden" name="user_id" value="{{ $currentUserId }}">
                             <label>Email*</label>
                             <input type="email" name="email" required="">
                             <textarea class="box form input" name="message" style="width: 100%"></textarea>

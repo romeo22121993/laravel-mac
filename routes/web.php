@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\PostsCategoriesController;
 use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\Admin\ContactsController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ContactController;
 
@@ -84,6 +85,12 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
         Route::get('/edit/{id}',    [PagesController::class, 'EditPage'])->name('wpadmin.pages.edit');
         Route::post('/update/{id}', [PagesController::class, 'UpdatePage'])->name('wpadmin.pages.update');
         Route::get('/delete/{id}',  [PagesController::class, 'DeletePage'])->name('wpadmin.pages.delete');
+    });
+
+    Route::group(['prefix'=> 'contacts'], function() {
+        Route::get('/',             [ContactsController::class, 'indexPage'])->name('wpadmin.contacts');
+        Route::get('/show/{id}',    [ContactsController::class, 'showContact'])->name('wpadmin.contacts.show');
+        Route::get('/delete/{id}',  [ContactsController::class, 'DeleteContact'])->name('wpadmin.contacts.delete');
     });
 
 });

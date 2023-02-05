@@ -38,14 +38,6 @@ class ContactController extends Controller
 
         $data = $request->all();
 
-        $request->validate([
-            'name'     => 'required',
-            'email'    => 'required|email',
-            'lastname' => 'required',
-            'company'  => 'required',
-            'message'  => 'required'
-        ]);
-
         Contact::create( $data );
 
         Mail::to( $this->adminEmail )->send( new ContactMail( $data ) );

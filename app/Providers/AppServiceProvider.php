@@ -34,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'instructionPopup' => $a ?? 0,
                 'currentUser'      => $user ?? [],
+                'currentUserId'    => $user ? $user->id : '',
                 'avatarImg'        => $avatarImg ?? '',
             ]);
 
