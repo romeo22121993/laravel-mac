@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\PostObserverJob;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
@@ -183,7 +184,10 @@ class PostsController extends Controller
     public function DeletePost( $id ){
 
         DB::table('posts_and_cats')->where('post_id', $id)->delete();
-        Post::whereId( $id )->delete();
+
+        $post = Post::find($id );
+        dispatch( new PostObserverJob( $post, 'deleted' ) )->onQueue('emails'); // send email via observer
+        $post->delete();
 
         return redirect()->back();
 
