@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Contact;
 use App\Models\Post;
 use App\Models\PostCategory;
 use Illuminate\Http\Request;
@@ -38,15 +37,11 @@ class PostsController extends Controller
      */
     public function loadPostsByAjax( Request $request ) {
 
-        $data = $request->all();
-
-        $user           = Auth::user();
-        $paged          = (int)$data['page'];
-        $getCat         = ( !empty( $data['getCat'] ) )  ? $data['getCat']  : '';
-        $getCatId       = ( !empty( $data['getCatId'] ) )  ? $data['getCatId']  : '';
-
-        $cptType     = 'post';
-        $mytaxonomy  = 'category';
+        $data      = $request->all();
+        $paged     = (int)$data['page'];
+        $getCat    = ( !empty( $data['getCat'] ) ) ? $data['getCat']  : '';
+        $getCatId  = ( !empty( $data['getCatId'] ) ) ? $data['getCatId']  : '';
+        $cptType   = 'post';
 
         if ( ( $data['totalCount'] + $this->countPerPage ) < ( $this->countPerPage * $paged ) ) {
             return false;
@@ -59,18 +54,30 @@ class PostsController extends Controller
             $posts        = PostCategory::find( $getCatId )->posts->pluck(['id']);
             $myPosts      = Post::where('check1', '>', 0)->whereIn('id', $posts )->paginate( $this->countPerPage );
         }
-        $totalpost = $myPosts->total();
 
-        $result = $this->set_html_layout( $myPosts, $cptType, $paged, $this->countPerPage, $totalpost );
-        //wp_send_json( $result, 200);
+        $totalPost = $myPosts->total();
 
-//        TODO:
-//        1) posts single page
-//        2) finish load more - filtration posts
-        dd();
+        $result = $this->setHtmlLayout( $myPosts, $paged, $this->countPerPage, $totalPost );
 
-        return true;
+        return $result;
 
+    }
+
+
+    /**
+     * Function setting single post page
+     *
+     * @param $slug
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function singlePostPage( $slug ) {
+
+        $post         = Post::where( 'slug', $slug )->first();
+        $relatedPosts = Post::where( 'slug', '<>', $slug )->paginate(2);;
+//        var_dump( '$relatedPosts', $relatedPosts );
+//        die;
+
+        return view('frontend.singlePost', compact('post', 'relatedPosts' ) );
     }
 
 
@@ -78,33 +85,56 @@ class PostsController extends Controller
      * Setting html layout of different cpt for Ajax requests
      *
      * @param $myPosts
-     * @param $cpt_type
+     * @param $cptType
      * @param $paged
-     * @param $count_per_page
-     * @param $totalpost
+     * @param $countPerPage
+     * @param $totalPost
      *
      * @return array|void
      */
-    public function set_html_layout( $myPosts, $cpt_type, $paged, $count_per_page, $totalpost ) {
+    public function setHtmlLayout( $myPosts, $paged, $countPerPage, $totalPost ) {
 
+        $paged = (int)$paged;
         if ( !empty( $myPosts ) ) {
             $result = [];
-            $i = 0;
-            foreach ( $myPosts->posts as $post ) {
-                require 'templates/template-parts/ajax-items/post_item.php';
+
+            $html = '';
+            foreach ( $myPosts as $post ) {
+                $imgSrc = ( $post->img == 'none') ? asset('img/none.jpg') : asset( 'uploads/posts/'.$post->img );
+                $html .= '
+                    <div class="sv-blog-post col-lg-6 col-sm-12 col-xs-12">
+                        <div class="one-card">
+                            <div class="blog-top-card">
+                                <a href="' . $post->slug . '">
+                                    <img src="' . $imgSrc . '" alt="">
+                                </a>
+                            </div>
+                            <div class="card-content blog_list">
+                                <h3>
+                                    <a href="' . $post->slug . '">
+                                        ' . $post->title . '
+                                    </a>
+                                </h3>
+                                <a href="' . $post->slug . '}">Read article</a>
+                            </div>
+                        </div>
+                    </div>
+                ';
+//                $html .= include( resource_path() . '/views/frontend/items/postitem.blade.php');
             }
 
-            $result['html']  = ob_get_clean();
-            $result['count'] = ( $paged > 1 ) ? count( $myPosts->posts ) + ( ( $paged - 1 ) * $count_per_page) : count( $myPosts->posts ) * $paged;
-            $result['total'] = $count_per_page * $paged;
-            $result['all']   = $totalpost;
+            $result['html']  = $html;
+            $result['count'] = ( $paged > 1 ) ? count( $myPosts ) + ( ( $paged - 1 ) * $countPerPage) : count( $myPosts ) * $paged;
+            $result['total'] = $countPerPage * $paged;
+            $result['all']   = $totalPost;
             $result['page']  = $paged;
 
-
             return $result;
-        }
-    }
 
+        }
+
+
+    }
 
 
 }

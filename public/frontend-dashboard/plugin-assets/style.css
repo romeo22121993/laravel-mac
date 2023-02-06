@@ -4922,3 +4922,14 @@ div.sv-section h2, div.white-element h2 {
 .right-holder-video p.video_module_text + #video_module_block img {
 	object-fit: cover;
 }
+.addtoany_list a.social-link {
+    border: 0;
+    box-shadow: none;
+    padding: 0 4px;
+    vertical-align: middle;
+    display: inline-block !important;
+    font-size: 16px !important;
+}
+.addtoany_list {
+    display: inline;
+}

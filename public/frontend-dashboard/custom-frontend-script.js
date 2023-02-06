@@ -42,13 +42,16 @@ $(document).ready(function() {
 
         $(".all_posts_categories a.cat").on( "click", function (e) {
             e.preventDefault();
-
             $("#load_more_posts_button").show();
+
             let page = 1;
-            let category = $(this).attr('data-href');
+            let category   = $(this).attr('data-href');
             let categoryId = $(this).attr('data-id');
-            let cpt_type = $('.all_posts').attr('data-cpt');
+            let cptType   = $('.all_posts').attr('data-cpt');
+
             $('.all_posts').attr('data-getcat', category);
+            $('.all_posts').attr('data-catid', categoryId);
+
             $(".all_posts_categories a.cat").removeClass('active');
             $(this).addClass('active');
 
@@ -57,7 +60,7 @@ $(document).ready(function() {
                 'page':       page,
                 'getCat':     category,
                 'getCatId':   categoryId,
-                'cpt_type':   cpt_type
+                'cptType':   cptType
             };
 
             $.ajax({
@@ -100,18 +103,20 @@ $(document).ready(function() {
             console.log( '22')
             $(this).addClass('disabled_btn');
 
-            let total_count = $('.all_posts').attr('data-all');
+            let totalCount  = $('.all_posts').attr('data-all');
             let page        = $('.all_posts').attr('data-page');
             page            = ( page > 1 ) ?  page : 2
 
-            let get_cat  = $('.all_posts').attr('data-getcat');
-            let cpt_type = $('.all_posts').attr('data-cpt');
+            let getCat      = $('.all_posts').attr('data-getcat');
+            let categoryId  = $('.all_posts').attr('data-catid');
+            let cptType     = $('.all_posts').attr('data-cpt');
 
             let data = {
-                'total_count': total_count,
-                'page':        page,
-                'get_cat':     get_cat,
-                'cpt_type':    cpt_type
+                'totalCount': totalCount,
+                'page':       page,
+                'getCat':     getCat,
+                'getCatId':   categoryId,
+                'cptType':    cptType
             };
 
             $.ajax({

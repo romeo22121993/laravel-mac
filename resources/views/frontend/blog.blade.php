@@ -43,29 +43,10 @@
 
     <div class="default-padding case-studies">
         <div class="container">
-            <div class="row d-flex justify-content-between all_posts" data-all="48" data-getcat="all" data-cpt="post">
-
+            <div class="row d-flex justify-content-between all_posts" data-all="{{ $posts->total() }}" data-catid="all" data-getcat="all" data-cpt="post">
                 @foreach ( $posts as $post )
-                    <div class="sv-blog-post col-lg-6 col-sm-12 col-xs-12">
-                        <div class="one-card">
-                            <div class="blog-top-card">
-                                <a href="{{ $post->slug }}">
-                                    <img src="@if( $post->img == 'none') {{ asset('img/none.jpg')  }} @else {{ asset( 'uploads/posts/'.$post->img) }} @endif" alt="">
-                                </a>
-                            </div>
-                            <div class="card-content blog_list">
-                                <h3>
-                                    <a href="{{ $post->slug }}">
-                                        {{ $post->title }}
-                                    </a>
-                                </h3>
-
-                                <a href="{{ $post->slug }}">Read article</a>
-                            </div>
-                        </div>
-                    </div>
+                    @include('frontend.items.postitem')
                 @endforeach
-
             </div>
             <div class="row">
                 <div class="col-12 text-center">
