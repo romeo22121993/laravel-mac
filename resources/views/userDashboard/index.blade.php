@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <div id="collapse-info"  class="welcome_block collapse">
         <div class="container">
             <div class="row">
@@ -317,7 +318,7 @@
                             </div>
                         </div>
                         <div class="w-100 col-12 d-flex flex-row justify-content-end align-items-center link-block">
-                            <a href="http://seven.loc/admin-content/" class="read-more">See More <img src="./dist/img/arrow-right.png" alt="arrow right"></a>
+                            <a href="http://seven.loc/admin-content/" class="read-more">See More <img src="{{ asset('frontendDashboard/themesAssets/dist/img/arrow-right.png') }}" alt="arrow right"></a>
                         </div>
                     </div>
                 </div>
@@ -436,7 +437,7 @@
                                 </div>
                             </div>
 
-                            <a href="http://seven.loc/admin-template/" class="read-more">See More  <img src="./dist/img/arrow-right.png" alt="arrow right"></a>
+                            <a href="http://seven.loc/admin-template/" class="read-more">See More  <img src="{{ asset('frontendDashboard/themesAssets/dist/img/arrow-right.png') }}" alt="arrow right"></a>
 
                         </div>
                     </div>
@@ -534,7 +535,8 @@
                             </div>
 
                             <a href="http://seven.loc/admin-campaigns/" class="read-more">
-                                See More                <img src="./dist/img/arrow-right.png" alt="arrow right">
+                                See More
+                                <img src="{{ asset('frontendDashboard/themesAssets/dist/img/arrow-right.png') }}" alt="arrow right">
                             </a>
                         </div>
 
