@@ -38,7 +38,7 @@
 
 
                 <div class="col-lg-4 one-program-card">
-                    <img src="http://seven.loc/wp-content/uploads/2019/11/icon_launchpad_alt.png" alt=""/>
+                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/icon_launchpad_alt.png') }}" alt=""/>
                     <h4></h4>
                     <h3>Fully-Customizable Content</h3>
                     <p>We provide ready-to-go content, out-of-the-box email campaigns, and downloadable resources to help you scale your content creation. </p>
@@ -46,7 +46,7 @@
 
 
                 <div class="col-lg-4 one-program-card">
-                    <img src="http://seven.loc/wp-content/uploads/2019/11/icon_build.svg" alt=""/>
+                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/icon_build.svg') }}" alt=""/>
                     <h4></h4>
                     <h3>On-Demand Coaching</h3>
                     <p>A full suite of video and guide-based coaching across every topic you need to market your practice in a digital world. You move at the pace that works for you; we coach you on marketing best practices and where others are finding success.</p>
@@ -54,7 +54,7 @@
 
 
                 <div class="col-lg-4 one-program-card">
-                    <img src="http://seven.loc/wp-content/uploads/2019/11/icon_runway_alt.png" alt=""/>
+                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/icon_runway_alt.png') }}" alt=""/>
                     <h4></h4>
                     <h3>Peer Group Learning</h3>
                     <p> Topic-based group coaching, led and facilitated by experts, allows you to make contacts, get motivated and stay in touch with the financial advisor community.</p>
@@ -88,7 +88,7 @@
                             <div class="col-xs-12 col-lg-6 text-left">
                                 <div class="row">
                                     <div class="col-lg-3 d-flex justify-content-center align-items-start flex-row">
-                                        <img src="http://seven.loc/wp-content/uploads/2019/11/timley_topics.png" alt="p-img-1"/>
+                                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/timley_topics.png') }}" alt="p-img-1"/>
                                     </div>
                                     <div class="col-lg-9 d-flex justify-content-center align-items-start flex-column">
                                         <h5>Timely Topics</h5>
@@ -102,7 +102,7 @@
                             <div class="col-xs-12 col-lg-6 text-left">
                                 <div class="row">
                                     <div class="col-lg-3 d-flex justify-content-center align-items-start flex-row">
-                                        <img src="http://seven.loc/wp-content/uploads/2019/11/written.png" alt="p-img-1"/>
+                                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/written.png') }}" alt="p-img-1"/>
                                     </div>
                                     <div class="col-lg-9 d-flex justify-content-center align-items-start flex-column">
                                         <h5>Written for the Investor</h5>
@@ -119,7 +119,7 @@
                             <div class="col-xs-12 col-lg-6 text-left">
                                 <div class="row">
                                     <div class="col-lg-3 d-flex justify-content-center align-items-start flex-row">
-                                        <img src="http://seven.loc/wp-content/uploads/2019/11/finra.png" alt="p-img-1"/>
+                                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/finra.png') }}" alt="p-img-1"/>
                                     </div>
                                     <div class="col-lg-9 d-flex justify-content-center align-items-start flex-column">
                                         <h5>Ready-to-Send</h5>
@@ -133,7 +133,7 @@
                             <div class="col-xs-12 col-lg-6 text-left">
                                 <div class="row">
                                     <div class="col-lg-3 d-flex justify-content-center align-items-start flex-row">
-                                        <img src="http://seven.loc/wp-content/uploads/2019/11/custom.png" alt="p-img-1"/>
+                                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/custom.png') }}" alt="p-img-1"/>
                                     </div>
                                     <div class="col-lg-9 d-flex justify-content-center align-items-start flex-column">
                                         <h5>Customizable</h5>
@@ -158,7 +158,7 @@
                     <div class="col-xs-12 col-lg-6 text-left">
                         <div class="row">
                             <div class="col-lg-3 d-flex justify-content-center align-items-start flex-row">
-                                <img src="http://seven.loc/wp-content/uploads/2019/11/digital.png" alt="http://seven.loc/wp-content/uploads/2019/11/digital.png"/>
+                                <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/digital.png') }}" alt="http://seven.loc/wp-content/uploads/2019/11/digital.png"/>
                             </div>
                             <div class="col-lg-9 d-flex justify-content-center align-items-start flex-column">
                                 <h5> Digestible Sessions</h5>
@@ -169,7 +169,7 @@
                     <div class="col-xs-12 col-lg-6 text-left">
                         <div class="row">
                             <div class="col-lg-3 d-flex justify-content-center align-items-start flex-row">
-                                <img src="http://seven.loc/wp-content/uploads/2019/11/action.png" alt="http://seven.loc/wp-content/uploads/2019/11/action.png"/>
+                                <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/action.png') }}" alt="http://seven.loc/wp-content/uploads/2019/11/action.png"/>
                             </div>
                             <div class="col-lg-9 d-flex justify-content-center align-items-start flex-column">
                                 <h5>Action-Oriented</h5>
@@ -182,7 +182,7 @@
                     <div class="col-xs-12 col-lg-6 text-left">
                         <div class="row">
                             <div class="col-lg-3 d-flex justify-content-center align-items-start flex-row">
-                                <img src="http://seven.loc/wp-content/uploads/2019/11/digest.png" alt="http://seven.loc/wp-content/uploads/2019/11/digest.png"/>
+                                <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/digest.png') }}" alt="http://seven.loc/wp-content/uploads/2019/11/digest.png"/>
                             </div>
                             <div class="col-lg-9 d-flex justify-content-center align-items-start flex-column">
                                 <h5>Digital-First</h5>
@@ -193,7 +193,7 @@
                     <div class="col-xs-12 col-lg-6 text-left">
                         <div class="row">
                             <div class="col-lg-3 d-flex justify-content-center align-items-start flex-row">
-                                <img src="http://seven.loc/wp-content/uploads/2019/11/custom.png" alt="http://seven.loc/wp-content/uploads/2019/11/custom.png"/>
+                                <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/custom.png') }}" alt="http://seven.loc/wp-content/uploads/2019/11/custom.png"/>
                             </div>
                             <div class="col-lg-9 d-flex justify-content-center align-items-start flex-column">
                                 <h5>Topical</h5>
@@ -257,7 +257,7 @@
                 <div class="item">
                     <div class="row">
                         <div class="col-xs-12 col-lg-7">
-                            <img src="http://seven.loc/wp-content/uploads/2022/07/Body-min-2.png" alt="Body-min"/>
+                            <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/Body-min-2.png') }}" alt="Body-min"/>
                         </div>
                         <div class="col-xs-12 col-lg-5">
                             <h3>Hub Page</h3>
@@ -270,7 +270,7 @@
                 <div class="item">
                     <div class="row">
                         <div class="col-xs-12 col-lg-7">
-                            <img src="http://seven.loc/wp-content/uploads/2022/07/Body-min-1.png" alt="Body-min"/>
+                            <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/Body-min-1.png') }}" alt="Body-min"/>
                         </div>
                         <div class="col-xs-12 col-lg-5">
                             <h3>Investor Content</h3>
@@ -283,7 +283,7 @@
                 <div class="item">
                     <div class="row">
                         <div class="col-xs-12 col-lg-7">
-                            <img src="http://seven.loc/wp-content/uploads/2022/07/Body-min.png" alt="Body-min"/>
+                            <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/Body-min.png') }}" alt="Body-min"/>
                         </div>
                         <div class="col-xs-12 col-lg-5">
                             <h3>Coaching Lab</h3>
@@ -299,7 +299,9 @@
                     <div class="sv-slider-pagination">
 
                         <div class="slider-menu__dots">
-                            <div class="loc_slider_nav prev"><img src="{{ asset('frontend-dashboard/themes-assets/dist/img/arrow-left.svg') }}" alt="arrow left"/></div>
+                            <div class="loc_slider_nav prev">
+                                <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/arrow-left.svg') }}" alt="arrow left"/>
+                            </div>
                             <div class="dot active"
                                  data-next="Investor Content"
                             >
@@ -315,10 +317,13 @@
                             >
                                 <div></div>
                             </div>
-                            <div class="loc_slider_nav next"><img src="{{ asset('frontend-dashboard/themes-assets/dist/img/arrow-right.png') }}" alt="arrow right"/></div>
+                            <div class="loc_slider_nav next">
+                                <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/arrow-right.png') }}" alt="arrow right"/>
+                            </div>
 
                             <div class="up-next">
-                                <span>Next: </span>Investor Content                                </div>
+                                <span>Next: </span>Investor Content
+                            </div>
                         </div>
                     </div>
                 </div>

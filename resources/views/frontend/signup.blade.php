@@ -313,27 +313,4 @@
 
     </div>
 
-
-    <div class="privacy_block">
-        <div class="col-lg-8 offset-lg-2 col-sm-12 case-studies text-center">
-            <div class="row">
-                <div class="col-12 one-card pxy-20 mt-3 ">
-                    <div class="row">
-                        <div class="col-lg-12 d-flex justify-content-start align-items-center flex-row">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" name="privacy" required id="privacyPolicy" >
-                                <label class="form-check-label" for="privacyPolicy" style="display: inline-block;font-weight: normal;">
-                                    I have read and agree to the                                        <a class="terms_signup_links" target="_blank" href="http://laravel.loc/privacy-policy/">
-                                        Privacy Policy                                        </a>
-                                    &                                        <a class="terms_signup_links" target="_blank" href="http://laravel.loc/terms-of-service/">
-                                        Terms of Service                                        </a>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 @endsection

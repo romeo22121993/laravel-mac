@@ -15,7 +15,7 @@
                                 The content marketing platform and coaching system built for the independent financial advisor.</h1>
                             <a href="http://seven.loc/sign-up/" target="" class="btn btn-primary">Create an Account</a>
                         </div>
-                        <div class="video-holder video-holder-home" style="background: url(http://seven.loc/wp-content/uploads/2022/07/Group-72-min.png);"><a></a></div>
+                        <div class="video-holder video-holder-home" style="background: url( {{ asset('frontend-dashboard/themes-assets/dist/img/Group-72-min.png') }});"><a></a></div>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
             <div class="row justify-content-center justify-content-sm-start justify-content-lg-center">
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
                     <div class="sv-social-proof__img">
-                        <img src="http://seven.loc/wp-content/uploads/2020/08/Bitmap.png"
+                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/Bitmap.png') }}"
                              alt="Wealth Management"
                              class=""
                         >
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
                     <div class="sv-social-proof__img">
-                        <img src="http://seven.loc/wp-content/uploads/2020/08/header-logo-2.png"
+                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/header-logo-2.png') }}"
                              alt="Financial advisor"
                              class=""
                         >
@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
                     <div class="sv-social-proof__img">
-                        <img src="http://seven.loc/wp-content/uploads/2020/08/Think-Advisor-Logo.png"
+                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/Think-Advisor-Logo.png') }}"
                              alt="Think Advisor"
                              class=""
                         >
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
                     <div class="sv-social-proof__img">
-                        <img src="http://seven.loc/wp-content/uploads/2022/05/XY_Planning_Network_Logo-transparent-1.png"
+                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/XY_Planning_Network_Logo-transparent-1.png') }}"
                              alt="XY_Planning_Network_Logo-transparent (1)"
                              class=""
                         >
@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-12 col-sm-6 col-lg-4 col-xl-2">
                     <div class="sv-social-proof__img">
-                        <img src="http://seven.loc/wp-content/uploads/2022/05/Kitcescom-1.png"
+                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/Kitcescom-1.png') }}"
                              alt="Kitcescom-1"
                              class="last"
                         >
@@ -107,14 +107,14 @@
             <div class="row">
 
                 <div class="col-lg-6">
-                    <img src="http://seven.loc/wp-content/uploads/2019/11/timley_topics.png" alt=""/>
+                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/timley_topics.png') }}" alt=""/>
                     <h3>We Help You Save Time</h3>
                     <p>We've built our content and coaching system to help you scale rapidly. We pair content with coaching so you have assets you need, and the know-how to deploy them.</p>
                 </div>
 
 
                 <div class="col-lg-6">
-                    <img src="http://seven.loc/wp-content/uploads/2019/11/icon_care.svg" alt=""/>
+                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/icon_care.svg') }}" alt=""/>
                     <h3>We Coach You Through It All</h3>
                     <p>We are only successful if our members are successful, which is why we act as your coach to help you build and maintain marketing excellence.</p>
                 </div>
@@ -123,14 +123,14 @@
             <div class="row">
 
                 <div class="col-lg-6">
-                    <img src="http://seven.loc/wp-content/uploads/2019/11/icon_build-1.svg" alt=""/>
+                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/icon_build-1.svg') }}" alt=""/>
                     <h3>We Provide You With 100% Customizable Content</h3>
                     <p>Your marketing needs to be unique to your practice. No cookie-cutter marketing content - our content is 100% customizable for your voice.</p>
                 </div>
 
 
                 <div class="col-lg-6">
-                    <img src="http://seven.loc/wp-content/uploads/2019/11/icon_practice.svg" alt=""/>
+                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/icon_practice.svg') }}" alt=""/>
                     <h3>We Practice What We Preach</h3>
                     <p>We’ve done this ourselves, so we know what it takes to build a valuable marketing engine within the financial services industry. All of our strategies and tactics are battle tested. </p>
                 </div>
@@ -198,7 +198,7 @@
                     <h3>Get Smart on Marketing</h3>
                     <p>We want to make you dangerous. In-depth coaching on every element of digital marketing, in quick, scalable steps. We breakdown: building a marketing strategy, driving growth through social platforms, successful email campaigns, unique content marketing, and more.</p>
                     <a href=" http://seven.loc/contact/" class="read-more">
-                        LEARN MORE   <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/arrow-right.png') }}" alt="arrow right"/>
+                        LEARN MORE <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/arrow-right.png') }}" alt="arrow right"/>
                     </a>
                 </div>
                 <img src="http://seven.loc/wp-content/uploads/2022/07/Group-71-min.png" class="position-absolute" alt=""/>
