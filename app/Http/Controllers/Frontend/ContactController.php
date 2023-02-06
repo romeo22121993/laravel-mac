@@ -44,7 +44,7 @@ class ContactController extends Controller
 
         // Mail::to( $this->adminEmail )->send( new ContactMail( $data ) ); // send email directly
 
-        dispatch( new SendContactEmailJob( $data ) ); // set email in background, via job
+        dispatch( new SendContactEmailJob( $data ) )->onQueue('emails'); // set email in background, via job
 
         return redirect()->back();
 

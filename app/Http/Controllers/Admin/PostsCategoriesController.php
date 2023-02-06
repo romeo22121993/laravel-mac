@@ -59,7 +59,7 @@ class PostsCategoriesController extends Controller
 
         $postCat = new PostCategory();
         $postCat->title = $request->title;
-        $postCat->slug = !empty( $request->slug ) ? str_replace( ' ','-', strtolower( $request->slug ) ) : str_replace( ' ','-', strtolower( $request->title ) );
+        $postCat->slug  = \Str::slug( $request->title );
         $postCat->save();
 
         return Redirect()->route('wpadmin.posts.categories');
@@ -97,7 +97,7 @@ class PostsCategoriesController extends Controller
 
         PostCategory::whereId( $id )->update([
             'title' => $request->title,
-            'slug'  => $request->slug,
+            'slug'  => \Str::slug( $request->slug )
         ]);
 
         return Redirect()->route('wpadmin.posts.categories');

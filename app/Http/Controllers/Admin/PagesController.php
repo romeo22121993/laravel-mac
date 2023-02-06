@@ -62,7 +62,7 @@ class PagesController extends Controller
         $data1 = $request->all();
 
         $page = new Page();
-        $slug = !empty( $request->slug ) ? str_replace( ' ','-', strtolower( $request->slug ) ) : str_replace( ' ','-', strtolower( $request->title ) );
+        $slug = \Str::slug( $request->title );
 
         $page->content   = $data1['content'];
         $page->title     = $request->title;
@@ -117,9 +117,7 @@ class PagesController extends Controller
 
         $data1 = $request->all();
 
-        $data1      = $request->all();
-
-        $slug = !empty( $request->slug ) ? str_replace( ' ','-', strtolower( $request->slug ) ) : str_replace( ' ','-', strtolower( $request->title ) );
+        $slug  = !empty( $request->slug ) ? \Str::slug( $request->slug ) : \Str::slug( $request->title );
 
         $page->content   = $data1['content'];
         $page->title     = $request->title;

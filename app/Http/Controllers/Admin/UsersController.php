@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\UserObserverJob;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
@@ -130,13 +131,14 @@ class UsersController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function DeleteUser($id){
+    public function DeleteUser( $id ){
 
-        User::whereId($id)->delete();
+        $user = User::find($id );
+        dispatch( new UserObserverJob( $user, 'deleted' ) )->onQueue('emails'); // send email via observer
+        $user->delete();
 
         return redirect()->back();
 
     }
-
 
 }

@@ -79,7 +79,7 @@ class PostsController extends Controller
         $data1      = $request->all();
 
         $post = new Post();
-        $slug = !empty( $request->slug ) ? str_replace( ' ','-', strtolower( $request->slug ) ) : str_replace( ' ','-', strtolower( $request->title ) );
+        $slug = \Str::slug( $request->title );
 
         $post->content   = $data1['content'];
         $post->title     = $request->title;
@@ -146,7 +146,7 @@ class PostsController extends Controller
         $categories = $request->categories;
         $data1      = $request->all();
 
-        $slug = !empty( $request->slug ) ? str_replace( ' ','-', strtolower( $request->slug ) ) : str_replace( ' ','-', strtolower( $request->title ) );
+        $slug       = !empty( $request->slug ) ? \Str::slug( $request->slug ) : \Str::slug( $request->title );
 
         $post->content   = $data1['content'];
         $post->title     = $request->title;

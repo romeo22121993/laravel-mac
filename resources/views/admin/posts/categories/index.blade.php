@@ -48,7 +48,7 @@
             <div class="col-lg-8 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Users Page</h4>
+                        <h4 class="card-title">Categories Page ( {{ $categories->total() }} )</h4>
                         <div class="template-demo">
                             <a href="{{ route('wpadmin.posts.categories.add') }}">
                                 <button type="button" class="btn btn-primary btn-fw">Add New Category</button>

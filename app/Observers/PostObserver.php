@@ -2,96 +2,87 @@
 
 namespace App\Observers;
 
+use App\Jobs\PostObserverJob;
 use App\Models\Post;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 
 class PostObserver
 {
 
-    public function creating(Post $post)
-    {
-//        $post->slug = Str::slug($post->title . '_' . $post->lang);
-        $post->slug = Str::slug($post->title);
-        $count = Post::where('slug', 'like', "%{$post->slug}%")->count();
+    /**
+     * Run events after transaction
+     *
+     * @var bool
+     */
+    public $afterCommit = true;
 
-        if ($count > 0) {
-            $post->slug .= '-' . $count;
-        }
-        if (isset($post->url)) {
-            unset($post->url);
-        }
+
+    /**
+     * Handle the Product "created" event.
+     *
+     */
+    public function creating()
+    {
+        // $product->slug = \Str::slug($product->name);
     }
 
     /**
-     * Handle the post "created" event.
+     * Handle the Post "created" event.
      *
      * @param  \App\Models\Post  $post
      * @return void
      */
     public function created(Post $post)
     {
-        if (Cache::has("post_{$post->slug}")) {
-            Cache::forget("post_{$post->slug}");
-        }
+        dispatch( new PostObserverJob( $post, 'created' ) )->onQueue('emails'); // set email in background, via job
+
     }
 
     public function updating(Post $post)
     {
-        if (isset($post->url)) {
-            unset($post->url);
-        }
+
     }
 
     /**
-     * Handle the post "updated" event.
+     * Handle the Post "updated" event.
      *
      * @param  \App\Models\Post  $post
      * @return void
      */
     public function updated(Post $post)
     {
-        if (Cache::has("post_{$post->slug}")) {
-            Cache::forget("post_{$post->slug}");
-        }
+        //
     }
 
     /**
-     * Handle the post "deleted" event.
+     * Handle the Post "deleted" event.
      *
      * @param  \App\Models\Post  $post
      * @return void
      */
     public function deleted(Post $post)
     {
-        if (Cache::has("post_{$post->slug}")) {
-            Cache::forget("post_{$post->slug}");
-        }
+        //
     }
 
     /**
-     * Handle the post "restored" event.
+     * Handle the Post "restored" event.
      *
      * @param  \App\Models\Post  $post
      * @return void
      */
     public function restored(Post $post)
     {
-        if (Cache::has("post_{$post->slug}")) {
-            Cache::forget("post_{$post->slug}");
-        }
+        //
     }
 
     /**
-     * Handle the post "force deleted" event.
+     * Handle the Post "force deleted" event.
      *
      * @param  \App\Models\Post  $post
      * @return void
      */
     public function forceDeleted(Post $post)
     {
-        if (Cache::has("post_{$post->slug}")) {
-            Cache::forget("post_{$post->slug}");
-        }
+        //
     }
 }

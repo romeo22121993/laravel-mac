@@ -15,7 +15,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Posts Page  ( {{ $posts->count() }} )</h4>
+                        <h4 class="card-title">Posts Page  ( {{ $posts->total() }} )</h4>
                         <div class="template-demo">
                             <a href="{{ route('wpadmin.posts.add') }}">
                                 <button type="button" class="btn btn-primary btn-fw">Add New Post</button>

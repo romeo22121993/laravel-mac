@@ -14,7 +14,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Users Page ( {{ $users->count() }} )</h4>
+                        <h4 class="card-title">Users Page ( {{ $users->total() }} )</h4>
                         <div class="template-demo">
                             <a href="{{ route('wpadmin.users.add') }}">
                                 <button type="button" class="btn btn-primary btn-fw">Add New User</button>
