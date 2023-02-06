@@ -9,8 +9,8 @@
     <div class="inner_container services_block platform_block" style="background-image:url( {{ asset('uploads/posts/'.$post->img) }} ) ">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-lg-8">
-                    <h4>Single Post Page</h4>
+                <div class="col-xs-12 col-lg-12">
+                    <h1 style="text-align: center;">Single Post Page</h1>
                 </div>
             </div>
         </div>
