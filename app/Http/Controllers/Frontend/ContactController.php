@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Mail\ContactMail;
 use Mail;
+use App\Jobs\SendContactEmailJob;
 
 class ContactController extends Controller
 {
 
-    public $adminEmail = 'romeo22121993@gmail.com';
+    public $adminEmail;
 
     /**
      * Create a new controller instance.
@@ -26,6 +27,7 @@ class ContactController extends Controller
      */
     public function __construct()
     {
+        $this->adminEmail = env('APP_ADMIN_EMAIL');
     }
 
     /**
@@ -40,12 +42,12 @@ class ContactController extends Controller
 
         Contact::create( $data );
 
-        Mail::to( $this->adminEmail )->send( new ContactMail( $data ) );
+        // Mail::to( $this->adminEmail )->send( new ContactMail( $data ) ); // send email directly
 
-        return redirect()->back()
-            ->with(['success' => 'Thank you for contact us. we will contact you shortly.']);
+        dispatch( new SendContactEmailJob( $data ) ); // set email in background, via job
+
+        return redirect()->back();
 
     }
-
 
 }

@@ -65,7 +65,7 @@
 
                     <div class="row">
                         <label class="form-check-label col-md-3">
-                            <input type="checkbox" name="check1" class="form-check-input" value="1"> Additional Check1
+                            <input type="checkbox" name="check1" class="form-check-input" value="1"> Published Post
                             <i class="input-helper"></i>
                         </label>
 

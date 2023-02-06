@@ -71,7 +71,7 @@
                                         <tr>
                                             <td> {{ $i++ }} </td>
                                             <td>
-                                                <a href="{{ route('wpadmin.posts.by,categories', $category->id) }}">{{ $category->title }}</a>
+                                                <a href="{{ route('wpadmin.posts.by.categories', $category->id) }}">{{ $category->title }}</a>
                                             </td>
                                             <td> {{ $category->slug }}</td>
                                             <td>{{ $category->posts->count() }}</td>

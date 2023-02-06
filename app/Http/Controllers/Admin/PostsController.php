@@ -41,7 +41,7 @@ class PostsController extends Controller
 
         $postCategory = PostCategory::find( $id );
         $posts        = $postCategory->posts->pluck(['id']);
-        $posts        = Post::whereIn('id',$posts )->paginate(3);
+        $posts        = Post::whereIn('id', $posts )->paginate(3);
 
         return view('admin.posts.postsbycategories', compact( 'posts', 'postCategory' ) );
     }

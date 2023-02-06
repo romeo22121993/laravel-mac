@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Models\PostCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
-
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class FrontendController extends Controller
 {
@@ -19,8 +14,7 @@ class FrontendController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
     }
 
     /**
@@ -31,9 +25,8 @@ class FrontendController extends Controller
     public function mainPage() {
 
         $category = [ 'a', 'b', 'c' ];
-        $usersCount = User::count();
 
-        return view('frontend.index', compact('category',  'usersCount'));
+        return view('frontend.index', compact('category'));
 
     }
 
@@ -45,9 +38,8 @@ class FrontendController extends Controller
     public function platformPage() {
 
         $category = [ 'a', 'b', 'c' ];
-        $usersCount = User::count();
 
-        return view('frontend.platform', compact('category',  'usersCount'));
+        return view('frontend.platform', compact('category'));
 
     }
 
@@ -59,9 +51,8 @@ class FrontendController extends Controller
     public function signUpPage() {
 
         $category = [ 'a', 'b', 'c' ];
-        $usersCount = User::count();
 
-        return view('frontend.signup', compact('category',  'usersCount'));
+        return view('frontend.signup', compact('category'));
 
     }
 
@@ -74,9 +65,8 @@ class FrontendController extends Controller
     public function podcastPage() {
 
         $category = [ 'a', 'b', 'c' ];
-        $usersCount = User::count();
 
-        return view('frontend.podcast', compact('category',  'usersCount'));
+        return view('frontend.podcast', compact('category'));
 
     }
 
@@ -88,9 +78,8 @@ class FrontendController extends Controller
     public function contactPage() {
 
         $category = [ 'a', 'b', 'c' ];
-        $usersCount = User::count();
 
-        return view('frontend.contact', compact('category',  'usersCount'));
+        return view('frontend.contact', compact('category'));
 
     }
 
@@ -102,10 +91,10 @@ class FrontendController extends Controller
      */
     public function blogPage() {
 
-        $category = [ 'a', 'b', 'c' ];
-        $usersCount = User::count();
+        $categories = PostCategory::all();
+        $posts      = Post::paginate(1);
 
-        return view('frontend.blog', compact('category',  'usersCount'));
+        return view('frontend.blog', compact('categories', 'posts'));
 
     }
 
@@ -116,9 +105,8 @@ class FrontendController extends Controller
     public function aboutPage() {
 
         $category = [ 'a', 'b', 'c' ];
-        $usersCount = User::count();
 
-        return view('frontend.about', compact('category',  'usersCount'));
+        return view('frontend.about', compact('category'));
 
     }
 

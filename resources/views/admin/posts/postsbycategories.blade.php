@@ -25,6 +25,7 @@
                                         <th>{{ __('Post Slug') }}</th>
                                         <th>{{ __('Categories') }}</th>
                                         <th>{{ __('Featured Image') }}</th>
+                                        <th>{{ __('Published?') }}</th>
                                         <th>{{ __('Action') }}</th>
                                     </tr>
                                 </thead>
@@ -39,6 +40,9 @@
                                             <td>
                                                 <img style="width: 50px; height: auto;"
                                                     src="@if( $post->img != 'none' ) {{ asset('/uploads/posts/'.$post->img) }} @else {{ asset('/img/none.jpg') }} @endif">
+                                            </td>
+                                            <td>
+                                                @if( !empty( $post->check1 ) ) Yes @else No @endif
                                             </td>
                                             <td>
                                                 <a href="{{ route('wpadmin.posts.edit',  $post->id) }}" class="btn btn-info">Edit</a>

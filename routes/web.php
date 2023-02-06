@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\ContactsController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\PostsController as FrontendPostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,7 +98,7 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
 
 /** All Pages without needed to log in */
 Route::group(['middleware' => ['web']], function () {
-    Route::get('/', [FrontendController::class, 'mainPage'])->name('home');
+    Route::get('/',         [FrontendController::class, 'mainPage'])->name('home');
     Route::get('/platform', [FrontendController::class, 'platformPage'])->name('platform');
     Route::get('/sign-up',  [FrontendController::class, 'signUpPage'])->name('signup');
     Route::get('/podcast',  [FrontendController::class, 'podcastPage'])->name('podcast');
@@ -108,7 +109,8 @@ Route::group(['middleware' => ['web']], function () {
     // Ajax requests for frontend pages
     Route::group(['prefix'=> 'ajax'], function(){
 
-        Route::post('/contactForm', [ContactController::class, 'contactFormAjax']);
+        Route::post('/contactForm',     [ContactController::class, 'contactFormAjax']);
+        Route::post('/loadPostsByAjax', [FrontendPostsController::class, 'loadPostsByAjax']);
 
         // Add to Cart Store Data
 //        Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);

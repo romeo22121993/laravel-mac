@@ -75,7 +75,7 @@
                         <label class="form-check-label col-md-3">
                             <input type="checkbox" name="check1" class="form-check-input"
                                    @if( !empty( $post->check1 ) ) checked @endif
-                                   value="1"> Additional Check1
+                                   value="1"> Published Post
                             <i class="input-helper"></i>
                         </label>
 
