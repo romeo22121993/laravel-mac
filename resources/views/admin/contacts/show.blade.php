@@ -40,7 +40,9 @@
                         <div class="form-group col-md-6">
                             <label for="exampleInputName1">Sender UserName</label>
                             <p class="form-control" id="exampleInputName1" >
-                                <a href="{{ route('wpadmin.users.edit', $contact->user_id) }}"> {{ \App\Models\User::find($contact->user_id)->name ?? '' }}</a>
+                                <a href="@if ( !empty( $contact->user_id ) ) {{ route('wpadmin.users.edit', $contact->user_id) }} @endif">
+                                    {{ \App\Models\User::find($contact->user_id)->name ?? '' }}
+                                </a>
                             </p>
                         </div>
 

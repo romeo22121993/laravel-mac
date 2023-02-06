@@ -10,9 +10,9 @@
         <div class="inner_container services_block platform_block">
             <div class="container">
                 <!--			<div class="podcast_block-banner-title">Episodes</div>-->
-                <div class="podcast_block-banner" style="background-image: url( {{ asset('frontend-dashboard/themes-assets/dist/img/Group_7-min.png') }})">
+                <div class="podcast_block-banner" style="background-image: url( {{ asset('frontendDashboard/themesAssets/dist/img/Group_7-min.png') }})">
                     <div class="podcast_block-banner-left">
-                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/Advisor-Lab-by-Cion-white-and-teal-Logo2-e1666192251495.png') }}" class="podcast_block-banner-left-image" alt="left image">				</div>
+                        <img src="{{ asset('frontendDashboard/themesAssets/dist/img/Advisor-Lab-by-Cion-white-and-teal-Logo2-e1666192251495.png') }}" class="podcast_block-banner-left-image" alt="left image">				</div>
                     <div class="podcast_block-banner-center">
                         <h4>Advisor Lab by CION</h4>
                         <h1>Browse Through Our Episodes</h1>
@@ -23,15 +23,15 @@
                             <div class="podcast_block-banner-right-text2">Derek Schwartz</div>
                             <div class="podcast_block-banner-right-text3">Managing Director</div>
                         </div>
-                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/Derek-headshot_rt-side4-e1665516710448.png') }}" class="podcast_block-banner-right-image" alt="right image">
+                        <img src="{{ asset('frontendDashboard/themesAssets/dist/img/Derek-headshot_rt-side4-e1665516710448.png') }}" class="podcast_block-banner-right-image" alt="right image">
                     </div>
                 </div>
                 <div class="podcast_block-banner-bottom">
                     <a href="https://advisorlab.libsyn.com/" target="_blank">
-                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/Bitmap-1.png') }}" class="podcast_block-banner-bottom-image" alt="bottom image">
+                        <img src="{{ asset('frontendDashboard/themesAssets/dist/img/Bitmap-1.png') }}" class="podcast_block-banner-bottom-image" alt="bottom image">
                     </a>
                     <a href="https://advisorlab.libsyn.com/" target="_blank">
-                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/Bitmap-2.png') }}" class="podcast_block-banner-bottom-image" alt="bottom image">
+                        <img src="{{ asset('frontendDashboard/themesAssets/dist/img/Bitmap-2.png') }}" class="podcast_block-banner-bottom-image" alt="bottom image">
                     </a>
                 </div>
             </div>
@@ -45,7 +45,7 @@
 
             <div class="podcast_block-item" data-num="1">
                 <div class="podcast_block-item-image">
-                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
+                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
                 </div>
                 <div class="podcast_block-item-text">
                     <div class="podcast_block-item-top-text">
@@ -102,7 +102,7 @@
             </div>
             <div class="podcast_block-item" data-num="2">
                 <div class="podcast_block-item-image">
-                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
+                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
                 </div>
                 <div class="podcast_block-item-text">
                     <div class="podcast_block-item-top-text">
@@ -159,7 +159,7 @@
             </div>
             <div class="podcast_block-item" data-num="3">
                 <div class="podcast_block-item-image">
-                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
+                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
                 </div>
                 <div class="podcast_block-item-text">
                     <div class="podcast_block-item-top-text">
@@ -216,7 +216,7 @@
             </div>
             <div class="podcast_block-item" data-num="4">
                 <div class="podcast_block-item-image">
-                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
+                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
                 </div>
                 <div class="podcast_block-item-text">
                     <div class="podcast_block-item-top-text">
@@ -273,7 +273,7 @@
             </div>
             <div class="podcast_block-item" data-num="5">
                 <div class="podcast_block-item-image">
-                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
+                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
                 </div>
                 <div class="podcast_block-item-text">
                     <div class="podcast_block-item-top-text">
@@ -330,7 +330,7 @@
             </div>
             <div class="podcast_block-item" data-num="6">
                 <div class="podcast_block-item-image">
-                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
+                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
                 </div>
                 <div class="podcast_block-item-text">
                     <div class="podcast_block-item-top-text">
@@ -387,7 +387,7 @@
             </div>
             <div class="podcast_block-item" data-num="7">
                 <div class="podcast_block-item-image">
-                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
+                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
                 </div>
                 <div class="podcast_block-item-text">
                     <div class="podcast_block-item-top-text">
@@ -444,7 +444,7 @@
             </div>
             <div class="podcast_block-item" data-num="8">
                 <div class="podcast_block-item-image">
-                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
+                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
                 </div>
                 <div class="podcast_block-item-text">
                     <div class="podcast_block-item-top-text">
@@ -501,7 +501,7 @@
             </div>
             <div class="podcast_block-item" data-num="9">
                 <div class="podcast_block-item-image">
-                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
+                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
                 </div>
                 <div class="podcast_block-item-text">
                     <div class="podcast_block-item-top-text">
@@ -558,7 +558,7 @@
             </div>
             <div class="podcast_block-item" data-num="10">
                 <div class="podcast_block-item-image">
-                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
+                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img//Advisor_Lab_-_Logo.png') }} " alt="podcast image">
                 </div>
                 <div class="podcast_block-item-text">
                     <div class="podcast_block-item-top-text">

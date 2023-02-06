@@ -90,7 +90,7 @@
 
                 <div class="col-lg-6 d-flex ">
                     <div class="left-icon">
-                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/speciality3.png') }}" alt="About Us- TheSevenGroup">
+                        <img src="{{ asset('frontendDashboard/themesAssets/dist/img/speciality3.png') }}" alt="About Us- TheSevenGroup">
                     </div>
                     <div>
                         <h3>Coaching on Your Terms, Your Timing</h3>
@@ -100,7 +100,7 @@
 
                 <div class="col-lg-6 d-flex ">
                     <div class="left-icon">
-                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/speciality5.png') }}" alt="About Us- TheSevenGroup">
+                        <img src="{{ asset('frontendDashboard/themesAssets/dist/img/speciality5.png') }}" alt="About Us- TheSevenGroup">
                     </div>
                     <div>
                         <h3>Content Creation</h3>
@@ -114,7 +114,7 @@
 
                 <div class="col-lg-6 d-flex ">
                     <div class="left-icon">
-                        <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/speciality6.png') }}" alt="About Us- TheSevenGroup">
+                        <img src="{{ asset('frontendDashboard/themesAssets/dist/img/speciality6.png') }}" alt="About Us- TheSevenGroup">
                     </div>
                     <div>
                         <h3>Campaigns and Digital Distribution</h3>

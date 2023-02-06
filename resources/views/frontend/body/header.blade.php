@@ -7,8 +7,8 @@
                         <div class="header_top_content d-flex flex-row align-items-center justify-content-start">
                             <div class="logo">
                                 <a href="http://laravel.loc">
-                                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/logo_new.svg') }}" alt="logo" class="logo-desktop"/>
-                                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/logo_new.svg') }}" alt="logo-mobile" class="logo-mobile"/>
+                                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img/logo_new.svg') }}" alt="logo" class="logo-desktop"/>
+                                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img/logo_new.svg') }}" alt="logo-mobile" class="logo-mobile"/>
                                 </a>
                             </div>
                             <div class="header_top_extra d-flex flex-row align-items-center justify-content-start ml-auto">

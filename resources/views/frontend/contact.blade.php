@@ -59,7 +59,7 @@
                     <div class="success_message_block success_message_block_none">
                         <h3>We’ll keep you updated on Advisor Lab, our latest content, and trends we’re seeing.</h3>
                     </div>
-                    <img src="{{ asset('frontend-dashboard/themes-assets/dist/img/loader.gif') }}" alt="loader" id="loader">
+                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img/loader.gif') }}" alt="loader" id="loader">
                 </div>
                 <div class="col-xs-12 col-lg-4 d-flex d-lg-block contact-form__info">
                     <div class="contact-form__col">

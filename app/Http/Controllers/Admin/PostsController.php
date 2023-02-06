@@ -72,7 +72,7 @@ class PostsController extends Controller
         $request->validate([
             'title'      => ['required', 'string', 'max:255', 'unique:posts'],
             'slug'       => [ 'max:255', 'unique:posts'],
-            'content'    => ['required', 'string', 'max:955'],
+            'content'    => ['required', 'string' ],
             'categories' => ['required'],
         ]);
 
@@ -138,7 +138,7 @@ class PostsController extends Controller
         $request->validate([
             'title'      => ['required', 'string', 'max:255', Rule::unique('posts')->ignore( $post )],
             'slug'       => [ 'max:255', Rule::unique('posts')->ignore( $post )],
-            'content'    => ['required', 'string', 'max:955'],
+            'content'    => ['required', 'string' ],
             'categories' => ['required'],
         ]);
 

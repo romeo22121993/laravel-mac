@@ -15,6 +15,8 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\PostsController as FrontendPostsController;
 
+use App\Http\Controllers\Subscriber\DashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,8 +40,16 @@ Route::post('/reset-password',        [UserAuthController::class, 'changePasswor
 
 
 /** All Pages with User dashboards */
-Route::group(['prefix'=> 'dashboard'], function(){
-    Route::get('/', [AdminController::class, 'mainPage'])->name('dashboard.main');
+Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']], function(){
+
+    Route::get('/',                [DashboardController::class, 'mainPage'])->name('dashboard.main');
+    Route::get('/admin-articles',  [DashboardController::class, 'articlesPage'])->name('dashboard.articles');
+    Route::get('/admin-campaigns', [DashboardController::class, 'campaignPage'])->name('dashboard.campaigns');
+    Route::get('/admin-resources', [DashboardController::class, 'resourcesPage'])->name('dashboard.resources');
+    Route::get('/admin-courses',   [DashboardController::class, 'coursesPage'])->name('dashboard.courses');
+    Route::get('/admin-guides',    [DashboardController::class, 'guidesPage'])->name('dashboard.guides');
+
+
 });
 
 /** All Pages with Admin dashboards */
@@ -116,11 +126,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/contactForm',     [ContactController::class, 'contactFormAjax']);
         Route::post('/loadPostsByAjax', [FrontendPostsController::class, 'loadPostsByAjax']);
 
-        // Add to Cart Store Data
-//        Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
-//
-//        // Get Data from mini cart
-//        Route::get('/product/mini/cart/',    [CartController::class, 'AddMiniCart']);
 
     });
 

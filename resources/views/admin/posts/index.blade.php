@@ -32,6 +32,7 @@
                                         <th>{{ __('Featured Image') }}</th>
                                         <th>{{ __('Published?') }}</th>
                                         <th>{{ __('Time') }}</th>
+                                        <th>{{ __('View Post') }}</th>
                                         <th>{{ __('Action') }}</th>
                                     </tr>
                                 </thead>
@@ -51,6 +52,7 @@
                                                 @if( !empty( $post->check1 ) ) Yes @else No @endif
                                             </td>
                                             <td>{{ $post->updated_at->diffForHumans() }}</td>
+                                            <td><a href="{{ route( 'single.post', $post->slug ) }}">View Post</a></td>
                                             <td>
                                                 <a href="{{ route('wpadmin.posts.edit',  $post->id) }}" class="btn btn-info">Edit</a>
                                                 <a href="{{ route('wpadmin.posts.delete', $post->id) }}" onclick="return confirm('Are you sure to delete')" class="btn btn-danger">Delete</a>
