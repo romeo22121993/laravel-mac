@@ -287,19 +287,11 @@ Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], fun
             Route::get('/delete/{id}',  [ProductCategoryController::class, 'CategoryDelete'])->name('wpadmin.products.cats.delete');
 
             // Admin Sub Category All Routes
-            Route::get('/sub/view',        [ProductCategoryController::class, 'SubCategoryView'])->name('wpadmin.products.subcats.all');
+            Route::get('/sub/',            [ProductCategoryController::class, 'SubCategoryView'])->name('wpadmin.products.subcats.all');
             Route::post('/sub/store',      [ProductCategoryController::class, 'SubCategoryStore'])->name('wpadmin.products.subcats.store');
             Route::get('/sub/edit/{id}',   [ProductCategoryController::class, 'SubCategoryEdit'])->name('wpadmin.products.subcats.edit');
             Route::post('/update',         [ProductCategoryController::class, 'SubCategoryUpdate'])->name('wpadmin.products.subcats.update');
             Route::get('/sub/delete/{id}', [ProductCategoryController::class, 'SubCategoryDelete'])->name('wpadmin.products.subcats.delete');
-
-            // Admin Sub->Sub Category All Routes
-            Route::get('/sub/sub/view',        [ProductCategoryController::class, 'SubSubCategoryView'])->name('wpadmin.products.subsubcats.all');
-            Route::post('/sub/sub/store',      [ProductCategoryController::class, 'SubSubCategoryStore'])->name('wpadmin.products.subsubcats.store');
-            Route::get('/sub/sub/edit/{id}',   [ProductCategoryController::class, 'SubSubCategoryEdit'])->name('wpadmin.products.subsubcats.edit');
-            Route::post('/sub/update',         [ProductCategoryController::class, 'SubSubCategoryUpdate'])->name('wpadmin.products.subsubcats.update');
-            Route::get('/sub/sub/delete/{id}', [ProductCategoryController::class, 'SubSubCategoryDelete'])->name('wpadmin.products.subsubcats.delete');
-
 
         });
 

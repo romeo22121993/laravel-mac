@@ -44,19 +44,18 @@ class ProductBrandController extends Controller
             'name' => 'Input Brand Name',
         ]);
 
-        $image = $request->file('image');
-        $filename = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        $image_resize = Image::make($image->getRealPath());
+        $image         = $request->file('image');
+        $filename      = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        $image_resize  = Image::make($image->getRealPath());
         $image_resize->fit(250);
         $image_resize->save(public_path('/uploads/brands/'.$filename));
-        $save_url = '/uploads/brands/'.$filename;
+        $save_url      = '/uploads/brands/'.$filename;
 
         ProductBrand::insert([
             'name'  => $request->name,
             'slug'  => \Str::slug( $request->name ),
             'image' => $save_url,
         ]);
-
 
         return redirect()->back();
 
@@ -69,7 +68,7 @@ class ProductBrandController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function BrandEdit($id){
-        $brand = ProductBrand::findOrFail($id);
+        $brand = ProductBrand::findOrFail( $id );
         return view('admin.product.brand.edit',compact('brand'));
     }
 
