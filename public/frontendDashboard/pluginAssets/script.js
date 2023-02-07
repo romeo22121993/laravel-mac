@@ -72,7 +72,7 @@ jQuery(document).ready(function ($) {
     }
 
     /**
-     * Function reading article ( in few pages: dashboard home page, content page, single article pages )
+     * Function reading article ( in few page: dashboard home page, content page, single article page )
      *
      */
     function read_article() {
@@ -178,7 +178,7 @@ jQuery(document).ready(function ($) {
     });
 
     /**
-     * Function choosing category, loading first page of categorie's posts
+     * Function choosing category, loading first page of categorie's post
      *
      */
     function before_load_more_function() {
@@ -1456,7 +1456,7 @@ jQuery(document).ready(function ($) {
 });
 
 /*
- * Function of preloading pages
+ * Function of preloading page
  *
  */
 window.onload = function () {

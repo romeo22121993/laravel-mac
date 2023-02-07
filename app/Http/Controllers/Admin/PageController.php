@@ -15,7 +15,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Image;
 
-class PagesController extends Controller
+class PageController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
@@ -30,7 +30,7 @@ class PagesController extends Controller
 
         $pages = Page::paginate(3);
 
-        return view('admin.pages.index', compact( 'pages' ) );
+        return view('admin.page.index', compact( 'pages' ) );
     }
 
 
@@ -41,7 +41,7 @@ class PagesController extends Controller
      */
     public function addPage() {
 
-        return view('admin.pages.create' );
+        return view('admin.page.create' );
     }
 
 
@@ -54,8 +54,8 @@ class PagesController extends Controller
     public function StorePage( Request $request ) {
 
         $request->validate([
-            'title'      => ['required', 'string', 'max:255', 'unique:pages'],
-            'slug'       => [ 'max:255', 'unique:pages'],
+            'title'      => ['required', 'string', 'max:255', 'unique:page'],
+            'slug'       => [ 'max:255', 'unique:page'],
             'content'    => ['required', 'string', 'max:955'],
         ]);
 
@@ -73,7 +73,7 @@ class PagesController extends Controller
         if ( $request->file('image' ) ) {
             $file = $request->file('image');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/pages' ), $filename );
+            $file->move( public_path('uploads/page' ), $filename );
             $image_src = $filename;
         }
 
@@ -95,7 +95,7 @@ class PagesController extends Controller
 
         $page = Page::find( $id );
 
-        return view('admin.pages.edit', compact( 'page' ) );
+        return view('admin.page.edit', compact( 'page' ) );
     }
 
     /**
@@ -110,8 +110,8 @@ class PagesController extends Controller
         $page  = Page::find( $id );
 
         $request->validate([
-            'title'      => ['required', 'string', 'max:255', Rule::unique('pages')->ignore( $page )],
-            'slug'       => [ 'max:255', Rule::unique('pages')->ignore( $page )],
+            'title'      => ['required', 'string', 'max:255', Rule::unique('page')->ignore( $page )],
+            'slug'       => [ 'max:255', Rule::unique('page')->ignore( $page )],
             'content'    => ['required', 'string', 'max:955']
         ]);
 
@@ -125,10 +125,10 @@ class PagesController extends Controller
         $page->author_id = Auth::id();
 
         if ( $request->file('image' ) ) {
-            @unlink( public_path( 'uploads/pages/'.$page->img ) );
+            @unlink( public_path( 'uploads/page/'.$page->img ) );
             $file = $request->file('image');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/pages' ), $filename );
+            $file->move( public_path('uploads/page' ), $filename );
             $image_src = $filename;
 
             $page->img = $image_src;

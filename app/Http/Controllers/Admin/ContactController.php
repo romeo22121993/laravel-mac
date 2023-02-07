@@ -15,8 +15,11 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Image;
 
-class ContactsController extends Controller
+class ContactController extends Controller
 {
+
+    protected $number = 10;
+
     public function __construct(){
         $this->middleware('auth');
     }
@@ -28,9 +31,9 @@ class ContactsController extends Controller
      */
     public function indexPage() {
 
-        $contacts = Contact::paginate(3);
+        $contacts = Contact::paginate( $this->number );
 
-        return view('admin.contacts.index', compact( 'contacts' ) );
+        return view('admin.contact.index', compact( 'contacts' ) );
     }
 
 
@@ -43,7 +46,7 @@ class ContactsController extends Controller
     public function showContact( $id ) {
 
         $contact = Contact::find( $id );
-        return view('admin.contacts.show', compact( 'contact' ) );
+        return view('admin.contact.show', compact( 'contact' ) );
     }
 
 
@@ -60,7 +63,6 @@ class ContactsController extends Controller
         return redirect()->back();
 
     }
-
 
     /**
      * Function setting Posts-Categories table

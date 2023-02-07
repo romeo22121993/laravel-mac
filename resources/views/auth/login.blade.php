@@ -30,10 +30,11 @@
                     <label>{{ __('Password') }} *</label>
                     <input id="password" type="password" name="password" class="form-control p_input">
                 </div>
+
                 <div class="form-group d-flex align-items-center justify-content-between">
                     <div class="form-check">
                         <label class="form-check-label">{{ __('Remember me') }}
-                            <input type="checkbox" class="form-check-input remember" name="remember">
+                            <input type="checkbox" class="form-check-input remember" name="remember" value="1">
                         </label>
                     </div>
 

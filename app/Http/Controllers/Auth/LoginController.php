@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -48,6 +49,31 @@ class LoginController extends Controller
     protected function authenticated() {
         if ( auth()->user() ) {
             return redirect()->route( $this->redirectTo );
+        }
+    }
+
+    /**
+     * Function loginning
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|void
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function login( Request $request )
+    {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $remember_me = $request->has('remember') ? true : false;
+
+        if ( auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $remember_me))
+        {
+            $user = auth()->user();
+            return redirect()->route( $this->redirectTo );
+        } else{
+            return back()->with('error','your username and password are wrong.');
         }
     }
 

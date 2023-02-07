@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 use App\Mail\ContactMail;
 use Mail;
 
-class PostsController extends Controller
+class PostController extends Controller
 {
 
     public $countPerPage;

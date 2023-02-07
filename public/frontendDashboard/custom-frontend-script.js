@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 
     /**
-     * Function choosing category, loading first page of categorie's posts
+     * Function choosing category, loading first page of categorie's post
      *
      */
     function beforePostsLoadMoreFunction() {
@@ -95,7 +95,7 @@ $(document).ready(function() {
     function postsLoadMoreFunction( ) {
 
         /**
-         * Load more function for posts
+         * Load more function for post
          *
          */
         $("#load_more_posts_button").on( "click", function (e) {

@@ -15,8 +15,11 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Image;
 
-class PostsController extends Controller
+class PostController extends Controller
 {
+
+    protected $number = 5;
+
     public function __construct(){
         $this->middleware('auth');
     }
@@ -28,9 +31,9 @@ class PostsController extends Controller
      */
     public function postsPage() {
 
-        $posts = Post::paginate(3);
+        $posts = Post::paginate( $this->number );
 
-        return view('admin.posts.index', compact( 'posts' ) );
+        return view('admin.post.index', compact( 'posts' ) );
     }
 
     /**
@@ -42,9 +45,9 @@ class PostsController extends Controller
 
         $postCategory = PostCategory::find( $id );
         $posts        = $postCategory->posts->pluck(['id']);
-        $posts        = Post::whereIn('id', $posts )->paginate(3);
+        $posts        = Post::whereIn('id', $posts )->paginate($this->number);
 
-        return view('admin.posts.postsbycategories', compact( 'posts', 'postCategory' ) );
+        return view('admin.post.postsbycategories', compact( 'posts', 'postCategory' ) );
     }
 
 
@@ -57,7 +60,7 @@ class PostsController extends Controller
 
         $categories = PostCategory::all();
 
-        return view('admin.posts.create', compact( 'categories' ) );
+        return view('admin.post.create', compact( 'categories' ) );
     }
 
 
@@ -70,8 +73,8 @@ class PostsController extends Controller
     public function StorePost( Request $request ) {
 
         $request->validate([
-            'title'      => ['required', 'string', 'max:255', 'unique:posts'],
-            'slug'       => [ 'max:255', 'unique:posts'],
+            'title'      => ['required', 'string', 'max:255', 'unique:post'],
+            'slug'       => [ 'max:255', 'unique:post'],
             'content'    => ['required', 'string' ],
             'categories' => ['required'],
         ]);
@@ -94,7 +97,7 @@ class PostsController extends Controller
         if ( $request->file('image' ) ) {
             $file = $request->file('image');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/posts' ), $filename );
+            $file->move( public_path('uploads/post' ), $filename );
             $image_src = $filename;
         }
 
@@ -121,7 +124,7 @@ class PostsController extends Controller
         $postCategories = $post->categories->pluck('id')->toArray();
         $categories     = PostCategory::all();
 
-        return view('admin.posts.edit', compact( 'post', 'categories', 'postCategories' ) );
+        return view('admin.post.edit', compact( 'post', 'categories', 'postCategories' ) );
     }
 
     /**
@@ -136,8 +139,8 @@ class PostsController extends Controller
         $post  = Post::find( $id );
 
         $request->validate([
-            'title'      => ['required', 'string', 'max:255', Rule::unique('posts')->ignore( $post )],
-            'slug'       => [ 'max:255', Rule::unique('posts')->ignore( $post )],
+            'title'      => ['required', 'string', 'max:255', Rule::unique('post')->ignore( $post )],
+            'slug'       => [ 'max:255', Rule::unique('post')->ignore( $post )],
             'content'    => ['required', 'string' ],
             'categories' => ['required'],
         ]);
@@ -161,7 +164,7 @@ class PostsController extends Controller
             @unlink( public_path( 'uploads/posts/'.$post->img ) );
             $file = $request->file('image');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/posts' ), $filename );
+            $file->move( public_path('uploads/post' ), $filename );
             $image_src = $filename;
 
             $post->img = $image_src;

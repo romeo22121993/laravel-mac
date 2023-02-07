@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
@@ -25,7 +25,7 @@ class UsersController extends Controller
 
         $users = User::paginate(3);
 
-        return view('admin.users.index', compact( 'users' ) );
+        return view('admin.user.index', compact( 'users' ) );
     }
 
 
@@ -35,7 +35,7 @@ class UsersController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function addUser() {
-        return view('admin.users.create');
+        return view('admin.user.create');
     }
 
 
@@ -49,7 +49,7 @@ class UsersController extends Controller
 
         $request->validate([
             'name'      => ['required', 'string', 'max:255'],
-            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email'     => ['required', 'string', 'email', 'max:255', 'unique:user'],
             'firstname' => ['required', 'string', 'min:3' ],
             'lastname'  => ['required', 'string', 'min:3'],
             'phone'     => ['required', 'string', 'min:3'],
@@ -97,7 +97,7 @@ class UsersController extends Controller
     public function EditUser( $id ) {
         $user = User::find( $id );
 
-        return view('admin.users.edit', compact( 'user' ) );
+        return view('admin.user.edit', compact( 'user' ) );
     }
 
     /**

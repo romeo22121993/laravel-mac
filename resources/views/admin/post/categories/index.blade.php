@@ -16,6 +16,12 @@
                     <div class="card-body">
                         <h4 class="card-title">Add Post Category</h4>
 
+                        <div class="template-demo" style="margin: 20px 0;">
+                            <a href="{{ route('wpadmin.posts.categories.add') }}">
+                                <button type="button" class="btn btn-primary btn-fw">Add New Category</button>
+                            </a>
+                        </div>
+
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -49,11 +55,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Categories Page ( {{ $categories->total() }} )</h4>
-                        <div class="template-demo">
-                            <a href="{{ route('wpadmin.posts.categories.add') }}">
-                                <button type="button" class="btn btn-primary btn-fw">Add New Category</button>
-                            </a>
-                        </div>
+
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
@@ -61,7 +63,7 @@
                                     <th> # </th>
                                     <th>{{ __('Category Title') }}</th>
                                     <th>{{ __('Category Slug') }}</th>
-                                    <th>{{ __('Count of posts') }}</th>
+                                    <th>{{ __('Count of post') }}</th>
                                     <th>{{ __('Action') }}</th>
                                 </tr>
                                 </thead>

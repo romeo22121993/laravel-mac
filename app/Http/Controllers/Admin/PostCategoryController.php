@@ -14,7 +14,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Image;
 
-class PostsCategoriesController extends Controller
+class PostCategoryController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
@@ -30,7 +30,7 @@ class PostsCategoriesController extends Controller
 
         $categories = PostCategory::paginate(3);
 
-        return view('admin.posts.categories.index', compact( 'categories' ) );
+        return view('admin.post.categories.index', compact( 'categories' ) );
     }
 
 
@@ -40,7 +40,7 @@ class PostsCategoriesController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function addPostCategory() {
-        return view('admin.posts.categories.create');
+        return view('admin.post.categories.create');
     }
 
 
@@ -76,7 +76,7 @@ class PostsCategoriesController extends Controller
     public function EditPostCategory( $id ) {
         $category = PostCategory::find( $id );
 
-        return view('admin.posts.categories.edit', compact( 'category' ) );
+        return view('admin.post.categories.edit', compact( 'category' ) );
     }
 
     /**

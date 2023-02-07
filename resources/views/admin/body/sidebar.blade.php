@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-            <a class="sidebar-brand brand-logo" href="index.html"><img src="{{ asset('backend/assets/images/logo.svg') }}" alt="logo" /></a>
-            <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="{{ asset('backend/assets/images/logo-mini.svg') }}" alt="logo" /></a>
+            <a class="sidebar-brand brand-logo" href="{{ route('home') }}"><img src="{{ asset('frontendDashboard/themesAssets/dist/img/logo_new.svg') }}" alt="logo" /></a>
+            <a class="sidebar-brand brand-logo-mini" href="{{ route('home') }}"><img src="{{ asset('frontendDashboard/themesAssets/dist/img/logo_new.svg') }}" alt="logo" /></a>
         </div>
         <ul class="nav">
             <li class="nav-item profile">
@@ -125,10 +125,28 @@
                     <span class="menu-icon">
                         <i class="mdi mdi-laptop"></i>
                     </span>
-                    <span class="menu-title">Contacts</span>
+                    <span class="menu-title">Products</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="ui-basic3">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.products.main') }}">Products</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.products.cat.all') }}">Product Categories</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.products.brands.all') }}">Product Brands</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.products.add') }}">Add Product</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item menu-items">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic4">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-laptop"></i>
+                    </span>
+                    <span class="menu-title">Contacts</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic4">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.contacts') }}">Contacts</a></li>
                     </ul>
@@ -164,8 +182,8 @@
                 </a>
                 <div class="collapse" id="posts">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('posts.all') }}">All Posts</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('posts.create') }}">Add Post</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('post.all') }}">All Posts</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('post.create') }}">Add Post</a></li>
                     </ul>
                 </div>
             </li>

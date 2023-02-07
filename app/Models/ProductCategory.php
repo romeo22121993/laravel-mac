@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Post;
+use App\Models\Product;
 
-class PostCategory extends Model
+class ProductCategory extends Model
 {
     use HasFactory;
 
@@ -16,20 +16,21 @@ class PostCategory extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'title',
+        'name',
         'slug',
+        'cat_id',
+        'subcat_id',
+        'icon',
     ];
 
-    protected $table = 'postCategories';
-
-    // TODO: many to many
+    protected $table = 'products_categories';
 
     /**
     * Get all of the post by Category
     */
-    public function posts()
+    public function products()
     {
-        return $this->belongsToMany(Post::class, 'posts_and_cats',  'cat_id', 'post_id' );
+        return $this->hasMany(Product::class );
     }
 
 }
