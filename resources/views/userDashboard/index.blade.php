@@ -145,13 +145,47 @@
 
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="white-element">
 
-        <!--    <div class="row">-->
-        <!--        <div class="col-12">-->
-        <!--            <div class="white-element">-->
-        <!--                --><!--            </div>-->
-        <!--        </div>-->
-        <!--    </div>-->
+                    <div class="row">
+
+                        <div class="col-12">
+                            <h3>viktoriav: <p>Let’s take a look at your recent activity.</p>
+                            </h3>
+                        </div>
+                        <div class="col-12 col-md-4 border-r">
+                            <div class="general-holder d-flex flex-column justify-content-center align-items-center">
+                                <p>You’ve read</p>
+                                <label>49</label>
+                                <p>next-level insights</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 border-r">
+                            <div class="general-holder d-flex flex-column justify-content-center align-items-center">
+                                <p>You’ve taken</p>
+                                <label>0</label>
+                                <p>lessons</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="general-holder d-flex flex-column justify-content-center align-items-center">
+                                <p>You’ve shared</p>
+                                <label>26</label>
+                                <p>items with clients</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-12">
+                            <h4>Care to pick up where you left off?:                <a href="http://seven.loc/courses/start-here-welcome-to-advisor-i-o/">Get Started with Advisor I/O</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-12 col-lg-7">
@@ -255,7 +289,6 @@
                                                 <a href="http://seven.loc/articles/january-market-commentary-the-fed-goes-meta/" data-post-id="12817" class="read-article">
                                                     <p class="bold">January Market Commentary: The Fed Goes Meta</p>
                                                 </a>
-                                                <!-- <p></p> -->
                                             </div>
                                             <div class="col-12 col-lg-3 d-flex flex-row justify-content-end align-items-center">
                                                 <a href="http://seven.loc/articles/january-market-commentary-the-fed-goes-meta/" style="padding-right: 10px;">View</a>
@@ -281,7 +314,6 @@
                                                 <a href="http://seven.loc/articles/secure-2-0-act-enhancements-across-the-retirement-continuum/" data-post-id="12681" class="read-article">
                                                     <p class="bold">SECURE 2.0 Act Enhancements Across the Retirement Continuum</p>
                                                 </a>
-                                                <!-- <p></p> -->
                                             </div>
                                             <div class="col-12 col-lg-3 d-flex flex-row justify-content-end align-items-center">
                                                 <a href="http://seven.loc/articles/secure-2-0-act-enhancements-across-the-retirement-continuum/" style="padding-right: 10px;">View</a>
@@ -307,7 +339,6 @@
                                                 <a href="http://seven.loc/articles/the-secure-2-0-act-has-created-some-retirement-planning-opportunities-rmd-edition/" data-post-id="12669" class="read-article">
                                                     <p class="bold">The SECURE 2.0 Act Has Created Some Retirement Planning Opportunities: RMD Edition</p>
                                                 </a>
-                                                <!-- <p></p> -->
                                             </div>
                                             <div class="col-12 col-lg-3 d-flex flex-row justify-content-end align-items-center">
                                                 <a href="http://seven.loc/articles/the-secure-2-0-act-has-created-some-retirement-planning-opportunities-rmd-edition/" style="padding-right: 10px;">View</a>
@@ -323,10 +354,141 @@
                     </div>
                 </div>
 
-                <!--            <div class="white-element mb-100">-->
-                <!--                <div class="row">-->
-                <!--                    --><!--                </div>-->
-                <!--            </div>-->
+                <div class="white-element mb-100">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <h4>Coaching for You</h4>
+                        </div>
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <div class="white-element grey-bg-sect strategies-holder status-new d-flex flex-column justify-content-start align-items-center">
+                                <a href="http://seven.loc/courses/start-here-welcome-to-advisor-i-o/">
+                                    <img src="http://seven.loc/wp-content/uploads/2020/04/Group_2.png" alt="icon-hands">
+                                </a>
+                                <div class="point-holder d-flex flex-row justify-content-center align-items-center">
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                </div>
+                                <p>
+                                    <a href="http://seven.loc/courses/start-here-welcome-to-advisor-i-o/" class="read-course" data-course-id="11009">
+                                        Get Started with Advisor I/O                    </a>
+                                </p>
+                                <p class="grey">In progress</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <div class="white-element grey-bg-sect strategies-holder status-new d-flex flex-column justify-content-start align-items-center">
+                                <a href="http://seven.loc/courses/creating-a-marketing-strategy/">
+                                    <img src="http://seven.loc/wp-content/uploads/2019/12/digital-marketing.png" alt="icon-hands">
+                                </a>
+                                <div class="point-holder d-flex flex-row justify-content-center align-items-center">
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                </div>
+                                <p>
+                                    <a href="http://seven.loc/courses/creating-a-marketing-strategy/" class="read-course" data-course-id="950">
+                                        Build Your Marketing Strategy                    </a>
+                                </p>
+                                <p class="grey">In progress</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <div class="white-element grey-bg-sect strategies-holder status-new d-flex flex-column justify-content-start align-items-center">
+                                <a href="http://seven.loc/courses/a-guide-to-linkedin/">
+                                    <img src="http://seven.loc/wp-content/uploads/2019/12/link.png" alt="icon-hands">
+                                </a>
+                                <div class="point-holder d-flex flex-row justify-content-center align-items-center">
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                </div>
+                                <p>
+                                    <a href="http://seven.loc/courses/a-guide-to-linkedin/" class="read-course" data-course-id="951">
+                                        Setup LinkedIn For Business Success                    </a>
+                                </p>
+                                <p class="grey">In progress</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <div class="white-element grey-bg-sect strategies-holder status-new d-flex flex-column justify-content-start align-items-center">
+                                <a href="http://seven.loc/courses/how-to-use-linkedin-sales-navigator-to-grow-your-business/">
+                                    <img src="http://seven.loc/wp-content/uploads/2021/06/coupon.png" alt="icon-hands">
+                                </a>
+                                <div class="point-holder d-flex flex-row justify-content-center align-items-center">
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                </div>
+                                <p>
+                                    <a href="http://seven.loc/courses/how-to-use-linkedin-sales-navigator-to-grow-your-business/" class="read-course" data-course-id="3743">
+                                        Use LinkedIn Sales Navigator for Content Distribution, Audience Expansion, and Positive Prospecting                    </a>
+                                </p>
+                                <p class="grey">New</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <div class="white-element grey-bg-sect strategies-holder status-new d-flex flex-column justify-content-start align-items-center">
+                                <a href="http://seven.loc/courses/email-marketing-building-a-consistent-communication/">
+                                    <img src="http://seven.loc/wp-content/uploads/2020/01/mailing.png" alt="icon-hands">
+                                </a>
+                                <div class="point-holder d-flex flex-row justify-content-center align-items-center">
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                </div>
+                                <p>
+                                    <a href="http://seven.loc/courses/email-marketing-building-a-consistent-communication/" class="read-course" data-course-id="1062">
+                                        Educate, Entertain, and Serve Your Audience via Email Marketing                    </a>
+                                </p>
+                                <p class="grey">New</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <div class="white-element grey-bg-sect strategies-holder status-new d-flex flex-column justify-content-start align-items-center">
+                                <a href="http://seven.loc/courses/using-video-to-grow-your-practice/">
+                                    <img src="http://seven.loc/wp-content/uploads/2022/12/Using-Video-to-Grow-Logo.png" alt="icon-hands">
+                                </a>
+                                <div class="point-holder d-flex flex-row justify-content-center align-items-center">
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                    <div class="point-dot"></div>
+                                </div>
+                                <p>
+                                    <a href="http://seven.loc/courses/using-video-to-grow-your-practice/" class="read-course" data-course-id="12536">
+                                        Using Video to Grow Your Practice                    </a>
+                                </p>
+                                <p class="grey">New</p>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="link-box d-flex flex-row justify-content-end align-items-center">
+                                <a href="http://seven.loc/admin-training/" class="read-more">See More            <img src="./dist/img/arrow-right.png" alt="arrow right">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
@@ -351,6 +513,218 @@
                     </div>
                 </div>
 
+                <div class="white-element right-holder">
+                    <div class="row">
+                        <div class="sv-tasklist">
+                            <div class="sv-tasklist__header">
+                                <h4 class="sv-tasklist__title">Things to Do This Week</h4>
+                                <p class="sv-tasklist__period">Feb 6th - Feb 12th</p>
+                            </div>
+
+                            <ul class="tabs">
+                                <li class="tab-link active" data-tab="tab-1">This Week</li>
+                                <li class="tab-link" data-tab="tab-2">Saved</li>
+                            </ul>
+
+                            <div id="tab-1" class="tab-content active">
+                                <div class="tab-content__head">
+                                    <span></span>
+                                    <div class="tab-content__labels">
+                                        <span>Done</span>
+                                        <span>Save</span>
+                                        <span>Not for Me</span>
+                                    </div>
+                                </div>
+
+                                <div class="sv-task">
+                                    <p class="sv-task__aim">If you’ve had your marketing meeting, save your marketing strategy down somewhere easily accessible.</p>
+                                    <div class="sv-task__checkboxes">
+                                        <form action="" class="thing_to_do" method="post">
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-done1808" type="checkbox" name="recomendation" data-type="done" data-idr="1808" data-idu="13" disabled="">
+                                                <label for="recomendation-done1808">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-save1808" type="checkbox" name="recomendation" data-idr="1808" data-idu="13" data-type="save" disabled="">
+                                                <label for="recomendation-save1808">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-not-for-me1808" type="checkbox" name="recomendation" data-idr="1808" data-idu="13" data-type="not-for-me" disabled="">
+                                                <label for="recomendation-not-for-me1808">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="sv-task">
+                                    <p class="sv-task__aim">Document your marketing goals, root them in measurable metrics.</p>
+                                    <div class="sv-task__checkboxes">
+                                        <form action="" class="thing_to_do" method="post">
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-done1809" type="checkbox" name="recomendation" data-type="done" data-idr="1809" data-idu="13" disabled="">
+                                                <label for="recomendation-done1809">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-save1809" type="checkbox" name="recomendation" data-idr="1809" data-idu="13" data-type="save" disabled="">
+                                                <label for="recomendation-save1809">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-not-for-me1809" type="checkbox" name="recomendation" data-idr="1809" data-idu="13" data-type="not-for-me" disabled="">
+                                                <label for="recomendation-not-for-me1809">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="sv-task">
+                                    <p class="sv-task__aim">Send the Seven team your email and article disclosures for your custom-share link.</p>
+                                    <div class="sv-task__checkboxes">
+                                        <form action="" class="thing_to_do" method="post">
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-done1811" type="checkbox" name="recomendation" data-type="done" data-idr="1811" data-idu="13" disabled="">
+                                                <label for="recomendation-done1811">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-save1811" type="checkbox" name="recomendation" data-idr="1811" data-idu="13" data-type="save" disabled="">
+                                                <label for="recomendation-save1811">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-not-for-me1811" type="checkbox" name="recomendation" data-idr="1811" data-idu="13" data-type="not-for-me" disabled="">
+                                                <label for="recomendation-not-for-me1811">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="sv-task">
+                                    <p class="sv-task__aim">Setup your profile on Seven platform, connect any specific social networks.</p>
+                                    <div class="sv-task__checkboxes">
+                                        <form action="" class="thing_to_do" method="post">
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-done1812" type="checkbox" name="recomendation" data-type="done" data-idr="1812" data-idu="13" disabled="">
+                                                <label for="recomendation-done1812">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-save1812" type="checkbox" name="recomendation" data-idr="1812" data-idu="13" data-type="save" disabled="">
+                                                <label for="recomendation-save1812">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-not-for-me1812" type="checkbox" name="recomendation" data-idr="1812" data-idu="13" data-type="not-for-me" disabled="">
+                                                <label for="recomendation-not-for-me1812">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="sv-task">
+                                    <p class="sv-task__aim">Ensure you’re receiving Seven’s bi-weekly digest emails.</p>
+                                    <div class="sv-task__checkboxes">
+                                        <form action="" class="thing_to_do" method="post">
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-done1813" type="checkbox" name="recomendation" data-type="done" data-idr="1813" data-idu="13" disabled="">
+                                                <label for="recomendation-done1813">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-save1813" type="checkbox" name="recomendation" data-idr="1813" data-idu="13" data-type="save" disabled="">
+                                                <label for="recomendation-save1813">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-not-for-me1813" type="checkbox" name="recomendation" data-idr="1813" data-idu="13" data-type="not-for-me" disabled="">
+                                                <label for="recomendation-not-for-me1813">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="sv-task">
+                                    <p class="sv-task__aim">Have you been checking Slack? Make sure you have access to our bat-phone if you want to reach us at any time.</p>
+                                    <div class="sv-task__checkboxes">
+                                        <form action="" class="thing_to_do" method="post">
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-done5784" type="checkbox" name="recomendation" data-type="done" data-idr="5784" data-idu="13" disabled="">
+                                                <label for="recomendation-done5784">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-save5784" type="checkbox" name="recomendation" data-idr="5784" data-idu="13" data-type="save" disabled="">
+                                                <label for="recomendation-save5784">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-not-for-me5784" type="checkbox" name="recomendation" data-idr="5784" data-idu="13" data-type="not-for-me" disabled="">
+                                                <label for="recomendation-not-for-me5784">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="sv-task">
+                                    <p class="sv-task__aim">Watch the Brand Messaging – Getting Your Foundation in Order training.</p>
+                                    <div class="sv-task__checkboxes">
+                                        <form action="" class="thing_to_do" method="post">
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-done1815" type="checkbox" name="recomendation" data-type="done" data-idr="1815" data-idu="13" disabled="">
+                                                <label for="recomendation-done1815">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-save1815" type="checkbox" name="recomendation" data-idr="1815" data-idu="13" data-type="save" disabled="">
+                                                <label for="recomendation-save1815">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                            <div class="checkout__recomendation-checkbox">
+                                                <input id="recomendation-not-for-me1815" type="checkbox" name="recomendation" data-idr="1815" data-idu="13" data-type="not-for-me" disabled="">
+                                                <label for="recomendation-not-for-me1815">
+                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-2" class="tab-content">
+                                <div class="tab-content__head">
+                                    <span></span>
+                                    <div class="tab-content__labels">
+                                        <span>Done</span>
+                                        <span>Save</span>
+                                        <span>Not for Me</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>                </div>
+                </div>
 
                 <div class="white-element feature_ebooks_blocks">
                     <div class="row">
@@ -547,10 +921,6 @@
             </div>
         </div>
 
-        <!-- <div class="row">
-<div class="col-12">
-            </div>
-</div> -->
 
         <div class="row paring_webinars_block">
             <div class="col-12 col-lg-12">
@@ -622,7 +992,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-12 col-lg-5">
+            <div class="col-12 col-lg-5">
     <div class="white-element mh-100">
         <h2>Group Coaching</h2>
 
@@ -727,9 +1097,156 @@
                                                                                                                     </div>
 </div>
     </div>
-</div> -->
+</div>
         </div>
 
+
+        <div class="row">
+            <div class="col-12">
+
+                <div class="campaigns-report__charts">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="sv-container sv-section sv-section--radius-top" style="border-radius: 12px;">
+                                <h2 class="sv-title">How Your Campaigns Have Performed</h2>
+
+
+                                <div class="sv-tale__select sv-campaigns-select">
+                                    <select class="time_sorting single" data-campaign-id="">
+                                        <option selected="" value="all_time">All Time</option>
+                                        <option value="7_days">Last 7 days</option>
+                                        <option value="30_days">Last 30 days</option>
+                                    </select>
+                                </div>
+
+                                <div class="campaigns-report__charts">
+                                    <div class="sv-progress-bar count_contacts" style="flex-basis: 385px;">
+                                        <h4 class="sv-progress-bar__title">Number of Emails Sent in Campaigns</h4>
+                                        <div class="sv-progress-bar__chart ">
+                        <span class="count">
+                            <span class="sent_emails">
+                                0                            </span> /
+                            <span class="all_emails">0</span>
+                            emails                        </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="sv-progress-bar number_contacts_sent" style="flex-basis: 385px;">
+                                        <h4 class="sv-progress-bar__title">Number of Contacts Sent </h4>
+                                        <div class="sv-progress-bar__chart ">
+                                            <span class="count">0</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="sv-progress-bar sent_delivered" style="flex-basis: 385px;">
+                                        <h4 class="sv-progress-bar__title">Number of Emails Successfully Delivered</h4>
+                                        <div class="sv-progress-bar__chart "><span class="count"><span class="sent_emails">0</span> emails</span></div>
+                                    </div>
+
+                                    <div class="sv-progress-bar sent" style="flex-basis: 385px;">
+                                        <h4 class="sv-progress-bar__title">Delivery Rate</h4>
+                                        <div class="sv-progress-bar__chart js-chart" data-percent="0"><span class="count">0%</span><canvas height="120" width="120" style="height: 60px; width: 60px;"></canvas></div>
+                                    </div>
+
+                                </div>
+
+                                <div class="campaigns-report__charts">
+
+                                    <div class="sv-progress-bar opened" style="flex-basis: 385px;">
+                                        <h4 class="sv-progress-bar__title">Average Open Rate</h4>
+                                        <div class="sv-progress-bar__chart add_count">
+                        <span class="count">
+                            <span class="emails">0</span> emails                        </span>
+                                        </div>
+                                        <div class="sv-progress-bar__chart js-chart" data-percent="0"><span class="count">0%</span><canvas height="120" width="120" style="height: 60px; width: 60px;"></canvas></div>
+                                    </div>
+
+                                    <div class="sv-progress-bar clicked" style="flex-basis: 385px;">
+                                        <h4 class="sv-progress-bar__title">Average Click Through Rate</h4>
+                                        <div class="sv-progress-bar__chart add_count">
+                        <span class="count">
+                            <span class="emails">0</span> emails                        </span>
+                                        </div>
+                                        <div class="sv-progress-bar__chart js-chart" data-percent="0"><span class="count">0%</span><canvas height="120" width="120" style="height: 60px; width: 60px;"></canvas></div>
+                                    </div>
+
+                                    <div class="sv-progress-bar unsubscribers_count" style="flex-basis: 385px;">
+                                        <h4 class="sv-progress-bar__title">Unsubscribers</h4>
+                                        <div class="sv-progress-bar__chart ">
+                                            <div class="sv-progress-bar__chart ">
+                            <span class="count">
+                                <span class="emails">0</span> contacts                            </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="sv-progress-bar unsubscriber_rate" style="flex-basis: 385px;">
+                                        <h4 class="sv-progress-bar__title">Unsubscribe Rate</h4>
+                                        <div class="sv-progress-bar__chart js-chart" data-percent="0"><span class="count">0%</span><canvas height="120" width="120" style="height: 60px; width: 60px;"></canvas></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>        </div>
+                <div class="sv-container">
+                    <h2 class="sv-title">Recent Campaigns You've Sent</h2>
+
+                    <table class="sv-table">
+                        <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Campaign Title</th>
+                            <th>Start Date</th>
+                            <th>Open Rate</th>
+                            <th>CTR</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td data-th="Status">
+                                <div class="sv-table__status noactive">Draft</div>
+                            </td>
+                            <td data-th="Campaign Title"><a href="http://seven.loc/campaigns/market-volatility-win-back-campaign/">Private: Timely: Market Volatility Win-Back Campaign</a></td>
+                            <td data-th="Start Date"></td>
+                            <td data-th="Open Rate">0%</td>
+                            <td data-th="CTR">0%</td>
+                            <td>
+                                <a href="http://seven.loc/campaigns/market-volatility-win-back-campaign/?report=1">
+                                    <i class="fa fa-chevron-right"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-th="Status">
+                                <div class="sv-table__status noactive">Draft</div>
+                            </td>
+                            <td data-th="Campaign Title"><a href="http://seven.loc/?post_type=campaigns&amp;p=4968">September Market Commentary: Hostage to Headlines?</a></td>
+                            <td data-th="Start Date"></td>
+                            <td data-th="Open Rate">0%</td>
+                            <td data-th="CTR">0%</td>
+                            <td>
+                                <a href="http://seven.loc/?post_type=campaigns&amp;p=4968?report=1">
+                                    <i class="fa fa-chevron-right"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="campaigns-report__link">
+                    <a href="http://seven.loc/admin-campaigns/?page=all_reports">
+                        See More
+                        <img src="{{ asset('frontendDashboard/themesAssets/dist/img/arrow-right.png') }}" alt="arrow right">
+                    </a>
+                </div>
+
+            </div>
+        </div>
     </div>
 
 @endsection
