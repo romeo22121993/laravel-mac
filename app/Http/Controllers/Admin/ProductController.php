@@ -16,10 +16,10 @@ use Image;
 class ProductController extends Controller
 {
 
-    public $settings = [];
+    //public $settings = [];
 
     public function __construct() {
-        $this->settings = SiteSetting::find(1);
+        //$this->settings = SiteSetting::find(1);
     }
 
     /**
@@ -27,12 +27,11 @@ class ProductController extends Controller
     *
     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     */
-    public function ManageProduct(){
+    public function mainPage(){
 
         $products = Product::latest()->get();
-        $settings = $this->settings;
 
-        return view('admin.product.product_view',compact('products', 'settings'));
+        return view('admin.product.index',compact('products'));
     }
 
     /**
@@ -45,7 +44,7 @@ class ProductController extends Controller
         $brands     = Brand::latest()->get();
         $settings   = $this->settings;
 
-        return view('admin.product.product_add',compact('categories','brands', 'settings'));
+        return view('admin.product.add',compact('categories','brands', 'settings'));
     }
 
     /**
@@ -134,7 +133,7 @@ class ProductController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('product.manage')->with($notification);
+        return redirect()->route('wpadmin.products.main')->with($notification);
 
     }
 
@@ -210,7 +209,7 @@ class ProductController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('product.manage')->with($notification);
+        return redirect()->route('wpadmin.products.main')->with($notification);
 
     }
 

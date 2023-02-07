@@ -73,8 +73,8 @@ class PostController extends Controller
     public function StorePost( Request $request ) {
 
         $request->validate([
-            'title'      => ['required', 'string', 'max:255', 'unique:post'],
-            'slug'       => [ 'max:255', 'unique:post'],
+            'title'      => ['required', 'string', 'max:255', 'unique:posts'],
+            'slug'       => [ 'max:255', 'unique:posts'],
             'content'    => ['required', 'string' ],
             'categories' => ['required'],
         ]);
@@ -83,11 +83,9 @@ class PostController extends Controller
         $data1      = $request->all();
 
         $post = new Post();
-        $slug = \Str::slug( $request->title );
-
         $post->content   = $data1['content'];
         $post->title     = $request->title;
-        $post->slug      = $slug;
+        $post->slug      = \Str::slug( $request->title );
         $post->author_id = Auth::id();
         $post->check1    = $request->check1;
         $post->check2    = $request->check2;
@@ -97,7 +95,7 @@ class PostController extends Controller
         if ( $request->file('image' ) ) {
             $file = $request->file('image');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/post' ), $filename );
+            $file->move( public_path('uploads/posts' ), $filename );
             $image_src = $filename;
         }
 
@@ -164,7 +162,7 @@ class PostController extends Controller
             @unlink( public_path( 'uploads/posts/'.$post->img ) );
             $file = $request->file('image');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/post' ), $filename );
+            $file->move( public_path('uploads/posts' ), $filename );
             $image_src = $filename;
 
             $post->img = $image_src;
@@ -188,8 +186,14 @@ class PostController extends Controller
 
         DB::table('posts_and_cats')->where('post_id', $id)->delete();
 
-        $post = Post::find($id );
-        dispatch( new PostObserverJob( $post, 'deleted' ) )->onQueue('emails'); // send email via observer
+        $post = Post::find( $id );
+        $file = public_path( 'uploads/posts/'.$post->img );
+        if ( file_exists( $file ) ) {
+            @unlink( public_path( 'uploads/posts/'.$post->img ) );
+        }
+//        @unlink( public_path( 'uploads/posts/'.$post->img ) );
+
+        dispatch( new PostObserverJob( $post, 'deleted' ) ); // send email via observer
         $post->delete();
 
         return redirect()->back();

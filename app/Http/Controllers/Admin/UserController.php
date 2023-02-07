@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\UserObserverJob;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
@@ -23,7 +24,7 @@ class UserController extends Controller
      */
     public function usersPage() {
 
-        $users = User::paginate(3);
+        $users = User::paginate( 5 );
 
         return view('admin.user.index', compact( 'users' ) );
     }
@@ -49,7 +50,7 @@ class UserController extends Controller
 
         $request->validate([
             'name'      => ['required', 'string', 'max:255'],
-            'email'     => ['required', 'string', 'email', 'max:255', 'unique:user'],
+            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'firstname' => ['required', 'string', 'min:3' ],
             'lastname'  => ['required', 'string', 'min:3'],
             'phone'     => ['required', 'string', 'min:3'],
@@ -59,34 +60,33 @@ class UserController extends Controller
             'password'  => ['required', 'min:4',  'string'],
         ]);
 
-        $data  = $request->all();
-        $check = $this->create( $data );
+
+        $user = new User();
+        $user->name       = $request->name;
+        $user->email      = $request->email;
+        $user->firstname  = $request->firstname;
+        $user->lastname   = $request->lastname;
+        $user->phone      = $request->phone;
+        $user->role       = $request->role;
+        $user->company    = $request->company;
+        $user->position   = $request->position;
+        $user->password   = Hash::make( $request->password );
+
+        $image_src = 'none';
+        if ( $request->file('avatar_img' ) ) {
+            $file = $request->file('avatar_img');
+            $filename = date('YmdHi').$file->getClientOriginalName();
+            $file->move( public_path('uploads/users' ), $filename );
+            $image_src = $filename;
+        }
+
+        $user->avatar_img = $image_src;
+        $user->save();
 
         return Redirect()->route('wpadmin.users');
 
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create( array $data )
-    {
-
-        return User::create([
-            'name'      => $data['name'],
-            'email'     => $data['email'],
-            'firstname' => $data['firstname'],
-            'lastname'  => $data['lastname'],
-            'phone'     => $data['phone'],
-            'role'      => $data['role'],
-            'company'   => $data['company'],
-            'position'  => $data['position'],
-            'password'  => Hash::make( $data['password'] ),
-        ]);
-    }
 
     /**
      * Function for edit user page
@@ -109,17 +109,29 @@ class UserController extends Controller
      */
     public function UpdateUser( Request $request, $id ) {
 
+        $user  = User::find( $id );
         $data  = $request->all();
 
-        User::whereId($id)->update([
-            'name'      => $data['name'],
-            'email'     => $data['email'],
-            'firstname' => $data['firstname'],
-            'lastname'  => $data['lastname'],
-            'phone'     => $data['phone'],
-            'role'      => $data['role'],
-            'company'   => $data['company'],
-            'position'  => $data['position'],
+        $image_src = $user->avatar_img;
+        if ( $request->file('avatar_img' ) ) {
+            @unlink( public_path( 'uploads/users/'.$user->avatar_img ) );
+            $file = $request->file('avatar_img');
+            $filename = date('YmdHi').$file->getClientOriginalName();
+            $file->move( public_path('uploads/users' ), $filename );
+            $image_src = $filename;
+
+        }
+
+        User::whereId( $id )->update([
+            'name'       => $data['name'],
+            'email'      => $data['email'],
+            'firstname'  => $data['firstname'],
+            'lastname'   => $data['lastname'],
+            'phone'      => $data['phone'],
+            'role'       => $data['role'],
+            'company'    => $data['company'],
+            'position'   => $data['position'],
+            'avatar_img' => $image_src,
         ]);
 
         return Redirect()->route('wpadmin.users');
@@ -133,11 +145,17 @@ class UserController extends Controller
      */
     public function DeleteUser( $id ){
 
-        $user = User::find($id );
-        dispatch( new UserObserverJob( $user, 'deleted' ) )->onQueue('emails'); // send email via observer
+        $user = User::find( $id );
+
+        $file = public_path( 'uploads/users/'.$user->avatar_img );
+        if ( file_exists( $file ) ) {
+            @unlink( public_path( 'uploads/users/'.$user->avatar_img ) );
+        }
+
+        dispatch( new UserObserverJob( $user, 'deleted' ) );
         $user->delete();
 
-        return redirect()->back();
+        return Redirect()->route('wpadmin.users');
 
     }
 

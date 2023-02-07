@@ -1,4 +1,9 @@
 @extends('admin.admin_master')
+
+@section('title')
+    Add new User
+@endsection
+
 @section('admin_content')
 
     <div class="content-wrapper">
@@ -19,7 +24,7 @@
                         </div>
                     @endif
 
-                    <form class="forms-sample" method="POST" action="{{ route('wpadmin.users.store') }}">
+                    <form class="forms-sample" method="POST" action="{{ route('wpadmin.users.store') }}"  enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputUsername1">User Name</label>
@@ -63,6 +68,11 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">User Position</label>
                             <input type="text" class="form-control" name="position"  value="{{ old('position') }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">User Image </label>
+                            <input type="file" name="avatar_img" class="form-control-file" id="exampleFormControlFile1">
                         </div>
 
                         <div class="form-group">

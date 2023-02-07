@@ -131,7 +131,7 @@
                 <div class="collapse" id="ui-basic3">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.products.main') }}">Products</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.products.cat.all') }}">Product Categories</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.products.cats.all') }}">Product Categories</a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.products.brands.all') }}">Product Brands</a></li>
                         <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.products.add') }}">Add Product</a></li>
                     </ul>

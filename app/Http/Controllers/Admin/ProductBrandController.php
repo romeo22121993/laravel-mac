@@ -1,18 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
-use App\Models\Brand;
+use App\Models\ProductBrand;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 
-class BrandController extends Controller
+class ProductBrandController extends Controller
 {
+
+    protected $number = 10;
 
     /**
      * Function for view page for brands
@@ -21,8 +23,9 @@ class BrandController extends Controller
      */
     public function BrandView(){
 
-        $brands = Brand::latest()->get();
-        return view('backend.brand.brand_view',compact('brands'));
+        $brands = ProductBrand::paginate( $this->number );
+
+        return view('admin.product.brand.view', compact('brands' ) );
 
     }
 
@@ -32,38 +35,33 @@ class BrandController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function BrandStore(Request $request){
+    public function BrandStore( Request $request ){
 
         $request->validate([
-            'brand_name_en'  => 'required',
-            'brand_name_hin' => 'required',
-            'brand_image'    => 'required',
+            'name'  => 'required', 'unique:products_brands',
+            'image' => 'required',
         ],[
-            'brand_name_en.required' => 'Input Brand English Name',
-            'brand_name_hin.required' => 'Input Brand Hindi Name',
+            'name' => 'Input Brand Name',
         ]);
 
-        $image = $request->file('brand_image');
-        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(300,300)->save('upload/brands/'.$name_gen);
-        $save_url = 'upload/brands/'.$name_gen;
+        $image = $request->file('image');
+        $filename = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        $image_resize = Image::make($image->getRealPath());
+        $image_resize->fit(250);
+        $image_resize->save(public_path('/uploads/brands/'.$filename));
+        $save_url = '/uploads/brands/'.$filename;
 
-        Brand::insert([
-            'brand_name_en' => $request->brand_name_en,
-            'brand_name_hin' => $request->brand_name_hin,
-            'brand_slug_en' =>  strtolower(str_replace([' ', ','], ['-', '-'], $request->brand_name_en)),
-            'brand_slug_hin' => strtolower( str_replace([' ', ','], ['-', '-'], $request->brand_name_hin)),
-            'brand_image' => $save_url,
+
+        ProductBrand::insert([
+            'name'  => $request->name,
+            'slug'  => \Str::slug( $request->name ),
+            'image' => $save_url,
         ]);
 
-        $notification = array(
-            'message' => 'Brand Inserted Successfully',
-            'alert-type' => 'success'
-        );
 
-        return redirect()->back()->with($notification);
+        return redirect()->back();
 
-    } // end method
+    }
 
     /**
      * Function for editing page
@@ -72,7 +70,7 @@ class BrandController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function BrandEdit($id){
-        $brand = Brand::findOrFail($id);
+        $brand = ProductBrand::findOrFail($id);
         return view('backend.brand.brand_edit',compact('brand'));
     }
 
@@ -87,23 +85,23 @@ class BrandController extends Controller
         $brand_id = $request->id;
         $old_img = $request->old_image;
 
-        if ( $request->file('brand_image') ) {
+        if ( $request->file('image') ) {
 
             if ( file_exists($old_img) ) {
                 unlink($old_img);
             }
 
-            $image = $request->file('brand_image');
+            $image = $request->file('image');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
             Image::make($image)->resize(300,300)->save('upload/brands/'.$name_gen);
             $save_url = 'upload/brands/'.$name_gen;
 
-            Brand::findOrFail($brand_id)->update([
+            ProductBrand::findOrFail($brand_id)->update([
                 'brand_name_en' => $request->brand_name_en,
                 'brand_name_hin' => $request->brand_name_hin,
                 'brand_slug_en' => strtolower(str_replace(' ', '-',$request->brand_name_en)),
                 'brand_slug_hin' => strtolower(str_replace(' ', '-',$request->brand_name_hin)),
-                'brand_image' => $save_url,
+                'image' => $save_url,
             ]);
 
             $notification = array(
@@ -115,7 +113,7 @@ class BrandController extends Controller
 
         }else{
 
-            Brand::findOrFail( $brand_id )->update([
+            ProductBrand::findOrFail( $brand_id )->update([
                 'brand_name_en'  => $request->brand_name_en,
                 'brand_name_hin' => $request->brand_name_hin,
                 'brand_slug_en'  => strtolower(str_replace(' ', '-',$request->brand_name_en)),
@@ -129,8 +127,8 @@ class BrandController extends Controller
 
             return redirect()->route('brands.all')->with($notification);
 
-        } // end else
-    } // end method
+        }
+    }
 
 
     /**
@@ -141,21 +139,16 @@ class BrandController extends Controller
      */
     public function BrandDelete($id){
 
-        $brand = Brand::findOrFail($id);
-        $img = $brand->brand_image;
+        $brand = ProductBrand::findOrFail($id);
+        $img   = public_path( $brand->image );
         if ( file_exists( $img ) ) {
             unlink($img);
         }
 
-        Brand::findOrFail($id)->delete();
+        ProductBrand::findOrFail( $id )->delete();
 
-        $notification = array(
-            'message' => 'Brand Deleted Successfully',
-            'alert-type' => 'info'
-        );
+        return redirect()->back();
 
-        return redirect()->back()->with($notification);
-
-    } // end method
+    }
 
 }

@@ -24,7 +24,7 @@
                         </div>
                     @endif
 
-                    <form class="forms-sample" method="POST" action="{{ route('wpadmin.users.update', $user->id) }}">
+                    <form class="forms-sample" method="POST" action="{{ route('wpadmin.users.update', $user->id) }}"  enctype="multipart/form-data" >
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputUsername1">User Name</label>
@@ -68,6 +68,17 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">User Position</label>
                             <input type="text" class="form-control" name="position"  value="{{ $user->position }}">
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="exampleFormControlFile1">Feature Image </label>
+                                <input type="file" name="avatar_img" class="form-control-file" id="image">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <img id="showImage" src="@if( $user->avatar_img != 'none' ) {{ asset('/uploads/users/'.$user->avatar_img) }} @else {{ asset('/img/none.jpg') }} @endif"
+                                     style="width: 200px;  height: auto;" >
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary mr-2">Update</button>

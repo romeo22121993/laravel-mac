@@ -42,7 +42,7 @@
                                             <td> {{ $page->slug }}</td>
                                             <td>
                                                 <img style="width: 50px; height: auto;"
-                                                    src="@if( $page->img != 'none' ) {{ asset('/uploads/page/'.$page->img) }} @else {{ asset('/img/none.jpg') }} @endif">
+                                                    src="@if( $page->img != 'none' ) {{ asset('/uploads/pages/'.$page->img) }} @else {{ asset('/img/none.jpg') }} @endif">
                                             </td>
                                             <td>{{ $page->updated_at->diffForHumans() }}</td>
                                             <td>

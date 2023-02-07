@@ -54,8 +54,8 @@ class PageController extends Controller
     public function StorePage( Request $request ) {
 
         $request->validate([
-            'title'      => ['required', 'string', 'max:255', 'unique:page'],
-            'slug'       => [ 'max:255', 'unique:page'],
+            'title'      => ['required', 'string', 'max:255', 'unique:pages'],
+            'slug'       => [ 'max:255', 'unique:pages'],
             'content'    => ['required', 'string', 'max:955'],
         ]);
 
@@ -73,7 +73,7 @@ class PageController extends Controller
         if ( $request->file('image' ) ) {
             $file = $request->file('image');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/page' ), $filename );
+            $file->move( public_path('uploads/pages' ), $filename );
             $image_src = $filename;
         }
 
@@ -110,8 +110,8 @@ class PageController extends Controller
         $page  = Page::find( $id );
 
         $request->validate([
-            'title'      => ['required', 'string', 'max:255', Rule::unique('page')->ignore( $page )],
-            'slug'       => [ 'max:255', Rule::unique('page')->ignore( $page )],
+            'title'      => ['required', 'string', 'max:255', Rule::unique('pages')->ignore( $page )],
+            'slug'       => [ 'max:255', Rule::unique('pages')->ignore( $page )],
             'content'    => ['required', 'string', 'max:955']
         ]);
 
@@ -125,10 +125,10 @@ class PageController extends Controller
         $page->author_id = Auth::id();
 
         if ( $request->file('image' ) ) {
-            @unlink( public_path( 'uploads/page/'.$page->img ) );
+            @unlink( public_path( 'uploads/pages/'.$page->img ) );
             $file = $request->file('image');
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/page' ), $filename );
+            $file->move( public_path('uploads/pages' ), $filename );
             $image_src = $filename;
 
             $page->img = $image_src;
@@ -148,11 +148,12 @@ class PageController extends Controller
      */
     public function DeletePage( $id ){
 
-        Page::whereId( $id )->delete();
+        $page = Page::find( $id );
+        @unlink( public_path( 'uploads/pages/'.$page->img ) );
+        $page->delete();
 
         return redirect()->back();
 
     }
-
 
 }
