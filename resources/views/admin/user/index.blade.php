@@ -43,12 +43,21 @@
                                             <td> {{ ucfirst( $user->role ) }}</td>
                                             <td>
                                                 <img style="width: 50px; height: auto;"
-                                                     src="@if( !empty( $user->avatar_img ) ) {{ asset('/uploads/users/'.$user->avatar_img) }} @else {{ asset('/img/face.jpeg') }} @endif">
+                                                     src="@if( empty( $user->avatar_img ) || ( $user->avatar_img == 'none' ) ) {{ asset('/img/face.jpeg') }} @else {{ asset('/uploads/users/'.$user->avatar_img) }}  @endif">
                                             </td>
                                             <td>{{ $user->updated_at->diffForHumans() }}</td>
                                             <td>
                                                 <a href="{{ route('wpadmin.users.edit',  $user->id) }}" class="btn btn-info">Edit</a>
-                                                <a href="{{ route('wpadmin.users.delete', $user->id) }}" onclick="return confirm('Are you sure to delete')" class="btn btn-danger">Delete</a>
+
+                                                <form method="POST" action="{{ route('wpadmin.users.delete', $user->id) }}" class="btn btn-danger">
+                                                    @csrf
+                                                    @method('delete')
+
+                                                    <button type='submit' class="text-inverse" data-toggle="tooltip" style=" background: none;  border: 0;  color: #fff;">
+                                                        Delete
+                                                    </button>
+                                                </form>
+{{--                                                <a href="{{ route('wpadmin.users.delete', $user->id) }}"  class="btn btn-danger">Delete</a>--}}
                                             </td>
                                         </tr>
                                     @endforeach

@@ -33,7 +33,7 @@
                                     <tr>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->slug }}</td>
-                                        <td><img src="{{ asset($item->image) }}" style="width: 70px; height: 40px;"> </td>
+                                        <td><img src="{{ asset( $item->image ) }}" style="width: 70px; height: 40px;"> </td>
                                         <td>
                                             <a href="{{ route('wpadmin.products.brands.edit', $item->id) }}" class="btn btn-info" title="Edit Data">
                                                 <i class="fa fa-pencil"></i>

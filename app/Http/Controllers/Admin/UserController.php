@@ -145,12 +145,12 @@ class UserController extends Controller
      */
     public function DeleteUser( $id ){
 
-        $user = User::find( $id );
+        $user = User::findOrFail( $id );
 
-        $file = public_path( 'uploads/users/'.$user->avatar_img );
-        if ( file_exists( $file ) ) {
-            @unlink( public_path( 'uploads/users/'.$user->avatar_img ) );
-        }
+//        $file = public_path( 'uploads/users/'.$user->avatar_img );
+//        if ( file_exists( $file ) ) {
+//            @unlink( public_path( 'uploads/users/'.$user->avatar_img ) );
+//        }
 
         dispatch( new UserObserverJob( $user, 'deleted' ) );
         $user->delete();

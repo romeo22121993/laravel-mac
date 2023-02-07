@@ -191,7 +191,6 @@ class PostController extends Controller
         if ( file_exists( $file ) ) {
             @unlink( public_path( 'uploads/posts/'.$post->img ) );
         }
-//        @unlink( public_path( 'uploads/posts/'.$post->img ) );
 
         dispatch( new PostObserverJob( $post, 'deleted' ) ); // send email via observer
         $post->delete();

@@ -33,7 +33,7 @@ class PostObserver
      */
     public function created(Post $post)
     {
-        dispatch( new PostObserverJob( $post, 'created' ) )->onQueue('emails'); // set email in background, via job
+        dispatch( new PostObserverJob( $post, 'created' ) ); // set email in background, via job
 
     }
 

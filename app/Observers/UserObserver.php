@@ -26,7 +26,7 @@ class UserObserver
      */
     public function created( User $user )
     {
-        dispatch( new UserObserverJob( $user, 'created' ) )->onQueue('emails'); // set email in background, via job
+        dispatch( new UserObserverJob( $user, 'created' ) ); // set email in background, via job
     }
 
     /**
@@ -37,7 +37,7 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        dispatch( new UserObserverJob( $user, 'updated' ) )->onQueue('emails');
+        dispatch( new UserObserverJob( $user, 'updated' ) );
     }
 
     /**
@@ -48,7 +48,7 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        dispatch( new UserObserverJob( $user, 'deleted' ) )->onQueue('emails');
+//        dispatch( new UserObserverJob( $user, 'deleted' ) )->onQueue('emails');
     }
 
     /**

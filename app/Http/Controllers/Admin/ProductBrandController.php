@@ -51,7 +51,6 @@ class ProductBrandController extends Controller
         $image_resize->save(public_path('/uploads/brands/'.$filename));
         $save_url = '/uploads/brands/'.$filename;
 
-
         ProductBrand::insert([
             'name'  => $request->name,
             'slug'  => \Str::slug( $request->name ),
@@ -71,7 +70,7 @@ class ProductBrandController extends Controller
      */
     public function BrandEdit($id){
         $brand = ProductBrand::findOrFail($id);
-        return view('backend.brand.brand_edit',compact('brand'));
+        return view('admin.product.brand.edit',compact('brand'));
     }
 
     /**
@@ -80,54 +79,37 @@ class ProductBrandController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function BrandUpdate(Request $request){
+    public function BrandUpdate( Request $request )
+    {
 
-        $brand_id = $request->id;
-        $old_img = $request->old_image;
+        $brand_id  = $request->id;
+        $old_img   = $request->old_image;
 
-        if ( $request->file('image') ) {
+        $productBrand = ProductBrand::find( $brand_id );
+        $productBrand->name = $request->name;
+        $productBrand->slug = \Str::slug( $request->name );
 
-            if ( file_exists($old_img) ) {
-                unlink($old_img);
+        if ( $request->file('image' ) ) {
+
+            if ( file_exists( $old_img ) ) {
+                unlink( $old_img );
             }
 
             $image = $request->file('image');
-            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(300,300)->save('upload/brands/'.$name_gen);
-            $save_url = 'upload/brands/'.$name_gen;
+            $filename = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            $image_resize = Image::make($image->getRealPath());
+            $image_resize->fit(250);
+            $image_resize->save( public_path( '/uploads/brands/'.$filename )) ;
+            $save_url = '/uploads/brands/'.$filename;
 
-            ProductBrand::findOrFail($brand_id)->update([
-                'brand_name_en' => $request->brand_name_en,
-                'brand_name_hin' => $request->brand_name_hin,
-                'brand_slug_en' => strtolower(str_replace(' ', '-',$request->brand_name_en)),
-                'brand_slug_hin' => strtolower(str_replace(' ', '-',$request->brand_name_hin)),
-                'image' => $save_url,
-            ]);
-
-            $notification = array(
-                'message' => 'Brand Updated Successfully',
-                'alert-type' => 'info'
-            );
-
-            return redirect()->route('brands.all')->with($notification);
-
-        }else{
-
-            ProductBrand::findOrFail( $brand_id )->update([
-                'brand_name_en'  => $request->brand_name_en,
-                'brand_name_hin' => $request->brand_name_hin,
-                'brand_slug_en'  => strtolower(str_replace(' ', '-',$request->brand_name_en)),
-                'brand_slug_hin' => str_replace(' ', '-',$request->brand_name_hin),
-            ]);
-
-            $notification = array(
-                'message' => 'Brand Updated Successfully',
-                'alert-type' => 'info'
-            );
-
-            return redirect()->route('brands.all')->with($notification);
+            $productBrand->image = $save_url;
 
         }
+
+        $productBrand->save();
+
+        return redirect()->route('wpadmin.products.brands.all');
+
     }
 
 
