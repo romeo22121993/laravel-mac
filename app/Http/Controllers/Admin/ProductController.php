@@ -71,10 +71,12 @@ class ProductController extends Controller
             $files->move( $destinationPath,$digitalItem );
         }
 
-        $image = $request->file('thumbnail');
-        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(300,500)->save('uploads/products/thumbnail/'.$name_gen);
-        $save_url = 'uploads/products/thumbnail/'.$name_gen;
+        if ( !empty( $request->file('thumbnail') ) ) {
+            $image = $request->file('thumbnail');
+            $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(300, 500)->save('uploads/products/thumbnail/' . $name_gen);
+            $save_url = 'uploads/products/thumbnail/' . $name_gen;
+        }
 
         $product_id = Product::insertGetId([
             'brand_id'  => $request->brand_id,
@@ -105,17 +107,19 @@ class ProductController extends Controller
 
         ]);
 
-        $images = $request->file('multi_img');
-        foreach ( $images as $img ) {
-            $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
-            $uploadPath = 'uploads/products/multiImages/'. $make_name;
-            Image::make($img)->resize(300,500)->save($uploadPath);
+        if ( !empty( $request->file('multi_img') ) ) {
+            $images = $request->file('multi_img');
+            foreach ($images as $img) {
+                $make_name = hexdec(uniqid()) . '.' . $img->getClientOriginalExtension();
+                $uploadPath = 'uploads/products/multiImages/' . $make_name;
+                Image::make($img)->resize(300, 500)->save($uploadPath);
 
-            MultiImg::insert([
-                'product_id' => $product_id,
-                'photo_name' => $uploadPath,
-                'created_at' => Carbon::now(),
-            ]);
+                MultiImg::insert([
+                    'product_id' => $product_id,
+                    'photo_name' => $uploadPath,
+                    'created_at' => Carbon::now(),
+                ]);
+            }
         }
 
         return redirect()->route('wpadmin.products.main');
@@ -160,7 +164,7 @@ class ProductController extends Controller
         ]);
 
         if ( !empty( $request->file('file') ) && ( $files = $request->file('file') ) ) {
-            @unlink( $product->file );
+            @unlink( $product->digital_file );
             $destinationPath = 'uploads/products/docs';
             $digitalItem = date('YmdHis') . "." . $files->getClientOriginalExtension();
             $digitalItemPath = $destinationPath . '/' . $digitalItem;
@@ -179,6 +183,7 @@ class ProductController extends Controller
             $product->thumbnail = $save_url;
         }
 
+        /*
         if ( !empty( $request->file('multi_img') ) ) {
             $images = $request->file('multi_img');
 
@@ -196,7 +201,7 @@ class ProductController extends Controller
                 ]);
             }
         }
-
+        */
 
         $product->brand_id  = $request->brand_id;
         $product->cat_id    = $request->cat_id;
@@ -229,6 +234,38 @@ class ProductController extends Controller
     }
 
 
+    /**
+     * Function updating multiple image
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function MultiImageUpdate( Request $request ){
+        $productId = $request->id;
+
+        if ( !empty( $request->file('multi_img') ) ) {
+            $images = $request->file('multi_img');
+
+            $this->multiImagesDelete( $productId );
+
+            foreach ( $images as $img ) {
+                $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+                $uploadPath = 'uploads/products/multiImages/'. $make_name;
+                Image::make($img)->resize(300,500)->save($uploadPath);
+
+                MultiImg::insert([
+                    'product_id' => $productId,
+                    'photo_name' => $uploadPath,
+                    'created_at' => Carbon::now(),
+                ]);
+            }
+        }
+
+
+        return redirect()->back();
+
+    }
+
     //// Multi Image Delete ////
     /**
      * Function of deleting multi image from edit product page
@@ -238,9 +275,8 @@ class ProductController extends Controller
      */
     public function multiImagesDelete( $id ) {
         $imgs = MultiImg::where( 'product_id', $id )->get();
-
-        foreach ( $imgs as $id => $img) {
-            $imgDel = MultiImg::findOrFail($id);
+        foreach ( $imgs as  $img) {
+            $imgDel = MultiImg::findOrFail( $img['id'] );
             unlink($imgDel->photo_name);
             $imgDel->delete();
         }

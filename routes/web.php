@@ -257,10 +257,10 @@ Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], fun
         Route::post('/store',               [ProductController::class, 'StoreProduct'])->name('wpadmin.products.store');
         Route::get('/edit/{id}',            [ProductController::class, 'EditProduct'])->name('wpadmin.products.edit');
         Route::post('/update',              [ProductController::class, 'ProductDataUpdate'])->name('wpadmin.products.update');
-        Route::get('/multiimg/delete/{id}', [ProductController::class, 'MultiImageDelete'])->name('wpadmin.products.multiimg.delete');
         Route::get('/inactive/{id}',        [ProductController::class, 'ProductInactive'])->name('wpadmin.products.inactive');
         Route::get('/active/{id}',          [ProductController::class, 'ProductActive'])->name('wpadmin.products.active');
         Route::get('/delete/{id}',          [ProductController::class, 'ProductDelete'])->name('wpadmin.products.delete');
+        Route::post('/multiimg/update',     [ProductController::class, 'MultiImageUpdate'])->name('product.update-multi-images');
 
         // Admin Brand All Routes
         Route::prefix('brands')->group(function () {

@@ -251,44 +251,6 @@
                                     <div class="col-md-6">
 
                                         <div class="form-group">
-                                            <h5>Multiple Image <span class="text-danger">*</span></h5>
-                                            <div class="controls">
-                                                <input type="file" name="multi_img[]" class="form-control" multiple="" id="multiImg" >
-                                                @error('multi_img')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                                <div class="row" id="preview_img"></div>
-                                            </div>
-                                            <div class="row row-sm">
-                                                @foreach($multiImgs as $img)
-                                                    <div class="col-md-3">
-
-                                                        <div class="card">
-                                                            <img src="{{ asset($img->photo_name) }}" class="card-img-top" style="height: 130px; width: 280px;">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">
-                                                                    <a href="{{ route('product.multiimg.delete',$img->id) }}" class="btn btn-sm btn-danger" id="delete" title="Delete Data"><i class="fa fa-trash"></i> </a>
-                                                                </h5>
-                                                                <p class="card-text">
-                                                                <div class="form-group">
-                                                                    <label class="form-control-label">Change Image <span class="tx-danger">*</span></label>
-                                                                    <input class="form-control" type="file" name="multi_img[{{ $img->id }}]">
-                                                                </div>
-                                                                </p>
-
-                                                            </div>
-                                                        </div>
-
-                                                    </div><!--  end col md 3		 -->
-                                                @endforeach
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md-6">
-
-                                        <div class="form-group">
                                             <h5>Digital Product <span class="text-danger">pdf,xlx,csv</span></h5>
                                             <div class="controls">
                                                 <input type="file" name="file" class="form-control" >
@@ -352,6 +314,42 @@
             </div>
 
         </section>
+
+        <!-- ///////////////// Start Multiple Image Update Area ///////// -->
+
+        <section class="content" style="margin-top: 30px;">
+            <div class="row">
+                <div class="col-md-6">
+                    <form method="post" action="{{ route('product.update-multi-images') }}" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{ $product->id }}">
+                        @csrf
+
+                        <div class="form-group">
+                        <h5>Multiple Image <span class="text-danger">*</span></h5>
+                        <div class="controls">
+                            <input type="file" name="multi_img[]" class="form-control" multiple="" id="multiImg" >
+                            <div class="row" id="preview_img"></div>
+                        </div>
+                        <div class="row row-sm">
+                            @foreach($multiImgs as $img)
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="{{ asset($img->photo_name) }}" class="card-img-top" style="height: 130px; width: auto;">
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                        <div class="text-xs-right">
+                            <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update Multiples">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+        <!-- ///////////////// End Start Multiple Image Update Area ///////// -->
 
     </div>
 
