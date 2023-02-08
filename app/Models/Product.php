@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductBrand;
 use App\Models\ProductCategory;
+use App\Models\MultiImg;
 
 class Product extends Model
 {
@@ -21,6 +22,10 @@ class Product extends Model
 
     public function brand(){
     	return $this->belongsTo(ProductBrand::class,'brand_id','id');
+    }
+
+    public function multiImgs(){
+        return $this->hasMany(MultiImg::class,'product_id','id');
     }
 
 }

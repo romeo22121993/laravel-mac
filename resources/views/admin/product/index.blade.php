@@ -58,7 +58,7 @@
                                                     @endif
                                                 </td>
                                                 <td width="30%">
-                                                    <a href="{{ route('product.detail',   $item->slug) }}" class="btn btn-primary" title="Product Details Data"><i class="fa fa-eye"></i> </a>
+                                                    <a href="{{ route('product.details',   $item->slug) }}" class="btn btn-primary" title="Product Details Data"><i class="fa fa-eye"></i> </a>
                                                     <a href="{{ route('wpadmin.products.edit',   $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i> </a>
                                                     <a href="{{ route('wpadmin.products.delete', $item->id) }}" class="btn btn-danger" title="Delete Data" id="delete">
                                                         <i class="fa fa-trash"></i>

@@ -74,10 +74,8 @@ class PostController extends Controller
 
         $post         = Post::where( 'slug', $slug )->first();
         $relatedPosts = Post::where( 'slug', '<>', $slug )->paginate(2);;
-//        var_dump( '$relatedPosts', $relatedPosts );
-//        die;
 
-        return view('frontend.singlePost', compact('post', 'relatedPosts' ) );
+        return view('frontend.post.singlePost', compact('post', 'relatedPosts' ) );
     }
 
 

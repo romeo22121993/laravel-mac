@@ -26,7 +26,7 @@ class FrontendController extends Controller
 
         $category = [ 'a', 'b', 'c' ];
 
-        return view('frontend.index', compact('category'));
+        return view('frontend.pages.index', compact('category'));
 
     }
 
@@ -39,7 +39,7 @@ class FrontendController extends Controller
 
         $category = [ 'a', 'b', 'c' ];
 
-        return view('frontend.platform', compact('category'));
+        return view('frontend.pages.platform', compact('category'));
 
     }
 
@@ -52,7 +52,7 @@ class FrontendController extends Controller
 
         $category = [ 'a', 'b', 'c' ];
 
-        return view('frontend.signup', compact('category'));
+        return view('frontend.pages.signup', compact('category'));
 
     }
 
@@ -66,7 +66,7 @@ class FrontendController extends Controller
 
         $category = [ 'a', 'b', 'c' ];
 
-        return view('frontend.podcast', compact('category'));
+        return view('frontend.pages.podcast', compact('category'));
 
     }
 
@@ -79,7 +79,7 @@ class FrontendController extends Controller
 
         $category = [ 'a', 'b', 'c' ];
 
-        return view('frontend.contact', compact('category'));
+        return view('frontend.pages.contact', compact('category'));
 
     }
 
@@ -94,7 +94,7 @@ class FrontendController extends Controller
         $categories = PostCategory::all();
         $posts      = Post::paginate(1);
 
-        return view('frontend.blog', compact('categories', 'posts'));
+        return view('frontend.pages.blog', compact('categories', 'posts'));
 
     }
 
@@ -106,7 +106,7 @@ class FrontendController extends Controller
 
         $category = [ 'a', 'b', 'c' ];
 
-        return view('frontend.about', compact('category'));
+        return view('frontend.pages.about', compact('category'));
 
     }
 

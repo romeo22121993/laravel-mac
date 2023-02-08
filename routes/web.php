@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ProductBrandController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
+use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 
 use App\Http\Controllers\Subscriber\DashboardController;
 
@@ -205,7 +206,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
 
     // Frontend Product Details Page url
-    Route::get('/products/{slug}', [FrontEndController::class, 'ProductDetails'])->name('product.detail');
+    Route::get('/products/{slug}', [FrontendProductController::class, 'ProductDetails'])->name('product.details');
 
     // Frontend Product Tags Page
     Route::get('/product/tag/{tag}', [FrontEndController::class, 'TagWiseProduct']);
