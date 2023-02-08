@@ -31,8 +31,8 @@ class ProductCategoryController extends Controller
     public function CategoryStore(Request $request){
 
         $request->validate([
-            'name'  => 'required', 'unique:products_categories',
-            'icon'  => 'required',
+            'name'  => ['required', 'unique:products_categories'],
+            'icon'  => ['required'],
         ],[
             'name' => 'Input Category Name',
         ]);
@@ -197,6 +197,19 @@ class ProductCategoryController extends Controller
 
         return redirect()->back();
 
+    }
+
+    /**
+     * Function of getting subcategory for subsubcategory
+     *
+     * @param $categoryId
+     * @return false|string
+     */
+    public function GetSubCategory( $categoryId ){
+
+        $subcat = ProductCategory::where( 'cat_id', $categoryId)->orderBy('name', 'ASC')->get();
+
+        return json_encode( $subcat );
     }
 
 

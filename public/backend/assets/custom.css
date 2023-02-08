@@ -7,3 +7,12 @@
 .login_page input.remember {
     opacity: 1;
 }
+.container-full {
+    margin: 20px;
+}
+.bootstrap-tagsinput .tag {
+    margin-right: 2px;
+    color: antiquewhite;
+    background: blueviolet;
+    padding: 2px;
+}

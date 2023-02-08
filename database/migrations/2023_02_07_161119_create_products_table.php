@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('brand_id');
             $table->integer('cat_id');
             $table->integer('subcat_id');
-            $table->integer('subsubcat_id');
             $table->string('name');
             $table->string('slug');
             $table->string('code');

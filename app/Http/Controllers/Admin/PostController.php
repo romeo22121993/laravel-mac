@@ -137,8 +137,8 @@ class PostController extends Controller
         $post  = Post::find( $id );
 
         $request->validate([
-            'title'      => ['required', 'string', 'max:255', Rule::unique('post')->ignore( $post )],
-            'slug'       => [ 'max:255', Rule::unique('post')->ignore( $post )],
+            'title'      => ['required', 'string', 'max:255', Rule::unique('posts')->ignore( $post )],
+            'slug'       => [ 'max:255', Rule::unique('posts')->ignore( $post )],
             'content'    => ['required', 'string' ],
             'categories' => ['required'],
         ]);

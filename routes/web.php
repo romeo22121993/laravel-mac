@@ -146,13 +146,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/checkout',          [CheckoutController::class, 'Checkout'])->name('checkout');
     Route::post('/checkout/store',   [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
 
-    /*  Ajax requests
+    /*  Ajax requests */
     Route::group(['prefix' => 'ajax'], function () {
 
         // Categories ajax requests
         Route::prefix('category')->group(function () {
-            Route::get('/subcategory/{category_id}', [CategoryController::class, 'GetSubCategory']);
-            Route::get('/sub-subcategory/{subcategory_id}', [CategoryController::class, 'GetSubSubCategory']);
+            Route::get('/subcategory/{category_id}',    [ProductCategoryController::class, 'GetSubCategory']);
         });
 
         // Product View Modal with Ajax
@@ -195,8 +194,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('search-product', [FrontEndController::class, 'SearchProduct']);
 
     });
-
-    end of Ajax requests */
+    /* end of Ajax requests */
 
     /// Product Search Route
     Route::post('/search', [FrontEndController::class, 'ProductSearch'])->name('product.search');
@@ -207,7 +205,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
 
     // Frontend Product Details Page url
-    Route::get('/product/details/{id}', [FrontEndController::class, 'ProductDetails'])->name('productdetail');
+    Route::get('/products/{slug}', [FrontEndController::class, 'ProductDetails'])->name('product.detail');
 
     // Frontend Product Tags Page
     Route::get('/product/tag/{tag}', [FrontEndController::class, 'TagWiseProduct']);
@@ -258,9 +256,7 @@ Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], fun
         Route::get('/add',                  [ProductController::class, 'AddProduct'])->name('wpadmin.products.add');
         Route::post('/store',               [ProductController::class, 'StoreProduct'])->name('wpadmin.products.store');
         Route::get('/edit/{id}',            [ProductController::class, 'EditProduct'])->name('wpadmin.products.edit');
-        Route::post('/data/update',         [ProductController::class, 'ProductDataUpdate'])->name('wpadmin.products.update');
-        Route::post('/image/update',        [ProductController::class, 'MultiImageUpdate'])->name('wpadmin.products.update-image');
-        Route::post('/thumbnail/update',    [ProductController::class, 'ThambnailImageUpdate'])->name('wpadmin.products.update.thambnail');
+        Route::post('/update',              [ProductController::class, 'ProductDataUpdate'])->name('wpadmin.products.update');
         Route::get('/multiimg/delete/{id}', [ProductController::class, 'MultiImageDelete'])->name('wpadmin.products.multiimg.delete');
         Route::get('/inactive/{id}',        [ProductController::class, 'ProductInactive'])->name('wpadmin.products.inactive');
         Route::get('/active/{id}',          [ProductController::class, 'ProductActive'])->name('wpadmin.products.active');
@@ -298,6 +294,7 @@ Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], fun
     });
 
     // Admin Slider All Routes
+    /*
     Route::prefix('slider')->group(function () {
 
         Route::get('/view', [SliderController::class, 'SliderView'])->name('slider.manage');
@@ -309,6 +306,7 @@ Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], fun
         Route::get('/active/{id}', [SliderController::class, 'SliderActive'])->name('slider.active');
 
     });
+    */
 
     // Admin Coupons All Routes
     Route::prefix('coupons')->group(function () {
