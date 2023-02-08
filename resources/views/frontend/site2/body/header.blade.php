@@ -11,109 +11,45 @@ $categories    = \App\Models\ProductCategory::where('cat_id', 0)->orderBy('name'
                     <ul class="list-unstyled">
                         <li>
                             <a href="#">
-                                <i class="icon fa fa-user"></i>
-                                @if(session()->get('language') == 'hindi')
-                                    My AccountHindi
-                                @else
-                                    My Account
-                                @endif
+                                <i class="icon fa fa-user"></i> My Account
                             </a>
                         </li>
                         <li>
 {{--                            <a href="{{ route('wishlist') }}">--}}
-{{--                                <i class="icon fa fa-heart"></i>--}}
-{{--                                @if(session()->get('language') == 'hindi')--}}
-{{--                                    WishlistHindi--}}
-{{--                                @else--}}
-{{--                                    Wishlist--}}
-{{--                                @endif--}}
-{{--                            </a>--}}
+                            <a href="">
+                                <i class="icon fa fa-heart"></i> Wishlist
+                            </a>
                         </li>
                         <li>
 {{--                            <a href="{{ route('mycart') }}">--}}
-{{--                                <i class="icon fa fa-shopping-cart"></i>--}}
-{{--                                @if(session()->get('language') == 'hindi')--}}
-{{--                                    My CartHindi--}}
-{{--                                @else--}}
-{{--                                    My Cart--}}
-{{--                                @endif--}}
-{{--                            </a>--}}
+                            <a href="">
+                                <i class="icon fa fa-shopping-cart"></i> My Cart
+                            </a>
                         </li>
                         <li>
                             <a href="" type="button" data-toggle="modal" data-target="#ordertraking">
-                                <i class="icon fa fa-check"></i>
-                                @if(session()->get('language') == 'hindi')
-                                    Order TrackingHindi
-                                @else
-                                    Order Tracking
-                                @endif
+                                <i class="icon fa fa-check"></i>  Order Tracking
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="icon fa fa-check"></i>
-                                @if(session()->get('language') == 'hindi')
-                                    CheckoutHindi
-                                @else
-                                    Checkout
-                                @endif
+                                <i class="icon fa fa-check"></i> Checkout
                             </a>
                         </li>
                         @auth
-                            @if(session()->get('language') == 'hindi')
-                                <li><a href="{{ route('dashboard.main') }}"><i class="icon fa fa-lock"></i>ProfileHindi</a></li>
-                            @else
-                                <li><a href="{{ route('dashboard.main') }}"><i class="icon fa fa-lock"></i>Profile</a></li>
-                            @endif
+                            <li><a href="{{ route('dashboard.main') }}"><i class="icon fa fa-lock"></i>Profile</a></li>
                         @else
                             <li>
                                 <a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>
-                                    @if(session()->get('language') == 'hindi')
-                                        LoginHindi
-                                    @else
-                                        Login
-                                    @endif
+                                    Login
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('register') }}"><i class="icon fa fa-lock"></i>
-                                    @if(session()->get('language') == 'hindi')
-                                        RegisterHindi
-                                    @else
-                                        Register
-                                    @endif
+                                    Register
                                 </a>
                             </li>
                         @endauth
-                    </ul>
-                </div>
-
-                <div class="cnt-block">
-                    <ul class="list-unstyled list-inline">
-                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">USD</a></li>
-                                <li><a href="#">INR</a></li>
-                                <li><a href="#">GBP</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown dropdown-small">
-                            <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
-                                <span class="value">
-                                    @if(session()->get('language') == 'hindi')
-                                        LanguageHindi
-                                    @else
-                                        Language
-                                    @endif
-                                </span>
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-
-                                    <li><a href="">English</a></li>
-
-                            </ul>
-                        </li>
                     </ul>
                 </div>
                 <div class="clearfix"></div>
@@ -128,7 +64,7 @@ $categories    = \App\Models\ProductCategory::where('cat_id', 0)->orderBy('name'
                     <!-- ============================================================= LOGO ============================================================= -->
                     <div class="logo">
                         <a href="/">
-                            <img src="{{ asset('frontendDashboard/themesAssets/dist/img/logo_new.svg') }}" alt="logo">
+                            <img style="  width: auto;  height: 50px;" src="{{ asset('frontendDashboard/themesAssets/dist/img/logo_new.svg') }}" alt="logo">
                         </a>
                     </div>
                     <!-- ============================================================= LOGO : END ============================================================= --> </div>
@@ -170,11 +106,7 @@ $categories    = \App\Models\ProductCategory::where('cat_id', 0)->orderBy('name'
                                 <div class="basket-item-count"><span class="count" id="cartQty"> </span></div>
                                 <div class="total-price-basket">
                                     <span class="lbl">
-                                    @if(session()->get('language') == 'hindi')
-                                        cartH-
-                                    @else
                                         cart-
-                                    @endif
                                     </span>
                                     <span class="total-price"> <span class="sign">$</span>
                                     <span class="value" id="cartSubTotal"> </span> </span> </div>
@@ -182,10 +114,8 @@ $categories    = \App\Models\ProductCategory::where('cat_id', 0)->orderBy('name'
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <!--   // Mini Cart Start with Ajax -->
                                 <div id="miniCart">
                                 </div>
-                                <!--   // End Mini Cart Start with Ajax -->
                                 <div class="clearfix"></div>
                                 <hr>
                                 <div class="clearfix cart-total">
@@ -220,30 +150,27 @@ $categories    = \App\Models\ProductCategory::where('cat_id', 0)->orderBy('name'
                                 <li class="active dropdown yamm-fw"> <a href="{{ url('') }}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Home</a> </li>
                                 @foreach($categories as $category)
                                     <li class="dropdown yamm mega-menu">
-                                        <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
-                                            @if(session()->get('language') == 'hindi') {{ $category->category_name_hin }} @else {{ $category->name }} @endif
+                                        <a href="{{ route('home') }}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
+                                            {{ $category->name }}
                                         </a>
-                                    <ul class="dropdown-menu container">
+                                        <ul class="dropdown-menu container">
                                         <li>
                                             <div class="yamm-content ">
                                                 <div class="row">
                                                     @php
-                                                    $subcategories = App\Models\ProductCategory::where('cat_id', $category->id)->orderBy('name','ASC')->where('subcat_id',0)->get();
+                                                    $subcategories = App\Models\ProductCategory::where('cat_id', $category->id)->orderBy('name','ASC')->get();
                                                     @endphp
                                                     @foreach($subcategories as $subcategory)
-                                                        @php
-                                                            $link = (session()->get('language') == 'hindi') ? $subcategory->category_slug_hin : $subcategory->category_slug_en;
-                                                        @endphp
                                                         <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
                                                             <h2 class="title">
-                                                                <a href="/category/{{ $subcategory->id }}/{{ $link }}" style="padding: 0;">
-                                                                    @if(session()->get('language') == 'hindi') {{ $subcategory->name }} @else {{ $subcategory->name }} @endif
+                                                                <a href="/category/{{ $subcategory->id }}/{{ $subcategory->slug }}" style="padding: 0;">
+                                                                    {{ $subcategory->name }}
                                                                 </a>
                                                             </h2>
                                                             <ul class="links">
                                                                 <li>
-                                                                    <a href="/subcategory//{{ $link }}">
-                                                                        'subcategory->name'
+                                                                    <a href="/subcategory/{{ $subcategory->slug }}">
+                                                                        {{ $subcategory->name }}
                                                                     </a>
                                                                 </li>
                                                             </ul>
@@ -256,23 +183,25 @@ $categories    = \App\Models\ProductCategory::where('cat_id', 0)->orderBy('name'
                                             </div>
                                         </li>
                                     </ul>
-                                </li>
+                                    </li>
                                 @endforeach
                                 <li class="dropdown yamm mega-menu">
                                     <a href="{{ route('shop') }}" >
-                                        @if(session()->get('language') == 'hindi') ShopH @else Shop @endif
+                                        Shop
                                     </a>
                                 </li>
-{{--                                <li class="dropdown yamm mega-menu">--}}
+                                <li class="dropdown yamm mega-menu">
 {{--                                    <a href="{{ route('chat1') }}" >--}}
-{{--                                        @if(session()->get('language') == 'hindi') Chat1H @else Chat-Vue-Pusher @endif--}}
-{{--                                    </a>--}}
-{{--                                </li>--}}
-{{--                                <li class="dropdown yamm mega-menu">--}}
+                                    <a href="" >
+                                        Chat-Vue-Pusher
+                                    </a>
+                                </li>
+                                <li class="dropdown yamm mega-menu">
 {{--                                    <a href="{{ route('game-tik-tok') }}" >--}}
-{{--                                        @if(session()->get('language') == 'hindi') Game Tic Toc @else Game Tic Toc @endif--}}
-{{--                                    </a>--}}
-{{--                                </li>--}}
+                                    <a href="" >
+                                        Game Tic To
+                                    </a>
+                                </li>
                             </ul>
                             <div class="clearfix"></div>
                         </div>

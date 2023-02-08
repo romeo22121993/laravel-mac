@@ -36,7 +36,7 @@ class ProductController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function ProductDetails( $slug ){
+    public function ProductDetails( $slug ) {
 
         $product = Product::where( 'slug', $slug )->first();
 

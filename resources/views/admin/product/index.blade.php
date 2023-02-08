@@ -15,8 +15,14 @@
 
                     <div class="box">
                         <div class="box-header with-border">
-                        <h3 class="box-title">Product List <span class="badge badge-pill badge-danger"> {{ count($products) }} </span></h3>
-                    </div>
+                            <h3 class="box-title">Product List <span class="badge badge-pill badge-danger"> {{ count($products) }} </span></h3>
+                        </div>
+
+                        <div class="template-demo">
+                            <a href="{{ route('wpadmin.products.add') }}">
+                                <button type="button" class="btn btn-primary btn-fw">Add New Product</button>
+                            </a>
+                        </div>
 
                         <div class="box-body">
                             <div class="table-responsive">

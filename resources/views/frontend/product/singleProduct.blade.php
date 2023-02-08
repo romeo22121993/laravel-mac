@@ -13,7 +13,7 @@
                 <div class="sidebar-module-container">
 
                     <div class="home-banner outer-top-n">
-                        <img src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }}" alt="Image">
+                        <img src="{{ asset('frontend2/assets/images/banners/LHS-banner.jpg') }}" alt="Image">
                     </div>
 
                     <!-- ====== === HOT DEALS ==== ==== -->
@@ -40,19 +40,19 @@
                     <div class="sidebar-widget  wow fadeInUp outer-top-vs ">
                         <div id="advertisement" class="advertisement">
                             <div class="item">
-                                <div class="avatar"><img src="{{ asset('frontend/assets/images/testimonials/member1.png') }} " alt="Image"></div>
+                                <div class="avatar"><img src="{{ asset('frontend2/assets/images/testimonials/member1.png') }} " alt="Image"></div>
                                 <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
                                 <div class="clients_author">John Doe	<span>Abc Company</span>	</div><!-- /.container-fluid -->
                             </div><!-- /.item -->
 
                             <div class="item">
-                                <div class="avatar"><img src="{{ asset('frontend/assets/images/testimonials/member3.png') }} " alt="Image"></div>
+                                <div class="avatar"><img src="{{ asset('frontend2/assets/images/testimonials/member3.png') }} " alt="Image"></div>
                                 <div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
                                 <div class="clients_author">Stephen Doe	<span>Xperia Designs</span>	</div>
                             </div><!-- /.item -->
 
                             <div class="item">
-                                <div class="avatar"><img src="{{ asset('frontend/assets/images/testimonials/member2.png') }} " alt="Image"></div>
+                                <div class="avatar"><img src="{{ asset('frontend2/assets/images/testimonials/member2.png') }} " alt="Image"></div>
                                 <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
                                 <div class="clients_author">Saraha Smith	<span>Datsun &amp; Co</span>	</div><!-- /.container-fluid -->
                             </div><!-- /.item -->
@@ -175,12 +175,12 @@
                                                 <span class="value">@if($product->status == '1') In Stock @else Out of Stock @endif </span>
                                             </div>
                                         </div>
-                                    </div><!-- /.row -->
-                                </div><!-- /.stock-container -->
+                                    </div>
+                                </div>
 
                                 <div class="description-container m-t-20">
-                                    @if(session()->get('language') == 'hindi') {{ $product->short_descp_hin }} @else {{ $product->short_descp_en }} @endif
-                                </div><!-- /.description-container -->
+                                    {!! $product->short_description !!}
+                                </div>
 
                                 <div class="price-container info-container m-t-20">
                                     <div class="row">
@@ -210,8 +210,8 @@
                                             </div>
                                         </div>
 
-                                    </div><!-- /.row -->
-                                </div><!-- /.price-container -->
+                                    </div>
+                                </div>
 
 
                                 <div class="row">
@@ -228,27 +228,27 @@
                                                 @endforeach
                                             </select>
 
-                                        </div> <!-- // end form group -->
+                                        </div>
 
-                                    </div> <!-- // end col 6 -->
+                                    </div>
 
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            @if( $product->product_size_en == null )
+                                            @if( $product->size == null )
 
                                             @else
                                                 <label class="info-title control-label">Choose Size <span> </span></label>
                                                 <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size">
                                                     <option selected="" disabled="">--Choose Size--</option>
-                                                    @foreach($product_size_en as $size)
-                                                        <option value="{{ $size }}">{{ ucwords($size) }}</option>
+                                                    @foreach( explode( ',', $product->size ) as $size1)
+                                                        <option value="{{ $size1 }}">{{ ucwords($size1) }}</option>
                                                     @endforeach
                                                 </select>
                                             @endif
-                                        </div> <!-- // end form group -->
-                                    </div> <!-- // end col 6 -->
+                                        </div>
+                                    </div>
 
-                                </div><!-- /.row -->
+                                </div>
 
 
                                 <div class="quantity-container info-container">
@@ -276,16 +276,15 @@
                                             <button type="submit"  class="btn btn-primary add_to_cart_btn"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
                                         </div>
 
-                                    </div><!-- /.row -->
-                                </div><!-- /.quantity-container -->
+                                    </div>
+                                </div>
 
 
-                                <!-- Go to www.addthis.com/dashboard to customize your tools -->
                                 <div class="addthis_inline_share_toolbox_8tvu"></div>
 
-                            </div><!-- /.product-info -->
-                        </div><!-- /.col-sm-7 -->
-                    </div><!-- /.row -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="product-tabs inner-bottom-xs  wow fadeInUp">
@@ -295,15 +294,15 @@
                                 <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
                                 <li><a data-toggle="tab" href="#review">REVIEW</a></li>
                                 <li><a data-toggle="tab" href="#tags">TAGS</a></li>
-                            </ul><!-- /.nav-tabs #product-tabs -->
+                            </ul>
                         </div>
                         <div class="col-sm-9">
                             <div class="tab-content">
 
                                 <div id="description" class="tab-pane in active">
                                     <div class="product-tab">
-                                        <p class="text">@if(session()->get('language') == 'hindi')
-                                                {!! $product->long_descp_hin !!} @else {!! $product->long_descp_en !!} @endif
+                                        <p class="text">
+                                            {!! $product->long_description !!}
                                         </p>
                                     </div>
                                 </div>
@@ -383,7 +382,6 @@
                                             <div class="review-form">
                                                 @guest
                                                     <p> <b> For Add Product Review. You Need to Login First <a href="{{ route('login') }}">Login Here</a> </b> </p>
-
                                                 @else
 
                                                     <div class="form-container">
@@ -454,32 +452,29 @@
                                         <h4 class="title">Product Tags</h4>
                                         <form role="form" class="form-inline form-cnt">
                                             <div class="form-container">
-
                                                 <div class="form-group">
                                                     <label for="exampleInputTag">Add Your Tags: </label>
                                                     <input type="email" id="exampleInputTag" class="form-control txt">
-
-
                                                 </div>
 
                                                 <button class="btn btn-upper btn-primary" type="submit">ADD TAGS</button>
-                                            </div><!-- /.form-container -->
-                                        </form><!-- /.form-cnt -->
+                                            </div>
+                                        </form>
 
                                         <form role="form" class="form-inline form-cnt">
                                             <div class="form-group">
                                                 <label>&nbsp;</label>
                                                 <span class="text col-md-offset-3">Use spaces to separate tags. Use single quotes (') for phrases.</span>
                                             </div>
-                                        </form><!-- /.form-cnt -->
+                                        </form>
 
-                                    </div><!-- /.product-tab -->
-                                </div><!-- /.tab-pane -->
+                                    </div>
+                                </div>
 
-                            </div><!-- /.tab-content -->
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.product-tabs -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- ===== ======= UPSELL PRODUCTS ==== ========== -->
                 <section class="section featured-product wow fadeInUp">
@@ -493,16 +488,16 @@
                                     <div class="product">
                                         <div class="product-image">
                                             <div class="image">
-                                                <a href="{{ url('product/details/'.$product->id ) }}"><img  src="{{ asset($product->product_thambnail) }}" alt=""></a>
-                                            </div><!-- /.image -->
+                                                <a href="{{ url('products/'.$product->slug ) }}"><img  src="{{ asset($product->thumbnail) }}" alt=""></a>
+                                            </div>
 
                                             <div class="tag sale"><span>sale</span></div>
-                                        </div><!-- /.product-image -->
+                                        </div>
 
                                         <div class="product-info text-left">
                                             <h3 class="name">
-                                                <a href="{{ url('product/details/'.$product->id ) }}">
-                                                    @if(session()->get('language') == 'hindi') {{ $product->product_name_hin }} @else {{ $product->product_name_en }} @endif
+                                                <a href="{{ url('products/'.$product->slug ) }}">
+                                                   {{ $product->name }}
                                                 </a>
                                             </h3>
                                             <div class="rating rateit-small"></div>
@@ -513,15 +508,15 @@
                                                     <span class="price">
                                                     ${{ $product->selling_price }}
                                                     </span>
-                                                </div><!-- /.product-price -->
+                                                </div>
                                             @else
                                                 <div class="product-price">
                                                     <span class="price">${{ $product->discount_price }}	 </span>
                                                     <span class="price-before-discount">$ {{ $product->selling_price }}</span>
-                                                </div><!-- /.product-price -->
+                                                </div>
                                             @endif
 
-                                        </div><!-- /.product-info -->
+                                        </div>
                                         <div class="cart clearfix animate-effect">
                                             <div class="action">
                                                 <ul class="list-unstyled">
@@ -544,21 +539,21 @@
                                                         </a>
                                                     </li>
                                                 </ul>
-                                            </div><!-- /.action -->
-                                        </div><!-- /.cart -->
-                                    </div><!-- /.product -->
-                                </div><!-- /.products -->
-                            </div><!-- /.item -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         @endforeach
 
-                    </div><!-- /.home-owl-carousel -->
-                </section><!-- /.section -->
+                    </div>
+                </section>
                 <!-- ============================================== UPSELL PRODUCTS : END ============================================== -->
-            </div><!-- /.col -->
+            </div>
 
             <div class="clearfix"></div>
-        </div><!-- /.row -->
+        </div>
     </div>
 
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
