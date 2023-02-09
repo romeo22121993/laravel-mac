@@ -6,6 +6,7 @@ use App\Models\MultiImg;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -56,5 +57,36 @@ class ProductController extends Controller
         );
     }
 
+    /**
+     * Category page for products functionality
+     *
+     * @param Request $request
+     * @param $slug
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse
+     */
+    public function CategoriesProducts( Request $request, $slug ){
+
+        $subcat_id = ProductCategory::where( 'slug', $slug )->first();
+
+        $products = Product::where('status',1)->where('subcat_id', $subcat_id->id)->orderBy('id','DESC')->paginate(1);
+
+        $categories = ProductCategory::where('cat_id', 0)->orderBy('name', 'ASC')->get();
+
+        $tags  = Product::groupBy('tags')->select('tags')->get();
+
+        $chosen_tag  = '';
+
+        ///  Load More Product with Ajax
+        if ($request->ajax()) {
+            $grid_view = view('frontend.product.grid_view_product',compact('products'))->render();
+            $list_view = view('frontend.product.list_view_product',compact('products'))->render();
+            return response()->json(['grid_view' => $grid_view, 'list_view' => $list_view]);
+        }
+
+        ///  End Load More Product with Ajax
+
+        return view('frontend.product.subcat_view', compact('products','categories', 'tags', 'chosen_tag'));
+
+    }
 
 }

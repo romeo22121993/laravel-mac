@@ -34,6 +34,8 @@
                                             <th>Product Price </th>
                                             <th>Quantity </th>
                                             <th>Discount </th>
+                                            <th>Cat Id </th>
+                                            <th>SubCate Id </th>
                                             <th>Status </th>
                                             <th>Action</th>
                                         </tr>
@@ -56,6 +58,8 @@
                                                         <span class="badge badge-pill badge-danger">{{ round( $discount ) }} %</span>
                                                     @endif
                                                 </td>
+                                                <td>{{ $item->cat_id }}</td>
+                                                <td>{{ $item->subcat_id }}</td>
                                                 <td>
                                                     @if( $item->status == 1 )
                                                         <span class="badge badge-pill badge-success"> Active </span>

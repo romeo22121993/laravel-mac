@@ -163,13 +163,13 @@ $categories    = \App\Models\ProductCategory::where('cat_id', 0)->orderBy('name'
                                                     @foreach($subcategories as $subcategory)
                                                         <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
                                                             <h2 class="title">
-                                                                <a href="/category/{{ $subcategory->id }}/{{ $subcategory->slug }}" style="padding: 0;">
+                                                                <a href="{{ route( 'products.categories.list', $subcategory->slug ) }}" style="padding: 0;">
                                                                     {{ $subcategory->name }}
                                                                 </a>
                                                             </h2>
                                                             <ul class="links">
                                                                 <li>
-                                                                    <a href="/subcategory/{{ $subcategory->slug }}">
+                                                                    <a href="{{ route( 'products.categories.list', $subcategory->slug) }}">
                                                                         {{ $subcategory->name }}
                                                                     </a>
                                                                 </li>

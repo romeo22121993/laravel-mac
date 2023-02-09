@@ -136,9 +136,18 @@ Route::group(['middleware' => ['web']], function () {
 
 
 /** !!! Routes from big ecommerce project  !!! */
-
-
 Route::group(['middleware' => ['web']], function () {
+
+    // Frontend Product Details Page url
+    Route::get('/products/{slug}', [FrontendProductController::class, 'ProductDetails'])->name('product.details');
+
+    // Frontend SubCategory wise Data
+    Route::get('/products/category/{slug}', [FrontendProductController::class, 'CategoriesProducts'])->name('products.categories.list');
+
+    /* To be done */
+
+    // Frontend Product Tags Page
+    Route::get('/product/tag/{tag}', [FrontEndController::class, 'TagWiseProduct']);
 
     // My Cart Page All Routes
     Route::get('/mycart',            [CartController::class, 'MyCart'])->name('mycart');
@@ -204,18 +213,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
 
     Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
-
-    // Frontend Product Details Page url
-    Route::get('/products/{slug}', [FrontendProductController::class, 'ProductDetails'])->name('product.details');
-
-    // Frontend Product Tags Page
-    Route::get('/product/tag/{tag}', [FrontEndController::class, 'TagWiseProduct']);
-
-    // Frontend SubCategory wise Data
-    Route::get('/category/{subcat_id}/{slug}', [FrontEndController::class, 'SubCatWiseProduct']);
-
-    // Frontend Sub-SubCategory wise Data
-    Route::get('/subcategory/{subsubcat_id}/{slug}', [FrontEndController::class, 'SubSubCatWiseProduct']);
 
     /// Frontend Product Review Routes
     Route::post('/review/store', [ReviewController::class, 'ReviewStore'])->name('review.store');
