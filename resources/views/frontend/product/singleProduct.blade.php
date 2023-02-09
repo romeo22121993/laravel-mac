@@ -20,22 +20,6 @@
                     @include('frontend.site2.common.hot_deals')
                     <!-- ===== ===== HOT DEALS: END ====== ====== -->
 
-                    <!-- ============================================== NEWSLETTER ============================================== -->
-                    <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small outer-top-vs">
-                        <h3 class="section-title">Newsletters</h3>
-                        <div class="sidebar-widget-body outer-top-xs">
-                            <p>Sign Up for Our Newsletter!</p>
-                            <form>
-                                <div class="form-group">
-                                    <label class="sr-only" for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Subscribe to our newsletter">
-                                </div>
-                                <button class="btn btn-primary">Subscribe</button>
-                            </form>
-                        </div>
-                    </div><
-                    <!-- ============================================== NEWSLETTER: END ============================================== -->
-
                     <!-- ============================================== Testimonials============================================== -->
                     <div class="sidebar-widget  wow fadeInUp outer-top-vs ">
                         <div id="advertisement" class="advertisement">
@@ -43,25 +27,25 @@
                                 <div class="avatar"><img src="{{ asset('frontend2/assets/images/testimonials/member1.png') }} " alt="Image"></div>
                                 <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
                                 <div class="clients_author">John Doe	<span>Abc Company</span>	</div><!-- /.container-fluid -->
-                            </div><!-- /.item -->
+                            </div>
 
                             <div class="item">
                                 <div class="avatar"><img src="{{ asset('frontend2/assets/images/testimonials/member3.png') }} " alt="Image"></div>
                                 <div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
                                 <div class="clients_author">Stephen Doe	<span>Xperia Designs</span>	</div>
-                            </div><!-- /.item -->
+                            </div>
 
                             <div class="item">
                                 <div class="avatar"><img src="{{ asset('frontend2/assets/images/testimonials/member2.png') }} " alt="Image"></div>
                                 <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
                                 <div class="clients_author">Saraha Smith	<span>Datsun &amp; Co</span>	</div><!-- /.container-fluid -->
-                            </div><!-- /.item -->
+                            </div>
 
-                        </div><!-- /.owl-carousel -->
+                        </div>
                     </div>
                     <!-- ===== ========== Testimonials: END ======== =============== -->
                 </div>
-            </div><!-- /.sidebar -->
+            </div>
 
             <div class='col-md-9'>
                 <div class="detail-block">
@@ -75,10 +59,10 @@
                                             <a data-lightbox="image-1" data-title="Gallery" href="{{ asset($img->photo_name ) }} ">
                                                 <img class="img-responsive" alt="" src="{{ asset($img->photo_name ) }} " data-echo="{{ asset($img->photo_name ) }} " />
                                             </a>
-                                        </div><!-- /.single-product-gallery-item -->
+                                        </div>
                                     @endforeach
 
-                                </div><!-- /.single-product-slider -->
+                                </div>
 
                                 <div class="single-product-gallery-thumbs gallery-thumbs">
 
@@ -92,76 +76,18 @@
                                             </div>
                                         @endforeach
 
-                                    </div><!-- /#owl-single-product-thumbnails -->
+                                    </div>
 
-                                </div><!-- /.gallery-thumbs -->
-                            </div><!-- /.single-product-gallery -->
-                        </div><!-- /.gallery-holder -->
-
-
-                        @php
-                            /*
-                            $reviewcount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
-                            $avarage     = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
-                            */
-                            $avarage = 5;
-                        @endphp
+                                </div>
+                            </div>
+                        </div>
 
                         <div class='col-sm-6 col-md-7 product-info-block'>
                             <div class="product-info">
 
                                 <h1 class="name" id="pname">
-                                    @if(session()->get('language') == 'hindi') {{ $product->product_name_hin }} @else {{ $product->product_name_en }} @endif
+                                    {{ $product->name }}
                                 </h1>
-
-                                <div class="rating-reviews m-t-20">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-
-                                            @if($avarage == 0)
-                                                No Rating Yet
-                                            @elseif($avarage == 1 || $avarage < 2)
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                            @elseif($avarage == 2 || $avarage < 3)
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                            @elseif($avarage == 3 || $avarage < 4)
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
-                                                <span class="fa fa-star"></span>
-                                            @elseif($avarage == 4 || $avarage < 5)
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
-                                            @elseif($avarage == 5 || $avarage < 5)
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                            @endif
-
-                                        </div>
-
-                                        <div class="col-sm-8">
-                                            <div class="reviews">
-                                                {{--                                                <a href="#" class="lnk">({{ count($reviewcount) }} Reviews)</a>--}}
-                                                <a href="#" class="lnk">(2 Reviews)</a>
-                                            </div>
-                                        </div>
-                                    </div><!-- /.row -->
-                                </div><!-- /.rating-reviews -->
 
                                 <div class="stock-container info-container m-t-10">
                                     <div class="row">
@@ -196,23 +122,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
-                                            <div class="favorite-button m-t-10">
-                                                <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" href="#">
-                                                    <i class="fa fa-heart"></i>
-                                                </a>
-                                                <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Add to Compare" href="#">
-                                                    <i class="fa fa-signal"></i>
-                                                </a>
-                                                <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="E-mail" href="#">
-                                                    <i class="fa fa-envelope"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-
                                     </div>
                                 </div>
-
 
                                 <div class="row">
 
@@ -250,7 +161,6 @@
 
                                 </div>
 
-
                                 <div class="quantity-container info-container">
                                     <div class="row">
 
@@ -278,10 +188,7 @@
 
                                     </div>
                                 </div>
-
-
                                 <div class="addthis_inline_share_toolbox_8tvu"></div>
-
                             </div>
                         </div>
                     </div>
@@ -292,7 +199,6 @@
                         <div class="col-sm-3">
                             <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
                                 <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
-                                <li><a data-toggle="tab" href="#review">REVIEW</a></li>
                                 <li><a data-toggle="tab" href="#tags">TAGS</a></li>
                             </ul>
                         </div>
@@ -307,166 +213,11 @@
                                     </div>
                                 </div>
 
-                                <div id="review" class="tab-pane">
-                                    <div class="product-tab">
-
-                                        <div class="product-reviews">
-                                            <h4 class="title">Customer Reviews</h4>
-
-{{--                                            <div class="reviews">--}}
-{{--                                                @foreach($reviews as $item)--}}
-{{--                                                    @if($item->status == 0)--}}
-{{--                                                    @else--}}
-{{--                                                        <div class="review">--}}
-
-{{--                                                            <div class="row">--}}
-{{--                                                                <div class="col-md-6">--}}
-{{--                                                                    <img style="border-radius: 50%" src="{{ (!empty($item->user->profile_photo_path))? url('upload/user_images/'.$item->user->profile_photo_path):url('upload/no_image.jpg') }}" width="40px;" height="40px;"><b> {{ $item->user->name }}</b>--}}
-
-{{--                                                                    @if($item->rating == NULL)--}}
-
-{{--                                                                    @elseif($item->rating == 1)--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star"></span>--}}
-{{--                                                                        <span class="fa fa-star"></span>--}}
-{{--                                                                        <span class="fa fa-star"></span>--}}
-{{--                                                                        <span class="fa fa-star"></span>--}}
-{{--                                                                    @elseif($item->rating == 2)--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star"></span>--}}
-{{--                                                                        <span class="fa fa-star"></span>--}}
-{{--                                                                        <span class="fa fa-star"></span>--}}
-{{--                                                                    @elseif($item->rating == 3)--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star"></span>--}}
-{{--                                                                        <span class="fa fa-star"></span>--}}
-{{--                                                                    @elseif($item->rating == 4)--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star"></span>--}}
-{{--                                                                    @elseif($item->rating == 5)--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                        <span class="fa fa-star checked"></span>--}}
-{{--                                                                    @endif--}}
-
-{{--                                                                </div>--}}
-
-{{--                                                                <div class="col-md-6">--}}
-
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-
-{{--                                                            <div class="review-title"><span class="summary">{{ $item->summary }}</span><span class="date"><i class="fa fa-calendar"></i><span> {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }} </span></span></div>--}}
-{{--                                                            <div class="text">"{{ $item->comment }}"</div>--}}
-{{--                                                        </div>--}}
-{{--                                                    @endif--}}
-{{--                                                @endforeach--}}
-{{--                                            </div>--}}
-
-                                        </div>
-
-                                        <div class="product-add-review">
-                                            <h4 class="title">Write your own review</h4>
-                                            <div class="review-table">
-
-                                            </div>
-
-                                            <div class="review-form">
-                                                @guest
-                                                    <p> <b> For Add Product Review. You Need to Login First <a href="{{ route('login') }}">Login Here</a> </b> </p>
-                                                @else
-
-                                                    <div class="form-container">
-
-                                                        <form role="form" class="cnt-form" method="post" action="{{ route('review.store') }}">
-                                                            @csrf
-
-                                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th class="cell-label">&nbsp;</th>
-                                                                    <th>1 star</th>
-                                                                    <th>2 stars</th>
-                                                                    <th>3 stars</th>
-                                                                    <th>4 stars</th>
-                                                                    <th>5 stars</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td class="cell-label">Quality</td>
-                                                                    <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                                                    <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                                                    <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                                                    <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                                                    <td><input type="radio" name="quality" class="radio" value="5"></td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <label for="exampleInputSummary">Summary <span class="astk">*</span></label>
-                                                                        <input type="text" name="summary" class="form-control txt" id="exampleInputSummary" placeholder="">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label for="exampleInputReview">Review <span class="astk">*</span></label>
-                                                                        <textarea class="form-control txt txt-review" name="comment" id="exampleInputReview" rows="4" placeholder=""></textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="action text-right">
-                                                                <button type="submit" class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
-                                                            </div>
-
-                                                        </form>
-                                                    </div>
-
-                                                @endguest
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
                                 <div id="tags" class="tab-pane">
                                     <div class="product-tag">
 
                                         <h4 class="title">Product Tags</h4>
-                                        <form role="form" class="form-inline form-cnt">
-                                            <div class="form-container">
-                                                <div class="form-group">
-                                                    <label for="exampleInputTag">Add Your Tags: </label>
-                                                    <input type="email" id="exampleInputTag" class="form-control txt">
-                                                </div>
-
-                                                <button class="btn btn-upper btn-primary" type="submit">ADD TAGS</button>
-                                            </div>
-                                        </form>
-
-                                        <form role="form" class="form-inline form-cnt">
-                                            <div class="form-group">
-                                                <label>&nbsp;</label>
-                                                <span class="text col-md-offset-3">Use spaces to separate tags. Use single quotes (') for phrases.</span>
-                                            </div>
-                                        </form>
+                                        <p>{{ $product->tags }}</p>
 
                                     </div>
                                 </div>

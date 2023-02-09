@@ -18,7 +18,7 @@
     <div class="sidebar-widget-body outer-top-xs">
         <div class="tag-list">
             @foreach($productColors as $tag)
-                <a class="item " title="Phone" href="{{ url('product/tag/'.$tag) }}">
+                <a class="item " title="Phone" href="{{ route( 'products.colors.list', $tag ) }}">
                     {{ str_replace(',', ' ', $tag)  }}
                 </a>
             @endforeach
@@ -33,7 +33,7 @@
     <div class="sidebar-widget-body outer-top-xs">
         <div class="tag-list">
             @foreach($productSizes as $tag)
-                <a class="item " title="Phone" href="{{ url('product/tag/'.$tag) }}">
+                <a class="item " title="Phone" href="{{ route( 'products.sizes.list', $tag ) }}">
                     {{ str_replace(',', ' ', $tag)  }}
                 </a>
             @endforeach

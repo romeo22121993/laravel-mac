@@ -99,6 +99,32 @@ class ProductController extends Controller
         return view('frontend.product.tags_view', compact( 'products' ) );
     }
 
+    /**
+     * Function showing products by colors
+     *
+     * @param $tag
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function ColorWiseProduct( $chosen_tag ) {
+
+        $products = Product::where('status', 1)->where('color', 'LIKE' , '%' .$chosen_tag .'%')->orderBy('id', 'DESC')->paginate(1);
+
+        return view('frontend.product.tags_view', compact( 'products' ) );
+    }
+
+    /**
+     * Function showing products by sizes
+     *
+     * @param $tag
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function SizeWiseProduct( $chosen_tag ) {
+
+        $products = Product::where('status', 1)->where('size', 'LIKE' , '%' .$chosen_tag .'%')->orderBy('id', 'DESC')->paginate(1);
+
+        return view('frontend.product.tags_view', compact( 'products' ) );
+    }
+
 
     /**
      * Helper function for getting distinct tags

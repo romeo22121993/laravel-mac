@@ -46,7 +46,7 @@
                             <!-- == ====== END PRODUCT TAGS ==== ======= -->
 
                             <div class="home-banner">
-                                <img src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }}" alt="Image">
+                                <img src="{{ asset('frontend2/assets/images/banners/LHS-banner.jpg') }}" alt="Image">
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                     <div id="category" class="category-carousel hidden-xs">
                         <div class="item">
                             <div class="image">
-                                <img src="{{ asset('frontend/assets/images/banners/cat-banner-1.jpg') }}" alt="" class="img-responsive">
+                                <img src="{{ asset('frontend2/assets/images/banners/cat-banner-1.jpg') }}" alt="" class="img-responsive">
                             </div>
                         </div>
                     </div>
@@ -70,46 +70,6 @@
                                         <li class="active"> <a data-toggle="tab" href="#grid-container"><i class="icon fa fa-th-large"></i>Grid</a> </li>
                                         <li><a data-toggle="tab" href="#list-container"><i class="icon fa fa-th-list"></i>List</a></li>
                                     </ul>
-                                </div>
-                            </div>
-                            <div class="col col-sm-12 col-md-6">
-                                <div class="col col-sm-3 col-md-6 no-padding">
-                                    <div class="lbl-cnt"> <span class="lbl">Sort by</span>
-                                        <div class="fld inline">
-                                            <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                                                <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> Position <span class="caret"></span> </button>
-                                                <ul role="menu" class="dropdown-menu">
-                                                    <li role="presentation"><a href="#">position</a></li>
-                                                    <li role="presentation"><a href="#">Price:Lowest first</a></li>
-                                                    <li role="presentation"><a href="#">Price:HIghest first</a></li>
-                                                    <li role="presentation"><a href="#">Product Name:A to Z</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col col-sm-3 col-md-6 no-padding">
-                                    <div class="lbl-cnt"> <span class="lbl">Show</span>
-                                        <div class="fld inline">
-                                            <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                                                <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> 1
-                                                    <span class="caret"></span>
-                                                </button>
-                                                <ul role="menu" class="dropdown-menu">
-                                                    <li role="presentation"><a href="#">1</a></li>
-                                                    <li role="presentation"><a href="#">2</a></li>
-                                                    <li role="presentation"><a href="#">3</a></li>
-                                                    <li role="presentation"><a href="#">4</a></li>
-                                                    <li role="presentation"><a href="#">5</a></li>
-                                                    <li role="presentation"><a href="#">6</a></li>
-                                                    <li role="presentation"><a href="#">7</a></li>
-                                                    <li role="presentation"><a href="#">8</a></li>
-                                                    <li role="presentation"><a href="#">9</a></li>
-                                                    <li role="presentation"><a href="#">10</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col col-sm-6 col-md-4 text-right"></div>
@@ -152,55 +112,7 @@
                 </div>
             </div>
             <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-            <div id="brands-carousel" class="logo-slider wow fadeInUp">
-                <div class="logo-slider-inner">
-                    <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
-                        <div class="item m-t-15">
-                            <a href="#" class="image">
-                                <img data-echo="{{ asset('frontend/assets/images/brands/brand1.png') }}" src="{{ asset('frontend/assets/images/blank.gif') }}" alt="">
-                            </a>
-                        </div>
-
-                        <div class="item m-t-10">
-                            <a href="#" class="image">
-                                <img data-echo="{{ asset('frontend/assets/images/brands/brand2.png') }}" src="{{ asset('frontend/assets/images/blank.gif') }}" alt="">
-                            </a>
-                        </div>
-
-                        <div class="item">
-                            <a href="#" class="image"> <img data-echo="{{ asset('frontend/assets/images/brands/brand3.png') }}" src="{{ asset('frontend/assets/images/blank.gif') }}" alt=""> </a>
-                        </div>
-
-                        <div class="item">
-                            <a href="#" class="image"> <img data-echo="{{ asset('frontend/assets/images/brands/brand4.png') }}" src="{{ asset('frontend/assets/images/blank.gif') }}" alt=""> </a>
-                        </div>
-
-                        <div class="item">
-                            <a href="#" class="image"> <img data-echo="{{ asset('frontend/assets/images/brands/brand5.png') }}" src="{{ asset('frontend/assets/images/blank.gif') }}" alt=""> </a>
-                        </div>
-
-                        <div class="item">
-                            <a href="#" class="image"> <img data-echo="{{ asset('frontend/assets/images/brands/brand6.png') }}" src="{{ asset('frontend/assets/images/blank.gif') }}" alt=""> </a>
-                        </div>
-
-                        <div class="item">
-                            <a href="#" class="image"> <img data-echo="{{ asset('frontend/assets/images/brands/brand2.png') }}" src="{{ asset('frontend/assets/images/blank.gif') }}" alt=""> </a>
-                        </div>
-
-                        <div class="item">
-                            <a href="#" class="image"> <img data-echo="{{ asset('frontend/assets/images/brands/brand4.png') }}" src="{{ asset('frontend/assets/images/blank.gif') }}" alt=""> </a>
-                        </div>
-
-                        <div class="item">
-                            <a href="#" class="image"> <img data-echo="{{ asset('frontend/assets/images/brands/brand1.png') }}" src="{{ asset('frontend/assets/images/blank.gif') }}" alt=""> </a>
-                        </div>
-
-                        <div class="item">
-                            <a href="#" class="image"> <img data-echo="{{ asset('frontend/assets/images/brands/brand5.png') }}" src="{{ asset('frontend/assets/images/blank.gif') }}" alt=""> </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('frontend.site2.body.brands')
             <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
         </div>
 

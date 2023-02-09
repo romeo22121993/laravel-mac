@@ -190,10 +190,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::prefix('products')->group(function () {
         Route::get('/{slug}',           [FrontendProductController::class, 'ProductDetails'])->name('product.details');
         Route::get('/category/{slug}',  [FrontendProductController::class, 'CategoriesProducts'])->name('products.categories.list');
-        Route::get('/tags/{tag}',       [FrontendProductController::class, 'TagWiseProduct'])->name('products.tags.list');;
+        Route::get('/tags/{tag}',       [FrontendProductController::class, 'TagWiseProduct'])->name('products.tags.list');
+        Route::get('/colors/{color}',   [FrontendProductController::class, 'ColorWiseProduct'])->name('products.colors.list');
+        Route::get('/sizes/{size}',     [FrontendProductController::class, 'SizeWiseProduct'])->name('products.sizes.list');
 
     });
-
     /* To be done */
 
 
