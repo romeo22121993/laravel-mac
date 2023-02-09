@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductBrandController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
@@ -193,8 +194,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/tags/{tag}',       [FrontendProductController::class, 'TagWiseProduct'])->name('products.tags.list');
         Route::get('/colors/{color}',   [FrontendProductController::class, 'ColorWiseProduct'])->name('products.colors.list');
         Route::get('/sizes/{size}',     [FrontendProductController::class, 'SizeWiseProduct'])->name('products.sizes.list');
-
     });
+
+
+    // Shop Page Route
+    Route::get('/shop',         [ShopController::class, 'ShopPage'])->name('shop');
+    Route::post('/shop/filter', [ShopController::class, 'ShopFilter'])->name('shop.filter');
     /* To be done */
 
 
@@ -266,9 +271,6 @@ Route::group(['middleware' => ['web']], function () {
     /// Frontend Product Review Routes
     Route::post('/review/store', [ReviewController::class, 'ReviewStore'])->name('review.store');
 
-    // Shop Page Route
-    Route::get('/shop', [ShopController::class, 'ShopPage'])->name('shop');
-    Route::post('/shop/filter', [ShopController::class, 'ShopFilter'])->name('shop.filter');
 
 });
 

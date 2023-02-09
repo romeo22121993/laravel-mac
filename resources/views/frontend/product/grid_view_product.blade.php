@@ -61,4 +61,3 @@
         </div>
     </div>
 @endforeach
-{{ $products->links() }}
