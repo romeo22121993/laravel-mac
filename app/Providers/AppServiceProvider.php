@@ -48,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
 
             $productCategories = ProductCategory::where('cat_id', 0)->orderBy('name', 'ASC')->get();
             $productBrands     = ProductBrand::all();
+
             /* end Products Part */
 
 

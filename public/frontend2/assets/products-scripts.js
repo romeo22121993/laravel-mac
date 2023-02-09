@@ -14,14 +14,12 @@ jQuery(document).ready(function() {
      */
 
     $("#search").on("focus", function ( e ) {
-        console.log('focus');
         e.preventDefault();
         search_result_show();
     })
 
     $("#search").on("blur", function ( e ) {
         e.preventDefault();
-        console.log('blur');
         search_result_hide();
     })
 
@@ -46,9 +44,6 @@ jQuery(document).ready(function() {
                 data: {search: text},
                 url : "/ajax/search-product",
                 method : 'post',
-                beforSend : function(request){
-                    return request.setReuestHeader('X-CSRF-Token',("meta[name='csrf-token']"))
-                },
                 success:function(result){
                     $("#searchProducts").html(result);
                 }

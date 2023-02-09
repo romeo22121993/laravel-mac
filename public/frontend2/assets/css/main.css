@@ -5901,3 +5901,52 @@ z-index:10000
     float: left;
     margin-right: 20px;
 }
+
+
+.search .card {
+    background-color: #fff;
+    padding: 15px;
+    border: none
+}
+
+.search .input-box {
+    position: relative
+}
+
+.search .input-box i {
+    position: absolute;
+    right: 13px;
+    top: 15px;
+    color: #ced4da
+}
+
+.search .form-control {
+    height: 50px;
+    background-color: #eeeeee69
+}
+
+.search .form-control:focus {
+    background-color: #eeeeee69;
+    box-shadow: none;
+    border-color: #eee
+}
+
+.search .list {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center
+}
+
+.search .border-bottom {
+    border-bottom: 2px solid #eee
+}
+
+.search .list i {
+    font-size: 19px;
+    color: red
+}
+
+.search list small {
+    color: #dedddd
+}

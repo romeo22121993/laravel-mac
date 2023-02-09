@@ -58,7 +58,7 @@
     <script src="{{ asset('frontend2/assets/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('frontend2/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('frontend2/assets/js/scripts.js') }}"></script>
-    <script src="{{ asset('frontend2/assets/js/products-scripts.js') }}"></script>
+    <script src="{{ asset('frontend2/assets/products-scripts.js') }}"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

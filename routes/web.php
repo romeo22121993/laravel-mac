@@ -196,10 +196,13 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/sizes/{size}',     [FrontendProductController::class, 'SizeWiseProduct'])->name('products.sizes.list');
     });
 
-
     // Shop Page Route
     Route::get('/shop',         [ShopController::class, 'ShopPage'])->name('shop');
     Route::post('/shop/filter', [ShopController::class, 'ShopFilter'])->name('shop.filter');
+
+    /// Product Search Route
+    Route::post('/search',              [FrontendProductController::class, 'ProductSearch'])->name('product.search');
+    Route::post('/ajax/search-product', [FrontendProductController::class, 'SearchProduct']);
     /* To be done */
 
 
@@ -254,14 +257,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/district-get/{division_id}', [CheckoutController::class, 'DistrictGetAjax']);
         Route::get('/state-get/{district_id}', [CheckoutController::class, 'StateGetAjax']);
 
-        // Advance Search Routes
-        Route::post('search-product', [FrontEndController::class, 'SearchProduct']);
 
     });
     /* end of Ajax requests */
-
-    /// Product Search Route
-    Route::post('/search', [FrontEndController::class, 'ProductSearch'])->name('product.search');
 
     //** Stripe
     Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
