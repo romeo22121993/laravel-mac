@@ -98,27 +98,7 @@ class PostController extends Controller
 
             $html = '';
             foreach ( $myPosts as $post ) {
-                $imgSrc = ( $post->img == 'none') ? asset('img/none.jpg') : asset( 'uploads/posts/'.$post->img );
-                $html .= '
-                    <div class="sv-blog-post col-lg-6 col-sm-12 col-xs-12">
-                        <div class="one-card">
-                            <div class="blog-top-card">
-                                <a href="' . $post->slug . '">
-                                    <img src="' . $imgSrc . '" alt="">
-                                </a>
-                            </div>
-                            <div class="card-content blog_list">
-                                <h3>
-                                    <a href="' . $post->slug . '">
-                                        ' . $post->title . '
-                                    </a>
-                                </h3>
-                                <a href="' . $post->slug . '}">Read article</a>
-                            </div>
-                        </div>
-                    </div>
-                ';
-//                $html .= include( resource_path() . '/views/frontend/items/postitem.blade.php');
+                $html .=  view('frontend.items.postitem', compact('post'))->render();
             }
 
             $result['html']  = $html;
@@ -131,8 +111,6 @@ class PostController extends Controller
 
         }
 
-
     }
-
 
 }

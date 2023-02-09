@@ -25,6 +25,7 @@
                                         <th>Category Icon </th>
                                         <th>Category Name </th>
                                         <th>Category Slug </th>
+                                        <th>Category Posts </th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -34,6 +35,7 @@
                                             <td> <span><i class="fa {{ $item->icon }}"></i></span>  </td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->slug }}</td>
+                                            <td><a href="{{ route( 'wpadmin.products.categories.list', $item->id ) }}"> View Posts </a></td>
                                             <td>
                                             <a href="{{ route('wpadmin.products.cats.edit',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i> </a>
                                             <a href="{{ route('wpadmin.products.cats.delete',$item->id) }}" class="btn btn-danger" title="Delete Data" id="delete">

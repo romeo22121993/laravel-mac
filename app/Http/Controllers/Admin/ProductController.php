@@ -35,6 +35,19 @@ class ProductController extends Controller
         return view('admin.product.index',compact('products'));
     }
 
+
+    /**
+    * Function for view all products page by categories
+    *
+    * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    */
+    public function CategoriesProduct( $id ) {
+
+        $products = Product::where('cat_id', $id)->orWhere('subcat_id', $id)->paginate(2);
+
+        return view('admin.product.categoriesProduts', compact('products'));
+    }
+
     /**
     * Function for view of adding products
     *
@@ -266,7 +279,6 @@ class ProductController extends Controller
 
     }
 
-    //// Multi Image Delete ////
     /**
      * Function of deleting multi image from edit product page
      *
@@ -355,8 +367,8 @@ class ProductController extends Controller
     public function ProductStock(){
 
         $products = Product::latest()->get();
-        $settings = $this->settings;
-        return view('admin.product.product_stock',compact('products', 'settings'));
+
+        return view('admin.product.product_stock',compact('products'));
 
     }
 

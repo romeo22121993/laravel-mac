@@ -24,6 +24,7 @@
                                         <th>Category </th>
                                         <th>SubCategory Name</th>
                                         <th>SubCategory Slug </th>
+                                        <th>SubCategory Posts </th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -35,6 +36,7 @@
                                                 </td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->slug }}</td>
+                                                <td><a href="{{ route( 'wpadmin.products.categories.list', $item->id ) }}"> View Posts </a></td>
                                                 <td width="30%">
                                                     <a href="{{ route('wpadmin.products.subcats.edit',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i> </a>
                                                     <a href="{{ route('wpadmin.products.subcats.delete',$item->id) }}" class="btn btn-danger" title="Delete Data" id="delete">
