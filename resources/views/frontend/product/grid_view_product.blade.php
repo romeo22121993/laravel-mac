@@ -9,15 +9,15 @@
                         </a>
                     </div>
 
-                    @php
-                    $amount   = $product->selling_price - $product->discount_price;
-                    $discount = ($amount/$product->selling_price) * 100;
-                    @endphp
-
                     <div>
                         @if ($product->discount_price == NULL)
                             <div class="tag new"><span>new</span></div>
                         @else
+                            @php
+                                $amount   = $product->selling_price - $product->discount_price;
+                                $discount = ($amount/$product->selling_price) * 100;
+                            @endphp
+
                             <div class="tag hot"><span>{{ round($discount) }}%</span></div>
                         @endif
                     </div>
@@ -61,4 +61,4 @@
         </div>
     </div>
 @endforeach
-{{--{{ $products->links() }}--}}
+{{ $products->links() }}

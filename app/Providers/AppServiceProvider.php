@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Support\ServiceProvider;
 use http\Env\Request;
 use Illuminate\Support\Facades\View;
 
+use App\Http\Controllers\Frontend\ProductController;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,11 +34,31 @@ class AppServiceProvider extends ServiceProvider
             $user      = auth()->user();
             $avatarImg = ( !empty( $user->avatar_img ) ) ? url( 'uploads/users/'.$user->avatar_img ) : asset('img/face.jpeg');
 
+            $productController = new ProductController();
+            /* Products Part */
+            $productTags   = Product::groupBy('tags')->select('tags')->get();
+            $productTags   = $productController->getDistinctTags( $productTags, 'tags' );
+
+            $productColors = Product::groupBy('color')->select('color')->get();
+            $productColors = $productController->getDistinctTags( $productColors, 'color' );
+
+            $productSizes  = Product::groupBy('size')->select('size')->get();
+            $productSizes  = $productController->getDistinctTags( $productSizes, 'size' );
+
+            $productCategories = ProductCategory::where('cat_id', 0)->orderBy('name', 'ASC')->get();
+
+            /* end Products Part */
+
+
             $view->with([
                 'instructionPopup' => $a ?? 0,
                 'currentUser'      => $user ?? [],
                 'currentUserId'    => $user ? $user->id : '',
                 'avatarImg'        => $avatarImg ?? '',
+                'productColors'    => $productColors,
+                'productSizes'     => $productSizes,
+                'productTags'      => $productTags,
+                'productCategories' => $productCategories,
             ]);
 
         });

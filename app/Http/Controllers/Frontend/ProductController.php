@@ -50,8 +50,6 @@ class ProductController extends Controller
 
         $tags  = Product::groupBy('tags')->select('tags')->get();
 
-        //$reviews  = Review::where('product_id',$id)->latest()->limit(5)->get();
-
         return view('frontend.product.singleProduct',
             compact('product', 'relatedProduct',  'featured', 'hot_deals', 'special_offer', 'special_deals', 'tags' )
         );
@@ -66,27 +64,63 @@ class ProductController extends Controller
      */
     public function CategoriesProducts( Request $request, $slug ){
 
-        $subcat_id = ProductCategory::where( 'slug', $slug )->first();
+        $catId = ProductCategory::where( 'slug', $slug )->first();
 
-        $products = Product::where('status',1)->where('subcat_id', $subcat_id->id)->orderBy('id','DESC')->paginate(1);
+        $products = Product::where('status', 1 )
+            ->where( function( $query ) use ( $catId ){
+                $query->where('cat_id', $catId->id)->orWhere('subcat_id', $catId->id);
+            })
+           ->orderBy('id','DESC')->paginate(1);
 
-        $categories = ProductCategory::where('cat_id', 0)->orderBy('name', 'ASC')->get();
-
-        $tags  = Product::groupBy('tags')->select('tags')->get();
-
-        $chosen_tag  = '';
-
-        ///  Load More Product with Ajax
-        if ($request->ajax()) {
-            $grid_view = view('frontend.product.grid_view_product',compact('products'))->render();
-            $list_view = view('frontend.product.list_view_product',compact('products'))->render();
-            return response()->json(['grid_view' => $grid_view, 'list_view' => $list_view]);
-        }
+//        ///  Load More Product with Ajax
+//        if ($request->ajax()) {
+//            $grid_view = view('frontend.product.grid_view_product',compact('products'))->render();
+//            $list_view = view('frontend.product.list_view_product',compact('products'))->render();
+//            return response()->json(['grid_view' => $grid_view, 'list_view' => $list_view]);
+//        }
 
         ///  End Load More Product with Ajax
 
-        return view('frontend.product.subcat_view', compact('products','categories', 'tags', 'chosen_tag'));
+        return view('frontend.product.subcat_view', compact('products' ));
 
     }
+
+
+    /**
+     * Function showing products by tags
+     *
+     * @param $tag
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function TagWiseProduct( $chosen_tag ) {
+
+        $products = Product::where('status', 1)->where('tags', 'LIKE' , '%' .$chosen_tag .'%')->orderBy('id', 'DESC')->paginate(1);
+
+        return view('frontend.product.tags_view', compact( 'products' ) );
+    }
+
+
+    /**
+     * Helper function for getting distinct tags
+     *
+     * @param $array
+     * @return array
+     */
+    public function getDistinctTags( $array, $type ) {
+        $arr = array();
+
+        foreach ( $array as $tag ) {
+
+            $variable = explode(',', $tag->$type );
+            foreach ( $variable as $tag ) {
+                if (!in_array($tag, $arr)) {
+                    $arr[] = $tag;
+                }
+            }
+        }
+
+        return $arr;
+    }
+
 
 }

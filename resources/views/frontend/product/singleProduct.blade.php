@@ -17,8 +17,8 @@
                     </div>
 
                     <!-- ====== === HOT DEALS ==== ==== -->
-                @include('frontend.site2.common.hot_deals')
-                <!-- ===== ===== HOT DEALS: END ====== ====== -->
+                    @include('frontend.site2.common.hot_deals')
+                    <!-- ===== ===== HOT DEALS: END ====== ====== -->
 
                     <!-- ============================================== NEWSLETTER ============================================== -->
                     <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small outer-top-vs">
@@ -32,8 +32,8 @@
                                 </div>
                                 <button class="btn btn-primary">Subscribe</button>
                             </form>
-                        </div><!-- /.sidebar-widget-body -->
-                    </div><!-- /.sidebar-widget -->
+                        </div>
+                    </div><
                     <!-- ============================================== NEWSLETTER: END ============================================== -->
 
                     <!-- ============================================== Testimonials============================================== -->
@@ -480,7 +480,6 @@
                 <section class="section featured-product wow fadeInUp">
                     <h3 class="section-title">Related products</h3>
                     <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
-
                         @foreach($relatedProduct as $product)
 
                             <div class="item item-carousel">
@@ -546,7 +545,6 @@
                             </div>
 
                         @endforeach
-
                     </div>
                 </section>
                 <!-- ============================================== UPSELL PRODUCTS : END ============================================== -->
@@ -555,8 +553,5 @@
             <div class="clearfix"></div>
         </div>
     </div>
-
-    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e4b85f98de5201f"></script>
 
 @endsection

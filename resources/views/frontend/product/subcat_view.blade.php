@@ -49,36 +49,9 @@
                             </div>
                             <!-- ============================================== PRICE SILDER : END ============================================== -->
 
-                            <!-- ============================================== COLOR============================================== -->
-                            <div class="sidebar-widget wow fadeInUp">
-                                <div class="widget-header">
-                                    <h4 class="widget-title">Colors</h4>
-                                </div>
-                                <div class="sidebar-widget-body">
-                                    <ul class="list">
-                                        <li><a href="#">Red</a></li>
-                                        <li><a href="#">Blue</a></li>
-                                        <li><a href="#">Pink</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- ============================================== COLOR: END ============================================== -->
-                            <!-- == ======= COMPARE==== ==== -->
-                            <div class="sidebar-widget wow fadeInUp outer-top-vs">
-                                <h3 class="section-title">Compare products</h3>
-                                <div class="sidebar-widget-body">
-                                    <div class="compare-report">
-                                        <p>You have no <span>item(s)</span> to compare</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ============================================== COMPARE: END ============================================== -->
-
                             <!-- == ====== PRODUCT TAGS ==== ======= -->
                             @include('frontend.site2.common.product_tags')
                             <!-- == ====== END PRODUCT TAGS ==== ======= -->
-
-{{--                            @include('frontend.site2.common.testimonials')--}}
 
                             <div class="home-banner">
                                 <img src="{{ asset('frontend2/assets/images/banners/LHS-banner.jpg') }}" alt="Image">
@@ -182,9 +155,7 @@
                                     {{ $products->links() }}
                                 </div>
                             </div>
-                            <div class="ajax-loadmore-product-btn text-center" data-page="2">
-                                <p style=" padding: 10px; background: red; margin: 0 auto; width: 200px;">Load More</p>
-                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -22,7 +22,7 @@
                             @endif
 
                             <div class="description m-t-10">
-                                {{ $product->short_description }}
+                                {!! $product->short_description  !!}
                             </div>
                             <div class="cart clearfix animate-effect">
                                 <div class="action">
@@ -40,15 +40,15 @@
                     </div>
                 </div>
 
-                @php
-                $amount = $product->selling_price - $product->discount_price;
-                $discount = ($amount/$product->selling_price) * 100;
-                @endphp
-
                 <div>
                     @if ($product->discount_price == NULL)
                         <div class="tag new"><span>new</span></div>
                     @else
+                        @php
+                            $amount = $product->selling_price - $product->discount_price;
+                            $discount = ($amount/$product->selling_price) * 100;
+                        @endphp
+
                         <div class="tag hot"><span>{{ round($discount) }}%</span></div>
                     @endif
                 </div>

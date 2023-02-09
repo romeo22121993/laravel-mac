@@ -127,7 +127,7 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
 
         });
 
-        // Admin Category all Routes
+        // Admin Categories all Routes
         Route::prefix('categories')->group(function () {
 
             Route::get('/',             [ProductCategoryController::class, 'CategoryView'])->name('wpadmin.products.cats.all');
@@ -136,19 +136,9 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
             Route::post('/update/{id}', [ProductCategoryController::class, 'CategoryUpdate'])->name('wpadmin.products.cats.update');
             Route::get('/delete/{id}',  [ProductCategoryController::class, 'CategoryDelete'])->name('wpadmin.products.cats.delete');
 
-//            // Admin Sub Category All Routes
-//            Route::prefix('sub')->group(function () {
-//
-//                Route::get('/',             [ProductCategoryController::class, 'SubCategoryView'])->name('wpadmin.products.subcats.all');
-//                Route::post('/store',       [ProductCategoryController::class, 'SubCategoryStore'])->name('wpadmin.products.subcats.store');
-//                Route::get('/edit/{id}',    [ProductCategoryController::class, 'SubCategoryEdit'])->name('wpadmin.products.subcats.edit');
-//                Route::post('/update',      [ProductCategoryController::class, 'SubCategoryUpdate'])->name('wpadmin.products.subcats.update');
-//                Route::get('/delete/{id}',  [ProductCategoryController::class, 'SubCategoryDelete'])->name('wpadmin.products.subcats.delete');
-//            });
-
         });
 
-        // Admin Category all Routes
+        // Admin SubCategories all Routes
         Route::prefix('subcategories')->group(function () {
             Route::get('/',             [ProductCategoryController::class, 'SubCategoryView'])->name('wpadmin.products.subcats.all');
             Route::post('/store',       [ProductCategoryController::class, 'SubCategoryStore'])->name('wpadmin.products.subcats.store');
@@ -189,7 +179,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/contactForm',     [FrontendContactController::class, 'contactFormAjax']);
         Route::post('/loadPostsByAjax', [FrontendPostController::class, 'loadPostsByAjax']);
 
-
     });
 
 });
@@ -198,16 +187,15 @@ Route::group(['middleware' => ['web']], function () {
 /** !!! Routes from big ecommerce project  !!! */
 Route::group(['middleware' => ['web']], function () {
 
-    // Frontend Product Details Page url
-    Route::get('/products/{slug}', [FrontendProductController::class, 'ProductDetails'])->name('product.details');
+    Route::prefix('products')->group(function () {
+        Route::get('/{slug}',           [FrontendProductController::class, 'ProductDetails'])->name('product.details');
+        Route::get('/category/{slug}',  [FrontendProductController::class, 'CategoriesProducts'])->name('products.categories.list');
+        Route::get('/tags/{tag}',       [FrontendProductController::class, 'TagWiseProduct'])->name('products.tags.list');;
 
-    // Frontend SubCategory wise Data
-    Route::get('/products/category/{slug}', [FrontendProductController::class, 'CategoriesProducts'])->name('products.categories.list');
+    });
 
     /* To be done */
 
-    // Frontend Product Tags Page
-    Route::get('/product/tag/{tag}', [FrontEndController::class, 'TagWiseProduct']);
 
     // My Cart Page All Routes
     Route::get('/mycart',            [CartController::class, 'MyCart'])->name('mycart');
