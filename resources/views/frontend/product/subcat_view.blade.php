@@ -125,7 +125,6 @@
                 <div class="ajax-loadmore-product text-center" style="display: none;">
                     <img src="{{ asset('frontend2/assets/images/loading.gif') }}" style="width: 40px; height: 40px;">
                 </div>
-
             </div>
 
             <!-- ============================================== BRANDS CAROUSEL ============================================== -->
@@ -134,6 +133,4 @@
         </div>
     </div>
 
-
 @endsection
-

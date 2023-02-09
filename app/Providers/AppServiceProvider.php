@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Product;
+use App\Models\ProductBrand;
 use App\Models\ProductCategory;
 use Illuminate\Support\ServiceProvider;
 use http\Env\Request;
@@ -46,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
             $productSizes  = $productController->getDistinctTags( $productSizes, 'size' );
 
             $productCategories = ProductCategory::where('cat_id', 0)->orderBy('name', 'ASC')->get();
-
+            $productBrands     = ProductBrand::all();
             /* end Products Part */
 
 
@@ -59,6 +60,7 @@ class AppServiceProvider extends ServiceProvider
                 'productSizes'     => $productSizes,
                 'productTags'      => $productTags,
                 'productCategories' => $productCategories,
+                'productBrands'     => $productBrands,
             ]);
 
         });
