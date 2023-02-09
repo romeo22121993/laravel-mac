@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ContactController;
@@ -215,10 +216,13 @@ Route::group(['middleware' => ['web']], function () {
     /* To be done */
 
 
-
-    // Checkout Routes
+    // Checkout Routes //TODO it
     Route::get('/checkout',          [CheckoutController::class, 'Checkout'])->name('checkout');
     Route::post('/checkout/store',   [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
+
+    //** Stripe
+    Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
+    Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
 
     /*  Ajax requests */
     Route::group(['prefix' => 'ajax'], function () {
@@ -249,14 +253,12 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('/get-cart-product',              [CartController::class, 'GetCartProduct']);
 
-
         // Remove mini cart
         Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
         /* To be done */
 
 
-
-
+        //TODO it
         // Frontend Coupon Option
         Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
         Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
@@ -269,11 +271,6 @@ Route::group(['middleware' => ['web']], function () {
 
     });
     /* end of Ajax requests */
-
-    //** Stripe
-    Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
-
-    Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
 
 });
 
@@ -301,19 +298,19 @@ Route::group(['middleware' => ['auth:sanctum', 'web']], function () {
  */
 Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], function () {
 
-
-    /*
+    /* Done */
     // Admin Coupons All Routes
     Route::prefix('coupons')->group(function () {
-        Route::get('/view', [CouponController::class, 'CouponView'])->name('coupon.manage');
-        Route::post('/store', [CouponController::class, 'CouponStore'])->name('coupon.store');
-        Route::get('/edit/{id}', [CouponController::class, 'CouponEdit'])->name('coupon.edit');
-        Route::post('/update/{id}', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
-        Route::get('/delete/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
+        Route::get('/',             [CouponController::class, 'CouponView'])->name('wpadmin.coupons.all');
+        Route::post('/store',       [CouponController::class, 'CouponStore'])->name('wpadmin.coupons.store');
+        Route::get('/edit/{id}',    [CouponController::class, 'CouponEdit'])->name('wpadmin.coupons.edit');
+        Route::post('/update/{id}', [CouponController::class, 'CouponUpdate'])->name('wpadmin.coupons.update');
+        Route::get('/delete/{id}',  [CouponController::class, 'CouponDelete'])->name('wpadmin.coupons.delete');
     });
 
-    */
-    /*
+    // TODO: all of it
+
+
     // Admin Shipping All Routes
     Route::prefix('shipping')->group(function () {
 
@@ -365,26 +362,17 @@ Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], fun
     // Admin Reports Routes
     Route::prefix('reports')->group(function () {
 
-        Route::get('/view', [ReportController::class, 'ReportView'])->name('all-reports');
-        Route::post('/search/by/date', [ReportController::class, 'ReportByDate'])->name('search-by-date');
-        Route::post('/search/by/month', [ReportController::class, 'ReportByMonth'])->name('search-by-month');
-        Route::post('/search/by/year', [ReportController::class, 'ReportByYear'])->name('search-by-year');
+        Route::get('/view',              [ReportController::class, 'ReportView'])->name('all-reports');
+        Route::post('/search/by/date',   [ReportController::class, 'ReportByDate'])->name('search-by-date');
+        Route::post('/search/by/month',  [ReportController::class, 'ReportByMonth'])->name('search-by-month');
+        Route::post('/search/by/year',   [ReportController::class, 'ReportByYear'])->name('search-by-year');
 
-    });
-
-    // Admin Manage Review Routes
-    Route::prefix('review')->group(function () {
-        Route::get('/pending',      [ReviewController::class, 'PendingReview'])->name('pending.review');
-        Route::get('/admin/approve/{id}', [ReviewController::class, 'ReviewApprove'])->name('review.approve');
-        Route::get('/publish', [ReviewController::class, 'PublishReview'])->name('publish.review');
-        Route::get('/delete/{id}', [ReviewController::class, 'DeleteReview'])->name('delete.review');
     });
 
     // Admin Manage Stock Routes
     Route::prefix('stock')->group(function () {
         Route::get('/product', [ProductController::class, 'ProductStock'])->name('product.stock');
     });
-    */
 
 });
 

@@ -48,9 +48,7 @@ class CartController extends Controller
                 'color' => $request->color,
                 'size'  => $request->size,
             ],
-//            'associatedModel' => $product
         ]);
-
 
         return response()->json(['success' => 'Successfully Added on Your Cart']);
 
