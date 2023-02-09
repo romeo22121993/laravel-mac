@@ -155,21 +155,14 @@ class ProductController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function ProductSearch(Request $request){
+    public function ProductSearch( Request $request ){
 
         $request->validate( ["search" => "required"] );
         $item = $request->search;
 
-        $products      = Product::where('name','LIKE',"%$item%")->get();
+        $products  = Product::where('name','LIKE',"%$item%")->paginate(10);
 
-        $featured      = Product::where('featured', 1)->orderBy('id', 'DESC')->limit(6)->get();
-        $hot_deals     = Product::where('hot_deals', 1)->where('discount_price', '!=', NULL)->orderBy('id', 'DESC')->limit(3)->get();
-        $special_offer = Product::where('special_offer', 1)->orderBy('id', 'DESC')->limit(6)->get();
-        $special_deals = Product::where('special_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
-
-
-        return view('frontend.product.search', compact('products',
-            'special_offer', 'special_deals', 'featured', 'hot_deals'  ));
+        return view('frontend.product.search', compact('products'));
 
     }
 
@@ -190,5 +183,31 @@ class ProductController extends Controller
         return view('frontend.product.search_product', compact( 'products' ) );
 
     }
+
+
+    /**
+     * Function getting ajax data by product id
+     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ProductViewAjax( $id ){
+
+        $product       = Product::with('category','brand')->findOrFail($id);
+
+        $color         = $product->color;
+        $product_color = explode(',', $color);
+
+        $size         = $product->size;
+        $product_size = explode(',', $size);
+
+        return response()->json(array(
+            'product' => $product,
+            'color'   => $product_color,
+            'size'    => $product_size,
+        ));
+
+    }
+
 
 }

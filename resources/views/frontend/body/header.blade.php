@@ -20,6 +20,7 @@
                                                 <li id="menu-item-767" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-767"><a href="http://laravel.loc/blog/" class="a_blog_block  ">Blog</a></li>
                                                 <li id="menu-item-3679" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3679"><a href="http://laravel.loc/podcast/" class="a_podcast_block  ">Podcast</a></li>
                                                 <li id="menu-item-768" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-768"><a href="http://laravel.loc/contact/" class="a_contact_block ">Contact Us</a></li>
+                                                <li id="menu-item-768" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-768"><a href="{{ route('shop') }}" class="a_contact_block ">Shop</a></li>
 
                                                 @if ( empty( $currentUser ) )
                                                     <li id="menu-item-2469" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2469">

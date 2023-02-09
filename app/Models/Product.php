@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductBrand;
 use App\Models\ProductCategory;
 use App\Models\MultiImg;
+use App\Models\Wishlist;
 
 class Product extends Model
 {
@@ -26,6 +27,11 @@ class Product extends Model
 
     public function multiImgs(){
         return $this->hasMany(MultiImg::class,'product_id','id');
+    }
+
+    public function wishlists()
+    {
+        return $this->belongsTo(Wishlist::class);
     }
 
 }

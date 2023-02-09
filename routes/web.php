@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductBrandController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ShopController;
+use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
@@ -201,13 +203,18 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/shop/filter', [ShopController::class, 'ShopFilter'])->name('shop.filter');
 
     /// Product Search Route
-    Route::post('/search',              [FrontendProductController::class, 'ProductSearch'])->name('product.search');
+    Route::get('/search',               [FrontendProductController::class, 'ProductSearch'])->name('product.search');
     Route::post('/ajax/search-product', [FrontendProductController::class, 'SearchProduct']);
+
+    // Wishlist page
+    Route::get('/wishlist',             [WishlistController::class, 'ViewWishlist'])->name('wishlist');
+
+    // My Cart Page All Routes
+    Route::get('/mycart',               [CartController::class, 'MyCart'])->name('mycart');
+
     /* To be done */
 
 
-    // My Cart Page All Routes
-    Route::get('/mycart',            [CartController::class, 'MyCart'])->name('mycart');
 
     // Checkout Routes
     Route::get('/checkout',          [CheckoutController::class, 'Checkout'])->name('checkout');
@@ -216,37 +223,39 @@ Route::group(['middleware' => ['web']], function () {
     /*  Ajax requests */
     Route::group(['prefix' => 'ajax'], function () {
 
+        /* Done */
         // Categories ajax requests
         Route::prefix('category')->group(function () {
             Route::get('/subcategory/{category_id}',    [ProductCategoryController::class, 'GetSubCategory']);
         });
 
+        Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'AddToWishlist']);
+        Route::get('/wishlist-remove/{id}',          [WishlistController::class, 'RemoveWishlistProduct']);
+        Route::get('/get-wishlist-product',          [WishlistController::class, 'GetWishlistProduct']);
+
         // Product View Modal with Ajax
-        Route::get('/product/view/modal/{id}', [FrontEndController::class, 'ProductViewAjax']);
+        Route::get('/product/view/modal/{id}',       [FrontendProductController::class, 'ProductViewAjax']);
 
         // Add to Cart Store Data
-        Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
+        Route::post('/cart/add/{id}',                [CartController::class, 'AddToCart']);
 
         // Get Data from mini cart
-        Route::get('/product/mini/cart/', [CartController::class, 'AddMiniCart']);
+        Route::get('/product/miniCart',              [CartController::class, 'AddMiniCart']);
+
+        Route::get('/cart-increment/{rowId}',        [CartController::class, 'CartIncrement']);
+        Route::get('/cart-decrement/{rowId}',        [CartController::class, 'CartDecrement']);
+
+        Route::get('/cart-remove/{rowId}',           [CartController::class, 'RemoveCartProduct']);
+
+        Route::get('/get-cart-product',              [CartController::class, 'GetCartProduct']);
+
 
         // Remove mini cart
         Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
+        /* To be done */
 
-        // Add to Wishlist - user actions
-        Route::post('/add-to-wishlist/{product_id}', [CartController::class, 'AddToWishlist']);
 
-        Route::get('/get-wishlist-product', [WishlistController::class, 'GetWishlistProduct']);
 
-        Route::get('/wishlist-remove/{id}', [WishlistController::class, 'RemoveWishlistProduct']);
-
-        Route::get('/get-cart-product', [CartController::class, 'GetCartProduct']);
-
-        Route::get('/cart-remove/{rowId}', [CartController::class, 'RemoveCartProduct']);
-
-        Route::get('/cart-increment/{rowId}', [CartController::class, 'CartIncrement']);
-
-        Route::get('/cart-decrement/{rowId}', [CartController::class, 'CartDecrement']);
 
         // Frontend Coupon Option
         Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
@@ -265,10 +274,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
 
     Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
-
-    /// Frontend Product Review Routes
-    Route::post('/review/store', [ReviewController::class, 'ReviewStore'])->name('review.store');
-
 
 });
 
@@ -297,21 +302,7 @@ Route::group(['middleware' => ['auth:sanctum', 'web']], function () {
 Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], function () {
 
 
-    // Admin Slider All Routes
     /*
-    Route::prefix('slider')->group(function () {
-
-        Route::get('/view', [SliderController::class, 'SliderView'])->name('slider.manage');
-        Route::post('/store', [SliderController::class, 'SliderStore'])->name('slider.store');
-        Route::get('/edit/{id}', [SliderController::class, 'SliderEdit'])->name('slider.edit');
-        Route::post('/update', [SliderController::class, 'SliderUpdate'])->name('slider.update');
-        Route::get('/delete/{id}', [SliderController::class, 'SliderDelete'])->name('slider.delete');
-        Route::get('/inactive/{id}', [SliderController::class, 'SliderInactive'])->name('slider.inactive');
-        Route::get('/active/{id}', [SliderController::class, 'SliderActive'])->name('slider.active');
-
-    });
-    */
-
     // Admin Coupons All Routes
     Route::prefix('coupons')->group(function () {
         Route::get('/view', [CouponController::class, 'CouponView'])->name('coupon.manage');
@@ -321,6 +312,8 @@ Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], fun
         Route::get('/delete/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
     });
 
+    */
+    /*
     // Admin Shipping All Routes
     Route::prefix('shipping')->group(function () {
 
@@ -391,14 +384,12 @@ Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], fun
     Route::prefix('stock')->group(function () {
         Route::get('/product', [ProductController::class, 'ProductStock'])->name('product.stock');
     });
+    */
 
 });
 
-/* TODO later: web frontend page
+/* TODO later: web frontend page */
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'user']], function () {
-
-    // Wishlist page
-    Route::get('/wishlist',                    [WishlistController::class, 'ViewWishlist'])->name('wishlist');
 
     /// Order Traking Route
     Route::post('/order/tracking',             [UserOrderController::class, 'OrderTraking'])->name('order.tracking');
@@ -410,6 +401,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'user']], function ()
     Route::get('/cancel/orders',               [UserOrderController::class, 'CancelOrders'])->name('cancel.orders');
 
 });
-*/
+
 
 /** !!! End of Routes from big ecommerce project  !!! */

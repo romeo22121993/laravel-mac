@@ -57,6 +57,7 @@ jQuery(document).ready(function() {
     });
 
 
+    /* Ajax functionalities !!! */
     $(".add_to_cart_btn, .addToCartBtn").on("click", function ( e ) {
         e.preventDefault();
         addToCart();
@@ -71,7 +72,7 @@ jQuery(document).ready(function() {
     $(".wishlistRemoveBtn").on("click", function ( e ) {
         e.preventDefault();
         let id = $(this).attr('id');
-        wishlistRemove(id)
+        wishlistRemove( id )
     })
 
     $(document).on("click", ".cartRemoveBtn", function ( e ) {
@@ -84,12 +85,16 @@ jQuery(document).ready(function() {
     $(document).on("click", ".cartIncrementBtn", function ( e ) {
         e.preventDefault();
         let id = $(this).attr('id');
+
+        console.log( 'id', id );
+
         cartIncrement(id);
     })
 
     $(document).on("click", ".cartDecrementBtm", function ( e ) {
         e.preventDefault();
         let id = $(this).attr('id');
+        console.log('decreent');
         cartDecrement(id);
     })
 
@@ -111,24 +116,23 @@ jQuery(document).ready(function() {
      * @param id
      */
     function productView(id){
-        // alert(id)
+
         $.ajax({
             type: 'GET',
             url: '/ajax/product/view/modal/'+id,
             dataType:'json',
             success:function(data){
-                // console.log(data)
-                $('#pname').text(data.product.product_name_en);
+                console.log(data)
+                $('#pname').text(data.product.name);
                 $('#price').text(data.product.selling_price);
-                $('#pcode').text(data.product.product_code);
-                $('#pcategory').text(data.product.category.category_name_en);
-                $('#pbrand').text(data.product.brand.brand_name_en);
-                $('#pimage').attr('src','/'+data.product.product_thambnail);
+                $('#pcode').text(data.product.code);
+                $('#pcategory').text(data.product.category.name);
+                $('#pbrand').text(data.product.brand.name);
+                $('#pimage').attr('src','/'+data.product.thumbnail);
 
                 $('#product_id').val(id);
                 $('#qty').val(1);
 
-                // Product Price
                 if (data.product.discount_price == null) {
                     $('#pprice').text('');
                     $('#oldprice').text('');
@@ -165,7 +169,7 @@ jQuery(document).ready(function() {
                         $('#sizeArea').show();
                     }
 
-                }) // end size
+                })
 
             }
 
@@ -190,12 +194,12 @@ jQuery(document).ready(function() {
             data:{
                 color:color, size:size, quantity:quantity, product_name:product_name
             },
-            url: "/ajax/cart/data/store/"+id,
+            url: "/ajax/cart/add/"+id,
             success:function(data){
 
                 miniCart()
+
                 $('#closeModel').click();
-                // console.log(data)
 
                 // Start Message
                 const Toast = Swal.mixin({
@@ -205,6 +209,7 @@ jQuery(document).ready(function() {
                     showConfirmButton: false,
                     timer: 3000
                 })
+
                 if ( $.isEmptyObject(data.error) ) {
                     Toast.fire({
                         type: 'success',
@@ -227,34 +232,42 @@ jQuery(document).ready(function() {
      *
      */
     function miniCart(){
+        console.log('minicart run');
+
         $.ajax({
             type: 'GET',
-            url: '/ajax/product/mini/cart',
+            url: '/ajax/product/miniCart',
             dataType:'json',
             success:function(response){
 
+                console.log( 'response', response  );
+
                 $('span[id="cartSubTotal"]').text(response.cartTotal);
+                $('.cartTotalTd').text(response.cartTotal);
                 $('span[id="cartSubQut"]').text(response.cartQty);
+                $('.cartQtyTd').text(response.cartQty);
                 $('#cartQty').text(response.cartQty);
                 var miniCart = ""
 
                 $.each(response.carts, function(key,value){
+
+                    let totalPrice = (value.price) * (value.quantity);
+
                     miniCart += `
                         <div class="cart-item product-summary">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <div class="image"> <a href="detail.html"><img src="/${value.options.image}" alt=""></a> </div>
+                                    <div class="image"> <a href="detail.html"><img src="/${value.attributes.image}" alt=""></a> </div>
                                 </div>
                                 <div class="col-xs-7">
                                     <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
-                                    <div class="price"> ${value.price} * ${value.qty} </div>
+                                    <div class="price"> ${totalPrice}</div>
                                 </div>
                                 <div class="col-xs-1 action">
-                                    <button type="submit" class="miniCartRemove" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button>
+                                    <button type="submit" class="miniCartRemove" id="${value.id}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button>
                                 </div>
                             </div>
                         </div>
-                        <!-- /.cart-item -->
                         <div class="clearfix"></div>
                         <hr>
                     `
@@ -367,7 +380,10 @@ jQuery(document).ready(function() {
      *
      * @param product_id
      */
-    function addToWishList(product_id){
+    function addToWishList( product_id ){
+
+        console.log( 'wishlist');
+
         $.ajax({
             type: "POST",
             dataType: 'json',
@@ -452,7 +468,9 @@ jQuery(document).ready(function() {
             url: '/ajax/wishlist-remove/'+id,
             dataType:'json',
             success:function(data){
-                wishlist();
+                // wishlist();
+
+                $(".td-"+id).remove();
 
                 const Toast = Swal.mixin({
                     toast: true,
@@ -492,8 +510,10 @@ jQuery(document).ready(function() {
             success:function(response){
                 var rows = ""
                 $.each(response.carts, function(key,value){
+
+                    let totalPrice = (value.price) * (value.quantity);
                     rows += `<tr>
-                        <td class="col-md-2"><img src="/${value.options.image} " alt="imga" style="width:60px; height:60px;"></td>
+                        <td class="col-md-2"><img src="/${value.attributes.image} " alt="imga" style="width:60px; height:60px;"></td>
 
                         <td class="col-md-2">
                             <div class="product-name"><a href="#">${value.name}</a></div>
@@ -503,34 +523,34 @@ jQuery(document).ready(function() {
                         </td>
 
                         <td class="col-md-2">
-                            <strong>${value.options.color} </strong>
+                            <strong>${value.attributes.color} </strong>
                         </td>
 
                         <td class="col-md-2">
-                            ${value.options.size == null
+                            ${value.attributes.size == null
                                 ?
                                 `<span> .... </span>`
                                 :
-                                `<strong>${value.options.size} </strong>`
+                                `<strong>${value.attributes.size} </strong>`
                             }
                         </td>
 
                         <td class="col-md-2">
-                            ${value.qty > 1
-                                ? `<button type="submit" class="btn btn-danger btn-sm cartDecrementBtm" id="${value.rowId}"  >-</button> `
+                            ${value.quantity > 1
+                                ? `<button type="submit" class="btn btn-danger btn-sm cartDecrementBtm" id="${value.id}"  >-</button> `
                                 : `<button type="submit" class="btn btn-danger btn-sm" disabled >-</button> `
                             }
 
-                            <input type="text" value="${value.qty}" min="1" max="100" disabled="" style="width:25px;" >
-                            <button type="submit" class="btn btn-success btn-sm cartIncrementBtn" id="${value.rowId}"  >+</button>
+                            <input type="text" value="${value.quantity}" min="1" max="100" disabled="" style="width:25px;" >
+                            <button type="submit" class="btn btn-success btn-sm cartIncrementBtn" id="${value.id}"  >+</button>
                         </td>
 
                         <td class="col-md-2">
-                            <strong>$${value.subtotal} </strong>
+                            <strong>$${totalPrice}</strong>
                         </td>
 
                         <td class="col-md-1 close-btn">
-                            <button type="submit" class="cartRemoveBtn" id="${value.rowId}" ><i class="fa fa-times"></i></button>
+                            <button type="submit" class="cartRemoveBtn" id="${value.id}" ><i class="fa fa-times"></i></button>
                         </td>
                     </tr>
                     `
@@ -627,6 +647,8 @@ jQuery(document).ready(function() {
             url: "/ajax/cart-increment/"+rowId,
             dataType:'json',
             success:function(data){
+                $("#incrementDecrementValue").val( parseInt( $("#incrementDecrementValue").val() ) + 1 );
+                $(".cartQtyTd").text( parseInt( $(".cartQtyTd").text() ) + 1 );
                 couponCalculation();
                 cart();
                 cart_part();
@@ -648,6 +670,8 @@ jQuery(document).ready(function() {
             url: "/ajax/cart-decrement/"+rowId,
             dataType:'json',
             success:function(data){
+                $("#incrementDecrementValue").val( parseInt( $("#incrementDecrementValue").val() - 1) );
+                $(".cartQtyTd").text( parseInt( $(".cartQtyTd").text() ) - 1 );
                 couponCalculation();
                 cart();
                 cart_part();

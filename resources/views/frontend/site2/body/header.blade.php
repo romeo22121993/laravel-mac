@@ -15,14 +15,12 @@ $categories    = \App\Models\ProductCategory::where('cat_id', 0)->orderBy('name'
                             </a>
                         </li>
                         <li>
-{{--                            <a href="{{ route('wishlist') }}">--}}
-                            <a href="">
+                            <a href="{{ route('wishlist') }}">
                                 <i class="icon fa fa-heart"></i> Wishlist
                             </a>
                         </li>
                         <li>
-{{--                            <a href="{{ route('mycart') }}">--}}
-                            <a href="">
+                            <a href="{{ route('mycart') }}">
                                 <i class="icon fa fa-shopping-cart"></i> My Cart
                             </a>
                         </li>
@@ -72,8 +70,7 @@ $categories    = \App\Models\ProductCategory::where('cat_id', 0)->orderBy('name'
                 <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
                     <!-- ============================================================= SEARCH AREA ============================================================= -->
                     <div class="search-area">
-                        <form method="post" action="{{ route('product.search') }}">
-                            @csrf
+                        <form method="get" action="{{ route('product.search') }}">
                             <div class="control-group">
                                 <ul class="categories-filter animate-dropdown">
                                     <li class="dropdown"> <a class="dropdown-toggle"  data-toggle="dropdown" href="category.html">Categories <b class="caret"></b></a>
@@ -185,6 +182,16 @@ $categories    = \App\Models\ProductCategory::where('cat_id', 0)->orderBy('name'
                                     </ul>
                                     </li>
                                 @endforeach
+                                <li class="dropdown yamm mega-menu">
+                                    <a href="{{ route('wishlist') }}" >
+                                        Wishlist
+                                    </a>
+                                </li>
+                                <li class="dropdown yamm mega-menu">
+                                    <a href="{{ route('mycart') }}" >
+                                        My Cart
+                                    </a>
+                                </li>
                                 <li class="dropdown yamm mega-menu">
                                     <a href="{{ route('shop') }}" >
                                         Shop
