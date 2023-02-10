@@ -257,7 +257,7 @@ jQuery(document).ready(function() {
                         <div class="cart-item product-summary">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <div class="image"> <a href="detail.html"><img src="/${value.attributes.image}" alt=""></a> </div>
+                                    <div class="image"> <a href="/products/${value.name}"><img src="/${value.attributes.image}" alt=""></a> </div>
                                 </div>
                                 <div class="col-xs-7">
                                     <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>

@@ -140,6 +140,23 @@
             </li>
 
             <li class="nav-item menu-items">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic6">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-laptop"></i>
+                    </span>
+                    <span class="menu-title">Shipping Items</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic6">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('shipping.division.all') }}">Divisions</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('shipping.district.all') }}">Districts</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('shipping.state.all') }}">States</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic4">
                     <span class="menu-icon">
                         <i class="mdi mdi-laptop"></i>

@@ -138,82 +138,6 @@ class CartController extends Controller
 
     }
 
-    /**
-     * Function applying coupon
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function CouponApply(Request $request){
-
-        $coupon = Coupon::where('coupon_name',$request->coupon_name)->where('coupon_validity','>=',Carbon::now()->format('Y-m-d'))->first();
-
-        if ( $coupon ) {
-
-            $cartTotal = Cart::total();
-            $cartTotal = str_replace( ',', '', $cartTotal);
-
-            $discountAmount = $cartTotal * $coupon->coupon_discount/100;
-            $discountAmount = round($discountAmount, 3);
-            $totalAmount    = $cartTotal - $discountAmount;
-            $totalAmount    = round($totalAmount, 3);
-
-            Session::put('coupon',[
-                'coupon_name'     => $coupon->coupon_name,
-                'coupon_discount' => $coupon->coupon_discount,
-                'discount_amount' => $discountAmount,
-                'total_amount'    => $totalAmount
-            ]);
-
-            return response()->json(array(
-                'validity' => true,
-                'success'  => 'Coupon Applied Successfully'
-            ));
-
-        } else {
-            return response()->json(['error' => 'Invalid Coupon']);
-        }
-    }
-
-    /**
-     * Function calculating of coupon
-     *
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     */
-    public function CouponCalculation(){
-
-        $cartTotal = Cart::total();
-        $cartTotal = str_replace( ',', '', $cartTotal);
-
-        if (Session::has('coupon')) {
-            return response()->json(array(
-                'subtotal'        => $cartTotal,
-                'coupon_name'     => session()->get('coupon')['coupon_name'],
-                'coupon_discount' => session()->get('coupon')['coupon_discount'],
-                'discount_amount' => session()->get('coupon')['discount_amount'],
-                'total_amount'    => session()->get('coupon')['total_amount'],
-            ));
-        }else{
-            return response()->json(array(
-                'total' => $cartTotal,
-            ));
-        }
-    }
-
-    // Remove Coupon
-    /**
-     * Function removing coupon
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function CouponRemove()
-    {
-        Session::forget('coupon');
-        return response()->json(['success' => 'Coupon Remove Successfully']);
-    }
-
 
     /**
      * Function getting cart product by ajax
@@ -246,9 +170,9 @@ class CartController extends Controller
     public function RemoveCartProduct($rowId){
         Cart::remove($rowId);
 
-//        if (Session::has('coupon')) {
-//           Session::forget('coupon');
-//        }
+        if (Session::has('coupon')) {
+           Session::forget('coupon');
+        }
 
         return response()->json(['success' => 'Successfully Remove From Cart']);
     }
@@ -264,13 +188,12 @@ class CartController extends Controller
         $row = Cart::get( $rowId );
         Cart::update( $rowId, [ 'quantity' => 1 ] );
 
-        /*
         if ( Session::has('coupon') ) {
 
             $coupon_name = Session::get('coupon')['coupon_name'];
             $coupon      = Coupon::where('coupon_name',$coupon_name)->first();
 
-            $cartTotal = Cart::total();
+            $cartTotal = Cart::getSubTotalWithoutConditions();
             $cartTotal = str_replace( ',', '', $cartTotal);
 
             $discountAmount = $cartTotal * $coupon->coupon_discount/100;
@@ -285,7 +208,6 @@ class CartController extends Controller
                 'total_amount'    => $totalAmount
             ]);
         }
-        */
 
         return response()->json('increment');
 
@@ -302,13 +224,12 @@ class CartController extends Controller
         $row = Cart::get( $rowId );
         Cart::update( $rowId, [ 'quantity' => -1 ]  );
 
-        /*
         if ( Session::has('coupon') ) {
 
             $coupon_name = Session::get('coupon')['coupon_name'];
             $coupon      = Coupon::where('coupon_name',$coupon_name)->first();
 
-            $cartTotal = Cart::total();
+            $cartTotal = Cart::getSubTotalWithoutConditions();
             $cartTotal = str_replace( ',', '', $cartTotal);
 
             $discountAmount = $cartTotal * $coupon->coupon_discount/100;
@@ -323,7 +244,6 @@ class CartController extends Controller
                 'total_amount'    => $totalAmount
             ]);
         }
-        */
 
         return response()->json('Decrement');
 

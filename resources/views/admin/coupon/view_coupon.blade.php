@@ -1,5 +1,9 @@
 @extends('admin.admin_master')
 
+@section('title')
+    Coupons Page
+@endsection
+
 @section('admin_content')
 
     <!-- Content Wrapper. Contains page content -->

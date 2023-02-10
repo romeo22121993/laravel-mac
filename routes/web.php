@@ -15,10 +15,12 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductBrandController;
+use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
@@ -216,7 +218,7 @@ Route::group(['middleware' => ['web']], function () {
     /* To be done */
 
 
-    // Checkout Routes //TODO it
+    // Checkout Routes
     Route::get('/checkout',          [CheckoutController::class, 'Checkout'])->name('checkout');
     Route::post('/checkout/store',   [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
 
@@ -255,18 +257,18 @@ Route::group(['middleware' => ['web']], function () {
 
         // Remove mini cart
         Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
-        /* To be done */
 
+        Route::post('/coupon-apply',      [CouponController::class, 'CouponApply']);
+        Route::get('/coupon-calculation', [CouponController::class, 'CouponCalculation']);
+        Route::get('/coupon-remove',      [CouponController::class, 'CouponRemove']);
+        /* To be done */
 
         //TODO it
         // Frontend Coupon Option
-        Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
-        Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
-        Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
 
         // Checkout Functions
         Route::get('/district-get/{division_id}', [CheckoutController::class, 'DistrictGetAjax']);
-        Route::get('/state-get/{district_id}', [CheckoutController::class, 'StateGetAjax']);
+        Route::get('/state-get/{district_id}',    [CheckoutController::class, 'StateGetAjax']);
 
 
     });
@@ -308,54 +310,58 @@ Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], fun
         Route::get('/delete/{id}',  [CouponController::class, 'CouponDelete'])->name('wpadmin.coupons.delete');
     });
 
-    // TODO: all of it
-
-
     // Admin Shipping All Routes
     Route::prefix('shipping')->group(function () {
 
         // Ship Division
-        Route::get('/division/view', [ShippingAreaController::class, 'DivisionView'])->name('division.manage');
-        Route::post('/division/store', [ShippingAreaController::class, 'DivisionStore'])->name('division.store');
-        Route::get('/division/edit/{id}', [ShippingAreaController::class, 'DivisionEdit'])->name('division.edit');
-        Route::post('/division/update/{id}', [ShippingAreaController::class, 'DivisionUpdate'])->name('division.update');
-        Route::get('/division/delete/{id}', [ShippingAreaController::class, 'DivisionDelete'])->name('division.delete');
+        Route::prefix('divisions')->group(function () {
+            Route::get('/all',          [ShippingAreaController::class, 'DivisionView'])->name('shipping.division.all');
+            Route::post('/store',       [ShippingAreaController::class, 'DivisionStore'])->name('shipping.division.store');
+            Route::get('/edit/{id}',    [ShippingAreaController::class, 'DivisionEdit'])->name('shipping.division.edit');
+            Route::post('/update/{id}', [ShippingAreaController::class, 'DivisionUpdate'])->name('shipping.division.update');
+            Route::get('/delete/{id}',  [ShippingAreaController::class, 'DivisionDelete'])->name('shipping.division.delete');
+        });
 
         // Ship District
-        Route::get('/district/view', [ShippingAreaController::class, 'DistrictView'])->name('district.manage');
-        Route::post('/district/store', [ShippingAreaController::class, 'DistrictStore'])->name('district.store');
-        Route::get('/district/edit/{id}', [ShippingAreaController::class, 'DistrictEdit'])->name('district.edit');
-        Route::post('/district/update/{id}', [ShippingAreaController::class, 'DistrictUpdate'])->name('district.update');
-        Route::get('/district/delete/{id}', [ShippingAreaController::class, 'DistrictDelete'])->name('district.delete');
+        Route::prefix('districts')->group(function () {
+            Route::get('/all',          [ShippingAreaController::class, 'DistrictView'])->name('shipping.district.all');
+            Route::post('/store',       [ShippingAreaController::class, 'DistrictStore'])->name('shipping.district.store');
+            Route::get('/edit/{id}',    [ShippingAreaController::class, 'DistrictEdit'])->name('shipping.district.edit');
+            Route::post('/update/{id}', [ShippingAreaController::class, 'DistrictUpdate'])->name('shipping.district.update');
+            Route::get('/delete/{id}',  [ShippingAreaController::class, 'DistrictDelete'])->name('shipping.district.delete');
+        });
 
         // Ship State
-        Route::get('/state/view', [ShippingAreaController::class, 'StateView'])->name('state.manage');
-        Route::post('/state/store', [ShippingAreaController::class, 'StateStore'])->name('state.store');
-        Route::get('/state/edit/{id}', [ShippingAreaController::class, 'StateEdit'])->name('state.edit');
-        Route::post('/state/update/{id}', [ShippingAreaController::class, 'StateUpdate'])->name('state.update');
-        Route::get('/state/delete/{id}', [ShippingAreaController::class, 'StateDelete'])->name('state.delete');
-
+        Route::prefix('states')->group(function () {
+            Route::get('/all',          [ShippingAreaController::class, 'StateView'])->name('shipping.state.all');
+            Route::post('/store',       [ShippingAreaController::class, 'StateStore'])->name('shipping.state.store');
+            Route::get('/edit/{id}',    [ShippingAreaController::class, 'StateEdit'])->name('shipping.state.edit');
+            Route::post('/update/{id}', [ShippingAreaController::class, 'StateUpdate'])->name('shipping.state.update');
+            Route::get('/delete/{id}',  [ShippingAreaController::class, 'StateDelete'])->name('shipping.state.delete');
+        });
     });
+
+    // TODO: all of it
 
     // Admin Order All Routes
     Route::prefix('orders')->group(function () {
 
-        Route::get('/pending/', [AdminOrderController::class, 'PendingOrders'])->name('pending-orders');
+        Route::get('/pending/',                 [AdminOrderController::class, 'PendingOrders'])->name('pending-orders');
         Route::get('/order/details/{order_id}', [AdminOrderController::class, 'AdminOrdersDetails'])->name('pending.order.details');
-        Route::get('/confirmed', [AdminOrderController::class, 'ConfirmedOrders'])->name('confirmed-orders');
-        Route::get('/processing', [AdminOrderController::class, 'ProcessingOrders'])->name('processing-orders');
-        Route::get('/picked', [AdminOrderController::class, 'PickedOrders'])->name('picked-orders');
-        Route::get('/shipped', [AdminOrderController::class, 'ShippedOrders'])->name('shipped-orders');
-        Route::get('/delivered', [AdminOrderController::class, 'DeliveredOrders'])->name('delivered-orders');
-        Route::get('/canceled', [AdminOrderController::class, 'CanceledOrders'])->name('canceled-orders');
+        Route::get('/confirmed',                [AdminOrderController::class, 'ConfirmedOrders'])->name('confirmed-orders');
+        Route::get('/processing',               [AdminOrderController::class, 'ProcessingOrders'])->name('processing-orders');
+        Route::get('/picked',                   [AdminOrderController::class, 'PickedOrders'])->name('picked-orders');
+        Route::get('/shipped',                  [AdminOrderController::class, 'ShippedOrders'])->name('shipped-orders');
+        Route::get('/delivered',                [AdminOrderController::class, 'DeliveredOrders'])->name('delivered-orders');
+        Route::get('/canceled',                 [AdminOrderController::class, 'CanceledOrders'])->name('canceled-orders');
 
         // Update Status
-        Route::get('/pending/confirm/{order_id}', [AdminOrderController::class, 'PendingToConfirm'])->name('pending-confirm');
-        Route::get('/confirmed/processing/{order_id}', [AdminOrderController::class, 'ConfirmToProcessing'])->name('confirm.processing');
-        Route::get('/processing/picked/{order_id}', [AdminOrderController::class, 'ProcessingToPicked'])->name('processing.picked');
-        Route::get('/picked/shipped/{order_id}', [AdminOrderController::class, 'PickedToShipped'])->name('picked.shipped');
-        Route::get('/shipped/delivered/{order_id}', [AdminOrderController::class, 'ShippedToDelivered'])->name('shipped.delivered');
-        Route::get('/invoice/download/{order_id}', [AdminOrderController::class, 'AdminInvoiceDownload'])->name('invoice.download');
+        Route::get('/pending/confirm/{order_id}',       [AdminOrderController::class, 'PendingToConfirm'])->name('pending-confirm');
+        Route::get('/confirmed/processing/{order_id}',  [AdminOrderController::class, 'ConfirmToProcessing'])->name('confirm.processing');
+        Route::get('/processing/picked/{order_id}',     [AdminOrderController::class, 'ProcessingToPicked'])->name('processing.picked');
+        Route::get('/picked/shipped/{order_id}',        [AdminOrderController::class, 'PickedToShipped'])->name('picked.shipped');
+        Route::get('/shipped/delivered/{order_id}',     [AdminOrderController::class, 'ShippedToDelivered'])->name('shipped.delivered');
+        Route::get('/invoice/download/{order_id}',      [AdminOrderController::class, 'AdminInvoiceDownload'])->name('invoice.download');
 
     });
 
