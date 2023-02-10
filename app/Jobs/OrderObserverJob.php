@@ -18,16 +18,18 @@ class OrderObserverJob implements ShouldQueue
 
     public $data;
     public $typeAction;
+    public $paymentType;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct( $data, $typeAction )
+    public function __construct( $data, $typeAction, $paymentType )
     {
         $this->data = $data;
         $this->typeAction = $typeAction;
+        $this->paymentType = $paymentType;
     }
 
     /**
@@ -37,6 +39,6 @@ class OrderObserverJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to( env('APP_ADMIN_EMAIL') )->send( new OrderMail( $this->data, $this->typeAction ) );
+        Mail::to( env('APP_ADMIN_EMAIL') )->send( new OrderMail( $this->data, $this->typeAction, $this->paymentType ) );
     }
 }

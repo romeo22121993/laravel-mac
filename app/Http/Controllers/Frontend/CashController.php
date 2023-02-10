@@ -59,20 +59,22 @@ class CashController extends Controller
 
         // Start Send Email
         $createdOrder = Order::findOrFail( $order_id );
-        dispatch( new OrderObserverJob( $createdOrder, 'created' ) );
+        dispatch( new OrderObserverJob( $createdOrder, 'created', 'cash' ) );
 
         $carts = Cart::getContent();
         foreach ( $carts as $cart ) {
-            OrderItem::insert([
+            OrderItem::create([
                 'order_id'   => $order_id,
                 'product_id' => $cart->id,
                 'color'      => $cart->attributes->color,
                 'size'       => $cart->attributes->size,
                 'qty'        => $cart->quantity,
                 'price'      => $cart->price,
-                'created_at' => Carbon::now(),
             ]);
 
+        }
+
+        foreach ( $carts as $cart ) {
             Cart::remove( $cart->id );
         }
 

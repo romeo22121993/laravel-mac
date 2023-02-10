@@ -16,16 +16,18 @@ class OrderMail extends Mailable
 
     public $data;
     public $typeAction;
+    public $paymentType;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct( $data, $typeAction )
+    public function __construct( $data, $typeAction, $paymentType )
     {
         $this->data = $data;
-        $this->typeAction = $typeAction;
+        $this->typeAction  = $typeAction;
+        $this->paymentType = $paymentType;
     }
 
     /**
@@ -56,6 +58,7 @@ class OrderMail extends Mailable
             view: 'emails.order',
             with: [
                 'action' => $this->typeAction,
+                'paymentType' => $this->paymentType,
             ],
         );
     }

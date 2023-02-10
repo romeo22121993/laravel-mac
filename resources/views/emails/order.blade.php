@@ -1,7 +1,7 @@
 <h2>Hello, It's notification from observer {{ now() }}</h2>
 <br>
 
-<strong>Order {{ $data->id  }} is just {{ $action }} </strong><br>
+<strong>Order {{ $data->id  }} is just {{ $action }} via payment *{{ $paymentType }}* </strong><br>
 
 <strong>Details: </strong><br>
 <strong>Email: </strong>{{ $data->email }} <br>

@@ -222,11 +222,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/checkout/store',   [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
 
     Route::post('/cash/order',        [CashController::class, 'CashOrder'])->name('cash.order');
-    /* To be done */
-
-
     //** Stripe
-    Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
+    Route::post('/stripe/order',      [StripeController::class, 'StripeOrder'])->name('stripe.order');
+
+    /* To be done */
 
 
     /*  Ajax requests */
