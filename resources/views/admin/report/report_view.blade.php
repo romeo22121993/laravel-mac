@@ -1,5 +1,9 @@
 @extends('admin.admin_master')
 
+@section('title')
+    Reports Page
+@endsection
+
 @section('admin_content')
 
     <!-- Content Wrapper. Contains page content -->

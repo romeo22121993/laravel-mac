@@ -1,5 +1,9 @@
 @extends('admin.admin_master')
 
+@section('title')
+    Reports Filter
+@endsection
+
 @section('admin_content')
 
 {{--    @include('backend.report.report_view');--}}
