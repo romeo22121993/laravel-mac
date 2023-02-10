@@ -21,6 +21,8 @@ use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Frontend\StripeController;
+use App\Http\Controllers\Frontend\CashController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
@@ -215,16 +217,17 @@ Route::group(['middleware' => ['web']], function () {
     // My Cart Page All Routes
     Route::get('/mycart',               [CartController::class, 'MyCart'])->name('mycart');
 
-    /* To be done */
-
-
     // Checkout Routes
     Route::get('/checkout',          [CheckoutController::class, 'Checkout'])->name('checkout');
     Route::post('/checkout/store',   [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
 
+    Route::post('/cash/order',        [CashController::class, 'CashOrder'])->name('cash.order');
+    /* To be done */
+
+
     //** Stripe
     Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
-    Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
+
 
     /*  Ajax requests */
     Route::group(['prefix' => 'ajax'], function () {
@@ -261,15 +264,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/coupon-apply',      [CouponController::class, 'CouponApply']);
         Route::get('/coupon-calculation', [CouponController::class, 'CouponCalculation']);
         Route::get('/coupon-remove',      [CouponController::class, 'CouponRemove']);
-        /* To be done */
-
-        //TODO it
-        // Frontend Coupon Option
 
         // Checkout Functions
         Route::get('/district-get/{division_id}', [CheckoutController::class, 'DistrictGetAjax']);
         Route::get('/state-get/{district_id}',    [CheckoutController::class, 'StateGetAjax']);
-
 
     });
     /* end of Ajax requests */

@@ -22,7 +22,8 @@ class CheckoutController extends Controller
     public function Checkout(){
 
         if ( Auth::check() ) {
-            $cartTotal = Cart::total();
+
+            $cartTotal = Cart::getSubTotalWithoutConditions();
             $cartTotal = str_replace( ',', '', $cartTotal);
 
             if ( $cartTotal > 0 ) {
@@ -30,7 +31,6 @@ class CheckoutController extends Controller
                 $user    = Auth::user();
                 $carts   = Cart::getContent();
                 $cartQty = Cart::getTotalQuantity();
-
 
                 $divisions = ShipDivision::orderBy('division_name','ASC')->get();
 
@@ -45,10 +45,12 @@ class CheckoutController extends Controller
                 return redirect()->to('/')->with($notification);
             }
         } else {
+
             $notification = array(
-                'message' => 'You Need to Login First',
+                'message'    => 'You Need to Login First',
                 'alert-type' => 'error'
             );
+
             return redirect()->route('login')->with($notification);
         }
     }
@@ -59,9 +61,10 @@ class CheckoutController extends Controller
      * @param $division_id
      * @return false|string
      */
-    public function DistrictGetAjax($division_id){
-    	$ship = ShipDistrict::where('division_id',$division_id)->orderBy('district_name','ASC')->get();
-    	return json_encode($ship);
+    public function DistrictGetAjax( $division_id ){
+    	$ship = ShipDistrict::where('division_id', $division_id)->orderBy('district_name','ASC')->get();
+
+    	return json_encode( $ship );
     }
 
     /**
@@ -83,25 +86,19 @@ class CheckoutController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|string
      */
     public function CheckoutStore(Request $request){
-    	// dd($request->all());
+
     	$data = array();
-    	$data['shipping_name']  = $request->shipping_name;
-    	$data['shipping_email'] = $request->shipping_email;
-    	$data['shipping_phone'] = $request->shipping_phone;
-    	$data['post_code']      = $request->post_code;
-    	$data['division_id']    = $request->division_id;
-    	$data['district_id']    = $request->district_id;
-    	$data['state_id']       = $request->state_id;
-    	$data['notes']          = $request->notes;
-        $cartTotal = Cart::getSubTotalWithoutConditions();
+        $data = $request->all();
+
+        $cartTotal  = Cart::getSubTotalWithoutConditions();
         $cartTotal  = str_replace( ',', '', $cartTotal);
 
     	if ( $request->payment_method == 'stripe' ) {
-    		return view('frontend.payment.stripe',compact('data','cartTotal'));
+    		return view('frontend.payment.stripe', compact('data','cartTotal'));
     	} elseif ( $request->payment_method == 'card' ) {
     		return 'card';
     	} else {
-            return view('frontend.payment.cash',compact('data','cartTotal'));
+            return view('frontend.payment.cash', compact('data','cartTotal'));
     	}
 
     }
