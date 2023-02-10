@@ -225,6 +225,22 @@
             </li>
 
 
+            <li class="nav-item menu-items">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic10" aria-expanded="false" aria-controls="ui-basic10">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-laptop"></i>
+                    </span>
+                    <span class="menu-title">Stock</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic10">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.product.stock') }}">Stock</a></li>
+                    </ul>
+                </div>
+            </li>
+
+
 
         @if(Auth::user()->setting == 1)
             <li class="nav-item menu-items">

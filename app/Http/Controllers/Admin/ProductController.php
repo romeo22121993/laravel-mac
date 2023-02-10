@@ -368,7 +368,7 @@ class ProductController extends Controller
 
         $products = Product::latest()->get();
 
-        return view('admin.product.product_stock',compact('products'));
+        return view('admin.product.stock',compact('products'));
 
     }
 

@@ -373,7 +373,7 @@ Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], fun
 
     // Admin Manage Stock Routes
     Route::prefix('stock')->group(function () {
-        Route::get('/product', [ProductController::class, 'ProductStock'])->name('product.stock');
+        Route::get('/', [ProductController::class, 'ProductStock'])->name('wpadmin.product.stock');
     });
 
 });
