@@ -157,6 +157,28 @@
             </li>
 
             <li class="nav-item menu-items">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic7" aria-expanded="false" aria-controls="ui-basic7">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-laptop"></i>
+                    </span>
+                    <span class="menu-title">Orders</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic7">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" href="{{ route('wpadmin.orders.pending') }}"><i class="ti-more"></i>Pending Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('wpadmin.orders.confirmed') }}"><i class="ti-more"></i>Confirmed Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('wpadmin.orders.processing') }}"><i class="ti-more"></i>Processing Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('wpadmin.orders.picked') }}"><i class="ti-more"></i> Picked Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('wpadmin.orders.shipped') }}"><i class="ti-more"></i> Shipped Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('wpadmin.orders.delivered') }}"><i class="ti-more"></i> Delivered Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('wpadmin.orders.canceled') }}"><i class="ti-more"></i> Canceled Orders</a></li>
+
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic4">
                     <span class="menu-icon">
                         <i class="mdi mdi-laptop"></i>
@@ -186,42 +208,25 @@
                 </div>
             </li>
 
-            @if(Auth::user()->district == 1)
-            <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#district" aria-expanded="false" aria-controls="district">
-              <span class="menu-icon">
-                <i class="mdi mdi-security"></i>
-              </span>
-                    <span class="menu-title">District</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="district">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('districts') }}">District </a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('subdistricts') }}"> SubDistrict </a></li>
 
-                    </ul>
-                </div>
-            </li>
-            @endif
-            @if(Auth::user()->post == 1)
             <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#posts" aria-expanded="false" aria-controls="ui-basic">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic9" aria-expanded="false" aria-controls="ui-basic9">
                     <span class="menu-icon">
                         <i class="mdi mdi-laptop"></i>
                     </span>
-                    <span class="menu-title">Posts</span>
+                    <span class="menu-title">Reports</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse" id="posts">
+                <div class="collapse" id="ui-basic9">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('post.all') }}">All Posts</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('post.create') }}">Add Post</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.reports.all') }}">Reports</a></li>
                     </ul>
                 </div>
             </li>
-            @endif
-            @if(Auth::user()->setting == 1)
+
+
+
+        @if(Auth::user()->setting == 1)
             <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#settings" aria-expanded="false" aria-controls="ui-basic">
                     <span class="menu-icon">
@@ -242,6 +247,7 @@
                 </div>
             </li>
             @endif
+
             @if(Auth::user()->website == 1)
             <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#websites" aria-expanded="false" aria-controls="ui-basic">
@@ -258,59 +264,6 @@
                     </ul>
                 </div>
             </li>
-            @endif
-            @if(Auth::user()->gallery == 1)
-            <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#gallery" aria-expanded="false" aria-controls="photo">
-              <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
-              </span>
-                    <span class="menu-title">Gallery</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="gallery">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('gallery.photo') }}">Photo Gallery</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('gallery.video') }}">Video Gallery</a></li>
-                    </ul>
-                </div>
-            </li>
-            @endif
-            @if(Auth::user()->ads == 1)
-
-            <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#ads" aria-expanded="false" aria-controls="ads">
-              <span class="menu-icon">
-                <i class="mdi mdi-security"></i>
-              </span>
-                    <span class="menu-title">Advertisement</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="ads">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('list.add') }}">Ads List </a></li>
-                    </ul>
-                </div>
-            </li>
-            @endif
-
-            @if(Auth::user()->role == 1)
-                <li class="nav-item menu-items">
-                    <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-              <span class="menu-icon">
-                <i class="mdi mdi-security"></i>
-              </span>
-                        <span class="menu-title">User Roles</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="auth">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('add.writer') }}"> Add Writer </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('all.writer') }}"> All Writer </a></li>
-
-                        </ul>
-                    </div>
-                </li>
             @endif
 
         </ul>

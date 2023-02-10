@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductBrandController;
 use App\Http\Controllers\Admin\ShippingAreaController;
+use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\WishlistController;
@@ -336,32 +338,36 @@ Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], fun
     // Admin Order All Routes
     Route::prefix('orders')->group(function () {
 
-        Route::get('/pending/',                 [AdminOrderController::class, 'PendingOrders'])->name('pending-orders');
-        Route::get('/order/details/{order_id}', [AdminOrderController::class, 'AdminOrdersDetails'])->name('pending.order.details');
-        Route::get('/confirmed',                [AdminOrderController::class, 'ConfirmedOrders'])->name('confirmed-orders');
-        Route::get('/processing',               [AdminOrderController::class, 'ProcessingOrders'])->name('processing-orders');
-        Route::get('/picked',                   [AdminOrderController::class, 'PickedOrders'])->name('picked-orders');
-        Route::get('/shipped',                  [AdminOrderController::class, 'ShippedOrders'])->name('shipped-orders');
-        Route::get('/delivered',                [AdminOrderController::class, 'DeliveredOrders'])->name('delivered-orders');
-        Route::get('/canceled',                 [AdminOrderController::class, 'CanceledOrders'])->name('canceled-orders');
+        Route::get('/pending/',                 [AdminOrderController::class, 'PendingOrders'])->name('wpadmin.orders.pending');
+        Route::get('/details/{order_id}',       [AdminOrderController::class, 'AdminOrdersDetails'])->name('wpadmin.orders.details');
+        Route::get('/confirmed',                [AdminOrderController::class, 'ConfirmedOrders'])->name('wpadmin.orders.confirmed');
+        Route::get('/processing',               [AdminOrderController::class, 'ProcessingOrders'])->name('wpadmin.orders.processing');
+        Route::get('/picked',                   [AdminOrderController::class, 'PickedOrders'])->name('wpadmin.orders.picked');
+        Route::get('/shipped',                  [AdminOrderController::class, 'ShippedOrders'])->name('wpadmin.orders.shipped');
+        Route::get('/delivered',                [AdminOrderController::class, 'DeliveredOrders'])->name('wpadmin.orders.delivered');
+        Route::get('/canceled',                 [AdminOrderController::class, 'CanceledOrders'])->name('wpadmin.orders.canceled');
 
         // Update Status
-        Route::get('/pending/confirm/{order_id}',       [AdminOrderController::class, 'PendingToConfirm'])->name('pending-confirm');
-        Route::get('/confirmed/processing/{order_id}',  [AdminOrderController::class, 'ConfirmToProcessing'])->name('confirm.processing');
-        Route::get('/processing/picked/{order_id}',     [AdminOrderController::class, 'ProcessingToPicked'])->name('processing.picked');
-        Route::get('/picked/shipped/{order_id}',        [AdminOrderController::class, 'PickedToShipped'])->name('picked.shipped');
-        Route::get('/shipped/delivered/{order_id}',     [AdminOrderController::class, 'ShippedToDelivered'])->name('shipped.delivered');
-        Route::get('/invoice/download/{order_id}',      [AdminOrderController::class, 'AdminInvoiceDownload'])->name('invoice.download');
+        Route::get('/pending/confirm/{order_id}',       [AdminOrderController::class, 'PendingToConfirm'])->name('wpadmin.orders.pending-confirm');
+        Route::get('/confirmed/processing/{order_id}',  [AdminOrderController::class, 'ConfirmToProcessing'])->name('wpadmin.orders.confirm.processing');
+        Route::get('/processing/picked/{order_id}',     [AdminOrderController::class, 'ProcessingToPicked'])->name('wpadmin.orders.processing.picked');
+        Route::get('/picked/shipped/{order_id}',        [AdminOrderController::class, 'PickedToShipped'])->name('wpadmin.orders.picked.shipped');
+        Route::get('/shipped/delivered/{order_id}',     [AdminOrderController::class, 'ShippedToDelivered'])->name('wpadmin.orders.shipped.delivered');
+        Route::get('/invoice/download/{order_id}',      [AdminOrderController::class, 'AdminInvoiceDownload'])->name('wpadmin.orders.invoice.download');
 
     });
 
     // Admin Reports Routes
     Route::prefix('reports')->group(function () {
 
-        Route::get('/view',              [ReportController::class, 'ReportView'])->name('all-reports');
-        Route::post('/search/by/date',   [ReportController::class, 'ReportByDate'])->name('search-by-date');
-        Route::post('/search/by/month',  [ReportController::class, 'ReportByMonth'])->name('search-by-month');
-        Route::post('/search/by/year',   [ReportController::class, 'ReportByYear'])->name('search-by-year');
+        Route::get('/',            [ReportController::class, 'ReportView'])->name('wpadmin.reports.all');
+
+        Route::prefix('search/by/')->group(function () {
+            Route::post('/date',   [ReportController::class, 'ReportByDate'])->name('wpadmin.reports.search-by-date');
+            Route::post('/month',  [ReportController::class, 'ReportByMonth'])->name('wpadmin.reports.search-by-month');
+            Route::post('/year',   [ReportController::class, 'ReportByYear'])->name('wpadmin.reports.search-by-year');
+        });
+
 
     });
 
