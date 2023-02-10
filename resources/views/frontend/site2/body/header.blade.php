@@ -30,7 +30,7 @@ $categories    = \App\Models\ProductCategory::where('cat_id', 0)->orderBy('name'
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route('checkout') }}">
                                 <i class="icon fa fa-check"></i> Checkout
                             </a>
                         </li>
@@ -195,6 +195,11 @@ $categories    = \App\Models\ProductCategory::where('cat_id', 0)->orderBy('name'
                                 <li class="dropdown yamm mega-menu">
                                     <a href="{{ route('shop') }}" >
                                         Shop
+                                    </a>
+                                </li>
+                                <li class="dropdown yamm mega-menu">
+                                    <a href="{{ route('my.orders') }}" >
+                                        My Orders
                                     </a>
                                 </li>
                                 <li class="dropdown yamm mega-menu">

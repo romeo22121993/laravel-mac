@@ -7,7 +7,6 @@ jQuery(document).ready(function() {
         }
     })
 
-
     /**
      * Function for products
      *
@@ -240,13 +239,12 @@ jQuery(document).ready(function() {
             dataType:'json',
             success:function(response){
 
-                console.log( 'response', response  );
 
                 $('span[id="cartSubTotal"]').text(response.cartTotal);
-                $('.cartTotalTd').text(response.cartTotal);
+                // $('.cartTotalTd').text(response.cartTotal);
                 $('span[id="cartSubQut"]').text(response.cartQty);
-                $('.cartQtyTd').text(response.cartQty);
-                $('#cartQty').text(response.cartQty);
+                // $('.cartQtyTd').text(response.cartQty);
+                // $('#cartQty').text(response.cartQty);
                 var miniCart = ""
 
                 $.each(response.carts, function(key,value){

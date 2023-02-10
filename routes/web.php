@@ -25,6 +25,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\StripeController;
 use App\Http\Controllers\Frontend\CashController;
+use App\Http\Controllers\Frontend\UserOrderController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
@@ -202,6 +203,48 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
         });
     });
 
+
+    // Admin Order All Routes
+    Route::prefix('orders')->group(function () {
+
+        Route::get('/pending/',                 [AdminOrderController::class, 'PendingOrders'])->name('wpadmin.orders.pending');
+        Route::get('/details/{order_id}',       [AdminOrderController::class, 'AdminOrdersDetails'])->name('wpadmin.orders.details');
+        Route::get('/confirmed',                [AdminOrderController::class, 'ConfirmedOrders'])->name('wpadmin.orders.confirmed');
+        Route::get('/processing',               [AdminOrderController::class, 'ProcessingOrders'])->name('wpadmin.orders.processing');
+        Route::get('/picked',                   [AdminOrderController::class, 'PickedOrders'])->name('wpadmin.orders.picked');
+        Route::get('/shipped',                  [AdminOrderController::class, 'ShippedOrders'])->name('wpadmin.orders.shipped');
+        Route::get('/delivered',                [AdminOrderController::class, 'DeliveredOrders'])->name('wpadmin.orders.delivered');
+        Route::get('/canceled',                 [AdminOrderController::class, 'CanceledOrders'])->name('wpadmin.orders.canceled');
+
+        // Update Status
+        Route::get('/pending/confirm/{order_id}',       [AdminOrderController::class, 'PendingToConfirm'])->name('wpadmin.orders.pending-confirm');
+        Route::get('/confirmed/processing/{order_id}',  [AdminOrderController::class, 'ConfirmToProcessing'])->name('wpadmin.orders.confirm.processing');
+        Route::get('/processing/picked/{order_id}',     [AdminOrderController::class, 'ProcessingToPicked'])->name('wpadmin.orders.processing.picked');
+        Route::get('/picked/shipped/{order_id}',        [AdminOrderController::class, 'PickedToShipped'])->name('wpadmin.orders.picked.shipped');
+        Route::get('/shipped/delivered/{order_id}',     [AdminOrderController::class, 'ShippedToDelivered'])->name('wpadmin.orders.shipped.delivered');
+        Route::get('/invoice/download/{order_id}',      [AdminOrderController::class, 'AdminInvoiceDownload'])->name('wpadmin.orders.invoice.download');
+
+    });
+
+    // Admin Reports Routes
+    Route::prefix('reports')->group(function () {
+
+        Route::get('/',            [ReportController::class, 'ReportView'])->name('wpadmin.reports.all');
+
+        Route::prefix('search/by/')->group(function () {
+            Route::post('/date',   [ReportController::class, 'ReportByDate'])->name('wpadmin.reports.search-by-date');
+            Route::post('/month',  [ReportController::class, 'ReportByMonth'])->name('wpadmin.reports.search-by-month');
+            Route::post('/year',   [ReportController::class, 'ReportByYear'])->name('wpadmin.reports.search-by-year');
+        });
+
+
+    });
+
+    // Admin Manage Stock Routes
+    Route::prefix('stock')->group(function () {
+        Route::get('/', [ProductController::class, 'ProductStock'])->name('wpadmin.product.stock');
+    });
+
 });
 
 /** All Pages without needed to log in */
@@ -304,12 +347,26 @@ Route::group(['middleware' => ['web']], function () {
 
     });
 
+    Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+
+        /// Order Traking Route
+        Route::post('/order/tracking',             [UserOrderController::class, 'OrderTraking'])->name('order.tracking');
+        Route::get('/my/orders',                   [UserOrderController::class, 'MyOrders'])->name('my.orders');
+        Route::get('/order_details/{order_id}',    [UserOrderController::class, 'OrderDetails']);
+        Route::get('/invoice_download/{order_id}', [UserOrderController::class, 'InvoiceDownload']);
+        Route::post('/return/order/{order_id}',    [UserOrderController::class, 'ReturnOrder'])->name('return.order');
+        Route::get('/return/order/list',           [UserOrderController::class, 'ReturnOrderList'])->name('return.order.list');
+        Route::get('/cancel/orders',               [UserOrderController::class, 'CancelOrders'])->name('cancel.orders');
+
+    });
+
+
 });
 
 
 /** !!! Routes from big ecommerce project  !!! */
 
-/* TODO later: chat-game page
+/* TODO later: chat-game page */
 Route::group(['middleware' => ['auth:sanctum', 'web']], function () {
     Route::get('/chat',            [ChatController::class, 'ChatVue'])->name('chat');
     Route::get('/chat-vue',        [ChatController::class, 'ChatVue1'])->name('chat1');
@@ -324,71 +381,6 @@ Route::group(['middleware' => ['auth:sanctum', 'web']], function () {
     Route::middleware('auth:sanctum')->get('/chat/rooms/{roomId}/messages',   [ChatController::class, 'messages']);
     Route::middleware('auth:sanctum')->post('/chat/rooms/{roomId}/messages',  [ChatController::class, 'newMessage']);
     Route::middleware('auth:sanctum')->post('/chat/rooms/create',             [ChatController::class, 'newRoom']);
-
-});
-*/
-
-/**
- * Admin All Routes
- */
-Route::group(['prefix' => 'wpadmin',  'middleware' => ['auth', 'isAdmin'] ], function () {
-
-    // TODO: all of it
-
-    // Admin Order All Routes
-    Route::prefix('orders')->group(function () {
-
-        Route::get('/pending/',                 [AdminOrderController::class, 'PendingOrders'])->name('wpadmin.orders.pending');
-        Route::get('/details/{order_id}',       [AdminOrderController::class, 'AdminOrdersDetails'])->name('wpadmin.orders.details');
-        Route::get('/confirmed',                [AdminOrderController::class, 'ConfirmedOrders'])->name('wpadmin.orders.confirmed');
-        Route::get('/processing',               [AdminOrderController::class, 'ProcessingOrders'])->name('wpadmin.orders.processing');
-        Route::get('/picked',                   [AdminOrderController::class, 'PickedOrders'])->name('wpadmin.orders.picked');
-        Route::get('/shipped',                  [AdminOrderController::class, 'ShippedOrders'])->name('wpadmin.orders.shipped');
-        Route::get('/delivered',                [AdminOrderController::class, 'DeliveredOrders'])->name('wpadmin.orders.delivered');
-        Route::get('/canceled',                 [AdminOrderController::class, 'CanceledOrders'])->name('wpadmin.orders.canceled');
-
-        // Update Status
-        Route::get('/pending/confirm/{order_id}',       [AdminOrderController::class, 'PendingToConfirm'])->name('wpadmin.orders.pending-confirm');
-        Route::get('/confirmed/processing/{order_id}',  [AdminOrderController::class, 'ConfirmToProcessing'])->name('wpadmin.orders.confirm.processing');
-        Route::get('/processing/picked/{order_id}',     [AdminOrderController::class, 'ProcessingToPicked'])->name('wpadmin.orders.processing.picked');
-        Route::get('/picked/shipped/{order_id}',        [AdminOrderController::class, 'PickedToShipped'])->name('wpadmin.orders.picked.shipped');
-        Route::get('/shipped/delivered/{order_id}',     [AdminOrderController::class, 'ShippedToDelivered'])->name('wpadmin.orders.shipped.delivered');
-        Route::get('/invoice/download/{order_id}',      [AdminOrderController::class, 'AdminInvoiceDownload'])->name('wpadmin.orders.invoice.download');
-
-    });
-
-    // Admin Reports Routes
-    Route::prefix('reports')->group(function () {
-
-        Route::get('/',            [ReportController::class, 'ReportView'])->name('wpadmin.reports.all');
-
-        Route::prefix('search/by/')->group(function () {
-            Route::post('/date',   [ReportController::class, 'ReportByDate'])->name('wpadmin.reports.search-by-date');
-            Route::post('/month',  [ReportController::class, 'ReportByMonth'])->name('wpadmin.reports.search-by-month');
-            Route::post('/year',   [ReportController::class, 'ReportByYear'])->name('wpadmin.reports.search-by-year');
-        });
-
-
-    });
-
-    // Admin Manage Stock Routes
-    Route::prefix('stock')->group(function () {
-        Route::get('/', [ProductController::class, 'ProductStock'])->name('wpadmin.product.stock');
-    });
-
-});
-
-/* TODO later: web frontend page */
-Route::group(['prefix' => 'user', 'middleware' => ['auth', 'user']], function () {
-
-    /// Order Traking Route
-    Route::post('/order/tracking',             [UserOrderController::class, 'OrderTraking'])->name('order.tracking');
-    Route::get('/my/orders',                   [UserOrderController::class, 'MyOrders'])->name('my.orders');
-    Route::get('/order_details/{order_id}',    [UserOrderController::class, 'OrderDetails']);
-    Route::get('/invoice_download/{order_id}', [UserOrderController::class, 'InvoiceDownload']);
-    Route::post('/return/order/{order_id}',    [UserOrderController::class, 'ReturnOrder'])->name('return.order');
-    Route::get('/return/order/list',           [UserOrderController::class, 'ReturnOrderList'])->name('return.order.list');
-    Route::get('/cancel/orders',               [UserOrderController::class, 'CancelOrders'])->name('cancel.orders');
 
 });
 

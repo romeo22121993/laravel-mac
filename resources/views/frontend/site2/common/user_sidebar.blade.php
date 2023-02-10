@@ -1,20 +1,9 @@
-@php
-
-    $id = Auth::user()->id;
-    $user = App\Models\User::find($id);
-
-@endphp
-
 
 <div class="col-md-2"><br>
-    <img class="card-img-top" style="border-radius: 50%" src="{{ (!empty($user->profile_photo_path))? url('upload/user_images/'.$user->profile_photo_path):url('upload/no_image.jpg') }}" height="100%" width="100%"><br><br>
+    <img class="card-img-top" style="border-radius: 50%" src="{{ (!empty($currentUser->avatar_img))? url('uploads/users/'.$currentUser->avatar_img):url('upload/no_image.jpg') }}" height="100%" width="100%"><br><br>
 
     <ul class="list-group list-group-flush">
-        <a href="{{ route('dashboard') }}" class="btn btn-primary btn-sm btn-block">Home</a>
-
-        <a href="{{ route('user.profile') }}" class="btn btn-primary btn-sm btn-block">Profile Update</a>
-
-        <a href="{{ route('user.change.password') }}" class="btn btn-primary btn-sm btn-block">Change Password </a>
+        <a href="{{ route('dashboard.main') }}" class="btn btn-primary btn-sm btn-block">Home</a>
 
         <a href="{{ route('my.orders') }}" class="btn btn-primary btn-sm btn-block">My Orders</a>
 
