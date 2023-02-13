@@ -203,14 +203,12 @@ $categories    = \App\Models\ProductCategory::where('cat_id', 0)->orderBy('name'
                                     </a>
                                 </li>
                                 <li class="dropdown yamm mega-menu">
-{{--                                    <a href="{{ route('chat1') }}" >--}}
-                                    <a href="" >
+                                    <a href="{{ route('chat1') }}" >
                                         Chat-Vue-Pusher
                                     </a>
                                 </li>
                                 <li class="dropdown yamm mega-menu">
-{{--                                    <a href="{{ route('game-tik-tok') }}" >--}}
-                                    <a href="" >
+                                    <a href="{{ route('game-tik-tok') }}" >
                                         Game Tic To
                                     </a>
                                 </li>

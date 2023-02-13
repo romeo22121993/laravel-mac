@@ -26,6 +26,8 @@ use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\StripeController;
 use App\Http\Controllers\Frontend\CashController;
 use App\Http\Controllers\Frontend\UserOrderController;
+use App\Http\Controllers\Frontend\GameController;
+use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;

@@ -5,7 +5,9 @@
  */
 
 import './bootstrap';
-import { createApp } from 'vue';
+// import { createApp } from 'vue';
+import { createApp } from "vue/dist/vue.esm-bundler";
+
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -15,8 +17,10 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
+import ExampleComponent1 from './Pages/Chat/container.vue';
+// import ExampleComponent from './components/ChatComponent.vue';
+app.component('component', ExampleComponent1);
+// app.component('container',  require('./Pages/Chat/container.vue').default);
 
 /**
  * The following block of code may be used to automatically register your

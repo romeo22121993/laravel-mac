@@ -23,6 +23,21 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'App\Events\NewChatMessage' => [
+            'App\Listeners\SendChatNotification'
+        ],
+        'App\Events\NewChatRoom' => [
+            'App\Listeners\SendRoomNotification'
+        ],
+        'App\Events\NewGame' => [
+            'App\Listeners\NewGameListener',
+        ],
+        'App\Events\Play' => [
+            'App\Listeners\PlayListener',
+        ],
+        'App\Events\GameOver' => [
+            'App\Listeners\GameOverListener',
+        ],
     ];
 
     /**
