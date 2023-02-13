@@ -240,6 +240,22 @@
                 </div>
             </li>
 
+            <li class="nav-item menu-items">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic11" aria-expanded="false" aria-controls="ui-basic11">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-laptop"></i>
+                    </span>
+                    <span class="menu-title">Courses</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic11">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.courses') }}">Courses</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.courses.categories') }}">Courses Categories</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.courses.add') }}">Add Coursee</a></li>
+                    </ul>
+                </div>
+            </li>
 
 
         @if(Auth::user()->setting == 1)

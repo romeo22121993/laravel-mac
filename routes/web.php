@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\CoursesController;
+use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PageController;
@@ -60,7 +62,7 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
     Route::get('/admin-guides',    [DashboardController::class, 'guidesPage'])->name('dashboard.guides');
 
 
-    // Ajax requests for frontend page
+    // Ajax requests for dashboard pages
     Route::group(['prefix'=> 'ajax'], function(){
         Route::post('/change-avatar',    [UserDashboardController::class, 'changeAvatar']);
         Route::post('/change-userdata',  [UserDashboardController::class, 'changeUserData']);
@@ -105,6 +107,27 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
             Route::get('/delete/{id}',  [PostCategoryController::class, 'DeletePostCategory'])->name('wpadmin.posts.categories.delete');
         });
     });
+
+
+    Route::group(['prefix'=> 'courses'], function() {
+        Route::get('/',              [CoursesController::class, 'coursesPage'])->name('wpadmin.courses');
+        Route::get('/add',           [CoursesController::class, 'addCourse'])->name('wpadmin.courses.add');
+        Route::post('/store',        [CoursesController::class, 'StoreCourse'])->name('wpadmin.courses.store');
+        Route::get('/edit/{id}',     [CoursesController::class, 'EditCourse'])->name('wpadmin.courses.edit');
+        Route::post('/update/{id}',  [CoursesController::class, 'UpdateCourse'])->name('wpadmin.courses.update');
+        Route::get('/delete/{id}',   [CoursesController::class, 'DeleteCourse'])->name('wpadmin.courses.delete');
+        Route::get('/category/{id}', [CoursesController::class, 'coursesPageByCategory'])->name('wpadmin.courses.by.categories');
+
+        Route::group(['prefix'=> 'categories'], function() {
+            Route::get('/',             [CourseCategoryController::class, 'coursesCategoryPage'])->name('wpadmin.courses.categories');
+            Route::get('/add',          [CourseCategoryController::class, 'addCourseCategory'])->name('wpadmin.courses.categories.add');
+            Route::post('/store',       [CourseCategoryController::class, 'StoreCourseCategory'])->name('wpadmin.courses.categories.store');
+            Route::get('/edit/{id}',    [CourseCategoryController::class, 'EditCourseCategory'])->name('wpadmin.courses.categories.edit');
+            Route::post('/update/{id}', [CourseCategoryController::class, 'UpdateCourseCategory'])->name('wpadmin.courses.categories.update');
+            Route::get('/delete/{id}',  [CourseCategoryController::class, 'DeleteCourseCategory'])->name('wpadmin.courses.categories.delete');
+        });
+    });
+
 
     Route::group(['prefix'=> 'pages'], function() {
         Route::get('/',             [PageController::class, 'pagesPage'])->name('wpadmin.pages');
