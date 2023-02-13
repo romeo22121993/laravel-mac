@@ -17,7 +17,8 @@
                     <div class="justify-content-start align-items-left">
                         <label for="user_image" class="custom-file-upload small">
                             <i class="fa fa-upload"></i>
-                            Upload new                    </label>
+                            Upload new
+                        </label>
                         <input type="file" required name="user_image" id="user_image"
                                value="Upload new" >
                     </div>
@@ -25,11 +26,11 @@
                 <img src="{{ asset('frontendDashboard/pluginAssets/img/loader.gif') }}"  id="loader-image" alt="loader" />
             </div>
             <div class="col-12 col-md-8">
-                <h3>Roman Last Name</h3>
-                <p>Roman LiveSite</p>
-                <p>position1</p>
-                <p>roman@growthlabs.info</p>
-                <p>395</p>
+                <h3>{{ $currentUser->firstname }} {{ $currentUser->lastname }}</h3>
+                <p>{{ $currentUser->firstname }} {{ $currentUser->lastname }}</p>
+                <p>{{ $currentUser->position }}</p>
+                <p>{{ $currentUser->email }}</p>
+                <p>{{ $currentUser->phone }}</p>
                 <p class="big">Connected Accounts</p>
                 <div class="d-flex flex-row justify-content-start align-items-center">
                     <a class="social-link" href="https://www.linkedin.com/in/valeriia-dziaruk/"><i class="fa fa-linkedin"></i></a>
@@ -186,7 +187,7 @@
                         <div class="card-header" id="headingTwo">
                             <div class="col-12 pl-0">
                                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#acc-info-2" aria-expanded="false" aria-controls="acc-info-2">
-                                    Contact Us                                <i class="fa fa-angle-right"></i>
+                                    Contact Us <i class="fa fa-angle-right"></i>
                                 </button>
                             </div>
                         </div>
@@ -194,7 +195,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 col-md-10">
-                                        <a href="mailto:info@advisorio.co" target="_blank" rel="nofollow">info@advisorio.co</a>
+                                        <a href="mailto:info@laravel.loc" target="_blank" rel="nofollow">info@laravel.loc</a>
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +213,7 @@
         </div>
     </div>
     <div class="mt-3">
-        <p>Advisor I/O 2023 -
+        <p>Laravel Pro 2023 -
             <a href="/privacy-policy/">Privacy Policy</a>
             -
             <a href="/terms-of-service/">Terms of Service</a>
@@ -220,7 +221,9 @@
     </div>
     <div class="mt-3">
         <p>
-            <a href="http://seven.loc/wp-login.php?action=logout&amp;_wpnonce=94e541e3af" class="logout_button">
-                Logout        </a>
+            <a href="{{ route('logout') }}" class="logout_button">
+                Logout
+            </a>
         </p>
-    </div>                </div>
+    </div>
+</div>

@@ -12,7 +12,7 @@
                             <a href="http://seven.loc/admin-dashboard/">
                                 <img src="{{ asset('frontendDashboard/themesAssets/dist/img/logo-dashboard.svg') }}" id="logo_style_image" alt="logo">
                             </a>
-                            <p id="welcome_p">Welcome, <span>viktoriav</span></p>
+                            <p id="welcome_p">Welcome, <span>{{ $currentUser->name }}</span></p>
                         </div>
 
                         <div class="col-11 col-sm col-md third_header order-3">
@@ -408,7 +408,7 @@
                                                     <a href="http://seven.loc/courses/start-here-welcome-to-advisor-i-o/" class="sv-notifications__link courses"
                                                        data-id="498" >
                                                                                     <span class="sv-notifications__event">
-                                                                                        <b>New Training</b> | Get Started with Advisor I/O                                                                                </span>
+                                                                                        <b>New Training</b> | Get Started with Laravel Pro                                                                                </span>
                                                         <span class="sv-notifications__time">3 months ago</span>
                                                     </a>
                                                 </li>
@@ -3983,8 +3983,8 @@
                                                 <li class="sv-notifications__item 2">
                                                     <a href="http://seven.loc/articles/building-a-balanced-portfolio/" class="sv-notifications__link articles"
                                                        data-id="2" >
-                                                                                    <span class="sv-notifications__event">
-                                                                                        <b>New Article</b> | Building a Balanced Portfolio                                                                                </span>
+                                                        <span class="sv-notifications__event">
+                                                        <b>New Article</b> | Building a Balanced Portfolio                                                                                </span>
                                                         <span class="sv-notifications__time">2 years ago</span>
                                                     </a>
                                                 </li>
@@ -3995,8 +3995,8 @@
                                     <div class="sv-user border-left d-flex flex-row align-items-center justify-content-end">
                                         <img src="http://seven.loc/wp-content/uploads/2021/04/ava_13.svg" alt="oval" class="logo_main logo_main_style "/>
                                         <div class="name-holder">
-                                            <p class="bold">viktoriav</p>
-                                            <p>Roman Last Name</p>
+                                            <p class="bold">{{ $currentUser->name }}</p>
+                                            <p>{{ $currentUser->firstname }} {{ $currentUser->lastname }}</p>
                                         </div>
                                         <a class="user-info" href="#"><i class="fa fa-angle-down"></i></a>
                                     </div>

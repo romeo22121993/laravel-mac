@@ -62,7 +62,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a href="http://seven.loc/courses/start-here-welcome-to-advisor-i-o/">Get Started with Advisor I/O</a>
+                                <a href="http://seven.loc/courses/start-here-welcome-to-advisor-i-o/">Get Started with Laravel Pro</a>
                                 <p class="grey"></p>
                             </td>
                             <td>6</td>

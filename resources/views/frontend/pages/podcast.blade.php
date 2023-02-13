@@ -505,7 +505,7 @@
                 </div>
                 <div class="podcast_block-item-text">
                     <div class="podcast_block-item-top-text">
-                        Wed Aug 10 2022 | Episode 109 | Advisor I/O, A CION Investments Company
+                        Wed Aug 10 2022 | Episode 109 | Laravel Pro, A CION Investments Company
                     </div>
                     <h4 class="podcast_block-item-title">
                         Building an Engaged Audience on Social: How Callie Cox and eToro Do It
@@ -562,7 +562,7 @@
                 </div>
                 <div class="podcast_block-item-text">
                     <div class="podcast_block-item-top-text">
-                        Wed Aug 03 2022 | Episode 108 | Advisor I/O, A CION Investments Company
+                        Wed Aug 03 2022 | Episode 108 | Laravel Pro, A CION Investments Company
                     </div>
                     <h4 class="podcast_block-item-title">
                         Shifting From Busy to Productive: A Conversation with SEI's Shauna Mace

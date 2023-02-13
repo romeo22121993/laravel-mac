@@ -64,7 +64,7 @@
                 <div class="col-xs-12 col-lg-4 d-flex d-lg-block contact-form__info">
                     <div class="contact-form__col">
                         <h4>Contact Info</h4>
-                        <a href="mailto:info@advisorio.co">info@advisorio.co</a>
+                        <a href="mailto:info@laravel.loc">info@laravel.loc</a>
                     </div>
 
                     <br><br>

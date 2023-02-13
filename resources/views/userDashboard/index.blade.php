@@ -121,7 +121,7 @@
                                             <p class="category item-topic">Platform Training</p>
                                             <h3 class="campaign__title">
                                                 <a href="http://seven.loc/courses/start-here-welcome-to-advisor-i-o/">
-                                                    Get Started with Advisor I/O                                                </a>
+                                                    Get Started with Laravel Pro                                                </a>
                                             </h3>
 
                                         </div>
@@ -152,7 +152,7 @@
                     <div class="row">
 
                         <div class="col-12">
-                            <h3>viktoriav: <p>Let’s take a look at your recent activity.</p>
+                            <h3>{{ $currentUser->name }}: <p>Let’s take a look at your recent activity.</p>
                             </h3>
                         </div>
                         <div class="col-12 col-md-4 border-r">
@@ -179,7 +179,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-12">
-                            <h4>Care to pick up where you left off?:                <a href="http://seven.loc/courses/start-here-welcome-to-advisor-i-o/">Get Started with Advisor I/O</a>
+                            <h4>Care to pick up where you left off?:                <a href="http://seven.loc/courses/start-here-welcome-to-advisor-i-o/">Get Started with Laravel Pro</a>
                             </h4>
                         </div>
                     </div>
@@ -375,7 +375,7 @@
                                 </div>
                                 <p>
                                     <a href="http://seven.loc/courses/start-here-welcome-to-advisor-i-o/" class="read-course" data-course-id="11009">
-                                        Get Started with Advisor I/O                    </a>
+                                        Get Started with Laravel Pro                    </a>
                                 </p>
                                 <p class="grey">In progress</p>
                             </div>

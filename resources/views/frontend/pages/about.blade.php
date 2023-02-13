@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <p class="bigger">Rooted in 20+ years of experience and hatched out of CION Investment Group, a leading alternatives platform, Advisor I/O enables financial advisors to build a sustainable marketing model. We’re a group of marketers, writers, analysts, and doers. </p>
+                    <p class="bigger">Rooted in 20+ years of experience and hatched out of CION Investment Group, a leading alternatives platform, Laravel Pro enables financial advisors to build a sustainable marketing model. We’re a group of marketers, writers, analysts, and doers. </p>
                 </div>
             </div>
         </div>

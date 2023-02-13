@@ -14,7 +14,7 @@
                 <div class="col-lg-8  col-xs-12 col-md-12 menus_footer">
                     <ul class="d-flex justify-content-between">
                         <li>
-                            <span class="a">Advisor I/O</span>
+                            <span class="a">Laravel Pro</span>
                             <ul><li class="menu_item"><a href="http://seven.loc/about/" >About Us</a></li>
                                 <li class="menu_item"><a href="http://seven.loc/platform/" >The Platform</a></li>
                                 <li class="menu_item"><a href="http://seven.loc/privacy-policy/" >Privacy Policy</a></li>
@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="separator"></div>
                 <div class="col-lg-6 col-xs-12 col-md-12">
-                    <p class="copyright">Copyright © 2023 Advisor I/O, LLC. All rights reserved.</p>
+                    <p class="copyright">Copyright © 2023 Laravel Pro, LLC. All rights reserved.</p>
                 </div>
                 <div class="separator"></div>
             </div>

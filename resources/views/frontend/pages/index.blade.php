@@ -91,8 +91,8 @@
                 </div>
                 <div class="col-lg-4">
                     <img src="{{ asset('frontendDashboard/themesAssets/dist/img/icon-logo_io.png') }}" style="max-width: 50px" alt="seven icon"/>
-                    <h2>Why Advisor I/O?</h2>
-                    <p class="bigger bigger_video_block" >Advisor I/O helps financial advisors get clear on their marketing and succeed in a digital world. With on-demand coaching, engaging content, and scalable tools, the platform and process help advisors drive growth and lower marketing costs over time.</p>
+                    <h2>Why Laravel Pro?</h2>
+                    <p class="bigger bigger_video_block" >Laravel Pro helps financial advisors get clear on their marketing and succeed in a digital world. With on-demand coaching, engaging content, and scalable tools, the platform and process help advisors drive growth and lower marketing costs over time.</p>
                 </div>
             </div>
         </div>

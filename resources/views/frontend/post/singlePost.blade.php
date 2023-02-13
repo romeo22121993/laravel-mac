@@ -26,7 +26,7 @@
                         <img src="{{ asset('uploads/posts/'.$post->img) }}" />
 
                         <h2>{{ $post->title }}</h2>
-                        <h4>by Advisor I/O</h4>
+                        <h4>by Laravel Pro</h4>
                     </div>
                 </div>
             </div>
