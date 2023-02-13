@@ -13,7 +13,9 @@
         <div class="row">
             <div class="col-12 col-md-4">
                 <form id="user-image" method="post" enctype="multipart/form-data" >
-                    <img src="http://seven.loc/wp-content/uploads/2021/04/ava_13.svg" alt="info-img" id="user_img_style" />
+                    <img
+                        src="@if( empty( $currentUser->avatar_img ) || ( $currentUser->avatar_img == 'none' ) ) {{ asset('/img/face.jpeg') }} @else {{ asset('/uploads/users/'.$currentUser->avatar_img) }}  @endif"
+                        alt="info-img" id="user_img_style" />
                     <div class="justify-content-start align-items-left">
                         <label for="user_image" class="custom-file-upload small">
                             <i class="fa fa-upload"></i>
@@ -81,90 +83,85 @@
                                     <div class="col-12">
                                         <form id="account-info" method="post">
 
-                                            <label for="credit-card" class="hidden">HubspotCollectedFormsWorkaround https://community.hubspot.com/t5/APIs-Integrations/How-to-stop-collected-forms-from-collecting-a-form/m-p/299172#M28102</label>
-
-                                            <label for="cc-num" class="hidden">credit card HubspotCollectedFormsWorkaround https://community.hubspot.com/t5/APIs-Integrations/How-to-stop-collected-forms-from-collecting-a-form/m-p/299172#M28102</label>
-                                            <input name="cc-num" class="hidden" required="" value="HubspotCollectedFormsWorkaround" id="cc-num">
-                                            <input class="hidden InputElement is-empty Input Input--empty" autocomplete="cc-number" autocorrect="off" spellcheck="false" type="text" name="cardnumber" data-elements-stable-field-name="cardNumber" inputmode="numeric" aria-label="Credit or debit card number" placeholder="Card number" aria-invalid="false" value="">
-
                                             <div class="row">
                                                 <div class="col-12 col-md-10">
                                                     <label for="" class="account-info-label">First Name *</label>
-                                                    <input type="text" class="form-control" name="first_name" required
+                                                    <input type="text" class="form-control" name="firstname" required
                                                            placeholder="First Name"
-                                                           value="Roman">
+                                                           value="{{ $currentUser->firstname }}">
                                                 </div>
                                                 <div class="col-12 col-md-10">
                                                     <label for="" class="account-info-label">Last Name *</label>
-                                                    <input type="text" class="form-control" name="last_name" required
+                                                    <input type="text" class="form-control" name="lastname" required
                                                            placeholder="Last Name"
-                                                           value="Last Name">
+                                                           value="{{ $currentUser->lastname }}">
                                                 </div>
                                                 <div class="col-12 col-md-10">
                                                     <label for="" class="account-info-label">Company Name *</label>
-                                                    <input type="text" class="form-control" name="name" required
+                                                    <input type="text" class="form-control" name="company" required
                                                            placeholder="Company Name"
-                                                           value="Roman LiveSite">
+                                                           value="{{ $currentUser->company }}">
                                                 </div>
                                                 <div class="col-12 col-md-10">
                                                     <label for="" class="account-info-label">Position *</label>
-                                                    <input type="text" class="form-control" name="job-title" required
+                                                    <input type="text" class="form-control" name="position" required
                                                            placeholder="Position"
-                                                           value="position1">
+                                                           value="{{ $currentUser->position }}">
                                                 </div>
                                                 <div class="col-12 col-md-10">
                                                     <label for="" class="account-info-label">Email *</label>
                                                     <input type="email" class="form-control" name="email" required
                                                            placeholder="Email"
-                                                           value="roman@growthlabs.info">
+                                                           value="{{ $currentUser->email }}">
                                                 </div>
                                                 <div class="col-12 col-md-10">
                                                     <label for="" class="account-info-label">Phone *</label>
                                                     <input type="text" class="form-control" name="phone" required
                                                            placeholder="Phone"
-                                                           value="395">
+                                                           value="{{ $currentUser->phone }}" >
                                                 </div>
                                                 <div class="col-12 col-md-10">
                                                     <label for="" class="account-info-label">Your Website *</label>
-                                                    <input type="text" class="form-control" name="custom_site" required
+                                                    <input type="text" class="form-control" name="custom_site"
                                                            placeholder="Your Website"
-                                                           value="http://seven.loc/">
+                                                           value="{{ $currentUser->custom_site }}">
                                                 </div>
                                                 <div class="col-12 col-md-10">
                                                     <label for="" class="account-info-label">Facebook</label>
                                                     <input type="text" class="form-control" name="fb_link"
                                                            placeholder="Facebook"
-                                                           value="https://qoders.co/">
+                                                           value="{{ $currentUser->fb_link }}" >
                                                 </div>
                                                 <div class="col-12 col-md-10">
                                                     <label for="" class="account-info-label">Twitter</label>
                                                     <input type="text" class="form-control" name="tw_link"
                                                            placeholder="Twitter"
-                                                           value="https://upqode.com/">
+                                                           value="{{ $currentUser->tw_link }}" >
                                                 </div>
                                                 <div class="col-12 col-md-10">
                                                     <label for="" class="account-info-label">Linkedin</label>
                                                     <input type="text" class="form-control" name="lnkd_link"
                                                            placeholder="Linkedin"
-                                                           value="https://www.linkedin.com/in/valeriia-dziaruk/">
+                                                           value="{{ $currentUser->lnkd_link }}" >
                                                 </div>
                                                 <div class="col-12 col-md-10">
                                                     <label for="" class="account-info-label">YouTube</label>
                                                     <input type="text" class="form-control" name="ytb_link"
                                                            placeholder="YouTube"
-                                                           value="youtube">
+                                                           value="{{ $currentUser->ytb_link }}" >
                                                 </div>
-                                                <div class="col-12 col-md-10">
-                                                    <label for="" class="account-info-label">Meeting Calendar</label>
-                                                    <input type="text" class="form-control" name="meet_link"
-                                                           placeholder="Meeting Calendar"
-                                                           value="https://apps.google.com/meet/">
-                                                </div>
-                                                <div class="col-12 col-md-10">
-                                                    <label for="" class="account-info-label">Article Disclosure</label>
-                                                    <textarea type="text" class="form-control" name="article_disclosure"
-                                                              placeholder="Article Disclosure">TEST</textarea>
-                                                </div>
+{{--                                                <div class="col-12 col-md-10">--}}
+{{--                                                    <label for="" class="account-info-label">Meeting Calendar</label>--}}
+{{--                                                    <input type="text" class="form-control" name="meet_link"--}}
+{{--                                                           placeholder="Meeting Calendar"--}}
+{{--                                                           value="{{ $currentUser->position }}"--}}
+{{--                                                           value="https://apps.google.com/meet/">--}}
+{{--                                                </div>--}}
+{{--                                                <div class="col-12 col-md-10">--}}
+{{--                                                    <label for="" class="account-info-label">Article Disclosure</label>--}}
+{{--                                                    <textarea type="text" class="form-control" name="article_disclosure"--}}
+{{--                                                              placeholder="Article Disclosure">TEST</textarea>--}}
+{{--                                                </div>--}}
                                                 <div class="col-12 col-md-10">
                                                     <label for="" class="account-info-label">Set New Password Here</label>
                                                     <input type="text" class="form-control" name="password"

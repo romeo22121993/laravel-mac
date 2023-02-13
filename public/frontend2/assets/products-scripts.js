@@ -46,7 +46,6 @@ jQuery(document).ready(function() {
                 success:function(result){
                     $("#searchProducts").html(result);
                 }
-
             });
 
         }

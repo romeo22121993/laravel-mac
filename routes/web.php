@@ -27,6 +27,7 @@ use App\Http\Controllers\Frontend\StripeController;
 use App\Http\Controllers\Frontend\CashController;
 use App\Http\Controllers\Frontend\UserOrderController;
 use App\Http\Controllers\Frontend\GameController;
+use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
@@ -57,6 +58,13 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
     Route::get('/admin-resources', [DashboardController::class, 'resourcesPage'])->name('dashboard.resources');
     Route::get('/admin-courses',   [DashboardController::class, 'coursesPage'])->name('dashboard.courses');
     Route::get('/admin-guides',    [DashboardController::class, 'guidesPage'])->name('dashboard.guides');
+
+
+    // Ajax requests for frontend page
+    Route::group(['prefix'=> 'ajax'], function(){
+        Route::post('/change-avatar',    [UserDashboardController::class, 'changeAvatar']);
+        Route::post('/change-userdata',  [UserDashboardController::class, 'changeUserData']);
+    });
 
 
 });
@@ -366,8 +374,6 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 
-/** !!! Routes from big ecommerce project  !!! */
-
 /* TODO later: chat-game page */
 Route::group(['middleware' => ['auth:sanctum', 'web']], function () {
     Route::get('/chat',            [ChatController::class, 'ChatVue'])->name('chat');
@@ -385,6 +391,3 @@ Route::group(['middleware' => ['auth:sanctum', 'web']], function () {
     Route::middleware('auth:sanctum')->post('/chat/rooms/create',             [ChatController::class, 'newRoom']);
 
 });
-
-
-/** !!! End of Routes from big ecommerce project  !!! */

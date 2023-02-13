@@ -1,14 +1,10 @@
 jQuery(document).ready(function ($) {
 
-    /**
-     * Fixing strange symbol error 'L-SEP'
-     *
-     */
-    if ( ( $(".page-about").length > 0 )|| (  $(".page-the-platform").length > 0 ) ) {
-        $("body").children().each(function () {
-            document.body.innerHTML = document.body.innerHTML.replace(/\u2028/g, ' ');
-        });
-    }
+    $.ajaxSetup({
+        headers:{
+            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+        }
+    })
 
     /**
      * Function of searching page
@@ -109,18 +105,14 @@ jQuery(document).ready(function ($) {
         $("form#account-info").on('submit', function (e) {
             $("#loader").show();
             e.preventDefault();
-            var info = {
-                data: $(this).serialize(),
-                action: 'edit_user_account'
-            };
 
             $.post({
-                url: get.ajaxurl,
-                data: info,
+                url: '/dashboard/ajax/change-userdata',
+                data:  $(this).serialize(),
                 success: function (data) {
                     $("#loader").hide();
                     // console.log(data);
-                    if ( data.status == 'Done' ) {
+                    if ( data.status == 'done' ) {
                         location.reload();
                     }
                 },
@@ -153,11 +145,13 @@ jQuery(document).ready(function ($) {
             form_data.append('action', 'user_image');
 
             $.post({
-                url: get.ajaxurl,
+                url: "/dashboard/ajax/change-avatar",
                 data: form_data,
                 contentType: false,
                 processData: false,
                 success: function (data) {
+                    console.log( 'data', data  )
+                    console.log( 'data.message', data.message  )
                     $("#loader-image").hide();
                     if ( data.message == 'done' ) {
                         console.log('done', data );
