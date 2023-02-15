@@ -37,9 +37,15 @@ class DashboardCoursesController extends Controller
      */
     public function coursesPage() {
 
+        $user = Auth::user();
         $courses = Course::paginate( $this->number );
+        $categories = CourseCategory::all();
 
-        return view('userDashboard.pages.courses', compact( 'courses' ) );
+        $courseProgress = $user->progress;
+        $completedCourses   = !empty( $courseProgress->completed_courses ) ? json_decode( $courseProgress->completed_courses, true ) : [];
+        $progressingCourses = !empty( $courseProgress->progressing_courses ) ? json_decode( $courseProgress->progressing_courses, true ) : [];
+
+        return view('userDashboard.pages.courses', compact( 'courses', 'categories', 'progressingCourses', 'completedCourses' ) );
     }
 
 
@@ -57,7 +63,6 @@ class DashboardCoursesController extends Controller
         $relatedCourses = Course::where( 'slug', '<>', $slug )->paginate(3);
         $user           = Auth::user();
 
-//        $courseProgress = $course->progress->where('user_id', $user->id );
         $courseProgress = $user->progress;
         $courseLessons  = $course->lessons;
 
@@ -173,7 +178,6 @@ class DashboardCoursesController extends Controller
         return array( 'error' => false, 'message' => 'Progress is got.', 'percentage' => $percentage );
 
     }
-
 
 
     /**
@@ -327,7 +331,6 @@ class DashboardCoursesController extends Controller
         return array( 'status' => 'Done' );
 
     }
-
 
 
     /**
