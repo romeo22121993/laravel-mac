@@ -23,7 +23,7 @@
                         <div class="dropdown-menu sorting-categories" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="all">All</a>
                             @foreach( $categories as $category )
-                                <a class="dropdown-item" href="{{ $category->slug }}">{{ $category->title }}</a>
+                                <a class="dropdown-item" href="{{ $category->id }}">{{ $category->title }}</a>
                             @endforeach
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                         </tbody>
                     </table>
 
-                    @if( $courses->total() >= 2 )
+                    @if( $courses->total() >= 1 )
                         <a id="load_more_button">Load More</a>
                     @endif
                 </div>

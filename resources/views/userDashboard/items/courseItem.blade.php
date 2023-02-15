@@ -13,7 +13,8 @@
 <tr>
     <td>
         <a href="{{ route('single.course', $course->slug ) }}">
-            <img src="http://seven.loc/wp-content/uploads/2020/04/Group_2.png" alt="img1">
+            <img
+                 src="@if( $course->img != 'none' ) {{ asset('/uploads/courses/'.$course->img) }} @else {{ asset('/img/none.jpg') }} @endif">
         </a>
     </td>
     <td>

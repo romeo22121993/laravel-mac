@@ -196,7 +196,7 @@ jQuery(document).ready(function ($) {
             };
 
             $.ajax({
-                url: get.ajaxurl,
+                url: '/dashboard/ajax/loadMoreCourses',
                 type: "POST",
                 data: data,
                 success:function(response) {
@@ -215,7 +215,6 @@ jQuery(document).ready(function ($) {
                         else  {
                             $("#load_more_button").show();
                         }
-
                     }
                     else {
                         $("#load_more_button").hide();
@@ -255,7 +254,7 @@ jQuery(document).ready(function ($) {
             };
 
             $.ajax({
-                url: get.ajaxurl,
+                url: '/dashboard/ajax/loadMoreCourses',
                 type: "POST",
                 data: data,
                 success:function(response) {

@@ -79,6 +79,8 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
         Route::post('/lastiteraction',   [DashboardCoursesController::class, 'lastIteractionFunction']);
 
 
+        Route::post('/loadMoreCourses', [DashboardCoursesController::class, 'LoadMoreCourses']);
+
     });
 
 

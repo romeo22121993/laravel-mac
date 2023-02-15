@@ -24,7 +24,7 @@ use App\Modules\VideosAPI;
 class DashboardCoursesController extends Controller
 {
 
-    protected $number = 3;
+    protected $number = 1;
 
     public function __construct(){
         $this->middleware('auth');
@@ -37,8 +37,8 @@ class DashboardCoursesController extends Controller
      */
     public function coursesPage() {
 
-        $user = Auth::user();
-        $courses = Course::paginate( $this->number );
+        $user       = Auth::user();
+        $courses    = Course::where('published', '=', 1)->paginate( $this->number );
         $categories = CourseCategory::all();
 
         $courseProgress = $user->progress;
@@ -337,7 +337,7 @@ class DashboardCoursesController extends Controller
      * Function callback for getting last iteraction of user
      *
      */
-    public function lastIteractionFunction(  Request $request )
+    public function lastIteractionFunction( Request $request )
     {
 
         $courseId       = ( !empty( $request->course_id ) ) ? $request->course_id : 0;
@@ -376,6 +376,80 @@ class DashboardCoursesController extends Controller
 
 
         return array( 'error' => false, 'done' => 1, 'message' => 'Iteraction is updated.' );
+    }
+
+
+    /**
+     * Callback function for loading posts
+     *
+     */
+    public function LoadMoreCourses( Request $request )
+    {
+
+        $paged    = !empty( $request->page ) ? $request->page : 0;
+        $getCat   = !empty( $request->get_cat ) ? $request->get_cat : 0;
+        $cpt_type = 'courses';
+
+        $user            = Auth::user();
+        $courseProgress = $user->progress;
+        $completedCourses   = !empty( $courseProgress->completed_courses ) ? json_decode( $courseProgress->completed_courses, true ) : [];
+        $progressingCourses = !empty( $courseProgress->progressing_courses ) ? json_decode( $courseProgress->progressing_courses, true ) : [];
+
+        if ( ( $request->total_count + $this->number ) < ( $this->number * $paged ) ) {
+            return false;
+        }
+
+        if ( ( $getCat == 'all' ) ) {
+            $courses      = Course::where('published', '=', 1)->paginate( $this->number );
+        }
+        else {
+            $cats        = CourseCategory::find( $getCat )->courses->pluck(['id']);
+            $courses     = Course::where('published', '=', 1)->whereIn('id', $cats )->paginate( $this->number );
+        }
+
+        $totalPost = $courses->total();
+
+        $result = $this->setHtmlLayout( $courses, $paged, $totalPost, $completedCourses, $progressingCourses );
+
+        return $result;
+
+    }
+
+    /**
+     * Function setting html for ajax request
+     *
+     * @param $courses
+     * @param $paged
+     * @param $totalPost
+     * @param $completedCourses
+     * @param $progressingCourses
+     *
+     * @return array|void
+     */
+    private function setHtmlLayout( $courses, $paged, $totalPost, $completedCourses, $progressingCourses ) {
+
+        $paged = (int)$paged;
+
+
+        if ( !empty( $courses ) ) {
+            $result = [];
+
+            $html = '';
+            foreach ( $courses as $course ) {
+                $html .=  view('userDashboard.items.courseItem',
+                    compact('course', 'completedCourses', 'progressingCourses' ) )->render();
+            }
+
+            $result['html']  = $html;
+            $result['count'] = ( $paged > 1 ) ? count( $courses ) + ( ( $paged - 1 ) * $this->number) : count( $courses ) * $paged;
+            $result['total'] = $this->number * $paged;
+            $result['all']   = $totalPost;
+            $result['page']  = $paged;
+
+            return $result;
+
+        }
+
     }
 
 }
