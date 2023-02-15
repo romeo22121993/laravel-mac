@@ -110,7 +110,7 @@
                                 <div class="campaign" id="11009">
                                     <div class="item " style="width: auto;">
                                         <p class="article_label_p Coaching" >
-                                            <a href="http://seven.loc/admin-training/"><b>Coaching</b></a>
+                                            <a href="{{ route('dashboard.courses') }}"><b>Coaching</b></a>
                                         </p>
                                         <div id="video_module_block1" class="item-image "
                                              data-vimeo-url="https://vimeo.com/758449481/ebe266da72"

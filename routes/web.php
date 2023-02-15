@@ -34,6 +34,7 @@ use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
+use App\Http\Controllers\Subscriber\DashboardCoursesController;
 use App\Modules\VideosAPI;
 
 use App\Http\Controllers\Subscriber\DashboardController;
@@ -59,10 +60,10 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
     Route::get('/admin-articles',  [DashboardController::class, 'articlesPage'])->name('dashboard.articles');
     Route::get('/admin-campaigns', [DashboardController::class, 'campaignPage'])->name('dashboard.campaigns');
     Route::get('/admin-resources', [DashboardController::class, 'resourcesPage'])->name('dashboard.resources');
-    Route::get('/admin-courses',   [DashboardController::class, 'coursesPage'])->name('dashboard.courses');
+    Route::get('/admin-courses',   [DashboardCoursesController::class, 'coursesPage'])->name('dashboard.courses');
     Route::get('/admin-guides',    [DashboardController::class, 'guidesPage'])->name('dashboard.guides');
 
-    Route::get('/courses/{slug}', [CoursesController::class, 'singleCoursePage'])->name('single.course');
+    Route::get('/courses/{slug}',  [DashboardCoursesController::class, 'singleCoursePage'])->name('single.course');
 
 
     // Ajax requests for dashboard pages
@@ -70,12 +71,12 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
         Route::post('/change-avatar',    [UserDashboardController::class, 'changeAvatar']);
         Route::post('/change-userdata',  [UserDashboardController::class, 'changeUserData']);
 
-        Route::post('/progress-lesson',  [CoursesController::class, 'progressLesson']);
-        Route::post('/progress-course',  [CoursesController::class, 'progressCourse']);
-        Route::post('/complete-course',  [CoursesController::class, 'completeCourse']);
-        Route::post('/read-course',      [CoursesController::class, 'readCourse']);
+        Route::post('/progress-lesson',  [DashboardCoursesController::class, 'progressLesson']);
+        Route::post('/progress-course',  [DashboardCoursesController::class, 'progressCourse']);
+        Route::post('/complete-course',  [DashboardCoursesController::class, 'completeCourse']);
+        Route::post('/read-course',      [DashboardCoursesController::class, 'readCourse']);
 
-        Route::post('/lastiteraction',   [CoursesController::class, 'lastIteractionFunction']);
+        Route::post('/lastiteraction',   [DashboardCoursesController::class, 'lastIteractionFunction']);
 
 
     });

@@ -39,13 +39,13 @@
             <div class="container video-player training">
                 <div class="row">
                     <div class="container container_back_modules">
-                        <a href="http://seven.loc/admin-training/">Back to All</a>
+                        <a href="{{ route('dashboard.courses') }}">Back to All</a>
                     </div>
                 </div>
                 <div class="row mobile_block">
                     <div class="col-12 video-title mt-5 mt-md-0">
                         <label>Get Started with Advisor I/O</label>
-                        <p>An Introduction to Get Started with Advisor I/O</p>
+                        <p>{{ $course->title }}</p>
                         <div class="progress_bar" >
                             <span class="percent_count"> {{ $percentage }}</span> % of 100%
                             ( <span class="int_count"> {{ $total }}</span> of  <span class="all_count">{{ $allCount }}</span> )
