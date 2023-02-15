@@ -33,6 +33,7 @@
 
     @yield('individual_styles')
 
+    <script type='text/javascript' src='{{ asset('frontendDashboard/pluginAssets/courses.js') }}' id='moment-js-js'></script>
     <script type='text/javascript' src='{{ asset('frontendDashboard/pluginAssets/js/moment.min.js') }}' id='moment-js-js'></script>
     <script type='text/javascript' src='{{ asset('frontendDashboard/pluginAssets/js/moment-timezone.js') }}' id='moment-timezone-js-js'></script>
     <script type='text/javascript' src='{{ asset('frontendDashboard/pluginAssets/js/sv-calendar.js') }}' id='sv-calendar-js-js'></script>

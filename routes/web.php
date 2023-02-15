@@ -34,6 +34,7 @@ use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
+use App\Modules\VideosAPI;
 
 use App\Http\Controllers\Subscriber\DashboardController;
 
@@ -61,11 +62,22 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
     Route::get('/admin-courses',   [DashboardController::class, 'coursesPage'])->name('dashboard.courses');
     Route::get('/admin-guides',    [DashboardController::class, 'guidesPage'])->name('dashboard.guides');
 
+    Route::get('/courses/{slug}', [CoursesController::class, 'singleCoursePage'])->name('single.course');
+
 
     // Ajax requests for dashboard pages
     Route::group(['prefix'=> 'ajax'], function(){
         Route::post('/change-avatar',    [UserDashboardController::class, 'changeAvatar']);
         Route::post('/change-userdata',  [UserDashboardController::class, 'changeUserData']);
+
+        Route::post('/progress-lesson',  [CoursesController::class, 'progressLesson']);
+        Route::post('/progress-course',  [CoursesController::class, 'progressCourse']);
+        Route::post('/complete-course',  [CoursesController::class, 'completeCourse']);
+        Route::post('/read-course',      [CoursesController::class, 'readCourse']);
+
+        Route::post('/lastiteraction',   [CoursesController::class, 'lastIteractionFunction']);
+
+
     });
 
 
@@ -299,7 +311,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/contact',  [FrontendController::class, 'contactPage'])->name('contact');
     Route::get('/about',    [FrontendController::class, 'aboutPage'])->name('about');
 
-    Route::get('/post/{slug}', [FrontendPostController::class, 'singlePostPage'])->name('single.post');
+    Route::get('/post/{slug}',    [FrontendPostController::class, 'singlePostPage'])->name('single.post');
 
     // Ajax requests for frontend page
     Route::group(['prefix'=> 'ajax'], function(){

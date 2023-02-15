@@ -6,6 +6,7 @@ use App\Models\CourseCategory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\PostCategory;
+use App\Models\CourseProgress;
 
 class Course extends Model
 {
@@ -43,5 +44,13 @@ class Course extends Model
     {
         return $this->hasOne(CourseLesson::class);
     }
+
+    /**
+     * Get all of the categories by Post
+     */
+//    public function progress()
+//    {
+//        return $this->hasOne(CourseProgress::class);
+//    }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\CourseProgress;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,5 +48,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function progress()
+    {
+        return $this->hasOne(CourseProgress::class );
+    }
+
 
 }

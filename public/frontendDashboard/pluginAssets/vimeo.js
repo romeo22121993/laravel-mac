@@ -1,3 +1,10 @@
+$.ajaxSetup({
+    headers:{
+        'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+    }
+})
+
+
 var autoplay = localStorage.getItem( 'video-autoplay' );
 var player = new Vimeo.Player('player');
 
@@ -13,16 +20,13 @@ if ( autoplay == 1 ) {
 }
 
 player.on( 'progress', (data) => {
-    console.log('data.percent ', data.percent );
+
     if ( data.percent == 1 ){
         //Manually set the data to 100
         // data.percent = 1;
         //Remove the listeners
         player.off('pause');
         // player.off('progress');
-    }
-    else {
-        updateProgress( data, 'seeked' );
     }
 
 });
@@ -58,16 +62,15 @@ player.on( 'pause', function() {
                 lesson_name:   lesson_name,
                 parent_index:  parseInt(parent_index),
                 active_index:  parseInt(active_index),
-                action:        'progress_lesson'
+                action: 'progress-lesson'
             };
 
             console.log( 'data', data);
             $.post({
-                url: get.ajaxurl,
+                url: '/dashboard/ajax/progress-lesson',
                 data: data,
                 success: function (data) {
                     console.log('red',data);
-                    // alert('success pause');
                     var percent = data.percentage;
                     $(".video-player li.lesson.active").find(".progress .progress-bar").css( 'width', percent+'%' );
                     $(".video-player li.lesson.active").find(".progress .progress-bar").attr( 'aria-valuenow', percent );
@@ -125,16 +128,16 @@ player.on( 'ended', function() {
                 lesson_link:   lesson_link,
                 parent_index:  parseInt(parent_index),
                 active_index:  parseInt(active_index),
-                action:        'progress_course'
+                action: 'progress-course'
             };
 
             console.log('data', data);
             $.post({
-                url: get.ajaxurl,
+                url: '/dashboard/ajax/progress-course',
                 data: data,
                 success: function ( data ) {
-                    // alert('finished');
-                    console.log(data);
+                    alert('finished');
+                    console.log( 'progress-course data', data);
                     $(".progress_bar .percent_count, .percent_count .count").text(data.data.percentage);
                     $(".circle_progress_bar").attr('data-value', data.data.percentage );
                     $(".progress_bar .int_count").text(data.data.total);
