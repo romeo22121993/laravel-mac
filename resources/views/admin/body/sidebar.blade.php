@@ -257,6 +257,23 @@
                 </div>
             </li>
 
+            <li class="nav-item menu-items">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic12" aria-expanded="false" aria-controls="ui-basic12">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-laptop"></i>
+                    </span>
+                    <span class="menu-title">Guides</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic12">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.guides') }}">Guides</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.guides.categories') }}">Guide Categories</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.guides.add') }}">Add Guide</a></li>
+                    </ul>
+                </div>
+            </li>
+
 
         @if(Auth::user()->setting == 1)
             <li class="nav-item menu-items">

@@ -20,6 +20,8 @@ use App\Http\Controllers\Admin\ProductBrandController;
 use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\GuideController;
+use App\Http\Controllers\Admin\GuideCategoryController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\WishlistController;
@@ -120,6 +122,26 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
             Route::get('/edit/{id}',    [PostCategoryController::class, 'EditPostCategory'])->name('wpadmin.posts.categories.edit');
             Route::post('/update/{id}', [PostCategoryController::class, 'UpdatePostCategory'])->name('wpadmin.posts.categories.update');
             Route::get('/delete/{id}',  [PostCategoryController::class, 'DeletePostCategory'])->name('wpadmin.posts.categories.delete');
+        });
+    });
+
+
+    Route::group(['prefix'=> 'guides'], function() {
+        Route::get('/',              [GuideController::class, 'guidesPage'])->name('wpadmin.guides');
+        Route::get('/add',           [GuideController::class, 'addGuide'])->name('wpadmin.guides.add');
+        Route::post('/store',        [GuideController::class, 'StoreGuide'])->name('wpadmin.guides.store');
+        Route::get('/edit/{id}',     [GuideController::class, 'EditGuide'])->name('wpadmin.guides.edit');
+        Route::post('/update/{id}',  [GuideController::class, 'UpdateGuide'])->name('wpadmin.guides.update');
+        Route::get('/delete/{id}',   [GuideController::class, 'DeleteGuide'])->name('wpadmin.guides.delete');
+        Route::get('/category/{id}', [GuideController::class, 'guidesPageByCategory'])->name('wpadmin.guides.by.categories');
+
+        Route::group(['prefix'=> 'categories'], function() {
+            Route::get('/',             [GuideCategoryController::class, 'guidesCategoryPage'])->name('wpadmin.guides.categories');
+            Route::get('/add',          [GuideCategoryController::class, 'addGuideCategory'])->name('wpadmin.guides.categories.add');
+            Route::post('/store',       [GuideCategoryController::class, 'StoreGuideCategory'])->name('wpadmin.guides.categories.store');
+            Route::get('/edit/{id}',    [GuideCategoryController::class, 'EditGuideCategory'])->name('wpadmin.guides.categories.edit');
+            Route::post('/update/{id}', [GuideCategoryController::class, 'UpdateGuideCategory'])->name('wpadmin.guides.categories.update');
+            Route::get('/delete/{id}',  [GuideCategoryController::class, 'DeleteGuideCategory'])->name('wpadmin.guides.categories.delete');
         });
     });
 
