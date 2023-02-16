@@ -390,8 +390,8 @@ class DashboardCoursesController extends Controller
         $getCat   = !empty( $request->get_cat ) ? $request->get_cat : 0;
         $cpt_type = 'courses';
 
-        $user            = Auth::user();
-        $courseProgress = $user->progress;
+        $user               = Auth::user();
+        $courseProgress     = $user->progress;
         $completedCourses   = !empty( $courseProgress->completed_courses ) ? json_decode( $courseProgress->completed_courses, true ) : [];
         $progressingCourses = !empty( $courseProgress->progressing_courses ) ? json_decode( $courseProgress->progressing_courses, true ) : [];
 

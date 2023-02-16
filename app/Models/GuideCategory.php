@@ -22,8 +22,6 @@ class GuideCategory extends Model
 
     protected $table = 'guideCategories';
 
-    // TODO: many to many
-
     /**
     * Get all of the post by Category
     */

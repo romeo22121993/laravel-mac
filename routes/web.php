@@ -37,6 +37,7 @@ use App\Http\Controllers\Frontend\ContactController as FrontendContactController
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\Subscriber\DashboardCoursesController;
+use App\Http\Controllers\Subscriber\DashboardGuidesController;
 use App\Modules\VideosAPI;
 
 use App\Http\Controllers\Subscriber\DashboardController;
@@ -63,7 +64,7 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
     Route::get('/admin-campaigns', [DashboardController::class, 'campaignPage'])->name('dashboard.campaigns');
     Route::get('/admin-resources', [DashboardController::class, 'resourcesPage'])->name('dashboard.resources');
     Route::get('/admin-courses',   [DashboardCoursesController::class, 'coursesPage'])->name('dashboard.courses');
-    Route::get('/admin-guides',    [DashboardController::class, 'guidesPage'])->name('dashboard.guides');
+    Route::get('/admin-guides',    [DashboardGuidesController::class, 'guidesPage'])->name('dashboard.guides');
 
     Route::get('/courses/{slug}',  [DashboardCoursesController::class, 'singleCoursePage'])->name('single.course');
 
@@ -82,6 +83,7 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
 
 
         Route::post('/loadMoreCourses', [DashboardCoursesController::class, 'LoadMoreCourses']);
+        Route::post('/loadMoreGuides',  [DashboardGuidesController::class, 'LoadMoreGuides']);
 
     });
 

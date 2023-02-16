@@ -33,7 +33,7 @@ class DashboardController extends Controller
 
         $usersCount = User::count();
 
-        return view('userDashboard.index', compact( 'usersCount'));
+        return view('userDashboard.pages.index', compact( 'usersCount'));
 
     }
 

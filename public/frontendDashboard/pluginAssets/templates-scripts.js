@@ -28,7 +28,7 @@
 
         $.ajax( {
             type: "POST",
-            url: get.ajaxurl,
+            url: '/dashboard/ajax/loadMoreGuides',
             data: fltrForm.serialize(),
             dataType: "json",
             beforeSend: function () {
@@ -55,6 +55,7 @@
                     }
 
                 }
+
                 if ( resp.button !== undefined ) {
                     frame_button.html( resp.button.trim() );
                 }
@@ -62,6 +63,7 @@
                 $( 'body' ).removeClass( 'processing' );
             },
         } );
+
         return false;
     }
 
