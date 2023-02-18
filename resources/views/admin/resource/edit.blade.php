@@ -1,7 +1,7 @@
 @extends('admin.admin_master')
 
 @section('title')
-    Edit Guide
+    Edit Resource
 @endsection
 
 @section('admin_content')
@@ -12,7 +12,7 @@
         <div class="col-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Edit Guide</h4>
+                    <h4 class="card-title">Edit Resource</h4>
 
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -24,19 +24,19 @@
                         </div>
                     @endif
 
-                    <form class="forms-sample" action="{{ route('wpadmin.guides.update', $guide->id) }}" method="post" enctype="multipart/form-data">
+                    <form class="forms-sample" action="{{ route('wpadmin.resources.update', $resource->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="exampleInputName1">Guide Title</label>
-                                <input type="text" class="form-control" name="title" value="{{ $guide->title }}">
+                                <label for="exampleInputName1">Resource Title</label>
+                                <input type="text" class="form-control" name="title" value="{{ $resource->title }}">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="exampleInputName1">Category</label>
                                 <select class="form-control" id="exampleSelectGender" name="categories[]" multiple="">
                                     @foreach( $categories as $category )
-                                        <option value="{{ $category->id }}" @if ( in_array( $category->id, $guideCategories )) selected @endif>
+                                        <option value="{{ $category->id }}" @if ( in_array( $category->id, $resourceCategories )) selected @endif>
                                             {{ $category->title }}
                                         </option>
                                     @endforeach
@@ -50,9 +50,9 @@
                                 <label>Featured Image Type</label>
                                 <input type="file" name="img" class="form-control-file" id="exampleFormControlFile1">
 
-                                <img src="{{ '/' . $guide->img }}">
+                                <img src="{{ '/' . $resource->img }}">
 
-                                <a href="{{ route('wpadmin.guides.delete.image', $guide->id) }}">Delete image from Guide</a>
+                                <a href="{{ route('wpadmin.resources.delete.image', $resource->id) }}">Delete image from Resource</a>
                             </div>
                         </div>
 
@@ -63,28 +63,28 @@
                                     <p>
                                         <label for="exampleFormControlFile1">Png File</label>
                                         <input type="radio" name="doc_type" value="png" class="form-control-file" id="exampleFormControlFile1"
-                                            @if( $guide->doc_type == 'png' ) checked @endif
+                                            @if( $resource->doc_type == 'png' ) checked @endif
                                         >
                                     </p>
 
                                     <p>
                                         <label for="exampleFormControlFile2">Word File</label>
                                         <input type="radio" name="doc_type" value="word" class="form-control-file" id="exampleFormControlFile2"
-                                               @if( $guide->doc_type == 'word' ) checked @endif
+                                               @if( $resource->doc_type == 'word' ) checked @endif
                                         >
                                     </p>
 
                                     <p>
                                         <label for="exampleFormControlFile3">Ppt File</label>
                                         <input type="radio" name="doc_type" value="ppt" class="form-control-file" id="exampleFormControlFile3"
-                                               @if( $guide->doc_type == 'ppt' ) checked @endif
+                                               @if( $resource->doc_type == 'ppt' ) checked @endif
                                         >
                                     </p>
 
                                     <p>
                                         <label for="exampleFormControlFile4">Pdf File</label>
                                         <input type="radio" name="doc_type" value="pdf" class="form-control-file" id="exampleFormControlFile4"
-                                               @if( $guide->doc_type == 'pdf' ) checked @endif
+                                               @if( $resource->doc_type == 'pdf' ) checked @endif
                                         >
                                     </p>
 
@@ -94,7 +94,7 @@
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1">Document File( png, word, ppt or pdf) </label>
                                     <input type="file" name="doc_file" class="form-control-file" id="exampleFormControlFile1">
-                                    <span>{{ $guide->doc_file }}</span>
+                                    <span>{{ $resource->doc_file }}</span>
                                 </div>
                             </div>
                         </div>

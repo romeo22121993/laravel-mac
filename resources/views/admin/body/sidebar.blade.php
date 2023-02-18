@@ -274,46 +274,25 @@
                 </div>
             </li>
 
-
-        @if(Auth::user()->setting == 1)
             <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#settings" aria-expanded="false" aria-controls="ui-basic">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic13" aria-expanded="false" aria-controls="ui-basic13">
                     <span class="menu-icon">
                         <i class="mdi mdi-laptop"></i>
                     </span>
-                    <span class="menu-title">Settings</span>
+                    <span class="menu-title">Resources</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse" id="settings">
+                <div class="collapse" id="ui-basic13">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('settings.socials') }}">Social Settings</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('settings.seo') }}">SEO Settings</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('settings.prayers') }}">Prayers Settings</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('settings.livetv') }}">Live TV Settings</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('settings.notices') }}">Notices Settings</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('website.setting') }}">Website Settings </a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.resources') }}">Resources</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.resources.categories') }}">Resource Categories</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.resources.add') }}">Add Resource</a></li>
                     </ul>
                 </div>
             </li>
-            @endif
 
-            @if(Auth::user()->website == 1)
-            <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#websites" aria-expanded="false" aria-controls="ui-basic">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-laptop"></i>
-                    </span>
-                    <span class="menu-title">Websites</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="websites">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('settings.website.add') }}">Add Website</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('settings.website') }}">All Websites</a></li>
-                    </ul>
-                </div>
-            </li>
-            @endif
+
+
 
         </ul>
     </nav>

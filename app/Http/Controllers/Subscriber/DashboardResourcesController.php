@@ -8,8 +8,8 @@ use App\Models\Course;
 use App\Models\CourseIteration;
 use App\Models\CourseLesson;
 use App\Models\CourseProgress;
-use App\Models\Guide;
-use App\Models\GuideCategory;
+use App\Models\Resource;
+use App\Models\ResourceCategory;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Validator;
 use Image;
 use App\Modules\VideosAPI;
 
-class DashboardGuidesController extends Controller
+class DashboardResourcesController extends Controller
 {
 
     protected $number = 1;
@@ -33,51 +33,50 @@ class DashboardGuidesController extends Controller
     }
 
     /**
-     * main guides page in dashboard
+     * Main resources page in dashboard
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function guidesPage( )
-    {
+    public function resourcesPage( ) {
 
-        $guides = Guide::paginate( $this->number );
-        $categories = GuideCategory::all();
+        $resources  = Resource::paginate( $this->number );
+        $categories = ResourceCategory::all();
 
-        return view('userDashboard.pages.guides', compact( 'guides', 'categories' ) );
+        return view('userDashboard.pages.resources', compact( 'resources', 'categories' ) );
     }
 
     /**
      * Callback function for loading posts
      *
      */
-    public function LoadMoreGuides( Request $request )
+    public function LoadMoreResources( Request $request )
     {
 
         $paged    = !empty( $request->page ) ? $request->page : 1;
         $getCat   = !empty( $request->category ) ? $request->category : 0;
         $docType  = !empty( $request->doc_type ) ? $request->doc_type : 'all';
 
-        $user            = Auth::user();
+        $user     = Auth::user();
 
         if ( ( $getCat == 'all' ) ) {
-            $guides = ( $docType != 'all' ) ?
-                Guide::where('doc_type', $docType )->paginate( $this->number )
+            $resources = ( $docType != 'all' ) ?
+                Resource::where('doc_type', $docType )->paginate( $this->number )
                 :
-                Guide::paginate( $this->number );
+                Resource::paginate( $this->number );
         }
         else {
-            $cats  = GuideCategory::find($getCat)->guides->pluck(['id']);
+            $cats  = ResourceCategory::find($getCat)->guides->pluck(['id']);
 
-            $guides = ( $docType == 'all' ) ?
-                Guide::whereIn('id', $cats)->paginate($this->number)
+            $resources = ( $docType == 'all' ) ?
+                Resource::whereIn('id', $cats)->paginate($this->number)
                 :
-            Guide::where('doc_type', $docType )->whereIn('id', $cats)->paginate($this->number);
+                Resource::where('doc_type', $docType )->whereIn('id', $cats)->paginate($this->number);
 
         }
 
-        $totalPost = $guides->total();
+        $totalPost = $resources->total();
 
-        $result = $this->setHtmlLayout( $guides, $paged, $totalPost );
+        $result = $this->setHtmlLayout( $resources, $paged, $totalPost );
 
         return $result;
 
@@ -86,29 +85,28 @@ class DashboardGuidesController extends Controller
     /**
      * Function setting html for ajax request
      *
-     * @param $guides
+     * @param $resources
      * @param $paged
      * @param $totalPost
      *
      * @return array|void
      */
-    private function setHtmlLayout( $guides, $paged, $totalPost )
-    {
+    private function setHtmlLayout( $resources, $paged, $totalPost ) {
 
         $paged = (int)$paged;
 
-        if ( !empty( $guides ) ) {
+        if ( !empty( $resources ) ) {
             $result = [];
 
             $html = '';
-            foreach ( $guides as $guide ) {
-                $html .=  view('userDashboard.items.guideItem',
-                    compact('guide' ) )->render();
+            foreach ( $resources as $resource ) {
+                $html .=  view('userDashboard.items.resourceItem',
+                    compact('resource' ) )->render();
             }
 
             $result['html']  = $html;
             $result['button' ] = $this->get_loadmore_button( $totalPost, $paged  );
-            $result['count'] = ( $paged > 1 ) ? count( $guides ) + ( ( $paged - 1 ) * $this->number) : count( $guides ) * $paged;
+            $result['count'] = ( $paged > 1 ) ? count( $resources ) + ( ( $paged - 1 ) * $this->number) : count( $resources ) * $paged;
             $result['total'] = $this->number * $paged;
             $result['all']   = $totalPost;
             $result['page']  = $paged;

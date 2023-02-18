@@ -1,7 +1,7 @@
 @extends('userDashboard.master')
 
 @section('title')
-    Guides Page
+    Resources Page
 @endsection
 
 @section('content')
@@ -10,10 +10,10 @@
         <div class="sv-filter">
             <div class="sv-filter__top">
                 <h3 class="sv-filter__title">
-                    Coaching Guides
+                    Coaching Resources
                 </h3>
                 <p class="sv-filter__description">
-                    Coaching Guides provide walkthroughs, step-by-step instructions with screenshots, process flows and narratives to help you with your brand strategy, marketing plan, and content creation and distribution.
+                    Coaching Resources provide walkthroughs, step-by-step instructions with screenshots, process flows and narratives to help you with your brand strategy, marketing plan, and content creation and distribution.
                 </p>
             </div>
 
@@ -58,8 +58,8 @@
             <div class="col-12">
 
                 <div class="template-items htmlAjaxFrame">
-                    @foreach( $guides as $guide )
-                        @include('userDashboard.items.guideItem')
+                    @foreach( $resources as $resource )
+                        @include('userDashboard.items.resourceItem')
                     @endforeach
                 </div>
 
@@ -85,5 +85,5 @@
 @endsection
 
 @section('individual_scripts')
-    <script type='text/javascript' src='{{ asset('frontendDashboard/pluginAssets/guides-scripts.js') }}' id='admin-script-js'></script>
+    <script type='text/javascript' src='{{ asset('frontendDashboard/pluginAssets/resources-scripts.js') }}' id='admin-script-js'></script>
 @endsection

@@ -22,6 +22,8 @@ use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\GuideController;
 use App\Http\Controllers\Admin\GuideCategoryController;
+use App\Http\Controllers\Admin\ResourceController;
+use App\Http\Controllers\Admin\ResourceCategoryController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\WishlistController;
@@ -38,6 +40,7 @@ use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\Subscriber\DashboardCoursesController;
 use App\Http\Controllers\Subscriber\DashboardGuidesController;
+use App\Http\Controllers\Subscriber\DashboardResourcesController;
 use App\Modules\VideosAPI;
 
 use App\Http\Controllers\Subscriber\DashboardController;
@@ -62,7 +65,7 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
     Route::get('/',                [DashboardController::class, 'mainPage'])->name('dashboard.main');
     Route::get('/admin-articles',  [DashboardController::class, 'articlesPage'])->name('dashboard.articles');
     Route::get('/admin-campaigns', [DashboardController::class, 'campaignPage'])->name('dashboard.campaigns');
-    Route::get('/admin-resources', [DashboardController::class, 'resourcesPage'])->name('dashboard.resources');
+    Route::get('/admin-resources', [DashboardResourcesController::class, 'resourcesPage'])->name('dashboard.resources');
     Route::get('/admin-courses',   [DashboardCoursesController::class, 'coursesPage'])->name('dashboard.courses');
     Route::get('/admin-guides',    [DashboardGuidesController::class, 'guidesPage'])->name('dashboard.guides');
 
@@ -82,8 +85,9 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
         Route::post('/lastiteraction',   [DashboardCoursesController::class, 'lastIteractionFunction']);
 
 
-        Route::post('/loadMoreCourses', [DashboardCoursesController::class, 'LoadMoreCourses']);
-        Route::post('/loadMoreGuides',  [DashboardGuidesController::class, 'LoadMoreGuides']);
+        Route::post('/loadMoreCourses',   [DashboardCoursesController::class,   'LoadMoreCourses']);
+        Route::post('/loadMoreGuides',    [DashboardGuidesController::class,    'LoadMoreGuides']);
+        Route::post('/loadMoreResources', [DashboardResourcesController::class, 'LoadMoreResources']);
 
     });
 
@@ -137,6 +141,8 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
         Route::get('/delete/{id}',   [GuideController::class, 'DeleteGuide'])->name('wpadmin.guides.delete');
         Route::get('/category/{id}', [GuideController::class, 'guidesPageByCategory'])->name('wpadmin.guides.by.categories');
 
+        Route::get('/image/delete/{id}', [GuideController::class, 'DeleteGuideImage'])->name('wpadmin.guides.delete.image');
+
         Route::group(['prefix'=> 'categories'], function() {
             Route::get('/',             [GuideCategoryController::class, 'guidesCategoryPage'])->name('wpadmin.guides.categories');
             Route::get('/add',          [GuideCategoryController::class, 'addGuideCategory'])->name('wpadmin.guides.categories.add');
@@ -144,6 +150,26 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
             Route::get('/edit/{id}',    [GuideCategoryController::class, 'EditGuideCategory'])->name('wpadmin.guides.categories.edit');
             Route::post('/update/{id}', [GuideCategoryController::class, 'UpdateGuideCategory'])->name('wpadmin.guides.categories.update');
             Route::get('/delete/{id}',  [GuideCategoryController::class, 'DeleteGuideCategory'])->name('wpadmin.guides.categories.delete');
+        });
+    });
+
+    Route::group(['prefix'=> 'resources'], function() {
+        Route::get('/',              [ResourceController::class, 'resourcesPage'])->name('wpadmin.resources');
+        Route::get('/add',           [ResourceController::class, 'addResource'])->name('wpadmin.resources.add');
+        Route::post('/store',        [ResourceController::class, 'StoreResource'])->name('wpadmin.resources.store');
+        Route::get('/edit/{id}',     [ResourceController::class, 'EditResource'])->name('wpadmin.resources.edit');
+        Route::post('/update/{id}',  [ResourceController::class, 'UpdateResource'])->name('wpadmin.resources.update');
+        Route::get('/delete/{id}',   [ResourceController::class, 'DeleteResource'])->name('wpadmin.resources.delete');
+        Route::get('/category/{id}', [ResourceController::class, 'resourcesPageByCategory'])->name('wpadmin.resources.by.categories');
+        Route::get('/image/delete/{id}', [ResourceController::class, 'DeleteResourceImage'])->name('wpadmin.resources.delete.image');
+
+        Route::group(['prefix'=> 'categories'], function() {
+            Route::get('/',             [ResourceCategoryController::class, 'resourcesCategoryPage'])->name('wpadmin.resources.categories');
+            Route::get('/add',          [ResourceCategoryController::class, 'addResourceCategory'])->name('wpadmin.resources.categories.add');
+            Route::post('/store',       [ResourceCategoryController::class, 'StoreResourceCategory'])->name('wpadmin.resources.categories.store');
+            Route::get('/edit/{id}',    [ResourceCategoryController::class, 'EditResourceCategory'])->name('wpadmin.resources.categories.edit');
+            Route::post('/update/{id}', [ResourceCategoryController::class, 'UpdateResourceCategory'])->name('wpadmin.resources.categories.update');
+            Route::get('/delete/{id}',  [ResourceCategoryController::class, 'DeleteResourceCategory'])->name('wpadmin.resources.categories.delete');
         });
     });
 

@@ -202,6 +202,29 @@ class GuideController extends Controller
 
     }
 
+    /**
+     * Function deleting
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function DeleteGuideImage( $id )
+    {
+
+        $guide = Guide::find( $id );
+
+        if ( file_exists( $guide->img ) ) {
+            unlink( $guide->img );
+        }
+
+        $guide->img = '';
+        $guide->save();
+
+        return redirect()->back();
+
+    }
+
+
 
     /**
      * Function setting Guides-Categories table
