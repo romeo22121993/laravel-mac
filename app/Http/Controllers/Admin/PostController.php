@@ -187,13 +187,19 @@ class PostController extends Controller
         DB::table('posts_and_cats')->where('post_id', $id)->delete();
 
         $post = Post::find( $id );
-        $file = public_path( 'uploads/posts/'.$post->img );
-        if ( file_exists( $file ) ) {
-            @unlink( public_path( 'uploads/posts/'.$post->img ) );
-        }
+//        $file = public_path( 'uploads/posts/'.$post->img );
+//        if ( file_exists( $file ) ) {
+//            @unlink( public_path( 'uploads/posts/'.$post->img ) );
+//        }
 
-        dispatch( new PostObserverJob( $post, 'deleted' ) ); // send email via observer
-        $post->delete();
+        dispatch( new PostObserverJob( $post, 'deleted' ) )
+            ->onConnection('redis') // async
+//            ->onConnection('sync') // sync
+            ->onQueue('delete_posts');
+        // send email via observer
+
+
+//        $post->delete();
 
         return redirect()->back();
 

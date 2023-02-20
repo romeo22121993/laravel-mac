@@ -36,6 +36,8 @@ class PostObserverJob implements ShouldQueue
      */
     public function handle()
     {
+//        var_dump( 'diee post');
+//        dd();
         Mail::to( env('APP_ADMIN_EMAIL') )->send( new PostMail( $this->data, $this->typeAction ) );
     }
 }
