@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\ArticleObserverJob;
+use App\Modules\FilesUploads;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
@@ -29,11 +30,12 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function articlesPage() {
+    public function articlesPage()
+    {
 
-        $articles = Article::paginate( $this->number );
+        $articles = Article::paginate($this->number);
 
-        return view('admin.article.index', compact( 'articles' ) );
+        return view('admin.article.index', compact('articles'));
     }
 
     /**
@@ -41,13 +43,14 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function articlesPageByCategory( $id ) {
+    public function articlesPageByCategory($id)
+    {
 
-        $articleCategory = ArticleCategory::find( $id );
+        $articleCategory = ArticleCategory::find($id);
         $articles        = $articleCategory->articles->pluck(['id']);
-        $articles        = Article::whereIn('id', $articles )->paginate($this->number);
+        $articles        = Article::whereIn('id', $articles)->paginate($this->number);
 
-        return view('admin.article.articlesbycategories', compact( 'articles', 'articleCategory' ) );
+        return view('admin.article.articlesbycategories', compact('articles', 'articleCategory'));
     }
 
 
@@ -56,11 +59,24 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function addArticle() {
+    public function addArticle()
+    {
 
         $categories = ArticleCategory::all();
 
-        return view('admin.article.create', compact( 'categories' ) );
+        $reviewStatuses = [
+            'reviewed'     => "Reviewed",
+            'not_reviewed' => "Not Reviewed",
+        ];
+
+        $articleTypes = [
+            'article',
+            'email',
+            'video'
+        ];
+
+
+        return view('admin.article.create', compact('categories', 'reviewStatuses', 'articleTypes'));
     }
 
 
@@ -70,7 +86,9 @@ class ArticleController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function StoreArticle( Request $request ) {
+    public function StoreArticle(Request $request)
+    {
+        $fileModule = new FilesUploads();
 
         $request->validate([
             'title'      => ['required', 'string', 'max:255', 'unique:articles'],
@@ -83,26 +101,27 @@ class ArticleController extends Controller
         $data1      = $request->all();
 
         $article = new Article();
-        $article->content   = $data1['content'];
-        $article->title     = $request->title;
-        $article->slug      = \Str::slug( $request->title );
-        $article->author_id = Auth::id();
-        $article->check1    = $request->check1;
-        $article->check2    = $request->check2;
-        $article->check3    = $request->check3;
+        $article->content       = $data1['content'];
+        $article->title         = $request->title;
+        $article->slug          = \Str::slug($request->title);
+        $article->author_id     = Auth::id();
+        $article->original_type = 'original';
+        $article->article_type  = $request->article_type;
+        $article->review_status = $request->review_status;
 
-        $image_src = 'none';
-        if ( $request->file('image' ) ) {
-            $file = $request->file('image');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/articles' ), $filename );
-            $image_src = $filename;
+        if ($request->file('img')) {
+            $image_src = $fileModule->fileUploadProcess($request->file('img'), 'uploads/articles');
+            $article->img = $image_src;
         }
 
-        $article->img = $image_src;
+        if ($request->file('doc_file')) {
+            $file_src = $fileModule->fileUploadProcess($request->file('doc_file'), 'uploads/articles');
+            $article->doc_file = $file_src;
+        }
+
         $article->save();
 
-        $this->setCategoriesByArticle ( $categories, $article->id );
+        $this->setCategoriesByArticle ($categories, $article->id);
 
         return Redirect()->route('wpadmin.articles');
 
@@ -115,14 +134,29 @@ class ArticleController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function EditArticle( $id ) {
+    public function EditArticle($id)
+    {
 
-        $article = Article::find( $id );
+        $article = Article::find($id);
 
         $articleCategories = $article->categories->pluck('id')->toArray();
         $categories     = ArticleCategory::all();
 
-        return view('admin.article.edit', compact( 'article', 'categories', 'articleCategories' ) );
+        $reviewStatuses = [
+            'reviewed'     => "Reviewed",
+            'not_reviewed' => "Not Reviewed",
+        ];
+
+        $articleTypes = [
+            'article',
+            'email',
+            'video'
+        ];
+
+        return view('admin.article.edit', compact(
+            'categories', 'article', 'reviewStatuses', 'articleTypes', 'articleCategories'
+        ));
+
     }
 
     /**
@@ -132,46 +166,50 @@ class ArticleController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function UpdateArticle( Request $request, $id ) {
+    public function UpdateArticle(Request $request, $id)
+    {
 
-        $article  = Article::find( $id );
+        $fileModule = new FilesUploads();
+        $article  = Article::find($id);
 
         $request->validate([
-            'title'      => ['required', 'string', 'max:255', Rule::unique('articles')->ignore( $article )],
-            'slug'       => [ 'max:255', Rule::unique('articles')->ignore( $article )],
-            'content'    => ['required', 'string' ],
+            'title'      => ['required', 'string', 'max:255', Rule::unique('articles')->ignore($article)],
+            'content'    => ['required', 'string'],
             'categories' => ['required'],
         ]);
-
-        $data1 = $request->all();
 
         $categories = $request->categories;
         $data1      = $request->all();
 
-        $slug       = !empty( $request->slug ) ? \Str::slug( $request->slug ) : \Str::slug( $request->title );
+        $article->content       = $data1['content'];
+        $article->title         = $request->title;
+        $article->slug          = \Str::slug($request->title);
+        $article->author_id     = Auth::id();
+        $article->original_type = 'original';
+        $article->article_type  = $request->article_type;
+        $article->review_status = $request->review_status;
 
-        $article->content   = $data1['content'];
-        $article->title     = $request->title;
-        $article->slug      = $slug;
-        $article->author_id = Auth::id();
-        $article->check1    = $request->check1;
-        $article->check2    = $request->check2;
-        $article->check3    = $request->check3;
 
-        if ( $request->file('image' ) ) {
-            @unlink( public_path( 'uploads/articles/'.$article->img ) );
-            $file = $request->file('image');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/articles' ), $filename );
-            $image_src = $filename;
+        if ($request->file('img')) {
+            if (file_exists($article->img)) {
+                unlink($article->img);
+            }
+            $file_src = $fileModule->fileUploadProcess($request->file('img'), 'uploads/articles');
+            $article->img = $file_src;
+        }
 
-            $article->img = $image_src;
+        if ($request->file('doc_file')) {
+            if (file_exists( $article->doc_file)) {
+                unlink($article->doc_file);
+            }
+            $file_src = $fileModule->fileUploadProcess($request->file('doc_file'), 'uploads/articles');
+            $article->doc_file = $file_src;
         }
 
 
         $article->save();
 
-        $this->setCategoriesByArticle ( $categories, $id, true );
+        $this->setCategoriesByArticle($categories, $id, true);
 
         return redirect()->back();
     }
@@ -182,21 +220,18 @@ class ArticleController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function DeleteArticle( $id ){
+    public function DeleteArticle($id)
+    {
 
         DB::table('articles_and_cats')->where('article_id', $id)->delete();
 
-        $article = Article::find( $id );
-        $file = public_path( 'uploads/articles/'.$article->img );
-        if ( file_exists( $file ) ) {
-            @unlink( public_path( 'uploads/articles/'.$article->img ) );
+        $article = Article::find($id);
+        if (file_exists($article->img)) {
+            unlink($article->img);
         }
-
-        dispatch( new ArticleObserverJob( $article, 'deleted' ) )
-            ->onConnection('redis') // async
-//            ->onConnection('sync') // sync
-            ->onQueue('delete_articles');
-        // send email via observer
+        if (file_exists($article->doc_file)) {
+            unlink($article->doc_file);
+        }
 
         $article->delete();
 
@@ -214,21 +249,22 @@ class ArticleController extends Controller
      *
      * @return bool
      */
-    protected function setCategoriesByArticle ( $categories, $articleId, $deletingPrevious = false ) {
+    protected function setCategoriesByArticle ($categories, $articleId, $deletingPrevious = false)
+    {
         $articleAndCats = [];
 
-        if ( !empty( $deletingPrevious ) ) {
+        if (!empty($deletingPrevious)) {
             DB::table('articles_and_cats')->where('article_id', $articleId)->delete();
         }
 
-        foreach ( $categories as $category ) {
+        foreach ($categories as $category) {
             $articleAndCats[] = [
                 'article_id' => $articleId,
-                'cat_id'  => $category,
+                'cat_id'     => $category,
             ];
         }
 
-        DB::table('articles_and_cats')->insert( $articleAndCats );
+        DB::table('articles_and_cats')->insert($articleAndCats);
 
         return true;
     }

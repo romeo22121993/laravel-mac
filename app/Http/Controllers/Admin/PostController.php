@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\PostObserverJob;
+use App\Modules\FilesUploads;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
@@ -91,12 +92,10 @@ class PostController extends Controller
         $post->check2    = $request->check2;
         $post->check3    = $request->check3;
 
-        $image_src = 'none';
-        if ( $request->file('image' ) ) {
-            $file = $request->file('image');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/posts' ), $filename );
-            $image_src = $filename;
+        $image_src  = 'none';
+        $fileModule = new FilesUploads();
+        if ($request->file('image')) {
+            $image_src = $fileModule->fileUploadProcess($request->file('image'), 'uploads/posts');
         }
 
         $post->img = $image_src;
@@ -143,8 +142,6 @@ class PostController extends Controller
             'categories' => ['required'],
         ]);
 
-        $data1 = $request->all();
-
         $categories = $request->categories;
         $data1      = $request->all();
 
@@ -158,16 +155,14 @@ class PostController extends Controller
         $post->check2    = $request->check2;
         $post->check3    = $request->check3;
 
-        if ( $request->file('image' ) ) {
-            @unlink( public_path( 'uploads/posts/'.$post->img ) );
-            $file = $request->file('image');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/posts' ), $filename );
-            $image_src = $filename;
-
+        $fileModule = new FilesUploads();
+        if ($request->file('image')) {
+            if (file_exists($post->img)) {
+                unlink($post->img);
+            }
+            $image_src = $fileModule->fileUploadProcess($request->file('image'), 'uploads/posts');
             $post->img = $image_src;
         }
-
 
         $post->save();
 
@@ -187,9 +182,8 @@ class PostController extends Controller
         DB::table('posts_and_cats')->where('post_id', $id)->delete();
 
         $post = Post::find( $id );
-        $file = public_path( 'uploads/posts/'.$post->img );
-        if ( file_exists( $file ) ) {
-            @unlink( public_path( 'uploads/posts/'.$post->img ) );
+        if ( file_exists($post->img) ) {
+            unlink($post->img);
         }
 
         dispatch( new PostObserverJob( $post, 'deleted' ) )

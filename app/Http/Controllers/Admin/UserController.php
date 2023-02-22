@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Jobs\UserObserverJob;
 use App\Models\Post;
+use App\Modules\FilesUploads;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
@@ -24,9 +25,9 @@ class UserController extends Controller
      */
     public function usersPage() {
 
-        $users = User::paginate( 5 );
+        $users = User::paginate(5);
 
-        return view('admin.user.index', compact( 'users' ) );
+        return view('admin.user.index', compact('users'));
     }
 
 
@@ -46,7 +47,7 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function StoreUser( Request $request ){
+    public function StoreUser(Request $request){
 
         $request->validate([
             'name'      => ['required', 'string', 'max:255'],
@@ -70,14 +71,12 @@ class UserController extends Controller
         $user->role       = $request->role;
         $user->company    = $request->company;
         $user->position   = $request->position;
-        $user->password   = Hash::make( $request->password );
+        $user->password   = Hash::make($request->password);
 
-        $image_src = 'none';
-        if ( $request->file('avatar_img' ) ) {
-            $file = $request->file('avatar_img');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/users' ), $filename );
-            $image_src = $filename;
+        $image_src  = 'none';
+        $fileModule = new FilesUploads();
+        if ($request->file('avatar_img')) {
+            $image_src = $fileModule->fileUploadProcess($request->file('avatar_img'), 'uploads/users');
         }
 
         $user->avatar_img = $image_src;
@@ -94,10 +93,10 @@ class UserController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function EditUser( $id ) {
-        $user = User::find( $id );
+    public function EditUser($id) {
+        $user = User::find($id);
 
-        return view('admin.user.edit', compact( 'user' ) );
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -107,22 +106,21 @@ class UserController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function UpdateUser( Request $request, $id ) {
+    public function UpdateUser(Request $request, $id) {
 
-        $user  = User::find( $id );
+        $user  = User::find($id);
         $data  = $request->all();
 
-        $image_src = $user->avatar_img;
-        if ( $request->file('avatar_img' ) ) {
-            @unlink( public_path( 'uploads/users/'.$user->avatar_img ) );
-            $file = $request->file('avatar_img');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/users' ), $filename );
-            $image_src = $filename;
-
+        $image_src  = $user->avatar_img;
+        $fileModule = new FilesUploads();
+        if ($request->file('avatar_img')) {
+            if (file_exists($user->avatar_img)) {
+                unlink($user->avatar_img);
+            }
+            $image_src = $fileModule->fileUploadProcess($request->file('avatar_img'), 'uploads/users');
         }
 
-        User::whereId( $id )->update([
+        User::whereId($id)->update([
             'name'       => $data['name'],
             'email'      => $data['email'],
             'firstname'  => $data['firstname'],
@@ -143,16 +141,15 @@ class UserController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function DeleteUser( $id ){
+    public function DeleteUser($id){
 
-        $user = User::findOrFail( $id );
+        $user = User::findOrFail($id);
 
-        $file = public_path( 'uploads/users/'.$user->avatar_img );
-        if ( file_exists( $file ) ) {
-            @unlink( public_path( 'uploads/users/'.$user->avatar_img ) );
+        if (file_exists($user->avatar_img)) {
+            unlink($user->avatar_img);
         }
 
-        dispatch( new UserObserverJob( $user, 'deleted' ) );
+        dispatch(new UserObserverJob($user, 'deleted'));
         $user->delete();
 
         return Redirect()->route('wpadmin.users');

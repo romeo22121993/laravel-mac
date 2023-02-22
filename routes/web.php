@@ -389,6 +389,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/about',    [FrontendController::class, 'aboutPage'])->name('about');
 
     Route::get('/post/{slug}',    [FrontendPostController::class, 'singlePostPage'])->name('single.post');
+    Route::get('/article/{slug}', [FrontendPostController::class, 'singlePostPage'])->name('single.article');
 
     // Ajax requests for frontend page
     Route::group(['prefix'=> 'ajax'], function(){

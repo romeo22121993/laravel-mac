@@ -46,7 +46,7 @@
                                             <td> {{ implode(', ', ( $post->categories->pluck('title')->toArray() ) ) }} </td>
                                             <td>
                                                 <img style="width: 50px; height: auto;"
-                                                    src="@if( $post->img != 'none' ) {{ asset('/uploads/posts/'.$post->img) }} @else {{ asset('/img/none.jpg') }} @endif">
+                                                    src="@if($post->img != 'none') {{ "/$post->img" }} @else {{ asset('/img/none.jpg') }} @endif">
                                             </td>
                                             <td>
                                                 @if( !empty( $post->check1 ) ) Yes @else No @endif

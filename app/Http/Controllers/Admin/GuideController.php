@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\PostObserverJob;
+use App\Modules\FilesUploads;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
@@ -31,9 +32,9 @@ class GuideController extends Controller
      */
     public function guidesPage() {
 
-        $guides = Guide::paginate( $this->number );
+        $guides = Guide::paginate($this->number);
 
-        return view('admin.guide.index', compact( 'guides' ) );
+        return view('admin.guide.index', compact('guides'));
     }
 
     /**
@@ -41,13 +42,13 @@ class GuideController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function guidesPageByCategory( $id ) {
+    public function guidesPageByCategory($id) {
 
-        $guideCategory = GuideCategory::find( $id );
+        $guideCategory = GuideCategory::find($id);
         $guides        = $guideCategory->guides->pluck(['id']);
-        $guides        = Guide::whereIn('id', $guides )->paginate($this->number);
+        $guides        = Guide::whereIn('id', $guides)->paginate($this->number);
 
-        return view('admin.guide.guidesbycategories', compact( 'guides', 'guideCategory' ) );
+        return view('admin.guide.guidesbycategories', compact('guides', 'guideCategory'));
     }
 
 
@@ -60,7 +61,7 @@ class GuideController extends Controller
 
         $categories = GuideCategory::all();
 
-        return view('admin.guide.create', compact( 'categories' ) );
+        return view('admin.guide.create', compact('categories'));
     }
 
 
@@ -70,7 +71,7 @@ class GuideController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function StoreGuide( Request $request ) {
+    public function StoreGuide(Request $request) {
 
         $request->validate([
             'title'      => ['required', 'string', 'max:255', 'unique:guides'],
@@ -78,33 +79,30 @@ class GuideController extends Controller
             'categories' => ['required'],
         ]);
 
+        $fileModule = new FilesUploads();
+
         $categories = $request->categories;
 
         $guide = new Guide();
         $guide->doc_type  = $request->doc_type;
         $guide->title     = $request->title;
-        $guide->slug      = \Str::slug( $request->title );
+        $guide->slug      = \Str::slug($request->title);
 
-        if ( $request->file('img' ) ) {
-            $file = $request->file('img');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/guides/img' ), $filename );
-            $image_src = 'uploads/guides/img/' . $filename;
+
+        if ($request->file('img')) {
+            $image_src = $fileModule->fileUploadProcess($request->file('img'), 'uploads/guides/img');
             $guide->img = $image_src;
         }
 
-         if ( $request->file('doc_file' ) ) {
-            $file = $request->file('doc_file');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/guides/files' ), $filename );
-            $image_src = 'uploads/guides/files/' . $filename;
-            $guide->doc_file = $image_src;
+        if ($request->file('doc_file')) {
+            $file_src = $fileModule->fileUploadProcess($request->file('doc_file'), 'uploads/guides/files');
+            $guide->doc_file = $file_src;
         }
 
 
         $guide->save();
 
-        $this->setCategoriesByGuide ( $categories, $guide->id );
+        $this->setCategoriesByGuide ($categories, $guide->id);
 
         return Redirect()->route('wpadmin.guides');
 
@@ -117,14 +115,14 @@ class GuideController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function EditGuide( $id ) {
+    public function EditGuide($id) {
 
-        $guide = Guide::find( $id );
+        $guide = Guide::find($id);
 
         $guideCategories = $guide->categories->pluck('id')->toArray();
         $categories      = GuideCategory::all();
 
-        return view('admin.guide.edit', compact( 'guide', 'categories', 'guideCategories' ) );
+        return view('admin.guide.edit', compact('guide', 'categories', 'guideCategories'));
     }
 
     /**
@@ -134,13 +132,13 @@ class GuideController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function UpdateGuide( Request $request, $id ) {
+    public function UpdateGuide(Request $request, $id) {
 
-        $guide  = Guide::find( $id );
+        $guide  = Guide::find($id);
 
         $request->validate([
-            'title'      => ['required', 'string', 'max:255', Rule::unique('guides')->ignore( $guide )],
-            'slug'       => [ 'max:255', Rule::unique('guides')->ignore( $guide )],
+            'title'      => ['required', 'string', 'max:255', Rule::unique('guides')->ignore($guide)],
+            'slug'       => [ 'max:255', Rule::unique('guides')->ignore($guide)],
             'categories' => ['required'],
         ]);
 
@@ -148,30 +146,30 @@ class GuideController extends Controller
 
         $guide->doc_type  = $request->doc_type;
         $guide->title     = $request->title;
-        $guide->slug      = \Str::slug( $request->title );
+        $guide->slug      = \Str::slug($request->title);
 
+        $fileModule = new FilesUploads();
 
-        if ( $request->file('img' ) ) {
-            unlink( $guide->img);
-            $file = $request->file('img');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/guides/img' ), $filename );
-            $image_src = 'uploads/guides/img/' . $filename;
+        if ($request->file('img')) {
+            if (file_exists($guide->img)) {
+                unlink($guide->img);
+            }
+            $image_src = $fileModule->fileUploadProcess($request->file('img'), 'uploads/guides/img');
             $guide->img = $image_src;
         }
 
-        if ( $request->file('doc_file' ) ) {
-            unlink( $guide->doc_file);
-            $file = $request->file('doc_file');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/guides/files' ), $filename );
-            $image_src = 'uploads/guides/files/' . $filename;
-            $guide->doc_file = $image_src;
+        if ($request->file('doc_file')) {
+            if (file_exists($guide->doc_file)) {
+                unlink($guide->doc_file);
+            }
+            $file_src = $fileModule->fileUploadProcess($request->file('doc_file'), 'uploads/guides/files');
+            $guide->doc_file = $file_src;
         }
+
 
         $guide->save();
 
-        $this->setCategoriesByGuide ( $categories, $id, true );
+        $this->setCategoriesByGuide ($categories, $id, true);
 
         return redirect()->back();
     }
@@ -182,18 +180,18 @@ class GuideController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function DeleteGuide( $id )
+    public function DeleteGuide($id)
     {
 
         DB::table('guides_and_cats')->where('guide_id', $id)->delete();
 
-        $guide = Guide::find( $id );
+        $guide = Guide::find($id);
 
-        if ( file_exists( $guide->img ) ) {
-            unlink( $guide->img );
+        if (file_exists($guide->img)) {
+            unlink($guide->img);
         }
-        if ( file_exists( $guide->doc_file ) ) {
-            unlink( $guide->doc_file );
+        if (file_exists($guide->doc_file)) {
+            unlink($guide->doc_file);
         }
 
         $guide->delete();
@@ -208,13 +206,13 @@ class GuideController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function DeleteGuideImage( $id )
+    public function DeleteGuideImage($id)
     {
 
-        $guide = Guide::find( $id );
+        $guide = Guide::find($id);
 
-        if ( file_exists( $guide->img ) ) {
-            unlink( $guide->img );
+        if (file_exists($guide->img)) {
+            unlink($guide->img);
         }
 
         $guide->img = '';
@@ -235,21 +233,21 @@ class GuideController extends Controller
      *
      * @return bool
      */
-    protected function setCategoriesByGuide ( $categories, $guideId, $deletingPrevious = false ) {
+    protected function setCategoriesByGuide ($categories, $guideId, $deletingPrevious = false) {
         $guideAndCats = [];
 
-        if ( !empty( $deletingPrevious ) ) {
+        if (!empty($deletingPrevious)) {
             DB::table('guides_and_cats')->where('guide_id', $guideId)->delete();
         }
 
-        foreach ( $categories as $category ) {
+        foreach ($categories as $category) {
             $guideAndCats[] = [
                 'guide_id' => $guideId,
                 'cat_id'  => $category,
             ];
         }
 
-        DB::table('guides_and_cats')->insert( $guideAndCats );
+        DB::table('guides_and_cats')->insert($guideAndCats);
 
         return true;
     }

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('author_id');
             $table->text('img')->nullable();
             $table->text('doc_file')->nullable();
+            $table->integer('parent_id')->nullable();
             $table->timestamps();
         });
     }

@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\CourseIteration;
 use App\Models\CourseLesson;
 use App\Models\CourseProgress;
+use App\Modules\FilesUploads;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
@@ -93,21 +94,16 @@ class CoursesController extends Controller
         $course->slug      = \Str::slug( $request->title );
         $course->published = $request->published;
 
-
-        if ( $request->file('image' ) ) {
-            $file = $request->file('image');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/courses' ), $filename );
-            $image_src = $filename;
-
-            $course->img = $image_src;
+        $fileModule = new FilesUploads();
+        if ($request->file('image')) {
+            $file_src = $fileModule->fileUploadProcess($request->file('image'), 'uploads/courses');
+            $course->img = $file_src;
         }
 
         $course->save();
 
         $this->setCategoriesByPost ( $categories, $course->id );
         $this->setLessonsByCourse ( $request->all(), $course->id );
-
 
         return Redirect()->route('wpadmin.courses');
 
@@ -157,14 +153,14 @@ class CoursesController extends Controller
         $course->slug      = \Str::slug( $request->title );
         $course->published = $request->published;
 
-        if ( $request->file('image' ) ) {
-            $file = $request->file('image');
-            @unlink( public_path( 'uploads/courses/'.$course->img ) );
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/courses' ), $filename );
-            $image_src = $filename;
 
-            $course->img = $image_src;
+        $fileModule = new FilesUploads();
+        if ($request->file('image')) {
+            if (file_exists($course->img)) {
+                unlink($course->img);
+            }
+            $file_src = $fileModule->fileUploadProcess($request->file('image'), 'uploads/courses');
+            $course->img = $file_src;
         }
 
         $course->save();
@@ -186,9 +182,8 @@ class CoursesController extends Controller
         DB::table('courses_and_cats')->where('course_id', $id)->delete();
 
         $course = Course::find( $id );
-        $file = public_path( 'uploads/courses/'.$course->img );
-        if ( file_exists( $file ) ) {
-            @unlink( public_path( 'uploads/courses/'.$course->img ) );
+        if (file_exists($course->img)) {
+            unlink($course->img);
         }
 
         $course->delete();

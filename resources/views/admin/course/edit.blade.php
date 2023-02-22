@@ -64,7 +64,7 @@
                             <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
                         </div>
                         <div class="form-group col-md-6">
-                            <img id="showImage" src="@if ( $course->img != 'none' )  {{ asset('/uploads/courses/'.$course->img) }} @else {{ asset('/img/none.jpg') }} @endif"
+                            <img id="showImage" src="@if ( !empty($course->img)) {{ "/$course->img" }} @else {{ asset('/img/none.jpg') }} @endif"
                                  style="width: 200px;  height: auto;" >
                         </div>
 

@@ -23,7 +23,7 @@
                     <div class="col-10">
                         <h1 class="d-none">Blog Detail</h1>
 
-                        <img src="{{ asset('uploads/posts/'.$post->img) }}" />
+                        <img src="{{ "/$post->img" }}" />
 
                         <h2>{{ $post->title }}</h2>
                         <h4>by Laravel Pro</h4>
@@ -61,7 +61,7 @@
                         <div class="one-card">
                             <div class="blog-top-card">
                                 <a href="{{ route('single.post', $post->slug) }}">
-                                    <img src="@if( $post->img == 'none') {{ asset('img/none.jpg')  }} @else {{ asset( 'uploads/posts/'.$post->img) }} @endif" alt="">
+                                    <img src="@if($post->img == 'none') {{ asset('img/none.jpg') }} @else {{ "/$post->img" }} @endif" alt="">
                                 </a>
                             </div>
                             <div class="card-content blog_list">

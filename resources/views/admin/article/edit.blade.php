@@ -1,105 +1,97 @@
 @extends('admin.admin_master')
 
 @section('title')
-    Edit Post
+    Edit Article
 @endsection
 
 @section('admin_content')
 
-<div class="content-wrapper">
-    @include('admin.body.banner')
+    <div class="content-wrapper">
+        @include('admin.body.banner')
 
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">New Post Insert</h4>
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Edit Article</h4>
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                <form class="forms-sample" action="{{ route('wpadmin.posts.update', $post->id) }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputName1">Post Title</label>
-                            <input type="text" class="form-control" id="exampleInputName1" name="title" value="{{ $post->title }}">
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputName1">Post Slug</label>
-                            <input type="text" class="form-control" id="exampleInputName1" name="slug" value="{{ $post->slug }}">
-                        </div>
-                    </div> <!-- End Row  -->
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputName1">Category</label>
-                            <select class="form-control" id="exampleSelectGender" name="categories[]" multiple="">
-                                @foreach( $categories as $category )
-                                    <option value="{{ $category->id }}" @if ( in_array( $category->id, $postCategories ) ) selected @endif  >
-                                        {{ $category->title  }}
-                                    </option>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
                                 @endforeach
-                            </select>
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form class="forms-sample" action="{{ route('wpadmin.articles.update', $article->id) }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="exampleInputName1">Article Title</label>
+                                <input type="text" class="form-control" id="exampleInputName1" name="title" value="{{ $article->title }}">
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="exampleInputName1">Category</label>
+                                <select class="form-control" id="exampleSelectGender" name="categories[]" multiple="">
+                                    @foreach( $categories as $category )
+                                        <option value="{{ $category->id }}"
+                                            @if( in_array($category->id, $articleCategories)) selected @endif
+                                        >{{ $category->title  }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="exampleInputName1">Article</label>
+                                <select class="form-control" id="exampleSelectGender" name="article_type" required >
+                                    @foreach( $articleTypes as $k => $v )
+                                        <option value="{{ $k }}"
+                                                @if ($k == $article->article_type) selected @endif
+                                        >{{ ucfirst($v) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="exampleInputName1">Article</label>
+                                <select class="form-control" id="exampleSelectGender" name="review_status" required>
+                                    @foreach( $reviewStatuses as $k => $v )
+                                        <option value="{{ $k }}"
+                                            @if ($k == $article->review_status) selected @endif
+                                        >{{ $v }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                         </div>
 
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleTextarea1">Post Content</label>
-                        <textarea class="form-control" name="content" id="summernote">{{ $post->content }}</textarea>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="exampleFormControlFile1">Feature Image </label>
-                            <input type="file" name="image" class="form-control-file" id="image">
+                        <div class="form-group">
+                            <label for="exampleTextarea1">Article Content</label>
+                            <textarea class="form-control" name="content" id="summernote">{{ $article->content }}</textarea>
                         </div>
-                        <div class="form-group col-md-6">
-                            <img id="showImage" src="@if ( $post->img != 'none' )  {{ asset('/uploads/posts/'.$post->img) }} @else {{ asset('/img/none.jpg') }} @endif"
-                                 style="width: 200px;  height: auto;" >
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="exampleFormControlFile1">Feature Image </label>
+                                <input type="file" name="img" class="form-control-file" id="exampleFormControlFile1">
+                                <img src="/{{ $article->img }}" style="  width: 150px;  height: auto;" >
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="exampleFormControlFile1">Document File </label>
+                                <input type="file" name="doc_file"  class="form-control-file" id="exampleFormControlFile1">
+                            </div>
+
                         </div>
-                    </div>
-
-                    <hr>
-                        <h4 class="text-center">Extra Opions </h4>
-                    <br>
-
-                    <div class="row">
-                        <label class="form-check-label col-md-3">
-                            <input type="checkbox" name="check1" class="form-check-input"
-                                   @if( !empty( $post->check1 ) ) checked @endif
-                                   value="1"> Published Post
-                            <i class="input-helper"></i>
-                        </label>
-
-                        <label class="form-check-label col-md-3">
-                            <input type="checkbox" name="check2" class="form-check-input"
-                                   @if( !empty( $post->check2 ) ) checked @endif
-                                   value="1">Additional Check2
-                            <i class="input-helper"></i>
-                        </label>
-
-                        <label class="form-check-label col-md-3">
-                            <input type="checkbox" name="check3" class="form-check-input"
-                                  @if( !empty( $post->check3 ) ) checked @endif  value="1"> Additional Check3
-                            <i class="input-helper"></i>
-                        </label>
-
-                    </div>
-                    <br><br>
-
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                </form>
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 @endsection

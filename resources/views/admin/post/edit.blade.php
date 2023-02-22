@@ -36,7 +36,7 @@
                             <label for="exampleInputName1">Post Slug</label>
                             <input type="text" class="form-control" id="exampleInputName1" name="slug" value="{{ $post->slug }}">
                         </div>
-                    </div> <!-- End Row  -->
+                    </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="exampleInputName1">Category</label>
@@ -62,7 +62,7 @@
                             <input type="file" name="image" class="form-control-file" id="image">
                         </div>
                         <div class="form-group col-md-6">
-                            <img id="showImage" src="@if ( $post->img != 'none' )  {{ asset('/uploads/posts/'.$post->img) }} @else {{ asset('/img/none.jpg') }} @endif"
+                            <img id="showImage" src="@if( $post->img != 'none' ) {{ "/$post->img" }} @else {{ asset('/img/none.jpg') }} @endif"
                                  style="width: 200px;  height: auto;" >
                         </div>
                     </div>

@@ -46,13 +46,13 @@
                                             <td> {{ implode(', ', ( $course->categories->pluck('title')->toArray() ) ) }} </td>
                                             <td>
                                                 <img style="width: 50px; height: auto;"
-                                                    src="@if( $course->img != 'none' ) {{ asset('/uploads/courses/'.$course->img) }} @else {{ asset('/img/none.jpg') }} @endif">
+                                                    src="@if(!empty($course->img)) {{ "/$course->img" }} @else {{ asset('/img/none.jpg') }} @endif">
                                             </td>
                                             <td>
                                                 @if( !empty( $course->published ) ) Yes @else No @endif
                                             </td>
                                             <td>{{ $course->updated_at->diffForHumans() }}</td>
-                                            <td><a href="{{ route( 'single.course', $course->slug ) }}">View Post</a></td>
+                                            <td><a href="{{ route( 'single.course', $course->slug ) }}">View Course</a></td>
                                             <td>
                                                 <a href="{{ route('wpadmin.courses.edit',  $course->id) }}" class="btn btn-info">Edit</a>
                                                 <a href="{{ route('wpadmin.courses.delete', $course->id) }}" onclick="return confirm('Are you sure to delete')" class="btn btn-danger">Delete</a>

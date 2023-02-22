@@ -29,21 +29,6 @@ class VideosAPI
         //$this->countPerPage = 1;
     }
 
-    /**
-    public function init_actions() {
-
-        add_action( 'wp_ajax_last_iteraction',           [ $this,            'last_iteraction_function' ] );
-        add_action( 'wp_ajax_nopriv_last_iteraction',    [ $this,            'last_iteraction_function' ] );
-
-        add_action( 'wp_ajax_progress_course',           [ $this,            'progress_course_function' ] );
-        add_action( 'wp_ajax_nopriv_progress_course',    [ $this,            'progress_course_function' ] );
-
-        add_action( 'wp_ajax_progress_lesson',           [ $this,            'progress_lesson_function' ] );
-        add_action( 'wp_ajax_nopriv_progress_lesson',    [ $this,            'progress_lesson_function' ] );
-    }
-    */
-
-
 
     /**
      * Function getting all lessons by course id
@@ -221,7 +206,6 @@ class VideosAPI
         curl_close($curl);
 
         if ($err) {
-//            $response = "cURL Error #:" . $err;
             $response = 0;
             $result = '';
         } else {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\PostObserverJob;
+use App\Modules\FilesUploads;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
@@ -31,9 +32,9 @@ class ResourceController extends Controller
      */
     public function resourcesPage() {
 
-        $resources = Resource::paginate( $this->number );
+        $resources = Resource::paginate($this->number);
 
-        return view('admin.resource.index', compact( 'resources' ) );
+        return view('admin.resource.index', compact('resources'));
     }
 
     /**
@@ -41,13 +42,13 @@ class ResourceController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function resourcesPageByCategory( $id ) {
+    public function resourcesPageByCategory($id) {
 
-        $resourceCategory = ResourceCategory::find( $id );
+        $resourceCategory = ResourceCategory::find($id);
         $resources        = $resourceCategory->resources->pluck(['id']);
-        $resources        = Resource::whereIn('id', $resources )->paginate($this->number);
+        $resources        = Resource::whereIn('id', $resources)->paginate($this->number);
 
-        return view('admin.resource.resourcesbycategories', compact( 'resources', 'resourceCategory' ) );
+        return view('admin.resource.resourcesbycategories', compact('resources', 'resourceCategory'));
     }
 
 
@@ -60,7 +61,7 @@ class ResourceController extends Controller
 
         $categories = ResourceCategory::all();
 
-        return view('admin.resource.create', compact( 'categories' ) );
+        return view('admin.resource.create', compact('categories'));
     }
 
 
@@ -70,8 +71,9 @@ class ResourceController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function StoreResource( Request $request ) {
+    public function StoreResource(Request $request) {
 
+        $fileModule = new FilesUploads();
         $request->validate([
             'title'      => ['required', 'string', 'max:255', 'unique:resources'],
             'slug'       => ['max:255', 'unique:resources'],
@@ -83,28 +85,22 @@ class ResourceController extends Controller
         $resource = new Resource();
         $resource->doc_type  = $request->doc_type;
         $resource->title     = $request->title;
-        $resource->slug      = \Str::slug( $request->title );
+        $resource->slug      = \Str::slug($request->title);
 
-        if ( $request->file('img' ) ) {
-            $file = $request->file('img');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/resources/img' ), $filename );
-            $image_src = 'uploads/resources/img/' . $filename;
+
+        if ($request->file('img')) {
+            $image_src = $fileModule->fileUploadProcess($request->file('img'), 'uploads/resources/img');
             $resource->img = $image_src;
         }
 
-         if ( $request->file('doc_file' ) ) {
-            $file = $request->file('doc_file');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/resources/files' ), $filename );
-            $image_src = 'uploads/resources/files/' . $filename;
-            $resource->doc_file = $image_src;
+        if ($request->file('doc_file')) {
+            $file_src = $fileModule->fileUploadProcess($request->file('doc_file'), 'uploads/resources/files');
+            $resource->doc_file = $file_src;
         }
-
 
         $resource->save();
 
-        $this->setCategoriesByResource ( $categories, $resource->id );
+        $this->setCategoriesByResource ($categories, $resource->id);
 
         return Redirect()->route('wpadmin.resources');
 
@@ -117,15 +113,15 @@ class ResourceController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function EditResource( $id )
+    public function EditResource($id)
     {
 
-        $resource = Resource::find( $id );
+        $resource = Resource::find($id);
 
         $resourceCategories = $resource->categories->pluck('id')->toArray();
         $categories      = ResourceCategory::all();
 
-        return view('admin.resource.edit', compact( 'resource', 'categories', 'resourceCategories' ) );
+        return view('admin.resource.edit', compact('resource', 'categories', 'resourceCategories'));
     }
 
     /**
@@ -135,13 +131,13 @@ class ResourceController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function UpdateResource( Request $request, $id ) {
+    public function UpdateResource(Request $request, $id) {
 
-        $resource  = Resource::find( $id );
+        $resource  = Resource::find($id);
 
         $request->validate([
-            'title'      => ['required', 'string', 'max:255', Rule::unique('resources')->ignore( $resource )],
-            'slug'       => [ 'max:255', Rule::unique('resources')->ignore( $resource )],
+            'title'      => ['required', 'string', 'max:255', Rule::unique('resources')->ignore($resource)],
+            'slug'       => [ 'max:255', Rule::unique('resources')->ignore($resource)],
             'categories' => ['required'],
         ]);
 
@@ -149,30 +145,29 @@ class ResourceController extends Controller
 
         $resource->doc_type  = $request->doc_type;
         $resource->title     = $request->title;
-        $resource->slug      = \Str::slug( $request->title );
+        $resource->slug      = \Str::slug($request->title);
 
+        $fileModule = new FilesUploads();
 
-        if ( $request->file('img' ) ) {
-            unlink( $resource->img);
-            $file = $request->file('img');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/resources/img' ), $filename );
-            $image_src = 'uploads/resources/img/' . $filename;
-            $resource->img = $image_src;
+        if ($request->file('img')) {
+            if (file_exists($resource->img)) {
+                unlink($resource->img);
+            }
+            $file_src = $fileModule->fileUploadProcess($request->file('img'), 'uploads/resources/img');
+            $resource->img = $file_src;
         }
 
-        if ( $request->file('doc_file' ) ) {
-            unlink( $resource->doc_file);
-            $file = $request->file('doc_file');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/resources/files' ), $filename );
-            $image_src = 'uploads/resources/files/' . $filename;
-            $resource->doc_file = $image_src;
+        if ($request->file('doc_file')) {
+            if (file_exists($resource->doc_file)) {
+                unlink($resource->doc_file);
+            }
+            $file_src = $fileModule->fileUploadProcess($request->file('doc_file'), 'uploads/resources/files');
+            $resource->doc_file = $file_src;
         }
 
         $resource->save();
 
-        $this->setCategoriesByResource ( $categories, $id, true );
+        $this->setCategoriesByResource ($categories, $id, true);
 
         return redirect()->back();
     }
@@ -183,18 +178,18 @@ class ResourceController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function DeleteResource( $id )
+    public function DeleteResource($id)
     {
 
         DB::table('resources_and_cats')->where('resource_id', $id)->delete();
 
-        $resource = Resource::find( $id );
+        $resource = Resource::find($id);
 
-        if ( file_exists( $resource->img ) ) {
-            unlink( $resource->img );
+        if (file_exists($resource->img)) {
+            unlink($resource->img);
         }
-        if ( file_exists( $resource->doc_file ) ) {
-            unlink( $resource->doc_file );
+        if (file_exists($resource->doc_file)) {
+            unlink($resource->doc_file);
         }
 
         $resource->delete();
@@ -209,13 +204,13 @@ class ResourceController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function DeleteResourceImage( $id )
+    public function DeleteResourceImage($id)
     {
 
-        $resource = Resource::find( $id );
+        $resource = Resource::find($id);
 
-        if ( file_exists( $resource->img ) ) {
-            unlink( $resource->img );
+        if (file_exists($resource->img)) {
+            unlink($resource->img);
         }
 
         $resource->img = '';
@@ -236,22 +231,22 @@ class ResourceController extends Controller
      *
      * @return bool
      */
-    protected function setCategoriesByResource ( $categories, $resourceId, $deletingPrevious = false )
+    protected function setCategoriesByResource ($categories, $resourceId, $deletingPrevious = false)
     {
         $resourceAndCats = [];
 
-        if ( !empty( $deletingPrevious ) ) {
+        if (!empty($deletingPrevious)) {
             DB::table('resources_and_cats')->where('resource_id', $resourceId)->delete();
         }
 
-        foreach ( $categories as $category ) {
+        foreach ($categories as $category) {
             $resourceAndCats[] = [
                 'resource_id' => $resourceId,
                 'cat_id'  => $category,
             ];
         }
 
-        DB::table('resources_and_cats')->insert( $resourceAndCats );
+        DB::table('resources_and_cats')->insert($resourceAndCats);
 
         return true;
     }

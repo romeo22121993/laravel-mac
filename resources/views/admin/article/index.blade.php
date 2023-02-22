@@ -30,7 +30,6 @@
                                         <th>{{ __('Article Slug') }}</th>
                                         <th>{{ __('Categories') }}</th>
                                         <th>{{ __('Featured Image') }}</th>
-                                        <th>{{ __('Published?') }}</th>
                                         <th>{{ __('Time') }}</th>
                                         <th>{{ __('View Article') }}</th>
                                         <th>{{ __('Action') }}</th>
@@ -46,13 +45,10 @@
                                             <td> {{ implode(', ', ( $article->categories->pluck('title')->toArray() ) ) }} </td>
                                             <td>
                                                 <img style="width: 50px; height: auto;"
-                                                    src="@if( $article->img != 'none' ) {{ asset('/uploads/articles/'.$article->img) }} @else {{ asset('/img/none.jpg') }} @endif">
-                                            </td>
-                                            <td>
-                                                @if( !empty( $article->check1 ) ) Yes @else No @endif
+                                                    src="@if( !empty( $article->img ) ) {{ "/".$article->img }} @else {{ asset('/img/none.jpg') }} @endif">
                                             </td>
                                             <td>{{ $article->updated_at->diffForHumans() }}</td>
-                                            <td><a href="{{ route( 'single.post', $article->slug ) }}">View Post</a></td>
+                                            <td><a href="{{ route( 'single.article', $article->slug ) }}">View Article</a></td>
                                             <td>
                                                 <a href="{{ route('wpadmin.articles.edit',  $article->id) }}" class="btn btn-info">Edit</a>
                                                 <a href="{{ route('wpadmin.articles.delete', $article->id) }}" onclick="return confirm('Are you sure to delete')" class="btn btn-danger">Delete</a>

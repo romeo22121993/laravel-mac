@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Modules\FilesUploads;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\User;
@@ -70,14 +71,13 @@ class PageController extends Controller
         $page->author_id = Auth::id();
 
         $image_src = 'none';
-        if ( $request->file('image' ) ) {
-            $file = $request->file('image');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/pages' ), $filename );
-            $image_src = $filename;
+
+        $fileModule = new FilesUploads();
+        if ($request->file('image')) {
+            $file_src = $fileModule->fileUploadProcess($request->file('image'), 'uploads/pages');
         }
 
-        $page->img = $image_src;
+        $page->img = $file_src;
         $page->save();
 
         return Redirect()->route('wpadmin.pages');
@@ -124,14 +124,14 @@ class PageController extends Controller
         $page->slug      = $slug;
         $page->author_id = Auth::id();
 
-        if ( $request->file('image' ) ) {
-            @unlink( public_path( 'uploads/pages/'.$page->img ) );
-            $file = $request->file('image');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move( public_path('uploads/pages' ), $filename );
-            $image_src = $filename;
 
-            $page->img = $image_src;
+        $fileModule = new FilesUploads();
+        if ($request->file('image')) {
+            if (file_exists($page->img)) {
+                unlink($page->img);
+            }
+            $file_src = $fileModule->fileUploadProcess($request->file('image'), 'uploads/pages');
+            $page->img = $file_src;
         }
 
 
@@ -149,7 +149,9 @@ class PageController extends Controller
     public function DeletePage( $id ){
 
         $page = Page::find( $id );
-        @unlink( public_path( 'uploads/pages/'.$page->img ) );
+        if (file_exists($page->img)){
+            unlink($page->img);
+        }
         $page->delete();
 
         return redirect()->back();
