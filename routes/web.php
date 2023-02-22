@@ -153,6 +153,28 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
         });
     });
 
+    Route::group(['prefix'=> 'articles'], function() {
+        Route::get('/',              [ArticleController::class, 'articlesPage'])->name('wpadmin.articles');
+        Route::get('/add',           [ArticleController::class, 'addArticle'])->name('wpadmin.articles.add');
+        Route::post('/store',        [ArticleController::class, 'StoreArticle'])->name('wpadmin.articles.store');
+        Route::get('/edit/{id}',     [ArticleController::class, 'EditArticle'])->name('wpadmin.articles.edit');
+        Route::post('/update/{id}',  [ArticleController::class, 'UpdateArticle'])->name('wpadmin.articles.update');
+        Route::get('/delete/{id}',   [ArticleController::class, 'DeleteArticle'])->name('wpadmin.articles.delete');
+        Route::get('/category/{id}', [ArticleController::class, 'articlesPageByCategory'])->name('wpadmin.articles.by.categories');
+
+        Route::get('/image/delete/{id}', [ArticleController::class, 'DeleteArticleImage'])->name('wpadmin.articles.delete.image');
+
+        Route::group(['prefix'=> 'categories'], function() {
+            Route::get('/',             [ArticleCategoryController::class, 'articlesCategoryPage'])->name('wpadmin.articles.categories');
+            Route::get('/add',          [ArticleCategoryController::class, 'addArticleCategory'])->name('wpadmin.articles.categories.add');
+            Route::post('/store',       [ArticleCategoryController::class, 'StoreArticleCategory'])->name('wpadmin.articles.categories.store');
+            Route::get('/edit/{id}',    [ArticleCategoryController::class, 'EditArticleCategory'])->name('wpadmin.articles.categories.edit');
+            Route::post('/update/{id}', [ArticleCategoryController::class, 'UpdateArticleCategory'])->name('wpadmin.articles.categories.update');
+            Route::get('/delete/{id}',  [ArticleCategoryController::class, 'DeleteArticleCategory'])->name('wpadmin.articles.categories.delete');
+        });
+    });
+
+
     Route::group(['prefix'=> 'resources'], function() {
         Route::get('/',              [ResourceController::class, 'resourcesPage'])->name('wpadmin.resources');
         Route::get('/add',           [ResourceController::class, 'addResource'])->name('wpadmin.resources.add');

@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function progress()
     {
-        return $this->hasOne(CourseProgress::class );
+        return $this->hasOne(CourseProgress::class);
     }
 
 
