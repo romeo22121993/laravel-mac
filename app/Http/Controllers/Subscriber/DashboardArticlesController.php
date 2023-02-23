@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Controller;
 use App\Jobs\PostObserverJob;
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use App\Models\Course;
 use App\Models\CourseIteration;
 use App\Models\CourseLesson;
@@ -17,7 +18,6 @@ use DB;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\PostCategory;
-use App\Models\CourseCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
@@ -46,7 +46,7 @@ class DashboardArticlesController extends Controller
         $user       = Auth::user();
         $originalArticles = Article::where('original_type', 'original')->paginate($this->number);
 
-        $categories = CourseCategory::all();
+        $categories = ArticleCategory::all();
 
         $postClonedArticles  = DB::table('cloned_articles_relations')->where('user_id', $user->id)
             ->get()->pluck(['child_id'])->toArray();
@@ -217,7 +217,6 @@ class DashboardArticlesController extends Controller
     }
 
 
-
     /**
      * Function cloning parent categories for cloned article
      *
@@ -264,35 +263,59 @@ class DashboardArticlesController extends Controller
      * Callback function for loading posts
      *
      */
-    public function LoadMoreCourses(Request $request)
+    public function LoadMoreArticles(Request $request)
     {
 
-        $paged    = !empty($request->page) ? $request->page : 0;
-        $getCat   = !empty($request->get_cat) ? $request->get_cat : 0;
-        $cpt_type = 'articles';
+        $post   = $_POST;
 
+        $article_cat       = ( !empty( $request->topic ) ) ? $request->topic : '';
+        $article_type      = ( !empty( $request->type ) )  ? $request->type  : '';
+        $article_original_edited = ( !empty( $request->original_edited ) )  ? $request->original_edited  : '';
         $user              = Auth::user();
-        $articleProgress    = $user->progress;
-        $completedCourses   = !empty($articleProgress->completed_articles) ? json_decode($articleProgress->completed_articles, true) : [];
-        $progressingCourses = !empty($articleProgress->progressing_articles) ? json_decode($articleProgress->progressing_articles, true) : [];
+
+        $paged    = !empty($request->page) ? $request->page : 0;
 
         if (($request->total_count + $this->number) < ($this->number * $paged)) {
             return false;
         }
 
-        if (($getCat == 'all')) {
-            $articles      = Course::where('published', '=', 1)->paginate($this->number);
+        $articles  = Article::where('id', '>', 0);
+        if ( ( $article_original_edited == 'original') || ( $article_original_edited == 'all') ) {
+            $articles = $articles->where('original_type', 'original');
+
+            if ( $article_cat != 'all' ) {
+                $cats = ArticleCategory::find($article_cat)->articles->pluck(['id']);
+                $articles = $articles->whereIn('id', $cats);
+            }
+            if ( $article_type != 'all' ) {
+                $articles = $articles->where('article_type', $article_type);
+            }
+
         }
         else {
-            $cats        = CourseCategory::find($getCat)->articles->pluck(['id']);
-            $articles     = Course::where('published', '=', 1)->whereIn('id', $cats)->paginate($this->number);
+
+            $postClonedArticles   = DB::table('cloned_articles_relations')
+                ->where('user_id', $user->id)
+                ->get()->pluck(['child_id'])->toArray();
+            $articles = $articles->whereIn('id', $postClonedArticles);
+
+            if ( $article_cat != 'all' ) {
+                $cats = ArticleCategory::find($article_cat)->articles->pluck(['id']);
+                $articles = $articles->whereIn('id', $cats);
+            }
+            if ( $article_type != 'all' ) {
+                $articles = $articles->where('article_type', $article_type);
+            }
         }
 
+        $articles = $articles->paginate($this->number);
         $totalPost = $articles->total();
 
-        $result = $this->setHtmlLayout($articles, $paged, $totalPost, $completedCourses, $progressingCourses);
+        $result = $this->setHtmlLayout($articles, $paged, $totalPost );
 
         return $result;
+
+
 
     }
 
@@ -302,12 +325,10 @@ class DashboardArticlesController extends Controller
      * @param $articles
      * @param $paged
      * @param $totalPost
-     * @param $completedCourses
-     * @param $progressingCourses
      *
      * @return array|void
      */
-    private function setHtmlLayout($articles, $paged, $totalPost, $completedCourses, $progressingCourses) {
+    private function setHtmlLayout($articles, $paged, $totalPost) {
 
         $paged = (int)$paged;
 
@@ -318,7 +339,7 @@ class DashboardArticlesController extends Controller
             $html = '';
             foreach ($articles as $article) {
                 $html .=  view('userDashboard.items.articleItem',
-                    compact('article', 'completedCourses', 'progressingCourses'))->render();
+                    compact('article'))->render();
             }
 
             $result['html']  = $html;

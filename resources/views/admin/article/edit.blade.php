@@ -56,8 +56,8 @@
                                 <label for="exampleInputName1">Article Type</label>
                                 <select class="form-control" id="exampleSelectGender" name="article_type" required >
                                     @foreach( $articleTypes as $k => $v )
-                                        <option value="{{ $k }}"
-                                                @if ($k == $article->article_type) selected @endif
+                                        <option value="{{ $v }}"
+                                                @if ($v == $article->article_type) selected @endif
                                         >{{ ucfirst($v) }}</option>
                                     @endforeach
                                 </select>

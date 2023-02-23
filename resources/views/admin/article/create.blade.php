@@ -51,7 +51,7 @@
                             <label for="exampleInputName1">Article</label>
                             <select class="form-control" id="exampleSelectGender" name="article_type" required >
                                 @foreach( $articleTypes as $k => $v )
-                                    <option value="{{ $k }}">{{ ucfirst($v) }}</option>
+                                    <option value="{{ $v }}">{{ ucfirst($v) }}</option>
                                 @endforeach
                             </select>
                         </div>

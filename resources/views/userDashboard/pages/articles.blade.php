@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="container content articles_dashboard_page">
+    <div class="container content articles_dashboard_page page-admin-content">
 
         <div class="sv-filter">
 
@@ -32,16 +32,9 @@
                     <span class="select-wrapper">
                         <select name="topic" id="sv-filter-topic">
                             <option value="all">All</option>
-                              <option value="charitable-giving">Charitable Giving</option>
-                              <option value="college-saving">College Saving</option>
-                              <option value="commentary">Commentary</option>
-                              <option value="crypto">Crypto</option>
-                              <option value="divorce">Divorce</option>
-                              <option value="education-savings">Education Savings</option>
-                              <option value="equity-compensation">Equity Compensation</option>
-
-                              <option value="women-investors">Women Investors</option>
-                              <option value="working-with-financial-advisor">Working With a Financial Advisor</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->title}}</option>
+                            @endforeach
                         </select>
                     </span>
                 </div>
@@ -75,7 +68,7 @@
                 </span>
                 </div>
                 <div class="sv-filter__item loader_block">
-                    <img src="./dist/img/loader.gif" alt="loader" id="loader">
+                    <img src="{{ asset('frontendDashboard/pluginAssets/img/loader.gif') }}" alt="loader" id="loader">
                 </div>
 
             </form>
@@ -98,69 +91,16 @@
                             </tr>
                         </thead>
                         <tbody class="body-items" data-all="{{ $originalArticles->total() }}" data-getcat="all" data-cpt="articles" data-gettype="all" data-getsort="all" data-get_article_type="all" data-page="1">
-                            <tr class="item">
-                                <td>
-                                    <a href="http://seven.loc/articles/recession-recovery-or-both/">
-                                        <img alt="img1" src="http://seven.loc/wp-content/uploads/2023/01/clicker-babu-aKBtbbVP970-unsplash-150x150.jpg">
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="http://seven.loc/articles/recession-recovery-or-both/">
-                                        Recession, Recovery, or Both?        </a>
-                                    <p class="grey"></p>
-                                </td>
-                                <td> 2023/01/22 </td>
-                                <td colspan="1"> Timely/Topical  </td>
-                                <td colspan="1"> Original </td>
-                                <td>
-                                    <p class="type-title type-title--no-margin title-icon title-icon--article">
-                                        Article        </p>
-                                </td>
-                                <td>
-                                    <a class="btn btn-line finra" disabled="">
-                                        <span>FINRA: Not Reviewed</span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-view read-article" data-post-id="13527" href="http://seven.loc/articles/recession-recovery-or-both/">
-                                        View        </a>
-                                </td>
-                            </tr>
-                            <tr class="item">
-                            <td>
-                                <a href="http://seven.loc/articles/avoiding-the-big-retirement-risks/">
-                                    <img alt="img1" src="http://seven.loc/wp-content/uploads/2023/01/victoire-joncheray-EF0UG0xFgnA-unsplash-150x150.jpg">
-                                </a>
-                            </td>
-                            <td>
-                                <a href="http://seven.loc/articles/avoiding-the-big-retirement-risks/">
-                                    Avoiding the Big Retirement Risks        </a>
-                                <p class="grey"></p>
-                            </td>
-                            <td> 2023/01/21 </td>
-                            <td colspan="1"> Pre-Retirement Planning<br>Retirement Planning  </td>
-                            <td colspan="1"> Original </td>
-                            <td>
-                                <p class="type-title type-title--no-margin title-icon title-icon--article">
-                                    Article        </p>
-                            </td>
-                            <td>
-                                <a class="btn btn-line finra" disabled="">
-                                    <span>FINRA: Not Reviewed</span>
-                                </a>
-                            </td>
-                            <td>
-                                <a class="btn btn-view read-article" data-post-id="13520" href="http://seven.loc/articles/avoiding-the-big-retirement-risks/">
-                                    View        </a>
-                            </td>
-                        </tr>
+                            @foreach($originalArticles as $article)
+                                @include('userDashboard.items.articleItem')
+                            @endforeach
                         </tbody>
                     </table>
 
                     @if ( $originalArticles->total() >= $countPerPage )
                         <a id="load_more_button_filtering">
                             Load More
-                            <img src="./dist/img/loader.gif" alt="loader_more" id="loader_more">
+                            <img src="{{ asset('frontendDashboard/pluginAssets/img/loader.gif') }}" alt="loader_more" id="loader_more">
                         </a>
                     @endif
                 </div>

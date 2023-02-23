@@ -23,7 +23,7 @@
     <td>{{ App::make(\App\Modules\VideosAPI::class)->getAllLessonsByCourse( $course->lessons ) }}</td>
     <td>{{ $status }}</td>
     <td>{{ $course->created_at->format('Y-m-d') }}</td>
-    <td> {{ implode(', ', ( $course->categories->pluck('title')->toArray() ) ) }} </td>
+    <td>{{ implode(', ', ( $course->categories->pluck('title')->toArray() ) ) }}</td>
     <td>
         <a class="btn btn-view read-course" data-course-id="{{ $course->id }}"
            href="{{ route('single.course', $course->slug ) }}">

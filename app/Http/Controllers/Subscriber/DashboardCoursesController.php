@@ -349,9 +349,6 @@ class DashboardCoursesController extends Controller
         $lessonLink     = ( !empty( $request->lesson_link ) ) ?  $request->lesson_link : '';
         $lessonVideo    = ( !empty( $request->lesson_video ) ) ?  $request->lesson_video : '';
 
-
-
-
         $user = Auth::user();
 
         $lastIteration = array(

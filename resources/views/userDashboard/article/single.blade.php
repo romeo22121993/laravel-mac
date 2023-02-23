@@ -132,7 +132,7 @@
                                                 <div class="d-flex flex-row justify-content-center align-items-center block_custom_url right">
                                                     <input type="url" id="input_url" class="input_url" name="share" value="">
                                                     <span class="btn_link_copy">copy link <span class="message">Copied</span></span>
-                                                    <img src="./dist/img/loader.gif" id="loader1" alt="loader">
+                                                    <img src="{{ asset('frontendDashboard/pluginAssets/img/loader.gif') }}" id="loader1" alt="loader">
                                                 </div>
                                             </div>
                                             <div class="block_custom_url third">
@@ -230,7 +230,7 @@
                     </form>
                     <span class="close_popup"><i class="fa fa-times"></i></span>
                 </div>
-                <img src="./dist/img/loader.gif" id="loader" alt="loader">
+                <img src="{{ asset('frontendDashboard/pluginAssets/img/loader.gif') }}" id="loader" alt="loader">
             </div>
 
         </div>

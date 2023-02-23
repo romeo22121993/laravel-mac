@@ -820,8 +820,8 @@
             let get_cat     = ( name_select == 'topic' ) ? $(this).val() : $('.body-items').attr('data-getcat');
             let art_sort    = ( name_select == 'sort' )  ? $(this).val() : $('.body-items').attr('data-getsort');
             let art_original_edited = ( name_select == 'filter_edited_original' ) ? $(this).val() : $('.body-items').attr('data-get_article_type');
-            // let art_type    = ( name_select == 'type' )  ? $(this).val() : $('.body-items').attr('data-gettype');
-            let art_type    = 'all';
+            let art_type    = ( name_select == 'type' )  ? $(this).val() : $('.body-items').attr('data-gettype');
+            // let art_type    = 'all';
 
             articles_ajax_function( get_cat, art_type, art_sort, art_original_edited );
         });
@@ -858,7 +858,7 @@
             };
 
             $.ajax({
-                url: get.ajaxurl,
+                url: "/dashboard/ajax/filtering-articles",
                 type: "POST",
                 data: info,
                 success:function(response) {
@@ -931,7 +931,7 @@
             };
 
             $.ajax({
-                url: get.ajaxurl,
+                url: "/dashboard/ajax/filtering-articles",
                 type: "POST",
                 data: info,
                 success:function(response) {
