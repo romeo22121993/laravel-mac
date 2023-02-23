@@ -76,7 +76,7 @@
                             <div class="download_block " data-post="14271" data-link="">
                                 <h3 class="download_text sv-tooltip-container">
                                     <span>Download for your marketing efforts.</span>
-                                    <span class="sv-tooltip" data-tooltip="Download the piece to use for your own website, copy and paste the test, but don't forget the disclosure! "></span>
+                                    <span class="sv-tooltip" data-tooltip="Download the piece to use for your own website, copy and paste the test, but don't forget the disclosure!"></span>
                                 </h3>
                                 <a class="word-pdf-button1 ">
                                     Word Document
@@ -104,8 +104,11 @@
                                             <a class="cancel">
                                                 Back
                                             </a>
+                                            @php
+                                            $docFile = ($article->original_type == 'cloned') ? \App\Models\Article::find($article->parent_id)->doc_file : $article->doc_file;
+                                            @endphp
                                             <a class="word-pdf-button different download_article_file "
-                                               data-post-id="{{ $article->id }}" href="/{{ $article->doc_file }}" data-file-type="word">
+                                               data-post-id="{{ $article->id }}" href="/{{ $docFile }}" data-file-type="word">
                                                 Proceed
                                             </a>
                                         </div>

@@ -2,13 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\Course;
 use App\Models\Product;
 use App\Models\ProductBrand;
 use App\Models\ProductCategory;
 use Illuminate\Support\ServiceProvider;
 use http\Env\Request;
 use Illuminate\Support\Facades\View;
-
+use DB;
 use App\Http\Controllers\Frontend\ProductController;
 
 class AppServiceProvider extends ServiceProvider
@@ -51,6 +52,12 @@ class AppServiceProvider extends ServiceProvider
 
             /* end Products Part */
 
+            $courseProgress = !empty($user) ? $user->progress: "";
+            $courses        = Course::all()->pluck('id')->toArray();
+            $currentMonth   = date('Y-m');
+            $postClonedArticles = !empty($user) ? DB::table('usermeta')->where('user_id', $user->id)->first() : [];
+            $getDownloads   = empty($postClonedArticles->articles_downloads) ? array() : json_decode($postClonedArticles->articles_downloads, true);
+            $monthDownloads = empty( $getDownloads[$currentMonth] ) ? array() : $getDownloads[$currentMonth];
 
             $view->with([
                 'instructionPopup' => $a ?? 0,
@@ -62,6 +69,9 @@ class AppServiceProvider extends ServiceProvider
                 'productTags'      => $productTags,
                 'productCategories' => $productCategories,
                 'productBrands'     => $productBrands,
+                'courseProgress'    => json_decode($courseProgress),
+                'courses'           => $courses,
+                'monthDownloads'    => $monthDownloads,
             ]);
 
         });

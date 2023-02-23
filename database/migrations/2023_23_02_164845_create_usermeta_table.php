@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('usermeta', function (Blueprint $table) {
             $table->id();
 
+            $table->integer('user_id');
             $table->text('cloned_articles')->nullable();
+            $table->text('articles_downloads')->nullable();
 
             $table->timestamps();
         });

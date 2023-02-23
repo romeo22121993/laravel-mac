@@ -36,11 +36,12 @@ class CoursesController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function coursesPage() {
+    public function coursesPage()
+    {
 
-        $courses = Course::paginate( $this->number );
+        $courses = Course::paginate($this->number);
 
-        return view('admin.course.index', compact( 'courses' ) );
+        return view('admin.course.index', compact('courses'));
     }
 
     /**
@@ -48,13 +49,14 @@ class CoursesController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function coursesPageByCategory( $id ) {
+    public function coursesPageByCategory($id)
+    {
 
-        $courseCategory = CourseCategory::find( $id );
+        $courseCategory = CourseCategory::find($id);
         $courses        = $courseCategory->courses->pluck(['id']);
-        $courses        = Course::whereIn('id', $courses )->paginate($this->number);
+        $courses        = Course::whereIn('id', $courses)->paginate($this->number);
 
-        return view('admin.course.coursesbycategories', compact( 'courses', 'courseCategory' ) );
+        return view('admin.course.coursesbycategories', compact('courses', 'courseCategory'));
     }
 
 
@@ -63,11 +65,12 @@ class CoursesController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function addCourse() {
+    public function addCourse()
+    {
 
         $categories = CourseCategory::all();
 
-        return view('admin.course.create', compact( 'categories' ) );
+        return view('admin.course.create', compact('categories'));
     }
 
 
@@ -77,7 +80,8 @@ class CoursesController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function StoreCourse( Request $request ) {
+    public function StoreCourse(Request $request)
+    {
 
         $request->validate([
             'title'      => ['required', 'string', 'max:255', 'unique:courses'],
@@ -91,7 +95,7 @@ class CoursesController extends Controller
         $course->faq_block = $request->faq_block;
         $course->transcription = $request->transcription;
         $course->title     = $request->title;
-        $course->slug      = \Str::slug( $request->title );
+        $course->slug      = \Str::slug($request->title);
         $course->published = $request->published;
 
         $fileModule = new FilesUploads();
@@ -102,8 +106,8 @@ class CoursesController extends Controller
 
         $course->save();
 
-        $this->setCategoriesByPost ( $categories, $course->id );
-        $this->setLessonsByCourse ( $request->all(), $course->id );
+        $this->setCategoriesByPost ($categories, $course->id);
+        $this->setLessonsByCourse ($request->all(), $course->id);
 
         return Redirect()->route('wpadmin.courses');
 
@@ -116,14 +120,15 @@ class CoursesController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function EditCourse( $id ) {
+    public function EditCourse($id)
+    {
 
-        $course = Course::find( $id );
+        $course = Course::find($id);
 
         $courseCategories = $course->categories->pluck('id')->toArray();
         $categories       = CourseCategory::all();
 
-        return view('admin.course.edit', compact( 'course', 'categories', 'courseCategories' ) );
+        return view('admin.course.edit', compact('course', 'categories', 'courseCategories'));
 
     }
 
@@ -134,13 +139,14 @@ class CoursesController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function UpdateCourse( Request $request, $id ) {
+    public function UpdateCourse(Request $request, $id)
+    {
 
-        $course  = Course::find( $id );
+        $course  = Course::find($id);
 
         $request->validate([
-            'title'      => ['required', 'string', 'max:255', Rule::unique('courses')->ignore( $course )],
-            'slug'       => [ 'max:255', Rule::unique('courses')->ignore( $course )],
+            'title'      => ['required', 'string', 'max:255', Rule::unique('courses')->ignore($course)],
+            'slug'       => [ 'max:255', Rule::unique('courses')->ignore($course)],
             'categories' => ['required'],
         ]);
 
@@ -150,7 +156,7 @@ class CoursesController extends Controller
         $course->faq_block = $request->faq_block;
         $course->transcription = $request->transcription;
         $course->title     = $request->title;
-        $course->slug      = \Str::slug( $request->title );
+        $course->slug      = \Str::slug($request->title);
         $course->published = $request->published;
 
 
@@ -165,8 +171,8 @@ class CoursesController extends Controller
 
         $course->save();
 
-        $this->setCategoriesByPost ( $categories, $id, true );
-        $this->setLessonsByCourse ( $request->all(), $id, true );
+        $this->setCategoriesByPost ($categories, $id, true);
+        $this->setLessonsByCourse ($request->all(), $id, true);
 
         return redirect()->back();
     }
@@ -177,11 +183,12 @@ class CoursesController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function DeleteCourse( $id ){
+    public function DeleteCourse($id)
+    {
 
         DB::table('courses_and_cats')->where('course_id', $id)->delete();
 
-        $course = Course::find( $id );
+        $course = Course::find($id);
         if (file_exists($course->img)) {
             unlink($course->img);
         }
@@ -202,21 +209,22 @@ class CoursesController extends Controller
      *
      * @return bool
      */
-    protected function setCategoriesByPost ( $categories, $courseId, $deletingPrevious = false ) {
+    protected function setCategoriesByPost ($categories, $courseId, $deletingPrevious = false)
+    {
         $courseAndCats = [];
 
-        if ( !empty( $deletingPrevious ) ) {
+        if (!empty($deletingPrevious)) {
             DB::table('courses_and_cats')->where('course_id', $courseId)->delete();
         }
 
-        foreach ( $categories as $category ) {
+        foreach ($categories as $category) {
             $courseAndCats[] = [
                 'course_id' => $courseId,
                 'cat_id'    => $category,
             ];
         }
 
-        DB::table('courses_and_cats')->insert( $courseAndCats );
+        DB::table('courses_and_cats')->insert($courseAndCats);
 
         return true;
     }
@@ -230,16 +238,17 @@ class CoursesController extends Controller
      *
      * @return bool
      */
-    protected function setLessonsByCourse ( $requests, $courseId, $update = false ) {
+    protected function setLessonsByCourse($requests, $courseId, $update = false)
+    {
 
-        if ( !empty( $update ) ) {
-            $courseLesson = CourseLesson::find( $requests['detail_id'] );
+        if (!empty($update)) {
+            $courseLesson = CourseLesson::find($requests['detail_id']);
         }
         else {
             $courseLesson = new CourseLesson();
         }
 
-        for ( $i = 1; $i <= 10; $i++ ) {
+        for ($i = 1; $i <= 10; $i++) {
             $nameKey = "lesson_name_$i";
             $linkKey = "lesson_link_$i";
 

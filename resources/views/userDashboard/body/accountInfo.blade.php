@@ -21,8 +21,7 @@
                             <i class="fa fa-upload"></i>
                             Upload new
                         </label>
-                        <input type="file" required name="user_image" id="user_image"
-                               value="Upload new" >
+                        <input type="file" required name="user_image" id="user_image" value="Upload new" >
                     </div>
                 </form>
                 <img src="{{ asset('frontendDashboard/pluginAssets/img/loader.gif') }}"  id="loader-image" alt="loader" />
@@ -44,18 +43,21 @@
             </div>
         </div>
     </div>
+
     <div class="joined-holder bottom-border">
         <div class="row">
             <div class="col-12">
                 <p>
                     <span class="bold_span">
-                        0  out of   23
+                        @if(!empty($courseProgress))  {{count(json_decode($courseProgress->completed_courses, true)) }} @else 0 @endif
+                        out of
+                        {{ count($courses) }}
                     </span>
                     lessons completed
                 </p>
                 <p>Joined since 2019</p>
                 <p>
-                    <span class="bold_span">0</span>
+                    <span class="bold_span">{{ count($monthDownloads) }}</span>
                     content downloads this month
                 </p>
             </div>

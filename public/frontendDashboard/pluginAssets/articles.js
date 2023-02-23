@@ -33,14 +33,12 @@ jQuery(document).ready(function ($) {
             };
 
             $.post({
-                url: get.ajaxurl,
+                url: '/dashboard/ajax/download-article',
                 data: info,
                 success: function (data) {
-                    if ( data.file_src ) {
-                        window.open( data.file_src );
-                        if($(".download-document-popup-wrap .download-overlay").length){
-                            $(".download-document-popup-wrap .download-overlay").trigger('click');
-                        }
+                    window.open( href );
+                    if($(".download-document-popup-wrap .download-overlay").length){
+                        $(".download-document-popup-wrap .download-overlay").trigger('click');
                     }
                 },
                 error: function (data) {
@@ -192,7 +190,7 @@ jQuery(document).ready(function ($) {
             $(".loaded .preloader").show().css('background', 'initial');
 
             $.post({
-                url: get.ajaxurl,
+                url: '/dashboard/ajax/reset-clone-article',
                 data: info,
                 success: function (data) {
                     $("#loader").show();
@@ -348,7 +346,7 @@ jQuery(document).ready(function ($) {
         });
     }
 
-    // downloads_function();
+    downloads_function();
     open_downloads_function();
     disable_sharing();
     clone_article();

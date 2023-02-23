@@ -24,7 +24,7 @@
                             <a href="{{ route('wpadmin.articles.cloned') }}">Cloned Articles</a>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered sortable searchable">
                                 <thead>
                                     <tr>
                                         <th> # </th>
@@ -52,9 +52,9 @@
                                             </td>
                                             <td>{{ $article->updated_at->diffForHumans() }}</td>
                                             <td>{{ $article->original_type }}
-{{--                                                @if ($article->original_type == 'cloned')--}}
-{{--                                                Parent: {{ \App\Models\Article::find($article->parent_id)->title }}, Author: {{ \App\Models\User::find($article->author_id)->name }}--}}
-{{--                                                @endif--}}
+                                                @if ($article->original_type == 'cloned')
+                                                , Parent: {{ \App\Models\Article::find($article->parent_id)->title }}, Author: {{ \App\Models\User::find($article->author_id)->name }}
+                                                @endif
                                             </td>
                                             <td><a href="{{ route( 'single.article', $article->slug ) }}">View Article</a></td>
                                             <td>
@@ -74,3 +74,4 @@
         </div>
     </div>
 @endsection
+

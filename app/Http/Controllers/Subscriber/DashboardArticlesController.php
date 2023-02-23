@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Subscriber;
 
+use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Controller;
 use App\Jobs\PostObserverJob;
 use App\Models\Article;
@@ -29,7 +30,7 @@ use Illuminate\Support\Facades\File;
 class DashboardArticlesController extends Controller
 {
 
-    protected $number = 4;
+    protected $number = 1;
 
     public function __construct(){
         $this->middleware('auth');
@@ -43,18 +44,21 @@ class DashboardArticlesController extends Controller
     public function articlesPage() {
 
         $user       = Auth::user();
-        $articles   = Course::where('published', '=', 1)->paginate($this->number);
+        $originalArticles = Article::where('original_type', 'original')->paginate($this->number);
+
         $categories = CourseCategory::all();
 
-        $articleProgress = $user->progress;
-        $completedCourses   = !empty($articleProgress->completed_articles) ? json_decode($articleProgress->completed_articles, true) : [];
-        $progressingCourses = !empty($articleProgress->progressing_articles) ? json_decode($articleProgress->progressing_articles, true) : [];
+        $postClonedArticles  = DB::table('cloned_articles_relations')->where('user_id', $user->id)
+            ->get()->pluck(['child_id'])->toArray();
 
-        return view('userDashboard.pages.articles', compact('articles', 'categories', 'progressingCourses', 'completedCourses'));
+        $clonedArticles = Article::whereIn('id', $postClonedArticles)->paginate($this->number);
+        $countPerPage   = $this->number;
+
+        return view('userDashboard.pages.articles', compact(
+            'countPerPage', 'originalArticles', 'categories', 'clonedArticles'
+        ));
     }
 
-
-    /* Dashboard articles actions */
 
     /**
      * Funtion single article page
@@ -194,6 +198,25 @@ class DashboardArticlesController extends Controller
     }
 
 
+    /**
+     * Function cloning original articles callback
+     *
+     */
+    public function resetClonedArticle(Request $request)
+    {
+
+        $article_id     = $request->article_id;
+
+        $artController = new ArticleController();
+        $artController->DeleteArticle($article_id);
+
+        $redirect_link = env("APP_URL") . "dashboard/admin-articles/";
+
+        return ['status' => 'Done', 'redirect_link' => $redirect_link];
+
+    }
+
+
 
     /**
      * Function cloning parent categories for cloned article
@@ -219,7 +242,7 @@ class DashboardArticlesController extends Controller
      * Function generating thumbnail by parent original thumbnail
      *
      * @param $image_url
-     * @param $post_id
+     * @param $postId
      * @return bool
      */
     public function generateFeaturedImageFromOriginal($image_url){
@@ -248,8 +271,8 @@ class DashboardArticlesController extends Controller
         $getCat   = !empty($request->get_cat) ? $request->get_cat : 0;
         $cpt_type = 'articles';
 
-        $user               = Auth::user();
-        $articleProgress     = $user->progress;
+        $user              = Auth::user();
+        $articleProgress    = $user->progress;
         $completedCourses   = !empty($articleProgress->completed_articles) ? json_decode($articleProgress->completed_articles, true) : [];
         $progressingCourses = !empty($articleProgress->progressing_articles) ? json_decode($articleProgress->progressing_articles, true) : [];
 
@@ -307,6 +330,49 @@ class DashboardArticlesController extends Controller
             return $result;
 
         }
+
+    }
+
+
+    /**
+     * Function for downloading process
+     *
+     */
+    public function downloadArticle(Request $request) {
+
+
+        $postId        = !empty( $request->post_id ) ? $request->post_id : 0;
+        $file_src      = !empty( $request->href ) ? $request->href : '';
+
+        $user           = Auth::user();
+        $currentMonth   = date('Y-m');
+
+        $postClonedArticles = DB::table('usermeta')->where('user_id', $user->id)
+            ->first();
+        $getDownloads   = empty($postClonedArticles->articles_downloads) ? array() : json_decode($postClonedArticles->articles_downloads, true);
+        $monthDownloads = empty( $getDownloads[$currentMonth] ) ? array() : $getDownloads[$currentMonth];
+
+        if ( !in_array( $postId, $monthDownloads ) ) {
+            $getDownloads[$currentMonth][] = $postId;
+        }
+
+
+        $getDownloads = json_encode( $getDownloads );
+
+        $arr = [
+            'articles_downloads' => $getDownloads,
+            'user_id'            => $user->id,
+        ];
+
+        DB::table('usermeta')
+            ->updateOrInsert(
+                ['user_id' => $user->id],
+                $arr
+            );
+
+        //$file_created   = !empty( $file_src ) ? $this->read_save_file_func( $file_src ) : '';
+
+        return ['error'=> false, 'message' => 'Done.'];
 
     }
 

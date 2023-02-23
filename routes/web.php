@@ -91,8 +91,10 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
         Route::post('/loadMoreGuides',    [DashboardGuidesController::class,    'LoadMoreGuides']);
         Route::post('/loadMoreResources', [DashboardResourcesController::class, 'LoadMoreResources']);
 
+        Route::post('/download-article/',    [DashboardArticlesController::class, 'downloadArticle']);
         Route::post('/clone-article/',       [DashboardArticlesController::class, 'cloneArticle']);
         Route::post('/edit-cloned-article/', [DashboardArticlesController::class, 'editClonedArticle']);
+        Route::post('/reset-clone-article/', [DashboardArticlesController::class, 'resetClonedArticle']);
 
     });
 
