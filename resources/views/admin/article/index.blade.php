@@ -20,6 +20,8 @@
                             <a href="{{ route('wpadmin.articles.add') }}">
                                 <button type="button" class="btn btn-primary btn-fw">Add New Article</button>
                             </a>
+                            <a href="{{ route('wpadmin.articles.original') }}">Original Articles</a>
+                            <a href="{{ route('wpadmin.articles.cloned') }}">Cloned Articles</a>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-bordered">
@@ -27,10 +29,11 @@
                                     <tr>
                                         <th> # </th>
                                         <th>{{ __('Article Title') }}</th>
-                                        <th>{{ __('Article Slug') }}</th>
+                                        <th>{{ __('Article Id') }}</th>
                                         <th>{{ __('Categories') }}</th>
                                         <th>{{ __('Featured Image') }}</th>
                                         <th>{{ __('Time') }}</th>
+                                        <th>{{ __('Original/Cloned') }}</th>
                                         <th>{{ __('View Article') }}</th>
                                         <th>{{ __('Action') }}</th>
                                     </tr>
@@ -41,13 +44,18 @@
                                         <tr>
                                             <td> {{ $i++ }} </td>
                                             <td> {{ $article->title }}</td>
-                                            <td> {{ $article->slug }}</td>
+                                            <td> {{ $article->id }}</td>
                                             <td> {{ implode(', ', ( $article->categories->pluck('title')->toArray() ) ) }} </td>
                                             <td>
                                                 <img style="width: 50px; height: auto;"
                                                     src="@if( !empty( $article->img ) ) {{ "/".$article->img }} @else {{ asset('/img/none.jpg') }} @endif">
                                             </td>
                                             <td>{{ $article->updated_at->diffForHumans() }}</td>
+                                            <td>{{ $article->original_type }}
+{{--                                                @if ($article->original_type == 'cloned')--}}
+{{--                                                Parent: {{ \App\Models\Article::find($article->parent_id)->title }}, Author: {{ \App\Models\User::find($article->author_id)->name }}--}}
+{{--                                                @endif--}}
+                                            </td>
                                             <td><a href="{{ route( 'single.article', $article->slug ) }}">View Article</a></td>
                                             <td>
                                                 <a href="{{ route('wpadmin.articles.edit',  $article->id) }}" class="btn btn-info">Edit</a>

@@ -451,6 +451,7 @@ jQuery(document).ready(function ($) {
             if( all_nots_seen == 'yes' ) {
                 let count_nots = $(".sv-notifications__alert .sv-notifications__counter").text().trim();
 
+                /*
                 let info = {
                     count_nots: count_nots,
                     action:     'seen_all_notifications'
@@ -467,6 +468,8 @@ jQuery(document).ready(function ($) {
                         console.log('error');
                     },
                 });
+
+                 */
 
             }
         });

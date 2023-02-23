@@ -43,6 +43,32 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
+    public function originalArticles()
+    {
+
+        $articles = Article::where('original_type', 'original')->paginate($this->number);
+
+        return view('admin.article.index', compact('articles'));
+    }
+
+    /**
+     * Function main of category controller
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function clonedArticles()
+    {
+
+        $articles = Article::where('original_type', 'cloned')->paginate($this->number);
+
+        return view('admin.article.index', compact('articles'));
+    }
+
+    /**
+     * Function main of category controller
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function articlesPageByCategory($id)
     {
 
@@ -225,7 +251,16 @@ class ArticleController extends Controller
 
         DB::table('articles_and_cats')->where('article_id', $id)->delete();
 
+
         $article = Article::find($id);
+
+        if ($article->original_type == 'original') {
+//            DB::table('cloned_articles_relations')->where('origin_id', $article->id)->delete();
+        }
+        else {
+            DB::table('cloned_articles_relations')->where('child_id', $article->id)->delete();
+        }
+
         if (file_exists($article->img)) {
             unlink($article->img);
         }

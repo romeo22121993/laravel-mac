@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Subscriber;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -29,9 +29,6 @@ class UserDashboardController extends Controller
 
         $data = $request->all();
         $user = Auth::user();
-
-        var_dump( '$request', $data );
-        var_dump( 'data', $request->data );
 
         $image_src = 'none';
         if ( $request->file('file' ) ) {

@@ -35,12 +35,13 @@ use App\Http\Controllers\Frontend\StripeController;
 use App\Http\Controllers\Frontend\CashController;
 use App\Http\Controllers\Frontend\UserOrderController;
 use App\Http\Controllers\Frontend\GameController;
-use App\Http\Controllers\Frontend\UserDashboardController;
+use App\Http\Controllers\Subscriber\UserDashboardController;
 use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\Subscriber\DashboardCoursesController;
+use App\Http\Controllers\Subscriber\DashboardArticlesController;
 use App\Http\Controllers\Subscriber\DashboardGuidesController;
 use App\Http\Controllers\Subscriber\DashboardResourcesController;
 use App\Modules\VideosAPI;
@@ -65,14 +66,14 @@ Auth::routes();
 Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']], function(){
 
     Route::get('/',                [DashboardController::class, 'mainPage'])->name('dashboard.main');
-    Route::get('/admin-articles',  [DashboardController::class, 'articlesPage'])->name('dashboard.articles');
+    Route::get('/admin-articles',  [DashboardArticlesController::class, 'articlesPage'])->name('dashboard.articles');
     Route::get('/admin-campaigns', [DashboardController::class, 'campaignPage'])->name('dashboard.campaigns');
     Route::get('/admin-resources', [DashboardResourcesController::class, 'resourcesPage'])->name('dashboard.resources');
     Route::get('/admin-courses',   [DashboardCoursesController::class, 'coursesPage'])->name('dashboard.courses');
     Route::get('/admin-guides',    [DashboardGuidesController::class, 'guidesPage'])->name('dashboard.guides');
 
     Route::get('/courses/{slug}',  [DashboardCoursesController::class, 'singleCoursePage'])->name('single.course');
-
+    Route::get('/article/{slug}',  [DashboardArticlesController::class, 'singleArticlePage'])->name('single.article');
 
     // Ajax requests for dashboard pages
     Route::group(['prefix'=> 'ajax'], function(){
@@ -86,10 +87,12 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
 
         Route::post('/lastiteraction',   [DashboardCoursesController::class, 'lastIteractionFunction']);
 
-
         Route::post('/loadMoreCourses',   [DashboardCoursesController::class,   'LoadMoreCourses']);
         Route::post('/loadMoreGuides',    [DashboardGuidesController::class,    'LoadMoreGuides']);
         Route::post('/loadMoreResources', [DashboardResourcesController::class, 'LoadMoreResources']);
+
+        Route::post('/clone-article/',       [DashboardArticlesController::class, 'cloneArticle']);
+        Route::post('/edit-cloned-article/', [DashboardArticlesController::class, 'editClonedArticle']);
 
     });
 
@@ -157,6 +160,8 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
 
     Route::group(['prefix'=> 'articles'], function() {
         Route::get('/',              [ArticleController::class, 'articlesPage'])->name('wpadmin.articles');
+        Route::get('/original',      [ArticleController::class, 'originalArticles'])->name('wpadmin.articles.original');
+        Route::get('/cloned',        [ArticleController::class, 'clonedArticles'])->name('wpadmin.articles.cloned');
         Route::get('/add',           [ArticleController::class, 'addArticle'])->name('wpadmin.articles.add');
         Route::post('/store',        [ArticleController::class, 'StoreArticle'])->name('wpadmin.articles.store');
         Route::get('/edit/{id}',     [ArticleController::class, 'EditArticle'])->name('wpadmin.articles.edit');
@@ -389,7 +394,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/about',    [FrontendController::class, 'aboutPage'])->name('about');
 
     Route::get('/post/{slug}',    [FrontendPostController::class, 'singlePostPage'])->name('single.post');
-    Route::get('/article/{slug}', [FrontendPostController::class, 'singlePostPage'])->name('single.article');
 
     // Ajax requests for frontend page
     Route::group(['prefix'=> 'ajax'], function(){

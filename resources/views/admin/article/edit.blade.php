@@ -31,7 +31,14 @@
                                 <label for="exampleInputName1">Article Title</label>
                                 <input type="text" class="form-control" id="exampleInputName1" name="title" value="{{ $article->title }}">
                             </div>
-
+                            <div class="form-group col-md-3">
+                                <label for="exampleInputName1">Parent Id</label>
+                                <input type="text" class="form-control" id="exampleInputName1" name="parent_id" value="{{ $article->parent_id }}">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="exampleInputName1">Author Id</label>
+                                <input type="text" class="form-control" id="exampleInputName1"  value="{{ \App\Models\User::find($article->author_id)->name }}">
+                            </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-4">
@@ -46,7 +53,7 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for="exampleInputName1">Article</label>
+                                <label for="exampleInputName1">Article Type</label>
                                 <select class="form-control" id="exampleSelectGender" name="article_type" required >
                                     @foreach( $articleTypes as $k => $v )
                                         <option value="{{ $k }}"
@@ -57,7 +64,7 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for="exampleInputName1">Article</label>
+                                <label for="exampleInputName1">Review Status</label>
                                 <select class="form-control" id="exampleSelectGender" name="review_status" required>
                                     @foreach( $reviewStatuses as $k => $v )
                                         <option value="{{ $k }}"
@@ -84,6 +91,7 @@
                             <div class="form-group col-md-6">
                                 <label for="exampleFormControlFile1">Document File </label>
                                 <input type="file" name="doc_file"  class="form-control-file" id="exampleFormControlFile1">
+                                <span>{{ $article->doc_file }}</span>
                             </div>
 
                         </div>

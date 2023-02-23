@@ -38,4 +38,5 @@ class Article extends Model
         return $this->belongsToMany(ArticleCategory::class, 'articles_and_cats', 'article_id', 'cat_id');
     }
 
+
 }

@@ -105,7 +105,7 @@ jQuery(document).ready(function ($) {
             let data      = $(this).serialize();
 
             let form_data = new FormData();
-            form_data.append('file', file_data);
+            form_data.append('img', file_data);
             form_data.append('data', data);
             form_data.append('action', 'clone_article');
 
@@ -113,7 +113,7 @@ jQuery(document).ready(function ($) {
             $(".loaded .preloader").show().css('background', 'initial');
 
             $.post({
-                url: get.ajaxurl,
+                url: '/dashboard/ajax/clone-article',
                 data: form_data,
                 contentType: false,
                 processData: false,
@@ -150,14 +150,14 @@ jQuery(document).ready(function ($) {
             let data      = $(this).serialize();
 
             let form_data = new FormData();
-            form_data.append('file', file_data);
+            form_data.append('img', file_data);
             form_data.append('data', data);
             form_data.append('action', 'edit_cloned_article');
 
             $(".edit_article_button, .reset_article_button, .edit_cloned_article_form input[type='submit']").addClass('disabled_btn');
             $(".loaded .preloader").show().css('background', 'initial');
             $.post({
-                url: get.ajaxurl,
+                url: '/dashboard/ajax/edit-cloned-article',
                 data: form_data,
                 contentType: false,
                 processData: false,
@@ -348,8 +348,7 @@ jQuery(document).ready(function ($) {
         });
     }
 
-    // download_article_file();
-    downloads_function();
+    // downloads_function();
     open_downloads_function();
     disable_sharing();
     clone_article();
