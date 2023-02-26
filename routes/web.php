@@ -26,6 +26,9 @@ use App\Http\Controllers\Admin\ResourceController;
 use App\Http\Controllers\Admin\ResourceCategoryController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\ArticleCategoryController;
+use App\Http\Controllers\Admin\CampaignController;
+use App\Http\Controllers\Admin\CampaignCategoryController;
+use App\Http\Controllers\Admin\CampaignTopicController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\WishlistController;
@@ -74,6 +77,7 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
 
     Route::get('/courses/{slug}',  [DashboardCoursesController::class, 'singleCoursePage'])->name('single.course');
     Route::get('/article/{slug}',  [DashboardArticlesController::class, 'singleArticlePage'])->name('single.article');
+    Route::get('/campaign/{slug}', [DashboardArticlesController::class, 'singleCampaignPage'])->name('single.campaign');
 
     // Ajax requests for dashboard pages
     Route::group(['prefix'=> 'ajax'], function(){
@@ -183,6 +187,40 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
             Route::post('/update/{id}', [ArticleCategoryController::class, 'UpdateArticleCategory'])->name('wpadmin.articles.categories.update');
             Route::get('/delete/{id}',  [ArticleCategoryController::class, 'DeleteArticleCategory'])->name('wpadmin.articles.categories.delete');
         });
+    });
+
+    Route::group(['prefix'=> 'campaigns'], function() {
+        Route::get('/',              [CampaignController::class, 'campaignsPage'])->name('wpadmin.campaigns');
+        Route::get('/original',      [CampaignController::class, 'originalCampaigns'])->name('wpadmin.campaigns.original');
+        Route::get('/cloned',        [CampaignController::class, 'clonedCampaigns'])->name('wpadmin.campaigns.cloned');
+        Route::get('/add',           [CampaignController::class, 'addCampaign'])->name('wpadmin.campaigns.add');
+        Route::post('/store',        [CampaignController::class, 'StoreCampaign'])->name('wpadmin.campaigns.store');
+        Route::get('/edit/{id}',     [CampaignController::class, 'EditCampaign'])->name('wpadmin.campaigns.edit');
+        Route::post('/update/{id}',  [CampaignController::class, 'UpdateCampaign'])->name('wpadmin.campaigns.update');
+        Route::get('/delete/{id}',   [CampaignController::class, 'DeleteCampaign'])->name('wpadmin.campaigns.delete');
+        Route::get('/category/{id}', [CampaignController::class, 'campaignsPageByCategory'])->name('wpadmin.campaigns.by.categories');
+        Route::get('/topic/{id}',    [CampaignController::class, 'campaignsPageByTopic'])->name('wpadmin.campaigns.by.topics');
+
+        Route::get('/image/delete/{id}', [CampaignController::class, 'DeleteCampaignImage'])->name('wpadmin.campaigns.delete.image');
+
+        Route::group(['prefix'=> 'categories'], function() {
+            Route::get('/',             [CampaignCategoryController::class, 'campaignsCategoryPage'])->name('wpadmin.campaigns.categories');
+            Route::get('/add',          [CampaignCategoryController::class, 'addCampaignCategory'])->name('wpadmin.campaigns.categories.add');
+            Route::post('/store',       [CampaignCategoryController::class, 'storeCampaignCategory'])->name('wpadmin.campaigns.categories.store');
+            Route::get('/edit/{id}',    [CampaignCategoryController::class, 'editCampaignCategory'])->name('wpadmin.campaigns.categories.edit');
+            Route::post('/update/{id}', [CampaignCategoryController::class, 'updateCampaignCategory'])->name('wpadmin.campaigns.categories.update');
+            Route::get('/delete/{id}',  [CampaignCategoryController::class, 'deleteCampaignCategory'])->name('wpadmin.campaigns.categories.delete');
+        });
+
+        Route::group(['prefix'=> 'topics'], function() {
+            Route::get('/',             [CampaignTopicController::class, 'campaignsTopicPage'])->name('wpadmin.campaigns.topics');
+            Route::get('/add',          [CampaignTopicController::class, 'addCampaignTopic'])->name('wpadmin.campaigns.topics.add');
+            Route::post('/store',       [CampaignTopicController::class, 'storeCampaignTopic'])->name('wpadmin.campaigns.topics.store');
+            Route::get('/edit/{id}',    [CampaignTopicController::class, 'editCampaignTopic'])->name('wpadmin.campaigns.topics.edit');
+            Route::post('/update/{id}', [CampaignTopicController::class, 'updateCampaignTopic'])->name('wpadmin.campaigns.topics.update');
+            Route::get('/delete/{id}',  [CampaignTopicController::class, 'deleteCampaignTopic'])->name('wpadmin.campaigns.topics.delete');
+        });
+
     });
 
 

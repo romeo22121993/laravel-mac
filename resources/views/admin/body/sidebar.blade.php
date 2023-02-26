@@ -308,5 +308,23 @@
                 </div>
             </li>
 
+            <li class="nav-item menu-items">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic15" aria-expanded="false" aria-controls="ui-basic15">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-laptop"></i>
+                    </span>
+                    <span class="menu-title">Campaigns</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic15">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.campaigns') }}">Campaigns</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.campaigns.categories') }}">Campaign Categories</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.campaigns.topics') }}">Campaign Topics</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.campaigns.add') }}">Add Campaign</a></li>
+                    </ul>
+                </div>
+            </li>
+
         </ul>
     </nav>

@@ -146,7 +146,7 @@ class CoursesController extends Controller
 
         $request->validate([
             'title'      => ['required', 'string', 'max:255', Rule::unique('courses')->ignore($course)],
-            'slug'       => [ 'max:255', Rule::unique('courses')->ignore($course)],
+            'slug'       => ['max:255', Rule::unique('courses')->ignore($course)],
             'categories' => ['required'],
         ]);
 

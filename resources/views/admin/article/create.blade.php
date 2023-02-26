@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="exampleInputName1">Article</label>
+                            <label for="exampleInputName1">Article Type</label>
                             <select class="form-control" id="exampleSelectGender" name="article_type" required >
                                 @foreach( $articleTypes as $k => $v )
                                     <option value="{{ $v }}">{{ ucfirst($v) }}</option>
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="exampleInputName1">Article</label>
+                            <label for="exampleInputName1">Review Status</label>
                             <select class="form-control" id="exampleSelectGender" name="review_status" required>
                                 @foreach( $reviewStatuses as $k => $v )
                                     <option value="{{ $k }}">{{ $v }}</option>
@@ -66,7 +66,6 @@
                         </div>
 
                     </div>
-
 
                     <div class="form-group">
                         <label for="exampleTextarea1">Article Content</label>

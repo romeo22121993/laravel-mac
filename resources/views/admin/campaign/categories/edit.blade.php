@@ -1,7 +1,7 @@
 @extends('admin.admin_master')
 
 @section('title')
-    Edit Article Category
+    Edit Campaign Category
 @endsection
 
 @section('admin_content')
@@ -12,7 +12,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Edit Article Category</h4>
+                    <h4 class="card-title">Edit Campaign Category</h4>
 
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -24,7 +24,7 @@
                         </div>
                     @endif
 
-                    <form class="forms-sample" method="POST" action="{{ route('wpadmin.articles.categories.update', $category->id) }}">
+                    <form class="forms-sample" method="POST" action="{{ route('wpadmin.campaigns.categories.update', $category->id) }}">
                         @csrf
 
                         <div class="form-group">
