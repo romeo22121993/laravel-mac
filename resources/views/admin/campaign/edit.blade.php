@@ -100,12 +100,12 @@
 
                                 <div class="form-group col-md-4">
                                     <label for="exampleTextarea1">Email Subject </label>
-                                    <textarea class="form-control" required name="email_subject{{$i}}">{{ $campaign->details->$subjectKey }}</textarea>
+                                    <textarea class="form-control" @if($i==1) required @endif name="email_subject{{$i}}">{{ $campaign->details->$subjectKey }}</textarea>
                                 </div>
 
                                 <div class="form-group col-md-8">
                                     <label for="exampleTextarea1">Email Body</label>
-                                    <textarea class="form-control" required name="email_body{{$i}}" id="summernote">{{ $campaign->details->$bodyKey }}</textarea>
+                                    <textarea class="form-control" @if($i==1) required @endif name="email_body{{$i}}" id="summernote">{{ $campaign->details->$bodyKey }}</textarea>
                                 </div>
 
                                 <div class="form-group col-md-4">

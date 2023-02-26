@@ -189,8 +189,6 @@ class CampaignController extends Controller
         $fileModule = new FilesUploads();
         $campaign   = Campaign::find($id);
 
-        $fileModule = new FilesUploads();
-
         $request->validate([
             'title'      => ['required', 'string', 'max:255', Rule::unique('campaigns')->ignore($campaign)],
             'slug'       => ['max:255', Rule::unique('campaigns')->ignore($campaign)],
@@ -249,6 +247,7 @@ class CampaignController extends Controller
         DB::table('campaigns_and_cats')->where('campaign_id', $id)->delete();
         DB::table('campaigns_and_topics')->where('campaign_id', $id)->delete();
 
+        CampaignDetail::where('campaign_id', $id)->delete();
 
         $campaign = Campaign::find($id);
 
@@ -264,6 +263,9 @@ class CampaignController extends Controller
         }
         if (file_exists($campaign->doc_file)) {
             unlink($campaign->doc_file);
+        }
+        if (file_exists($campaign->pdf_file)) {
+            unlink($campaign->pdf_file);
         }
 
         $campaign->delete();
