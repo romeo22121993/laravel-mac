@@ -241,7 +241,7 @@ jQuery(document).ready(function ($) {
             };
 
             $.post({
-                url: get.ajaxurl,
+                url: '/dashboard/ajax/clone-campaign',
                 data: info,
                 success: function ( data ) {
                     console.log('success', data);
@@ -290,13 +290,14 @@ jQuery(document).ready(function ($) {
         });
     }
 
+
     /**
      * Function of deleting cloned campaigns
      *
      */
     function delete_clone_campaign() {
 
-        $(document).on("click", ".delete_cloned_campaign_btn", function (e) {
+        $(document).on("click", ".delete_cloned_campaign", function (e) {
             e.preventDefault();
 
             $(this).addClass('loader_campaign');
@@ -308,11 +309,12 @@ jQuery(document).ready(function ($) {
             };
 
             $.post({
-                url: get.ajaxurl,
+                url: "/dashboard/ajax/delete-cloned-campaign",
                 data: info,
                 success: function ( data ) {
                     console.log('success', data);
                     $('.campaign#'+ id_campaign).remove();
+                    window.location.replace( data.redirect_link );
                 },
                 error: function ( data ) {
                     console.log('error');
@@ -573,25 +575,27 @@ jQuery(document).ready(function ($) {
          * Changing selects function
          *
          */
-        let sv_filter_type  = ( $(".all_campaigns_block.new #sv-filter-type").length > 0 ) ? $(".all_campaigns_block.new #sv-filter-type").val() : 'all';
-        let sv_filter_topic = ( $(".all_campaigns_block.new #sv-filter-topic").length > 0 ) ? $(".all_campaigns_block.new #sv-filter-topic").val() : 'all';
-        let getcat          = $('.all_campaigns_block.new').attr('data-getcat1');
+        let sv_filter_type  = ( $(".all_campaigns_block #sv-filter-type").length > 0 ) ? $(".all_campaigns_block #sv-filter-type").val() : 'all';
+        let sv_filter_topic = ( $(".all_campaigns_block #sv-filter-topic").length > 0 ) ? $(".all_campaigns_block #sv-filter-topic").val() : 'all';
+        let getcat          = $('.all_campaigns_block').attr('data-getcat1');
 
-        $(".all_campaigns_block.new #sv-filter-topic, .all_campaigns_block.new #sv-filter-type").on( "change", function (e) {
+        $(".all_campaigns_block #sv-filter-topic, .all_campaigns_block #sv-filter-type").on( "change", function (e) {
             e.preventDefault();
             $(".loader_block #loader").show();
 
             let name_select = $(this).attr('name');
-            let get_topic   = ( name_select == 'topic' ) ? $(this).val() : $('.all_campaigns_block.new').attr('data-gettopic');
-            let get_type    = ( name_select == 'type' )  ? $(this).val() : $('.all_campaigns_block.new').attr('data-gettype');
+            let get_topic   = ( name_select == 'topics' ) ? $(this).val() : $('.all_campaigns_block').attr('data-gettopic');
+            let get_type    = ( name_select == 'categories' )  ? $(this).val() : $('.all_campaigns_block').attr('data-gettype');
 
+            console.log( 'check1', get_topic, get_type, getcat  );
             campaigns_ajax_function( get_topic, get_type, getcat );
         });
 
         if (
             ( ( sv_filter_type != 'all' ) || ( sv_filter_topic != 'all' ) )
-            && ( ( $(".all_campaigns_block.new #sv-filter-topic").length > 0 ) || ( $(".all_campaigns_block.new #sv-filter-type").length > 0 ) )
+            && ( ( $(".all_campaigns_block #sv-filter-topic").length > 0 ) || ( $(".all_campaigns_block #sv-filter-type").length > 0 ) )
         ) {
+            console.log( 'check2', get_topic, get_type, getcat  )
             campaigns_ajax_function( sv_filter_topic, sv_filter_type, getcat );
         }
 
@@ -606,44 +610,47 @@ jQuery(document).ready(function ($) {
 
             let page        = 1;
 
+            console.log( 'get_topic, get_type, get_cat', get_topic, get_type, get_cat );
+
+
             let info        = {
                 'action':     'filtering_campaigns',
                 'total_count': 0,
                 'page':        page,
-                'topic':       get_topic,
-                'type':        get_type,
+                'topics':      get_topic,
+                'categories':  get_type,
                 'cat':         get_cat,
                 'js_type':     'load_more',
             };
 
             $.ajax({
-                url: get.ajaxurl,
+                url: '/dashboard/ajax/filtering-campaigns',
                 type: "POST",
                 data: info,
                 success:function(response) {
 
                     if ( response ) {
 
-                        $(".all_campaigns_block.new .columns-grid").html('');
-                        $(".all_campaigns_block.new .columns-grid").append(response.html).hide().fadeIn('slow');
-                        $('.all_campaigns_block.new').attr('data-all', response.all );
-                        $('.all_campaigns_block.new').attr('data-page', 2 );
+                        $(".all_campaigns_block .columns-grid").html('');
+                        $(".all_campaigns_block .columns-grid").append(response.html).hide().fadeIn('slow');
+                        $('.all_campaigns_block').attr('data-all', response.all );
+                        $('.all_campaigns_block').attr('data-page', 2 );
 
-                        $('.all_campaigns_block.new').attr('data-getcat1',  get_cat );
-                        $('.all_campaigns_block.new').attr('data-gettype', get_type );
-                        $('.all_campaigns_block.new').attr('data-gettopic', get_topic );
+                        $('.all_campaigns_block').attr('data-getcat1',  get_cat );
+                        $('.all_campaigns_block').attr('data-gettype', get_type );
+                        $('.all_campaigns_block').attr('data-gettopic', get_topic );
 
                         $(".loader_block #loader").hide();
                         if ( response.total >= response.all ) {
-                            $(".all_campaigns_block.new #load_more_campaigns").hide();
+                            $(".all_campaigns_block #load_more_campaigns").hide();
                         }
                         else {
-                            $(".all_campaigns_block.new #load_more_campaigns").show();
+                            $(".all_campaigns_block #load_more_campaigns").show();
                         }
                     }
                     else {
-                        $(".all_campaigns_block.new .columns-grid").html('');
-                        $(".all_campaigns_block.new #load_more_campaigns").hide();
+                        $(".all_campaigns_block .columns-grid").html('');
+                        $(".all_campaigns_block #load_more_campaigns").hide();
                         $(".loader_block #loader").hide();
                     }
                 }
@@ -655,60 +662,60 @@ jQuery(document).ready(function ($) {
          * Load more function - for articles page
          *
          */
-        $(".all_campaigns_block.new #load_more_campaigns").on( "click", function (e) {
+        $(".all_campaigns_block #load_more_campaigns").on( "click", function (e) {
             e.preventDefault();
 
             $(this).find("#loader_more").show();
 
             $(this).addClass('disabled_hrefs');
-            let total_count = $('.all_campaigns_block.new').attr('data-all');
-            let page        = $('.all_campaigns_block.new').attr('data-page');
+            let total_count = $('.all_campaigns_block').attr('data-all');
+            let page        = $('.all_campaigns_block').attr('data-page');
             page            = ( page > 1 ) ?  page : 2
 
-            let get_cat     = $('.all_campaigns_block.new').attr('data-getcat1');
-            let get_topic   = $('.all_campaigns_block.new').attr('data-gettopic');
-            let get_type    = $('.all_campaigns_block.new').attr('data-gettype');
+            let get_cat     = $('.all_campaigns_block').attr('data-getcat1');
+            let get_topic   = $('.all_campaigns_block').attr('data-gettopic');
+            let get_type    = $('.all_campaigns_block').attr('data-gettype');
 
 
             let info        = {
                 'action':     'filtering_campaigns',
                 'total_count': total_count,
                 'page':        page,
-                'topic':       get_topic,
-                'type':        get_type,
+                'topics':      get_topic,
+                'categories':  get_type,
                 'cat':         get_cat,
                 'js_type':     'load_more'
             };
 
 
             $.ajax({
-                url: get.ajaxurl,
+                url: '/dashboard/ajax/filtering-campaigns',
                 type: "POST",
                 data: info,
                 success:function(response) {
-                    $(".all_campaigns_block.new #load_more_campaigns #loader_more").hide();
+                    $(".all_campaigns_block #load_more_campaigns #loader_more").hide();
                     if ( response ) {
-                        $(".all_campaigns_block.new .columns-grid").append(response.html).hide().fadeIn('slow');
+                        $(".all_campaigns_block .columns-grid").append(response.html).hide().fadeIn('slow');
                         page++;
-                        $('.all_campaigns_block.new').attr('data-all', response.all );
-                        $('.all_campaigns_block.new').attr('data-page', page );
+                        $('.all_campaigns_block').attr('data-all', response.all );
+                        $('.all_campaigns_block').attr('data-page', page );
 
-                        $('.all_campaigns_block.new').attr('data-getcat1',  get_cat );
-                        $('.all_campaigns_block.new').attr('data-gettype',  get_type );
-                        $('.all_campaigns_block.new').attr('data-gettopic', get_topic );
+                        $('.all_campaigns_block').attr('data-getcat1',  get_cat );
+                        $('.all_campaigns_block').attr('data-gettype',  get_type );
+                        $('.all_campaigns_block').attr('data-gettopic', get_topic );
 
                         if ( response.total >= response.all ) {
-                            $(".all_campaigns_block.new #load_more_campaigns").hide();
+                            $(".all_campaigns_block #load_more_campaigns").hide();
                         }
                         else {
-                            $(".all_campaigns_block.new #load_more_campaigns").show();
+                            $(".all_campaigns_block #load_more_campaigns").show();
                         }
                     }
                     else {
-                        $(".all_campaigns_block.new #load_more_campaigns #loader_more").hide();
-                        $(".all_campaigns_block.new #load_more_campaigns").hide();
+                        $(".all_campaigns_block #load_more_campaigns #loader_more").hide();
+                        $(".all_campaigns_block #load_more_campaigns").hide();
                     }
-                    $(".all_campaigns_block.new #load_more_campaigns").removeClass('disabled_hrefs');
+                    $(".all_campaigns_block #load_more_campaigns").removeClass('disabled_hrefs');
                 }
             });
         });

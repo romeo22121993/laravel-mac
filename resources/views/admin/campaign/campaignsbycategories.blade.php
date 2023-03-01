@@ -1,7 +1,7 @@
 @extends('admin.admin_master')
 
 @section('title')
-    Articles Page By Category
+    Campaigns Page By Category
 @endsection
 
 @section('admin_content')
@@ -15,7 +15,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">articles Page for category *{{ $articleCategory->title  }}* ( {{ $articles->total() }} )</h4>
+                        <h4 class="card-title">Campaigns Page for category *{{ $campaignCategory->title  }}* ( {{ $campaigns->total() }} )</h4>
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
@@ -31,28 +31,28 @@
                                 </thead>
                                 <tbody>
                                     @php($i = 1)
-                                    @foreach( $articles as $article )
+                                    @foreach( $campaigns as $campaign )
                                         <tr>
                                             <td> {{ $i++ }} </td>
-                                            <td> {{ $article['title'] }}</td>
-                                            <td> {{ $article->slug }}</td>
-                                            <td> {{ implode(', ', ( $article->categories->pluck('title')->toArray() ) ) }} </td>
+                                            <td> {{ $campaign['title'] }}</td>
+                                            <td> {{ $campaign->slug }}</td>
+                                            <td> {{ implode(', ', ( $campaign->categories->pluck('title')->toArray() ) ) }} </td>
                                             <td>
                                                 <img style="width: 50px; height: auto;"
-                                                    src="@if( $article->img != 'none' ) {{ "/$article->img" }} @else {{ asset('/img/none.jpg') }} @endif">
+                                                    src="@if( $campaign->img != 'none' ) {{ "/$campaign->img" }} @else {{ asset('/img/none.jpg') }} @endif">
                                             </td>
                                             <td>
-                                                <a href="{{ route('single.article', $article->slug) }}">View Article</a>
+                                                <a href="{{ route('single.article', $campaign->slug) }}">View Article</a>
                                             </td>
                                             <td>
-                                                <a href="{{ route('wpadmin.campaigns.edit',  $article->id) }}" class="btn btn-info">Edit</a>
-                                                <a href="{{ route('wpadmin.campaigns.delete', $article->id) }}" onclick="return confirm('Are you sure to delete')" class="btn btn-danger">Delete</a>
+                                                <a href="{{ route('wpadmin.campaigns.edit',  $campaign->id) }}" class="btn btn-info">Edit</a>
+                                                <a href="{{ route('wpadmin.campaigns.delete', $campaign->id) }}" onclick="return confirm('Are you sure to delete')" class="btn btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $articles->links('pagination-links') }}
+                            {{ $campaigns->links('pagination-links') }}
                         </div>
                     </div>
                 </div>

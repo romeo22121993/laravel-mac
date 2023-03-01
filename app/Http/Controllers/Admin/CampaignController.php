@@ -75,11 +75,26 @@ class CampaignController extends Controller
     public function campaignsPageByCategory($id)
     {
 
-        $CampaignCategory = CampaignCategory::find($id);
-        $campaigns        = $CampaignCategory->campaigns->pluck(['id']);
+        $campaignCategory = CampaignCategory::find($id);
+        $campaigns        = $campaignCategory->campaigns->pluck(['id']);
         $campaigns        = Campaign::whereIn('id', $campaigns)->paginate($this->number);
 
-        return view('admin.campaign.campaignsbycategories', compact('campaigns', 'CampaignCategory'));
+        return view('admin.campaign.campaignsbycategories', compact('campaigns', 'campaignCategory'));
+    }
+
+    /**
+     * Function main of category controller
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function campaignsPageByTopic($id)
+    {
+
+        $campaignCategory = CampaignTopic::find($id);
+        $campaigns        = $campaignCategory->campaigns->pluck(['id']);
+        $campaigns        = Campaign::whereIn('id', $campaigns)->paginate($this->number);
+
+        return view('admin.campaign.campaignsbycategories', compact('campaigns', 'campaignCategory'));
     }
 
 
@@ -121,6 +136,7 @@ class CampaignController extends Controller
 
         $campaign = new Campaign();
         $campaign->title         = $request->title;
+        $campaign->content       = $request->content1;
         $campaign->slug          = \Str::slug($request->title);
         $campaign->author_id     = Auth::id();
         $campaign->original_type = 'original';
@@ -200,6 +216,7 @@ class CampaignController extends Controller
         $topics     = $request->topics;
 
         $campaign->title = $request->title;
+        $campaign->content = $request->content1;
 
         if ($request->file('img')) {
             if (file_exists($campaign->img)) {

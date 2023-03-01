@@ -35,6 +35,11 @@
                                 <label for="exampleInputName1">Campaign Slug</label>
                                 <input type="text" class="form-control"  id="exampleInputName1" name="slug" value="{{ $campaign->slug }}">
                             </div>
+
+                            <div class="form-group col-md-8">
+                                <label for="exampleTextarea1">Campaign Content</label>
+                                <textarea class="form-control" name="content1" id="summernote">{{ $campaign->content }}</textarea>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">

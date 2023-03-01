@@ -45,6 +45,7 @@ use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use App\Http\Controllers\Subscriber\DashboardCoursesController;
 use App\Http\Controllers\Subscriber\DashboardArticlesController;
+use App\Http\Controllers\Subscriber\DashboardCampaignsController;
 use App\Http\Controllers\Subscriber\DashboardGuidesController;
 use App\Http\Controllers\Subscriber\DashboardResourcesController;
 use App\Modules\VideosAPI;
@@ -70,14 +71,16 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
 
     Route::get('/',                [DashboardController::class, 'mainPage'])->name('dashboard.main');
     Route::get('/admin-articles',  [DashboardArticlesController::class, 'articlesPage'])->name('dashboard.articles');
-    Route::get('/admin-campaigns', [DashboardController::class, 'campaignPage'])->name('dashboard.campaigns');
+    Route::get('/admin-campaigns', [DashboardCampaignsController::class, 'campaignsPage'])->name('dashboard.campaigns');
+    Route::get('/admin-campaigns/cloned', [DashboardCampaignsController::class, 'clonedCampaignsPage'])->name('dashboard.campaigns.cloned');
     Route::get('/admin-resources', [DashboardResourcesController::class, 'resourcesPage'])->name('dashboard.resources');
     Route::get('/admin-courses',   [DashboardCoursesController::class, 'coursesPage'])->name('dashboard.courses');
     Route::get('/admin-guides',    [DashboardGuidesController::class, 'guidesPage'])->name('dashboard.guides');
 
     Route::get('/courses/{slug}',  [DashboardCoursesController::class, 'singleCoursePage'])->name('single.course');
     Route::get('/article/{slug}',  [DashboardArticlesController::class, 'singleArticlePage'])->name('single.article');
-    Route::get('/campaign/{slug}', [DashboardArticlesController::class, 'singleCampaignPage'])->name('single.campaign');
+    Route::get('/campaign/{slug}', [DashboardCampaignsController::class, 'singleCampaignPage'])->name('single.campaign');
+    Route::get('/campaign/{slug}/report', [DashboardCampaignsController::class, 'singleCampaignReportPage'])->name('single.campaign.report');
 
     // Ajax requests for dashboard pages
     Route::group(['prefix'=> 'ajax'], function(){
@@ -96,9 +99,12 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
         Route::post('/loadMoreResources', [DashboardResourcesController::class, 'LoadMoreResources']);
 
         Route::post('/filtering-articles', [DashboardArticlesController::class, 'LoadMoreArticles']);
+        Route::post('/filtering-campaigns', [DashboardCampaignsController::class, 'LoadMoreCampaigns']);
 
         Route::post('/download-article/',    [DashboardArticlesController::class, 'downloadArticle']);
         Route::post('/clone-article/',       [DashboardArticlesController::class, 'cloneArticle']);
+        Route::post('/clone-campaign/',      [DashboardCampaignsController::class, 'cloneCampaign']);
+        Route::post('/delete-cloned-campaign/', [DashboardCampaignsController::class, 'deleteClonedCampaign']);
         Route::post('/edit-cloned-article/', [DashboardArticlesController::class, 'editClonedArticle']);
         Route::post('/reset-clone-article/', [DashboardArticlesController::class, 'resetClonedArticle']);
 
@@ -198,6 +204,7 @@ Route::group(['prefix'=> 'wpadmin', 'middleware' => ['auth', 'isAdmin']], functi
         Route::get('/edit/{id}',     [CampaignController::class, 'EditCampaign'])->name('wpadmin.campaigns.edit');
         Route::post('/update/{id}',  [CampaignController::class, 'UpdateCampaign'])->name('wpadmin.campaigns.update');
         Route::get('/delete/{id}',   [CampaignController::class, 'DeleteCampaign'])->name('wpadmin.campaigns.delete');
+
         Route::get('/category/{id}', [CampaignController::class, 'campaignsPageByCategory'])->name('wpadmin.campaigns.by.categories');
         Route::get('/topic/{id}',    [CampaignController::class, 'campaignsPageByTopic'])->name('wpadmin.campaigns.by.topics');
 

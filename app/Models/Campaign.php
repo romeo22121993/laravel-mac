@@ -23,6 +23,7 @@ class Campaign extends Model
         'original_type',
         'doc_file',
         'pdf_file',
+        'content',
     ];
 
     protected $table = 'campaigns';

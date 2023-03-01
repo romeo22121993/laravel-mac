@@ -266,8 +266,6 @@ class DashboardArticlesController extends Controller
     public function LoadMoreArticles(Request $request)
     {
 
-        $post   = $_POST;
-
         $article_cat       = ( !empty( $request->topic ) ) ? $request->topic : '';
         $article_type      = ( !empty( $request->type ) )  ? $request->type  : '';
         $article_original_edited = ( !empty( $request->original_edited ) )  ? $request->original_edited  : '';
