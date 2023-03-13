@@ -26,10 +26,10 @@
                             Clone Campaign
                         </a>
                         <a href="{{ $campaign->pdf_file }}" target="_blank" class="sv-button sv-button--nav compilance_download_btn "
-                           data-campaginid="8137">
+                           data-campaginid="{{$campaign->id}}">
                             Download PDF
                         </a>
-                        <a href="{{ $campaign->doc_file }}" target="_blank" class="sv-button sv-button--nav compilance_download_btn " data-campaginid="8137">
+                        <a href="{{ $campaign->doc_file }}" target="_blank" class="sv-button sv-button--nav compilance_download_btn " data-campaginid="{{$campaign->id}}">
                             Download Word
                         </a>
 
@@ -110,8 +110,12 @@
                                             $articleKey    = "article$i";
                                         @endphp
                                         @if( !empty($campaign->details->$subjectKey) && $campaign->details->$bodyKey)
-                                            <tr data-scheduling-email-id="" data-scheduling-email-status="" class="" data-counter="1" data-articleid="7671" data-article_title="Tax Planning for Retirement: The Long Game" data-article_link="" data-user="13" data-shared-post="0">
-                                            <td class="sv-email-campaign__subject" data-th="Email Subject" data-subject="A Retirement Tax Strategy Can Boost Your Income – But Start Early">
+                                            <tr data-scheduling-email-id="" data-scheduling-email-status="" class=""
+                                                data-counter="{{$i}}" data-articleid="7671"
+                                                data-article_title="Article Title" data-article_link=""
+                                                data-user="{{$currentUser->id}}" data-shared-post="0">
+                                            <td class="sv-email-campaign__subject" data-th="{{ $campaign->details->$subjectKey }}"
+                                                 data-subject="{{ $campaign->details->$subjectKey }}">
                                                 <div style="height: 85.9297px;">{{ $campaign->details->$subjectKey }}</div>
                                             </td>
                                             <td class="sv-email-campaign__body" data-th="Email Body">
@@ -127,10 +131,14 @@
                                             </td>
                                             <td class="sv-email-campaign__view-button">
                                                 <button type="button" class="sv-button js-view-email" data-title="{{$campaign->title}}"
-{{--                                                        data-copy="{!! $campaign->details->$bodyKey !!}"--}}
-{{--                                                        data-edited-content="{!! $campaign->details->$bodyKey !!}"--}}sv-campaign-description
-                                                        data-fullname="Roman Last Name" data-userimg="http://seven.loc/wp-content/uploads//2021/04/ava_13.svg" data-email="roman@growthlabs.info" data-phone="395" data-website="http://seven.loc/"
-                                                        data-address="" data-company="Roman LiveSite" data-position="position1" data-disclosure="">
+                                                        data-copy="{{$campaign->details->$bodyKey}}"
+                                                        data-edited-content="{{ $campaign->details->$bodyKey }}"
+                                                        data-fullname="{{$currentUser->first_name . ' ' . $currentUser->last_name}}"
+                                                        data-userimg="{{ asset($currentUser->avatar_img) }}"
+                                                        data-email="{{$currentUser->email}}" data-phone="{{$currentUser->phone}}"
+                                                        data-website="http://seven.loc/"
+                                                        data-address="" data-company="{{$currentUser->company}}"
+                                                        data-position="{{$currentUser->position}}" data-disclosure="">
                                                     View Email
                                                 </button>
                                             </td>
@@ -145,7 +153,7 @@
                                                 <input type="hidden" class="email_subject_input" placeholder="Email Subject" name="email_subject1" value="A Retirement Tax Strategy Can Boost Your Income – But Start Early">
                                                 <input type="hidden" class="custom_personal_token_input" placeholder="Custom personal token" name="custom_personal_token1" value="checked">
                                                 <input type="hidden" class="custom_article_token_input" placeholder="Article on/off input" name="custom_article_token1" value="">
-                                                <input type="hidden" class="custom_edited_content" placeholder="Edited Content" name="custom_edited_content1" value='{!! $campaign->details->$bodyKey !!}'>
+                                                <input type="hidden" class="custom_edited_content" placeholder="Edited Content" name="custom_edited_content1" value='{{ $campaign->details->$bodyKey }}'>
                                             </td>
                                             <td class="sv-email-campaign__cancel">
                                                 <button type="button" class="sv-close-button js-cancel-email " data-id=""></button>

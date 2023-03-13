@@ -123,6 +123,9 @@ class ArticleController extends Controller
             'categories' => ['required'],
         ]);
 
+        //
+
+
         $categories = $request->categories;
         $data1      = $request->all();
 

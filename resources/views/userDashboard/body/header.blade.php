@@ -691,7 +691,7 @@
 
                                     <div class="sv-user border-left d-flex flex-row align-items-center justify-content-end">
                                         <img
-                                            src="@if( empty( $currentUser->avatar_img ) || ( $currentUser->avatar_img == 'none' ) ) {{ asset('/img/face.jpeg') }} @else {{ asset('/uploads/users/'.$currentUser->avatar_img) }}  @endif"
+                                            src="@if(( $currentUser->avatar_img == 'none' )) {{ asset('/img/face.jpeg') }} @else {{ asset($currentUser->avatar_img) }} @endif"
                                             alt="oval" class="logo_main logo_main_style "/>
                                         <div class="name-holder">
                                             <p class="bold">{{ $currentUser->name }}</p>

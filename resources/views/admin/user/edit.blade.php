@@ -76,7 +76,7 @@
                                 <input type="file" name="avatar_img" class="form-control-file" id="image">
                             </div>
                             <div class="form-group col-md-6">
-                                <img id="showImage" src="@if( $user->avatar_img != 'none' ) {{ asset('/uploads/users/'.$user->avatar_img) }} @else {{ asset('/img/none.jpg') }} @endif"
+                                <img id="showImage" src="@if( $user->avatar_img != 'none' ) {{ asset($user->avatar_img) }} @else {{ asset('/img/none.jpg') }} @endif"
                                      style="width: 200px;  height: auto;" >
                             </div>
                         </div>

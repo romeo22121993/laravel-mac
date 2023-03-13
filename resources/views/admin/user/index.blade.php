@@ -43,7 +43,7 @@
                                             <td> {{ ucfirst( $user->role ) }}</td>
                                             <td>
                                                 <img style="width: 50px; height: auto;"
-                                                     src="@if( empty( $user->avatar_img ) || ( $user->avatar_img == 'none' ) ) {{ asset('/img/face.jpeg') }} @else {{ asset('/uploads/users/'.$user->avatar_img) }}  @endif">
+                                                     src="@if( empty( $user->avatar_img ) || ( $user->avatar_img == 'none' ) ) {{ asset('/img/face.jpeg') }} @else {{ asset($user->avatar_img) }}  @endif">
                                             </td>
                                             <td>{{ $user->updated_at->diffForHumans() }}</td>
                                             <td>
