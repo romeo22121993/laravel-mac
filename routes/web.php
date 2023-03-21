@@ -46,6 +46,7 @@ use App\Http\Controllers\Frontend\ProductController as FrontendProductController
 use App\Http\Controllers\Subscriber\DashboardCoursesController;
 use App\Http\Controllers\Subscriber\DashboardArticlesController;
 use App\Http\Controllers\Subscriber\DashboardCampaignsController;
+use App\Http\Controllers\Subscriber\DashboardCampaignsEmailsController;
 use App\Http\Controllers\Subscriber\DashboardGuidesController;
 use App\Http\Controllers\Subscriber\DashboardResourcesController;
 use App\Modules\VideosAPI;
@@ -107,6 +108,9 @@ Route::group(['prefix'=> 'dashboard', 'middleware' => ['auth', 'isSubscriber']],
         Route::post('/delete-cloned-campaign/', [DashboardCampaignsController::class, 'deleteClonedCampaign']);
         Route::post('/edit-cloned-article/', [DashboardArticlesController::class, 'editClonedArticle']);
         Route::post('/reset-clone-article/', [DashboardArticlesController::class, 'resetClonedArticle']);
+
+
+        Route::post('/campaign-actions/',    [DashboardCampaignsEmailsController::class, 'campaignsActions']);
 
     });
 

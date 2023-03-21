@@ -53,5 +53,13 @@ class Campaign extends Model
         return $this->hasOne(CampaignDetail::class);
     }
 
+    /**
+     * Get all of the categories by Post
+     */
+    public function schedules()
+    {
+        return $this->hasMany(CampaignSchedulingEmail::class);
+    }
+
 
 }

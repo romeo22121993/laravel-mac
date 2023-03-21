@@ -49,7 +49,7 @@
                             <h2 class="sv-title">
                                 Email Campaign
                             </h2>
-                            <span class="ribbon-target" style="background-color: #c3cedd;">Not Active</span>
+                            <span class="ribbon-target" style="background-color:{{$status['ribbon_background']}};">{{ $status['status'] }}</span>
                         </div>
 
                         <form action="" class="sv-email-campaign scheduling_campaign_form" method="post">
@@ -108,68 +108,159 @@
                                             $bodyKey       = "email_body$i";
                                             $customLinkKey = "use_custom_link$i";
                                             $articleKey    = "article$i";
+
+                                            $campaignSchedule = $campaign->schedules->where('user_id', $currentUser->id)->where('email_subject', $campaign->details->$subjectKey)->first();
+                                            $emailBody = !empty($campaignSchedule['email_body']) ? $campaignSchedule['email_body'] : $campaign->details->$bodyKey;
+                                            $str_text  = mb_strimwidth( strip_tags( $emailBody ), 0, 33, '...' );
+
+                                            $sendingDataFormat = '';
+
+                                            if ( empty( $campaignSchedule ) ) {
+                                                $sendingData = 'Not scheduled yet';
+                                            }
+                                            elseif ( $campaignSchedule['status'] == 'canceled' ) {
+                                                $sendingData = 'Canceled';
+                                            }
+                                            elseif ( $campaignSchedule['status'] == 'draft' ) {
+                                                $sendingData        = 'Draft';
+
+                                                if ( $campaignSchedule['sending_time'] == '0000-00-00 00:00:00' ) {
+                                                    $sendingData = 'Not scheduled yet';
+                                                }
+                                                else {
+                                                    $old_date          = strtotime($campaignSchedule['sending_time']);
+                                                    $sendingDataFormat = date('m-d-Y h:ia', $old_date );
+                                                    $sendingData       .= ' - ' .  $sendingDataFormat;
+                                                }
+                                                $check_draft         = true;
+                                            }
+                                            else {
+                                                $sendingData        = ( $campaignSchedule['status'] == 'sent' ) ? 'Sent' : 'Active';
+                                                $old_date           = strtotime( $campaignSchedule['sending_time'] );
+                                                $sendingDataFormat  = date('m-d-Y h:ia', $old_date );
+                                                $sendingData       .= ' - ' .  $sendingDataFormat;
+                                                $check = true;
+                                            }
+
+                                            $emailItemSubject = !empty($campaignSchedule['email_subject']) ? $campaignSchedule['email_subject'] : $campaign->details->$subjectKey;
+                                            $emailItemSubject = !empty($campaignSchedule['email_subject_new']) ? $campaignSchedule['email_subject_new'] : $emailItemSubject;
+                                            $emailSendingTime = ( empty($campaignSchedule) || $campaignSchedule['sending_time'] == '0000-00-00 00:00:00' ) ? '' : $campaignSchedule['sending_time'];
+                                            $emailSendingTime = ( !empty($campaignSchedule) && $campaignSchedule['status'] == 'canceled' ) ? 'canceled' : $emailSendingTime;
                                         @endphp
-                                        @if( !empty($campaign->details->$subjectKey) && $campaign->details->$bodyKey)
+
+                                        @if( !empty($campaign->details->$subjectKey) && !empty($campaign->details->$bodyKey))
+
                                             <tr data-scheduling-email-id="" data-scheduling-email-status="" class=""
                                                 data-counter="{{$i}}" data-articleid="7671"
                                                 data-article_title="Article Title" data-article_link=""
                                                 data-user="{{$currentUser->id}}" data-shared-post="0">
-                                            <td class="sv-email-campaign__subject" data-th="{{ $campaign->details->$subjectKey }}"
-                                                 data-subject="{{ $campaign->details->$subjectKey }}">
-                                                <div style="height: 85.9297px;">{{ $campaign->details->$subjectKey }}</div>
-                                            </td>
-                                            <td class="sv-email-campaign__body" data-th="Email Body">
-                                                <div style="height: 85.9297px;">{!! $campaign->details->$bodyKey !!}</div>
-                                            </td>
-                                            <td class="sv-email-campaign__date" data-th="Sending date">
-                                                <div style="height: 85.9297px;">Not scheduled yet</div>
+                                                <td class="sv-email-campaign__subject" data-th="{{ $emailItemSubject }}"
+                                                     data-subject="{{ $emailItemSubject }}">
+                                                    <div style="height: 85.9297px;">{{ $emailItemSubject }}</div>
+                                                </td>
+                                                <td class="sv-email-campaign__body" data-th="Email Body">
+                                                    <div style="height: 85.9297px;">{!! $str_text !!}</div>
+                                                </td>
+                                                <td class="sv-email-campaign__date" data-th="Sending date">
+                                                    @if (empty($campaignSchedule))
+                                                        <div>{{ $sendingData }}</div>
+                                                    @elseif ( $campaignSchedule["status"] == 'draft' )
+                                                        @php
+                                                            $status_label = 'Draft';
+                                                        @endphp
+                                                        <div class="position-relative" data-prev-text="{{  $status_label }} - ">
+                                                            @if ( $campaignSchedule["sending_time"] != '0000-00-00 00:00:00' )
+                                                                <button type="button" class="js-sending-date-edit sv-edit-field"></button>
+                                                                {{ $sendingData }}
+                                                            @else
+                                                                {{  $status_label }} :{{ $sendingData }}
+                                                            @endif
+                                                        </div>
+                                                    @elseif ( $campaignSchedule["status"] == 'inprogress' )
+                                                        @php
+                                                        $status_label =  'Active';
+                                                        @endphp
+                                                        <div class="position-relative" data-prev-text="{{ $status_label }} - ">
+                                                            {{ $sendingData }}
+                                                            <button type="button" class="js-sending-date-edit sv-edit-field"></button>
+                                                        </div>
+                                                    @elseif ( ( $campaignSchedule["status"] == 'paused' ) || ( $campaignSchedule["status"] == 'stopped' ) )
+                                                        @php
+                                                        $status_label     = ucfirst( $campaignSchedule["status"] );
+                                                        $send_data_format = date('m-d-Y h:ia', strtotime( $campaignSchedule["sending_time"] ) );
+                                                        @endphp
+                                                        <div class="position-relative" data-prev-text="{{ $status_label }} - ">
+                                                            {{ $status_label . ' - ' .  $sendingDataFormat }}
+                                                        </div>
+                                                    @else
+                                                        <div>{{ $sendingData }}</div>
+                                                    @endif
 
-                                                <input type="hidden" name="date1" class="js-sending-date" value="">
-                                                <input type="hidden" name="type1" value="create">
-                                                <input type="hidden" name="edited_id1" value="">
+                                                    <input type="hidden" name="date{{$i}}" class="js-sending-date" value="{{$emailSendingTime}}">
+                                                    <input type="hidden" name="type{{$i}}" value="create">
 
-                                            </td>
-                                            <td class="sv-email-campaign__view-button">
-                                                <button type="button" class="sv-button js-view-email" data-title="{{$campaign->title}}"
-                                                        data-copy="{{$campaign->details->$bodyKey}}"
-                                                        data-edited-content="{{ $campaign->details->$bodyKey }}"
-                                                        data-fullname="{{$currentUser->first_name . ' ' . $currentUser->last_name}}"
-                                                        data-userimg="{{ asset($currentUser->avatar_img) }}"
-                                                        data-email="{{$currentUser->email}}" data-phone="{{$currentUser->phone}}"
-                                                        data-website="http://seven.loc/"
-                                                        data-address="" data-company="{{$currentUser->company}}"
-                                                        data-position="{{$currentUser->position}}" data-disclosure="">
-                                                    View Email
-                                                </button>
-                                            </td>
-                                            <td class="sv-email-campaign__schedule-button">
-                                                <button type="button" class="sv-button sv-button--blue-text js-campaign-button js-datePicker">Schedule</button>
-                                            </td>
-                                            <td class="sv-email-campaign__custom-link">
-                                                <div class="sv-custom-link js-custom-link  " data-status="">
-                                                    <i class="fa fa-edit"></i>
-                                                </div>
-                                                <input type="hidden" class="custom_link_input" placeholder="Custom link" name="custom_link1" value="">
-                                                <input type="hidden" class="email_subject_input" placeholder="Email Subject" name="email_subject1" value="A Retirement Tax Strategy Can Boost Your Income – But Start Early">
-                                                <input type="hidden" class="custom_personal_token_input" placeholder="Custom personal token" name="custom_personal_token1" value="checked">
-                                                <input type="hidden" class="custom_article_token_input" placeholder="Article on/off input" name="custom_article_token1" value="">
-                                                <input type="hidden" class="custom_edited_content" placeholder="Edited Content" name="custom_edited_content1" value='{{ $campaign->details->$bodyKey }}'>
-                                            </td>
-                                            <td class="sv-email-campaign__cancel">
-                                                <button type="button" class="sv-close-button js-cancel-email " data-id=""></button>
-                                            </td>
-                                        </tr>
+                                                    @if ( !empty( $campaignSchedule["id"] ) )
+                                                        <input type="hidden" name="edited_id{{$i}}" value="{{ $campaignSchedule["id"] }}">
+                                                    @endif
+                                                    @if ( !empty( $check_draft ) )
+                                                        <input type="hidden" name="was_draft" value="was_draft" id="was_draft">
+                                                    @endif
+
+                                                </td>
+
+                                                <td class="sv-email-campaign__view-button">
+                                                    <button type="button" class="sv-button js-view-email" data-title="{{$campaign->title}}"
+                                                            data-copy="{{$emailBody}}"
+                                                            data-edited-content="{{ $emailBody }}"
+                                                            data-fullname="{{$currentUser->first_name . ' ' . $currentUser->last_name}}"
+                                                            data-userimg="{{ asset($currentUser->avatar_img) }}"
+                                                            data-email="{{$currentUser->email}}" data-phone="{{$currentUser->phone}}"
+                                                            data-website="http://seven.loc/"
+                                                            data-address="" data-company="{{$currentUser->company}}"
+                                                            data-position="{{$currentUser->position}}" data-disclosure="">
+                                                        View Email
+                                                    </button>
+                                                </td>
+
+                                                <td class="sv-email-campaign__schedule-button">
+                                                    @if(empty($campaignSchedule))
+                                                        <button type="button" class="sv-button sv-button--blue-text js-campaign-button js-datePicker">Schedule</button>
+                                                    @elseif( $campaignSchedule["status"] == 'sent')
+                                                        <button type="button" class="sv-button sv-button--blue-text js-campaign-button" disabled>Scheduled</button>
+                                                    @elseif( ( $campaignSchedule["status"] == 'inprogress' ) ||  ( $campaignSchedule["status"] == 'paused' ) ||  ( $campaignSchedule["status"] == 'stopped' ) )
+                                                        <button type="button" class="sv-button sv-button--blue-text js-campaign-button selected disabled" >Scheduled</button>
+                                                    @elseif( ( $campaignSchedule["status"] == 'draft' ) && ( !empty( $campaignSchedule["sending_time"] ) && ( $campaignSchedule["sending_time"] != '0000-00-00 00:00:00' ) ) )
+                                                        <button type="button" class="sv-button sv-button--blue-text js-campaign-button selected disabled" >Scheduled</button>
+                                                    @elseif( $campaignSchedule["status"] == 'canceled' )
+                                                        <button type="button" class="sv-button sv-button--blue-text js-campaign-button js-datePicker" disabled>Scheduled</button>
+                                                    @else
+                                                        <button type="button" class="sv-button sv-button--blue-text js-campaign-button js-datePicker">Schedule</button>
+                                                    @endif
+                                                </td>
+
+                                                <td class="sv-email-campaign__custom-link">
+                                                    <div class="sv-custom-link js-custom-link  " data-status="">
+                                                        <i class="fa fa-edit"></i>
+                                                    </div>
+                                                    <input type="hidden" class="email_subject_input" placeholder="Email Subject" name="email_subject{{$i}}" value="{{ $emailItemSubject }}">
+                                                    <input type="hidden" class="custom_edited_content" placeholder="Edited Content" name="email_body{{$i}}" value='{{ $emailBody }}'>
+                                                </td>
+                                                <td class="sv-email-campaign__cancel">
+                                                    <button type="button" class="sv-close-button js-cancel-email " data-id=""></button>
+                                                </td>
+                                            </tr>
                                         @endif
                                     @endfor
                                 </tbody>
+                                <input type="hidden" name="campaign_detail" value="{{$campaign->details->id}}">
                             </table>
                             <div class="sv-row">
                                 <div class="sv-email-campaign__submit">
                                     <div class="sv-hr"></div>
-                                    <button class="sv-button sv-button--green sv-button--small-padding js_pause_campaign disabled" type="button" data-id="8137">
+                                    <button class="sv-button sv-button--green sv-button--small-padding js_pause_campaign disabled" type="button" data-id="{{ $campaign->id }}">
                                         Pause
                                     </button>
-                                    <button class="sv-button sv-button--green sv-button--small-padding js_stop_campaign disabled" type="button" data-id="8137">
+                                    <button class="sv-button sv-button--green sv-button--small-padding js_stop_campaign disabled" type="button" data-id="{{ $campaign->id }}">
                                         Stop
                                     </button>
                                     <button class="sv-button sv-button--green sv-button--small-padding js-draft-submit-campaign" type="button">

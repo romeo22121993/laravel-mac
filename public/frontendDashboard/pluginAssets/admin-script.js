@@ -279,38 +279,23 @@
             };
 
 
-            // let allowSend = false;
-            // if ( ( action == 'scheduling_campaign' ) || ( action == 'edit_scheduling_campaign' ) ) {
-            //     allowSend = false;
-            //     if (  ( ( parseInt( sendgridStep ) == 4 ) && ( parseInt( sendgridDomainId ) > 0 ) && ( parseInt( sendgridSenderId ) > 0 ) ) ) {
-            //         allowSend = true;
-            //     }
-            //     else {
-            //         allowSend = false;
-            //     }
-            // }
-            // else {
-            //     allowSend = true;
-            // }
-
-            let allowSend = ( ( action == 'scheduling_campaign' ) || ( action == 'edit_scheduling_campaign' ) ) ? ( ( parseInt( sendgridStep ) == 4 ) && ( parseInt( sendgridSenderId ) > 0 ) ) ? true : false : true;
-
-            if ( allowSend ) {
-                $.post({
-                    url: get.ajaxurl,
+            $.post({
+                    url: '/dashboard/ajax/campaign-actions',
                     data: info,
                     success: function (data) {
 
                         $(".single-campaign #loader").hide();
                         if ($(".scheduling_campaign_form").hasClass('edited_form') && !$(".scheduling_campaign_form").hasClass('draft_form')) {
+                            console.log('aa')
                             const message = new ActionModalResponse('Campaign has been saved', window.location.reload.bind(window.location));
                             message.show();
                         } else if ($(".scheduling_campaign_form").hasClass('draft_form')) {
                             $(".scheduling_campaign_form").addClass('draft_scheduling_campaign');
+                            console.log('bbb');
                             const message = new ActionModalResponse('Campaign has been saved as draft', window.location.reload.bind(window.location));
                             message.show();
                         } else {
-
+                            console.log('cc');
                             $(".scheduling_campaign_form").addClass('edited_form');
                             $(".js-submit-campaign").text('Save');
                             const message = new ActionModalResponse('Campaign has been started', window.location.reload.bind(window.location));
@@ -325,15 +310,7 @@
                         console.log('error');
                     },
                 });
-            }
-            else {
-                $(".js-submit-campaign").prop('disabled', true);
-                $(".single-campaign #loader").hide();
 
-                const message = new ActionModalResponse("<h3>Oops! You can't hit send yet. Please connect your email domain into our system via the Connect Your Email Domain button in your profile settings.</h3>");
-                message.show();
-
-            }
         });
     }
 
@@ -1200,16 +1177,6 @@
                 }
             });
 
-            customLinks.each(function () {
-                if($(this).attr('data-status') === ''){
-                    if(!$(this).closest('tr').find('.custom_link_input').val()) {
-                        valid = false;
-
-                        return false;
-                    }
-                }
-            });
-
             return valid;
         }
 
@@ -1860,25 +1827,6 @@
                                   <input id="switch" type="checkbox" ${htmlEntities(valueT)}  value="${htmlEntities(valueT)}" class="sv-link-popup__personal-token">
                                   <label for="switch"></label>
                               </div>
-                              <div class="sv-link-popup__header ${htmlEntities(classLink)}">
-                                  <h5>Add Seven Group branded article link to this email</h5>
-                               </div>
-                               <div class="sv-link-popup__body sv-link-popup__checkbox-flex ${htmlEntities(classLink)} ">
-                                  <p class="sv-link-popup__checkbox-wrap">
-                                      <input id="checkbox" type="checkbox" ${htmlEntities(valueAC)}  value="${htmlEntities(valueAC)}" data-id="${articleId}"
-                                      data-user="${userId}" data-shared-post="${sharedPost}"
-                                      data-shared-link="${articleLink}"
-                                      class="sv-link-popup__custom-checkbox campaign_custom_link_btn" ${checkbox_class}>
-                                      <label for="checkbox"></label>
-                                  </p>
-                                  <p class="sv-link-popup__text-after-checkbox-wrap">${articleTitle}</p>
-                              </div>
-                               <div class="sv-link-popup__header ${htmlEntities(classLink)}">
-                                  <h5>Add your own custom link</h5>
-                               </div>
-                               <div class="sv-link-popup__body ${htmlEntities(classLink)}">
-                                  <input type="text" class="custom_link_input link-input" placeholder="Link" value="${htmlEntities(value)}">
-                               </div>
                                <div class="sv-link-popup__header ">
                                   <h5>Edit the subject line</h5>
                                </div>

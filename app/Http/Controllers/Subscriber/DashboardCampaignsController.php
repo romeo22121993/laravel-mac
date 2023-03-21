@@ -13,6 +13,7 @@ use App\Models\Course;
 use App\Models\CourseIteration;
 use App\Models\CourseLesson;
 use App\Models\CourseProgress;
+use App\Models\CampaignSchedulingEmail;
 use App\Modules\FilesUploads;
 //use Illuminate\Http\File;
 use Illuminate\Http\Request;
@@ -101,8 +102,16 @@ class DashboardCampaignsController extends Controller
             }
         }
 
+        $userMeta = DB::table('usermeta')->where('user_id', $user->id)->first();
+        $userCampaigns  = empty($userMeta->user_campaigns) ? array() : json_decode($userMeta->user_campaigns, true);
+
+        $status = $this->getStatusAndBackground($userCampaigns, $campaign->id);
+
+        $campaignSchedules = $campaign->schedules->where('user_id', $user->id);
+
+
         return view('userDashboard.campaign.index',
-            compact('campaign', 'relatedCampaigns'
+            compact('campaign', 'relatedCampaigns', 'status', 'campaignSchedules'
            )
        );
 
@@ -482,5 +491,43 @@ class DashboardCampaignsController extends Controller
         return ['error'=> false, 'message' => 'Done.'];
 
     }
+
+    /**
+     * Function getting status label and background color by parameters
+     *
+     * @param $userCampaigns
+     * @param $campaign
+     * @return array
+     */
+    public function getStatusAndBackground($userCampaigns, $campaign) {
+        $status = '';
+        $ribbon_background = '';
+        $additional_class  = '';
+
+        $status     = ( !empty( $userCampaigns['inprogress'] ) && array_key_exists( $campaign, $userCampaigns['inprogress'] ) )   ? 'Active' : 'Not Active';
+        $status     = ( !empty( $userCampaigns['finished'] ) && in_array( $campaign, $userCampaigns['finished'] ) )       ? 'Completed' : $status;
+        $status     = ( !empty( $userCampaigns['draft'] ) && array_key_exists( $campaign, $userCampaigns['draft'] ) )     ?  'Draft' : $status;
+        $status     = ( !empty( $userCampaigns['stopped'] ) && array_key_exists( $campaign, $userCampaigns['stopped'] ) ) ?  'Stopped' : $status;
+        $status     = ( !empty( $userCampaigns['paused'] ) && array_key_exists( $campaign, $userCampaigns['paused'] ) )   ?  'Paused' : $status;
+
+        if ( ( $status === 'Not Active' ) || ( $status === 'Draft' ) ) {
+            $ribbon_background = 'background-color: #c3cedd;';
+            $additional_class = 'noactive';
+        } elseif( $status === 'Completed' ) {
+            $ribbon_background = 'background-color: #0645c7;';
+            $additional_class = 'completed';
+        } elseif( $status === 'Stopped' ) {
+            $ribbon_background = 'background-color: #ED7979;';
+        } elseif( $status === 'Paused' ) {
+            $ribbon_background = 'background-color: #ffa07f;';
+        }
+
+        return array(
+            'status'            => $status,
+            'ribbon_background' => $ribbon_background,
+            'additional_class'  => $additional_class,
+        );
+    }
+
 
 }
