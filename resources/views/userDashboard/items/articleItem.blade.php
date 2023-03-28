@@ -12,7 +12,7 @@
     </td>
     <td>{{ $article->created_at }}</td>
     <td colspan="1">{{ implode(', ', ( $article->categories->pluck('title')->toArray() ) ) }}</td>
-    <td colspan="1"> {{ ucfirst($article->original_type) }} </td>
+    <td colspan="1">{{ ucfirst($article->original_type) }} </td>
     <td>
         <p class="type-title type-title--no-margin title-icon title-icon--article">
             {{ ucfirst($article->article_type) }}

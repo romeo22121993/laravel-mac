@@ -195,161 +195,37 @@
                         <div class="col-12">
                             <h2 class="mb-15">Latest Articles</h2>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-12">
-                            <div class="grey-box">
-                                <div class="row no-gutters">
-                                    <div class="col-12 col-lg-3">
-                                        <a href="http://seven.loc/articles/recession-recovery-or-both/" class="read-article" data-post-id="13527" >
-                                            <div class="post-image"
-                                                 style="background-image: url(http://seven.loc/wp-content/uploads/2023/01/clicker-babu-aKBtbbVP970-unsplash-150x150.jpg);">
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-12 col-lg-9 d-flex justify-content-center align-items-center pl-0">
-                                        <div class="row w-100">
-                                            <div class="col-12 col-lg-9 d-flex flex-column justify-content-center align-items-start">
-                                                <a href="http://seven.loc/articles/recession-recovery-or-both/" data-post-id="13527" class="read-article">
-                                                    <p class="bold">Recession, Recovery, or Both?</p>
-                                                </a>
-                                                <!-- <p></p> -->
-                                            </div>
-                                            <div class="col-12 col-lg-3 d-flex flex-row justify-content-end align-items-center">
-                                                <a href="http://seven.loc/articles/recession-recovery-or-both/" style="padding-right: 10px;">View</a>
+                        @foreach($articles as $article)
+                            <div class="col-12 col-md-6 col-lg-12">
+                                <div class="grey-box">
+                                    <div class="row no-gutters">
+                                        <div class="col-12 col-lg-3">
+                                            <a href="{{ route('dashboard.single.article', $article->slug)}}" class="read-article" data-post-id="13527" >
+                                                <div class="post-image"
+                                                     style="background-image: url(/{{$article->img}});">
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-12 col-lg-9 d-flex justify-content-center align-items-center pl-0">
+                                            <div class="row w-100">
+                                                <div class="col-12 col-lg-9 d-flex flex-column justify-content-center align-items-start">
+                                                    <a href="{{ route('dashboard.single.article', $article->slug)}}" data-post-id="13527" class="read-article">
+                                                        <p class="bold">{{$article->title}}</p>
+                                                    </a>
+                                                </div>
+                                                <div class="col-12 col-lg-3 d-flex flex-row justify-content-end align-items-center">
+                                                    <a href="{{ route('dashboard.single.article', $article->slug)}}" style="padding-right: 10px;">View</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-12">
-                            <div class="grey-box">
-                                <div class="row no-gutters">
-                                    <div class="col-12 col-lg-3">
-                                        <a href="http://seven.loc/articles/avoiding-the-big-retirement-risks/" class="read-article" data-post-id="13520" >
-                                            <div class="post-image"
-                                                 style="background-image: url(http://seven.loc/wp-content/uploads/2023/01/victoire-joncheray-EF0UG0xFgnA-unsplash-150x150.jpg);">
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-12 col-lg-9 d-flex justify-content-center align-items-center pl-0">
-                                        <div class="row w-100">
-                                            <div class="col-12 col-lg-9 d-flex flex-column justify-content-center align-items-start">
-                                                <a href="http://seven.loc/articles/avoiding-the-big-retirement-risks/" data-post-id="13520" class="read-article">
-                                                    <p class="bold">Avoiding the Big Retirement Risks</p>
-                                                </a>
-                                                <!-- <p></p> -->
-                                            </div>
-                                            <div class="col-12 col-lg-3 d-flex flex-row justify-content-end align-items-center">
-                                                <a href="http://seven.loc/articles/avoiding-the-big-retirement-risks/" style="padding-right: 10px;">View</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-12">
-                            <div class="grey-box">
-                                <div class="row no-gutters">
-                                    <div class="col-12 col-lg-3">
-                                        <a href="http://seven.loc/articles/now-that-the-resolutions-part-is-over-lets-focus-on-resources/" class="read-article" data-post-id="13464" >
-                                            <div class="post-image"
-                                                 style="background-image: url(http://seven.loc/wp-content/uploads/2023/01/mads-schmidt-rasmussen-fhQ816rFmN0-unsplash-150x150.jpg);">
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-12 col-lg-9 d-flex justify-content-center align-items-center pl-0">
-                                        <div class="row w-100">
-                                            <div class="col-12 col-lg-9 d-flex flex-column justify-content-center align-items-start">
-                                                <a href="http://seven.loc/articles/now-that-the-resolutions-part-is-over-lets-focus-on-resources/" data-post-id="13464" class="read-article">
-                                                    <p class="bold">Now That the Resolutions Part Is Over, Let&#8217;s Focus on Resources</p>
-                                                </a>
-                                                <!-- <p></p> -->
-                                            </div>
-                                            <div class="col-12 col-lg-3 d-flex flex-row justify-content-end align-items-center">
-                                                <a href="http://seven.loc/articles/now-that-the-resolutions-part-is-over-lets-focus-on-resources/" style="padding-right: 10px;">View</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-12">
-                            <div class="grey-box">
-                                <div class="row no-gutters">
-                                    <div class="col-12 col-lg-3">
-                                        <a href="http://seven.loc/articles/january-market-commentary-the-fed-goes-meta/" class="read-article" data-post-id="12817" >
-                                            <div class="post-image"
-                                                 style="background-image: url(http://seven.loc/wp-content/uploads/2023/01/cristina-munteanu-8P1ImpCGvno-unsplash3-150x150.jpg);">
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-12 col-lg-9 d-flex justify-content-center align-items-center pl-0">
-                                        <div class="row w-100">
-                                            <div class="col-12 col-lg-9 d-flex flex-column justify-content-center align-items-start">
-                                                <a href="http://seven.loc/articles/january-market-commentary-the-fed-goes-meta/" data-post-id="12817" class="read-article">
-                                                    <p class="bold">January Market Commentary: The Fed Goes Meta</p>
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-lg-3 d-flex flex-row justify-content-end align-items-center">
-                                                <a href="http://seven.loc/articles/january-market-commentary-the-fed-goes-meta/" style="padding-right: 10px;">View</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-12">
-                            <div class="grey-box">
-                                <div class="row no-gutters">
-                                    <div class="col-12 col-lg-3">
-                                        <a href="http://seven.loc/articles/secure-2-0-act-enhancements-across-the-retirement-continuum/" class="read-article" data-post-id="12681" >
-                                            <div class="post-image"
-                                                 style="background-image: url(http://seven.loc/wp-content/uploads/2023/01/sara-cottle-6iS1PGNwwAI-unsplash1-150x150.jpg);">
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-12 col-lg-9 d-flex justify-content-center align-items-center pl-0">
-                                        <div class="row w-100">
-                                            <div class="col-12 col-lg-9 d-flex flex-column justify-content-center align-items-start">
-                                                <a href="http://seven.loc/articles/secure-2-0-act-enhancements-across-the-retirement-continuum/" data-post-id="12681" class="read-article">
-                                                    <p class="bold">SECURE 2.0 Act Enhancements Across the Retirement Continuum</p>
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-lg-3 d-flex flex-row justify-content-end align-items-center">
-                                                <a href="http://seven.loc/articles/secure-2-0-act-enhancements-across-the-retirement-continuum/" style="padding-right: 10px;">View</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-12">
-                            <div class="grey-box">
-                                <div class="row no-gutters">
-                                    <div class="col-12 col-lg-3">
-                                        <a href="http://seven.loc/articles/the-secure-2-0-act-has-created-some-retirement-planning-opportunities-rmd-edition/" class="read-article" data-post-id="12669" >
-                                            <div class="post-image"
-                                                 style="background-image: url(http://seven.loc/wp-content/uploads/2023/01/ian-schneider-PAykYb-8Er8-unsplash-150x150.jpg);">
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-12 col-lg-9 d-flex justify-content-center align-items-center pl-0">
-                                        <div class="row w-100">
-                                            <div class="col-12 col-lg-9 d-flex flex-column justify-content-center align-items-start">
-                                                <a href="http://seven.loc/articles/the-secure-2-0-act-has-created-some-retirement-planning-opportunities-rmd-edition/" data-post-id="12669" class="read-article">
-                                                    <p class="bold">The SECURE 2.0 Act Has Created Some Retirement Planning Opportunities: RMD Edition</p>
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-lg-3 d-flex flex-row justify-content-end align-items-center">
-                                                <a href="http://seven.loc/articles/the-secure-2-0-act-has-created-some-retirement-planning-opportunities-rmd-edition/" style="padding-right: 10px;">View</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                         <div class="w-100 col-12 d-flex flex-row justify-content-end align-items-center link-block">
-                            <a href="http://seven.loc/admin-content/" class="read-more">See More <img src="{{ asset('frontendDashboard/themesAssets/dist/img/arrow-right.png') }}" alt="arrow right"></a>
+                            <a href="http://seven.loc/admin-content/" class="read-more">See More
+                                <img src="{{ asset('frontendDashboard/themesAssets/dist/img/arrow-right.png') }}" alt="arrow right">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -360,130 +236,48 @@
                         <div class="col-12">
                             <h4>Coaching for You</h4>
                         </div>
-                        <div class="col-12 col-md-6 col-xl-4">
-                            <div class="white-element grey-bg-sect strategies-holder status-new d-flex flex-column justify-content-start align-items-center">
-                                <a href="http://seven.loc/courses/start-here-welcome-to-advisor-i-o/">
-                                    <img src="http://seven.loc/wp-content/uploads/2020/04/Group_2.png" alt="icon-hands">
-                                </a>
-                                <div class="point-holder d-flex flex-row justify-content-center align-items-center">
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
+
+                        @foreach($courses as $course)
+                            @php
+                                $status = '';
+                                if ( !empty( $progressingCourses ) && is_array( $progressingCourses ) && in_array( $course->id, $progressingCourses ) ) {
+                                    $status = 'In Progress';
+                                }
+                                elseif ( !empty( $completedCourses ) && is_array( $completedCourses ) && in_array( $course->id, $completedCourses ) ) {
+                                    $status = 'Completed';
+                                }
+                                else {
+                                    $status = 'New';
+                                }
+                            @endphp
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <div class="white-element grey-bg-sect strategies-holder status-new d-flex flex-column justify-content-start align-items-center">
+                                    <a href="{{ route('dashboard.single.course', $course->slug ) }}">
+                                        <img
+                                         src="@if( $course->img != 'none' ) {{"/".$course->img}} @else {{ asset('/img/none.jpg') }} @endif">
+                                    </a>
+                                    <div class="point-holder d-flex flex-row justify-content-center align-items-center">
+                                        <div class="point-dot"></div>
+                                        <div class="point-dot"></div>
+                                        <div class="point-dot"></div>
+                                        <div class="point-dot"></div>
+                                        <div class="point-dot"></div>
+                                        <div class="point-dot"></div>
+                                    </div>
+                                    <p>
+                                        <a href="{{ route('dashboard.single.course', $course->slug ) }}" class="read-course" data-course-id="{{$course->id}}">
+                                            {{ $course->title }}
+                                        </a>
+                                    </p>
+                                    <p class="grey">{{$status}}</p>
                                 </div>
-                                <p>
-                                    <a href="http://seven.loc/courses/start-here-welcome-to-advisor-i-o/" class="read-course" data-course-id="11009">
-                                        Get Started with Laravel Pro                    </a>
-                                </p>
-                                <p class="grey">In progress</p>
                             </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-xl-4">
-                            <div class="white-element grey-bg-sect strategies-holder status-new d-flex flex-column justify-content-start align-items-center">
-                                <a href="http://seven.loc/courses/creating-a-marketing-strategy/">
-                                    <img src="http://seven.loc/wp-content/uploads/2019/12/digital-marketing.png" alt="icon-hands">
-                                </a>
-                                <div class="point-holder d-flex flex-row justify-content-center align-items-center">
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                </div>
-                                <p>
-                                    <a href="http://seven.loc/courses/creating-a-marketing-strategy/" class="read-course" data-course-id="950">
-                                        Build Your Marketing Strategy                    </a>
-                                </p>
-                                <p class="grey">In progress</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-xl-4">
-                            <div class="white-element grey-bg-sect strategies-holder status-new d-flex flex-column justify-content-start align-items-center">
-                                <a href="http://seven.loc/courses/a-guide-to-linkedin/">
-                                    <img src="http://seven.loc/wp-content/uploads/2019/12/link.png" alt="icon-hands">
-                                </a>
-                                <div class="point-holder d-flex flex-row justify-content-center align-items-center">
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                </div>
-                                <p>
-                                    <a href="http://seven.loc/courses/a-guide-to-linkedin/" class="read-course" data-course-id="951">
-                                        Setup LinkedIn For Business Success                    </a>
-                                </p>
-                                <p class="grey">In progress</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-xl-4">
-                            <div class="white-element grey-bg-sect strategies-holder status-new d-flex flex-column justify-content-start align-items-center">
-                                <a href="http://seven.loc/courses/how-to-use-linkedin-sales-navigator-to-grow-your-business/">
-                                    <img src="http://seven.loc/wp-content/uploads/2021/06/coupon.png" alt="icon-hands">
-                                </a>
-                                <div class="point-holder d-flex flex-row justify-content-center align-items-center">
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                </div>
-                                <p>
-                                    <a href="http://seven.loc/courses/how-to-use-linkedin-sales-navigator-to-grow-your-business/" class="read-course" data-course-id="3743">
-                                        Use LinkedIn Sales Navigator for Content Distribution, Audience Expansion, and Positive Prospecting                    </a>
-                                </p>
-                                <p class="grey">New</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-xl-4">
-                            <div class="white-element grey-bg-sect strategies-holder status-new d-flex flex-column justify-content-start align-items-center">
-                                <a href="http://seven.loc/courses/email-marketing-building-a-consistent-communication/">
-                                    <img src="http://seven.loc/wp-content/uploads/2020/01/mailing.png" alt="icon-hands">
-                                </a>
-                                <div class="point-holder d-flex flex-row justify-content-center align-items-center">
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                </div>
-                                <p>
-                                    <a href="http://seven.loc/courses/email-marketing-building-a-consistent-communication/" class="read-course" data-course-id="1062">
-                                        Educate, Entertain, and Serve Your Audience via Email Marketing                    </a>
-                                </p>
-                                <p class="grey">New</p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6 col-xl-4">
-                            <div class="white-element grey-bg-sect strategies-holder status-new d-flex flex-column justify-content-start align-items-center">
-                                <a href="http://seven.loc/courses/using-video-to-grow-your-practice/">
-                                    <img src="http://seven.loc/wp-content/uploads/2022/12/Using-Video-to-Grow-Logo.png" alt="icon-hands">
-                                </a>
-                                <div class="point-holder d-flex flex-row justify-content-center align-items-center">
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                    <div class="point-dot"></div>
-                                </div>
-                                <p>
-                                    <a href="http://seven.loc/courses/using-video-to-grow-your-practice/" class="read-course" data-course-id="12536">
-                                        Using Video to Grow Your Practice                    </a>
-                                </p>
-                                <p class="grey">New</p>
-                            </div>
-                        </div>
+                        @endforeach
 
                         <div class="col-12">
                             <div class="link-box d-flex flex-row justify-content-end align-items-center">
-                                <a href="http://seven.loc/admin-training/" class="read-more">See More            <img src="./dist/img/arrow-right.png" alt="arrow right">
+                                <a href="{{ route('dashboard.courses') }}" class="read-more">See More
+                                    <img src="{{ asset('frontendDashboard/themesAssets/dist/img/arrow-right.png') }}" alt="arrow right">
                                 </a>
                             </div>
                         </div>
@@ -611,106 +405,6 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="sv-task">
-                                    <p class="sv-task__aim">Setup your profile on Seven platform, connect any specific social networks.</p>
-                                    <div class="sv-task__checkboxes">
-                                        <form action="" class="thing_to_do" method="post">
-                                            <div class="checkout__recomendation-checkbox">
-                                                <input id="recomendation-done1812" type="checkbox" name="recomendation" data-type="done" data-idr="1812" data-idu="13" disabled="">
-                                                <label for="recomendation-done1812">
-                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkout__recomendation-checkbox">
-                                                <input id="recomendation-save1812" type="checkbox" name="recomendation" data-idr="1812" data-idu="13" data-type="save" disabled="">
-                                                <label for="recomendation-save1812">
-                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkout__recomendation-checkbox">
-                                                <input id="recomendation-not-for-me1812" type="checkbox" name="recomendation" data-idr="1812" data-idu="13" data-type="not-for-me" disabled="">
-                                                <label for="recomendation-not-for-me1812">
-                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
-                                                </label>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="sv-task">
-                                    <p class="sv-task__aim">Ensure you’re receiving Seven’s bi-weekly digest emails.</p>
-                                    <div class="sv-task__checkboxes">
-                                        <form action="" class="thing_to_do" method="post">
-                                            <div class="checkout__recomendation-checkbox">
-                                                <input id="recomendation-done1813" type="checkbox" name="recomendation" data-type="done" data-idr="1813" data-idu="13" disabled="">
-                                                <label for="recomendation-done1813">
-                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkout__recomendation-checkbox">
-                                                <input id="recomendation-save1813" type="checkbox" name="recomendation" data-idr="1813" data-idu="13" data-type="save" disabled="">
-                                                <label for="recomendation-save1813">
-                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkout__recomendation-checkbox">
-                                                <input id="recomendation-not-for-me1813" type="checkbox" name="recomendation" data-idr="1813" data-idu="13" data-type="not-for-me" disabled="">
-                                                <label for="recomendation-not-for-me1813">
-                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
-                                                </label>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="sv-task">
-                                    <p class="sv-task__aim">Have you been checking Slack? Make sure you have access to our bat-phone if you want to reach us at any time.</p>
-                                    <div class="sv-task__checkboxes">
-                                        <form action="" class="thing_to_do" method="post">
-                                            <div class="checkout__recomendation-checkbox">
-                                                <input id="recomendation-done5784" type="checkbox" name="recomendation" data-type="done" data-idr="5784" data-idu="13" disabled="">
-                                                <label for="recomendation-done5784">
-                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkout__recomendation-checkbox">
-                                                <input id="recomendation-save5784" type="checkbox" name="recomendation" data-idr="5784" data-idu="13" data-type="save" disabled="">
-                                                <label for="recomendation-save5784">
-                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkout__recomendation-checkbox">
-                                                <input id="recomendation-not-for-me5784" type="checkbox" name="recomendation" data-idr="5784" data-idu="13" data-type="not-for-me" disabled="">
-                                                <label for="recomendation-not-for-me5784">
-                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
-                                                </label>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="sv-task">
-                                    <p class="sv-task__aim">Watch the Brand Messaging – Getting Your Foundation in Order training.</p>
-                                    <div class="sv-task__checkboxes">
-                                        <form action="" class="thing_to_do" method="post">
-                                            <div class="checkout__recomendation-checkbox">
-                                                <input id="recomendation-done1815" type="checkbox" name="recomendation" data-type="done" data-idr="1815" data-idu="13" disabled="">
-                                                <label for="recomendation-done1815">
-                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkout__recomendation-checkbox">
-                                                <input id="recomendation-save1815" type="checkbox" name="recomendation" data-idr="1815" data-idu="13" data-type="save" disabled="">
-                                                <label for="recomendation-save1815">
-                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
-                                                </label>
-                                            </div>
-                                            <div class="checkout__recomendation-checkbox">
-                                                <input id="recomendation-not-for-me1815" type="checkbox" name="recomendation" data-idr="1815" data-idu="13" data-type="not-for-me" disabled="">
-                                                <label for="recomendation-not-for-me1815">
-                                                    <span class="checkout__recomendation-box" style="background: lightgrey"></span>
-                                                </label>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
                             </div>
                             <div id="tab-2" class="tab-content">
                                 <div class="tab-content__head">
@@ -723,7 +417,8 @@
                                 </div>
                             </div>
 
-                        </div>                </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="white-element feature_ebooks_blocks">
@@ -736,82 +431,79 @@
                             </div>
 
                             <div class="templates ">
-                                <div class="item">
+                                @foreach($resources as $resource)
 
+                                    @php
 
-                                    <div class=" template item">
-                                        <div class="item-image-wrap">
-                                            <div class="item-image btn-view">
-                                                <img src='http://seven.loc/wp-content/uploads/2022/05/4.jpg' alt='image'>            </div>
-                                            <div class="item-image-ppt-pdf-word hidden" >
-                                                <iframe src="http://seven.loc/wp-content/uploads/2022/05/Seven-Steps-to-Financial-Independence-for-Mid-Career-Professionals-1.pdf#view=Fit" frameborder="0" class="iframe-pdf">
-                                                </iframe>
+                                        $featuredImage = !empty( $resource->img ) ? "/" . $resource->img : '';
+                                        $assetType     = $resource->doc_type;
+
+                                        ob_start();
+                                        switch ( $assetType ) {
+                                           case 'pdf' : ?>
+                                               <iframe src="<?php echo '/' . $resource->doc_file; ?>#view=Fit" frameborder="0" class="iframe-pdf">
+                                               </iframe>
+                                               <?php
+                                               break;
+                                           case 'png' :
+                                               ?>
+                                               <img src="<?php echo '/' . $resource->doc_file; ?>" alt="image">
+                                               <?php
+                                               break;
+                                           default :
+                                               ?>
+                                               <iframe src="//view.officeapps.live.com/op/embed.aspx?src=<?php echo '/' . $resource->doc_file; ?>" frameborder="0">
+                                               </iframe>
+                                               <?php
+                                           break;
+                                        }
+
+                                        $itemImageContent = ob_get_clean();
+
+                                        $imgCustom  = "<img src='". $featuredImage . "' alt='image'>";
+                                        $assetImage = ( !empty( $featuredImage ) && ( $assetType != 'png' ) ) ? true : false;
+
+                                    @endphp
+                                    <div class="item">
+                                        <div class=" template item">
+                                            <div class="item-image-wrap">
+                                                <div class="item-image btn-view">
+                                                    @if ( !empty( $assetImage ) && !empty( $featuredImage ) )
+                                                        {!! $imgCustom !!}
+                                                    @else
+                                                        {!! $itemImageContent !!}
+                                                    @endif
+                                                </div>
+                                                @if ( !empty( $assetImage ) && !empty( $featuredImage ) )
+                                                    <div class="item-image-ppt-pdf-word hidden" >
+                                                        {!! $itemImageContent !!}
+                                                    </div>
+                                                @endif
                                             </div>
-                                        </div>
-                                        <div class="item-text-wrap">
-                                            <p class="feature_ebook_template_class">EBOOKS &AMP; GUIDES</p>
-                                            <h4 class="feature_ebook_template_name item-title">
-                                                <a class="btn-view"> 7 Steps to Financial Independence for Mid-Career Professionals eBook</a>
-                                            </h4>
+                                            <div class="item-text-wrap">
+                                                <p class="feature_ebook_template_class">
+                                                    {{ implode(', ', ( $resource->categories->pluck('title')->toArray() ) ) }}
+                                                </p>
+                                                <h4 class="feature_ebook_template_name item-title">
+                                                    <a class="btn-view"> {{ $resource->title }}</a>
+                                                </h4>
 
-                                            <div class="item-btn-wrap">
-                                                <a class="btn btn-download" href="http://seven.loc/wp-content/uploads/2022/05/Seven-Steps-to-Financial-Independence-for-Mid-Career-Professionals-1.pdf" download>
-                                                    Download                </a>
+                                                <div class="item-btn-wrap">
+                                                    <a class="btn btn-download" href="{{ '/' . $resource->doc_file }}" download>
+                                                        Download
+                                                    </a>
+                                                </div>
+
                                             </div>
-
                                         </div>
                                     </div>
-                                </div>
-                                <div class="item">
+                                @endforeach
 
-
-                                    <div class=" template item">
-                                        <div class="item-image-wrap">
-                                            <div class="item-image btn-view">
-                                                <img src="http://seven.loc/wp-content/uploads/2022/02/2.png" alt="image" style="width: 100%;">
-                                            </div>
-                                        </div>
-                                        <div class="item-text-wrap">
-                                            <p class="feature_ebook_template_class">SOCIAL MEDIA GRAPHICS</p>
-                                            <h4 class="feature_ebook_template_name item-title">
-                                                <a class="btn-view"> A Note on the Invasion of Ukraine</a>
-                                            </h4>
-
-                                            <div class="item-btn-wrap">
-                                                <a class="btn btn-download" href="http://seven.loc/wp-content/uploads/2022/02/2.png" download>
-                                                    Download                </a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-
-
-                                    <div class=" template item">
-                                        <div class="item-image-wrap">
-                                            <div class="item-image btn-view">
-                                                <iframe src="//view.officeapps.live.com/op/embed.aspx?src=http://seven.loc/wp-content/uploads/2021/07/Saving-for-College-Webinar-Emails-1-1.docx" frameborder="0">
-                                                </iframe>
-                                            </div>
-                                        </div>
-                                        <div class="item-text-wrap">
-                                            <p class="feature_ebook_template_class">COLLEGE PLANNING WEBINAR CAMPAIGN</p>
-                                            <h4 class="feature_ebook_template_name item-title">
-                                                <a class="btn-view"> College Planning Webinar Campaign Emails</a>
-                                            </h4>
-
-                                            <div class="item-btn-wrap">
-                                                <a class="btn btn-download" href="http://seven.loc/wp-content/uploads/2021/07/Saving-for-College-Webinar-Emails-1-1.docx" download>
-                                                    Download                </a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
-                            <a href="http://seven.loc/admin-template/" class="read-more">See More  <img src="{{ asset('frontendDashboard/themesAssets/dist/img/arrow-right.png') }}" alt="arrow right"></a>
+                            <a href="{{ route('dashboard.resources')}}" class="read-more">See More
+                                <img src="{{ asset('frontendDashboard/themesAssets/dist/img/arrow-right.png') }}" alt="arrow right">
+                            </a>
 
                         </div>
                     </div>
@@ -830,85 +522,40 @@
                             <h2 class="sv-title weight_title">Featured Campaigns</h2>
 
                             <div class="columns-grid">
-                                <div class="campaign" id="10956">
-                                    <a class="campaign__image d-block ribbon" href="http://seven.loc/campaigns/changing-careers-and-401k-rollovers/"
-                                       style="pointer-events: none; background-image: url(http://seven.loc/wp-content/uploads/2022/01/istockphoto-870083342-170667a-e1643128755400.jpeg);">
-                                        <!--        <span class="ribbon-target" style="--><!--">--><!--</span>-->
-                                    </a>
-                                    <div class="campaign__info">
-                                        <div class="wordiframe" style="display: none;">
-                                            <iframe src="https://view.officeapps.live.com/op/embed.aspx?src=http://seven.loc/wp-content/uploads/2022/10/Changing-Careers-and-401k-Rollovers-1.docx" frameborder="0">
-                                            </iframe>
-                                        </div>
-                                        <span class="campaign__number">
-                Mid-Career Professionals, Pre-Retirement Planning, Timely/Topical        </span>
-                                        <h3 class="campaign__title"><a href="http://seven.loc/campaigns/changing-careers-and-401k-rollovers/" style="pointer-events: none;">Drip: Changing Careers and 401(k) Rollovers</a></h3>
-                                        <div class="campaign__button view_campaign_btn"  >
-                                            <a href="http://seven.loc/wp-content/uploads/2022/10/Changing-Careers-and-401k-Rollovers-1.docx" class="sv-button sv-button--green"
-                                            >
-                                                View            </a>
-                                        </div>
-                                        <div class="campaign__button download_campaign_btn" >
-                                            <a href="http://seven.loc/wp-content/uploads/2022/10/Changing-Careers-and-401k-Rollovers-1.docx" class="sv-button sv-button--green"
-                                            >
-                                                Download            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="campaign" id="10870">
-                                    <a class="campaign__image d-block ribbon" href="http://seven.loc/campaigns/current-market-environment-survey/"
-                                       style="pointer-events: none; background-image: url(http://seven.loc/wp-content/uploads/2022/06/Copy-of-Copy-of-Seven-Group-Blog-Covers-30-1.png);">
-                                        <!--        <span class="ribbon-target" style="--><!--">--><!--</span>-->
-                                    </a>
-                                    <div class="campaign__info">
-                                        <div class="wordiframe" style="display: none;">
-                                            <iframe src="https://view.officeapps.live.com/op/embed.aspx?src=http://seven.loc/wp-content/uploads/2022/01/Market-Survey-Referral-Campaign-7-1.docx" frameborder="0">
-                                            </iframe>
-                                        </div>
-                                        <span class="campaign__number">
-                        </span>
-                                        <h3 class="campaign__title"><a href="http://seven.loc/campaigns/current-market-environment-survey/" style="pointer-events: none;">Survey: Current Market Environment</a></h3>
-                                        <div class="campaign__button view_campaign_btn"  >
-                                            <a href="http://seven.loc/wp-content/uploads/2022/01/Market-Survey-Referral-Campaign-7-1.docx" class="sv-button sv-button--green"
-                                            >
-                                                View            </a>
-                                        </div>
-                                        <div class="campaign__button download_campaign_btn" >
-                                            <a href="http://seven.loc/wp-content/uploads/2022/01/Market-Survey-Referral-Campaign-7-1.docx" class="sv-button sv-button--green"
-                                            >
-                                                Download            </a>
+                                @foreach($campaigns as $campaign)
+                                    <div class="campaign" id="{{$campaign->id}}">
+                                        <a class="campaign__image d-block ribbon"
+                                           href="{{ route('dashboard.single.campaign', $campaign->slug) }}"
+                                            style="pointer-events: none; background-image: url('/{{ $campaign->img }}');">
+                                        </a>
+                                        <div class="campaign__info">
+                                            <div class="wordiframe" style="display: none;">
+                                                <iframe src="https://view.officeapps.live.com/op/embed.aspx?src=http://seven.loc/wp-content/uploads/2022/10/Changing-Careers-and-401k-Rollovers-1.docx" frameborder="0">
+                                                </iframe>
+                                            </div>
+                                            <span class="campaign__number">{{ implode(', ', ( $campaign->categories->pluck('title')->toArray() ) ) }}</span>
+                                            <h3 class="campaign__title">
+                                                <a href="{{ route('dashboard.single.campaign', $campaign->slug) }}"
+                                                   style="pointer-events: none;">{{$campaign->title}}
+                                                </a>
+                                            </h3>
+                                            <div class="campaign__button view_campaign_btn"  >
+                                                <a href="{{ route('dashboard.single.campaign', $campaign->slug) }}" class="sv-button sv-button--green">
+                                                    View
+                                                </a>
+                                            </div>
+                                            <div class="campaign__button download_campaign_btn" >
+                                                <a href="{{ $campaign->pdf_file }}" class="sv-button sv-button--green">
+                                                    Download
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="campaign" id="8131">
-                                    <a class="campaign__image d-block ribbon" href="http://seven.loc/campaigns/prospecting-content-download-follow-up/"
-                                       style="pointer-events: none; background-image: url(http://seven.loc/wp-content/uploads/2022/06/daria-nepriakhina-guiQYiRxkZY-unsplash.jpg);">
-                                        <!--        <span class="ribbon-target" style="--><!--">--><!--</span>-->
-                                    </a>
-                                    <div class="campaign__info">
-                                        <div class="wordiframe" style="display: none;">
-                                            <iframe src="https://view.officeapps.live.com/op/embed.aspx?src=http://seven.loc/wp-content/uploads/2022/06/Prospecting-Content-Download-Follow-Up.docx" frameborder="0">
-                                            </iframe>
-                                        </div>
-                                        <span class="campaign__number">
-                Benefits Financial Advisor        </span>
-                                        <h3 class="campaign__title"><a href="http://seven.loc/campaigns/prospecting-content-download-follow-up/" style="pointer-events: none;">Prospecting &#038; Onboarding: Content Download Follow Up</a></h3>
-                                        <div class="campaign__button view_campaign_btn"  >
-                                            <a href="http://seven.loc/wp-content/uploads/2022/06/Prospecting-Content-Download-Follow-Up.docx" class="sv-button sv-button--green"
-                                            >
-                                                View            </a>
-                                        </div>
-                                        <div class="campaign__button download_campaign_btn" >
-                                            <a href="http://seven.loc/wp-content/uploads/2022/06/Prospecting-Content-Download-Follow-Up.docx" class="sv-button sv-button--green"
-                                            >
-                                                Download            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                                 <img src="./dist/img/loader.gif" id="loader_campaign" alt="loader" style=" display: none; position: absolute; left: 50%; top: 50%;"/>
                             </div>
 
-                            <a href="http://seven.loc/admin-campaigns/" class="read-more">
+                            <a href="{{route('dashboard.campaigns')}}" class="read-more">
                                 See More
                                 <img src="{{ asset('frontendDashboard/themesAssets/dist/img/arrow-right.png') }}" alt="arrow right">
                             </a>
