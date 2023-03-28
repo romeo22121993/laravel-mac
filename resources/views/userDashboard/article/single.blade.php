@@ -156,7 +156,7 @@
                                         </div>
                                         <div class="col-7 pl-0  flex-row justify-content-start align-items-center">
                                             <p>
-                                                <a href="{{ route('single.article', $relatedArticle->slug) }}" class="read-article"
+                                                <a href="{{ route('dashboard.single.article', $relatedArticle->slug) }}" class="read-article"
                                                    data-post-id="{{ $relatedArticle->id }}">
                                                     {{ $relatedArticle->title }}
                                                 </a>

@@ -1,11 +1,11 @@
 <tr class="item">
     <td>
-        <a href="{{ route('single.article', $article->slug)}}">
+        <a href="{{ route('dashboard.single.article', $article->slug)}}">
             <img alt="img1" src="/{{$article->img}}">
         </a>
     </td>
     <td>
-        <a href="{{ route('single.article', $article->slug) }}">
+        <a href="{{ route('dashboard.single.article', $article->slug) }}">
             {{$article->title}}
         </a>
         <p class="grey"></p>
@@ -24,7 +24,7 @@
         </a>
     </td>
     <td>
-        <a class="btn btn-view read-article" data-post-id="{{ $article->id }}" href="{{ route('single.article', $article->slug) }}">
+        <a class="btn btn-view read-article" data-post-id="{{ $article->id }}" href="{{ route('dashboard.single.article', $article->slug) }}">
             View
         </a>
     </td>

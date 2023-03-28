@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-12 col-lg-8">
                     <div class="buttons-line d-flex flex-wrap justify-content-end align-items-start">
-                        <a href="{{ route('single.campaign.report', $campaign->slug) }}" class="sv-button sv-button--nav">
+                        <a href="{{ route('dashboard.single.campaign.report', $campaign->slug) }}" class="sv-button sv-button--nav">
                             View Report
                         </a>
                         <a href="#"  data-id="{{$campaign->id}}" class="sv-button sv-button--nav clone_campaign_single_page_btn">

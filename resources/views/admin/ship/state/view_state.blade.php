@@ -33,8 +33,8 @@
                                                 <td> {{ $item->district->district_name }}  </td>
                                                 <td> {{ $item->state_name }}  </td>
                                                 <td width="40%">
-                                                    <a href="{{ route('shipping.state.edit',  $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i> </a>
-                                                    <a href="{{ route('shipping.state.delete', $item->id) }}" class="btn btn-danger" title="Delete Data" id="delete">
+                                                    <a href="{{ route('wpadmin.shipping.state.edit',  $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i> </a>
+                                                    <a href="{{ route('wpadmin.shipping.state.delete', $item->id) }}" class="btn btn-danger" title="Delete Data" id="delete">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="box-body">
                             <div class="table-responsive">
-                                <form method="post" action="{{ route('shipping.state.store') }}" >
+                                <form method="post" action="{{ route('wpadmin.shipping.state.store') }}" >
                                     @csrf
 
                                     <div class="form-group">

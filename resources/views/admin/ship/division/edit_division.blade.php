@@ -13,7 +13,7 @@
                         </div>
                         <div class="box-body">
                             <div class="table-responsive">
-                                <form method="post" action="{{ route('shipping.division.update', $divisions->id) }}" >
+                                <form method="post" action="{{ route('wpadmin.shipping.division.update', $divisions->id) }}" >
                                     @csrf
                                     <div class="form-group">
                                         <h5>Division Name  <span class="text-danger">*</span></h5>

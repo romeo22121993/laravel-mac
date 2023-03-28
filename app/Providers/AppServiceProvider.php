@@ -53,7 +53,7 @@ class AppServiceProvider extends ServiceProvider
             /* end Products Part */
 
             $courseProgress = !empty($user) ? $user->progress: "";
-            $courses        = Course::all()->pluck('id')->toArray();
+            $courses1       = Course::all()->pluck('id')->toArray();
             $currentMonth   = date('Y-m');
             $postClonedArticles = !empty($user) ? DB::table('usermeta')->where('user_id', $user->id)->first() : [];
             $getDownloads   = empty($postClonedArticles->articles_downloads) ? array() : json_decode($postClonedArticles->articles_downloads, true);
@@ -70,7 +70,7 @@ class AppServiceProvider extends ServiceProvider
                 'productCategories' => $productCategories,
                 'productBrands'     => $productBrands,
                 'courseProgress'    => json_decode($courseProgress),
-                'courses'           => $courses,
+                'courses1'          => $courses1,
                 'monthDownloads'    => $monthDownloads,
             ]);
 

@@ -14,7 +14,7 @@
             <div class="col-12 col-md-4">
                 <form id="user-image" method="post" enctype="multipart/form-data" >
                     <img
-                        src="@if( empty( $currentUser->avatar_img ) || ( $currentUser->avatar_img == 'none' ) ) {{ asset('/img/face.jpeg') }} @else {{ asset('/uploads/users/'.$currentUser->avatar_img) }}  @endif"
+                        src="@if( empty( $currentUser->avatar_img ) || ( $currentUser->avatar_img == 'none' ) ) {{ asset('/img/face.jpeg') }} @else {{ "/".$currentUser->avatar_img }}  @endif"
                         alt="info-img" id="user_img_style" />
                     <div class="justify-content-start align-items-left">
                         <label for="user_image" class="custom-file-upload small">
@@ -51,7 +51,7 @@
                     <span class="bold_span">
                         @if(!empty($courseProgress))  {{count(json_decode($courseProgress->completed_courses, true)) }} @else 0 @endif
                         out of
-                        {{ count($courses) }}
+                        {{ count($courses1) }}
                     </span>
                     lessons completed
                 </p>

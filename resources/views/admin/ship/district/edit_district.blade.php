@@ -14,7 +14,7 @@
                         </div>
                         <div class="box-body">
                             <div class="table-responsive">
-                                <form method="post" action="{{ route('shipping.district.update', $district->id ) }}" >
+                                <form method="post" action="{{ route('wpadmin.shipping.district.update', $district->id ) }}" >
                                     @csrf
 
                                     <div class="form-group">

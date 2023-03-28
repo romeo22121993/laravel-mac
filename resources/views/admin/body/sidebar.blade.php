@@ -149,9 +149,9 @@
                 </a>
                 <div class="collapse" id="ui-basic6">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('shipping.division.all') }}">Divisions</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('shipping.district.all') }}">Districts</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="{{ route('shipping.state.all') }}">States</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.shipping.division.all') }}">Divisions</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.shipping.district.all') }}">Districts</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('wpadmin.shipping.state.all') }}">States</a></li>
                     </ul>
                 </div>
             </li>

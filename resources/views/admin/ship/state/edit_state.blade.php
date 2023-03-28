@@ -16,7 +16,7 @@
                         </div>
                         <div class="box-body">
                             <div class="table-responsive">
-                                <form method="post" action="{{ route('shipping.state.update', $state->id) }}" >
+                                <form method="post" action="{{ route('wpadmin.shipping.state.update', $state->id) }}" >
                                     @csrf
 
                                     <div class="form-group">

@@ -1,5 +1,5 @@
 <div class="campaign" id="{{$campaign->id}}">
-    <a class="campaign__image d-block ribbon" href="{{ route('single.campaign', $campaign->slug) }}"
+    <a class="campaign__image d-block ribbon" href="{{ route('dashboard.single.campaign', $campaign->slug) }}"
        style="pointer-events: none; background-image: url('/{{ $campaign->img }}');">
     </a>
     <div class="campaign__info"  style="justify-content: space-between;">
@@ -11,14 +11,14 @@
         <ht/>
         <span class="campaign__number">{{ implode(', ', ( $campaign->topics->pluck('title')->toArray() ) ) }}</span>
         <h3 class="campaign__title">
-            <a href="{{ route('single.campaign', $campaign->slug) }}" style="pointer-events: none;">{{$campaign->title}}</a>
+            <a href="{{ route('dashboard.single.campaign', $campaign->slug) }}" style="pointer-events: none;">{{$campaign->title}}</a>
         </h3>
 
         <div class="campaign__button" style="display: initial;">
-            <a href="{{ route('single.campaign', $campaign->slug) }}" class="sv-button sv-button--green">View Campaign</a>
+            <a href="{{ route('dashboard.single.campaign', $campaign->slug) }}" class="sv-button sv-button--green">View Campaign</a>
         </div>
         <div class="campaign__button" style="display: initial;">
-            <a href="{{ route('single.campaign', $campaign->slug) }}/?report=1" class="sv-button sv-button--green">View Report</a>
+            <a href="{{ route('dashboard.single.campaign', $campaign->slug) }}/?report=1" class="sv-button sv-button--green">View Report</a>
         </div>
 
         <div class="campaign__button" style="display: initial;">

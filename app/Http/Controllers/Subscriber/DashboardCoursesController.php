@@ -38,14 +38,15 @@ class DashboardCoursesController extends Controller
     public function coursesPage() {
 
         $user       = Auth::user();
-        $courses    = Course::where('published', '=', 1)->paginate( $this->number );
+        $courses    = Course::where('published', '=', 1)->paginate($this->number);
         $categories = CourseCategory::all();
 
         $courseProgress = $user->progress;
         $completedCourses   = !empty( $courseProgress->completed_courses ) ? json_decode( $courseProgress->completed_courses, true ) : [];
         $progressingCourses = !empty( $courseProgress->progressing_courses ) ? json_decode( $courseProgress->progressing_courses, true ) : [];
 
-        return view('userDashboard.pages.courses', compact( 'courses', 'categories', 'progressingCourses', 'completedCourses' ) );
+        return view('userDashboard.pages.courses', compact(
+            'courses', 'categories', 'progressingCourses', 'completedCourses' ) );
     }
 
 

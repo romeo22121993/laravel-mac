@@ -32,8 +32,8 @@
                                                 <td> {{ $item->division->division_name }}  </td>
                                                 <td> {{ $item->district_name }}  </td>
                                                 <td width="40%">
-                                                <a href="{{ route('shipping.district.edit',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i> </a>
-                                                <a href="{{ route('shipping.district.delete',$item->id) }}" class="btn btn-danger" title="Delete Data" id="delete">
+                                                <a href="{{ route('wpadmin.shipping.district.edit',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i> </a>
+                                                <a href="{{ route('wpadmin.shipping.district.delete',$item->id) }}" class="btn btn-danger" title="Delete Data" id="delete">
                                                 <i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="box-body">
                             <div class="table-responsive">
-                                <form method="post" action="{{ route('shipping.district.store') }}" >
+                                <form method="post" action="{{ route('wpadmin.shipping.district.store') }}" >
                                     @csrf
 
                                     <div class="form-group">
