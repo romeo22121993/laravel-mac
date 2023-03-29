@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\CampaignCreated;
 use App\Http\Controllers\Controller;
 use App\Jobs\ArticleObserverJob;
 use App\Models\Article;
@@ -157,6 +158,8 @@ class CampaignController extends Controller
         }
 
         $campaign->save();
+
+        event(new CampaignCreated($campaign));
 
         $this->setDetailsByCampaign($request->all(), $campaign->id);
         $this->setCategoriesByCampaign($categories, $campaign->id);

@@ -844,7 +844,7 @@
 
                     <table class="sv-table">
                         <thead>
-                        <tr>
+                            <tr>
                             <th>Status</th>
                             <th>Campaign Title</th>
                             <th>Start Date</th>
@@ -854,39 +854,31 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td data-th="Status">
-                                <div class="sv-table__status noactive">Draft</div>
-                            </td>
-                            <td data-th="Campaign Title"><a href="http://seven.loc/campaigns/market-volatility-win-back-campaign/">Private: Timely: Market Volatility Win-Back Campaign</a></td>
-                            <td data-th="Start Date"></td>
-                            <td data-th="Open Rate">0%</td>
-                            <td data-th="CTR">0%</td>
-                            <td>
-                                <a href="http://seven.loc/campaigns/market-volatility-win-back-campaign/?report=1">
-                                    <i class="fa fa-chevron-right"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-th="Status">
-                                <div class="sv-table__status noactive">Draft</div>
-                            </td>
-                            <td data-th="Campaign Title"><a href="http://seven.loc/?post_type=campaigns&amp;p=4968">September Market Commentary: Hostage to Headlines?</a></td>
-                            <td data-th="Start Date"></td>
-                            <td data-th="Open Rate">0%</td>
-                            <td data-th="CTR">0%</td>
-                            <td>
-                                <a href="http://seven.loc/?post_type=campaigns&amp;p=4968?report=1">
-                                    <i class="fa fa-chevron-right"></i>
-                                </a>
-                            </td>
-                        </tr>
+                            @foreach($campaigns as $campaign)
+                                <tr>
+                                    <td data-th="Status">
+                                        <div class="sv-table__status noactive">Draft</div>
+                                    </td>
+                                    <td data-th=" {{$campaign->title}}">
+                                        <a href="{{ route('dashboard.single.campaign', $campaign->slug) }}">
+                                            {{$campaign->title}}
+                                        </a>
+                                    </td>
+                                    <td data-th="Start Date"></td>
+                                    <td data-th="Open Rate">0%</td>
+                                    <td data-th="CTR">0%</td>
+                                    <td>
+                                        <a href="http://seven.loc/campaigns/market-volatility-win-back-campaign/?report=1">
+                                            <i class="fa fa-chevron-right"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
                 <div class="campaigns-report__link">
-                    <a href="http://seven.loc/admin-campaigns/?page=all_reports">
+                    <a href="{{route('dashboard.campaigns')}}">
                         See More
                         <img src="{{ asset('frontendDashboard/themesAssets/dist/img/arrow-right.png') }}" alt="arrow right">
                     </a>

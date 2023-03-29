@@ -38,7 +38,7 @@ class DashboardController extends Controller
         $usersCount = User::count();
         $articles   = Article::where('original_type', 'original')->paginate(5);
         $courses    = Course::where('published', '=', 1)->paginate(6);
-        $campaigns = Campaign::where('original_type', 'original')->paginate(6);
+        $campaigns  = Campaign::where('original_type', 'original')->paginate(6);
         $resources  = Resource::paginate(3);
 
         return view('userDashboard.pages.index', compact(

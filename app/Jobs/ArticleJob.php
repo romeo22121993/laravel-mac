@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\ArticleMail;
 use App\Mail\PostMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -11,22 +12,22 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Mail;
 
-class PostObserverJob implements ShouldQueue
+class ArticleJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $data;
-    public $typeAction;
+    public $comment;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($data, $typeAction)
+    public function __construct($data, $comment)
     {
         $this->data = $data;
-        $this->typeAction = $typeAction;
+        $this->comment = $comment;
     }
 
     /**
@@ -36,6 +37,7 @@ class PostObserverJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to(env('APP_ADMIN_EMAIL'))->send(new PostMail($this->data, $this->typeAction));
+        Mail::to(env('APP_ADMIN_EMAIL'))->send(new ArticleMail($this->data, 'send to useer'));
+        Mail::to(env('APP_ADMIN_EMAIL'))->send(new ArticleMail($this->data, 'send to email'));
     }
 }

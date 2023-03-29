@@ -56,7 +56,7 @@
                                                 , Parent: {{ \App\Models\Article::find($article->parent_id)->title }}, Author: {{ \App\Models\User::find($article->author_id)->name }}
                                                 @endif
                                             </td>
-                                            <td><a href="{{ route( 'single.article', $article->slug ) }}">View Article</a></td>
+                                            <td><a href="{{ route( 'dashboard.single.article', $article->slug ) }}">View Article</a></td>
                                             <td>
                                                 <a href="{{ route('wpadmin.articles.edit',  $article->id) }}" class="btn btn-info">Edit</a>
                                                 <a href="{{ route('wpadmin.articles.delete', $article->id) }}" onclick="return confirm('Are you sure to delete')" class="btn btn-danger">Delete</a>

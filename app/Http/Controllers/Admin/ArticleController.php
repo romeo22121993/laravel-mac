@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\ArticleCreated;
 use App\Http\Controllers\Controller;
+use App\Jobs\ArticleJob;
 use App\Jobs\ArticleObserverJob;
 use App\Modules\FilesUploads;
 use Illuminate\Http\Request;
@@ -149,6 +151,17 @@ class ArticleController extends Controller
         }
 
         $article->save();
+
+        // via events and listeners
+        //event(new ArticleCreated($article));
+
+        //or
+        // or via job
+        dispatch( new ArticleJob($article, 'send to email1' ) )
+            //->onConnection('redis') // async
+            ->onConnection('sync') // async
+            ->onQueue('create_articles');
+
 
         $this->setCategoriesByArticle ($categories, $article->id);
 

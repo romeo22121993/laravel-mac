@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Events\ArticleCreated;
+use App\Events\CampaignCreated;
+use App\Listeners\ArticleEmailAdmin;
+use App\Listeners\ArticleEmailUser;
+use App\Listeners\CampaignEmailAdmin;
+use App\Listeners\CampaignEmailUser;
 use App\Models\Order;
 use App\Observers\OrderObserver;
 use Illuminate\Auth\Events\Registered;
@@ -23,6 +29,14 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        ArticleCreated::class => [
+            ArticleEmailAdmin::class,
+            ArticleEmailUser::class
+        ],
+        CampaignCreated::class => [
+            CampaignEmailAdmin::class,
+            CampaignEmailUser::class
         ],
         'App\Events\NewChatMessage' => [
             'App\Listeners\SendChatNotification'

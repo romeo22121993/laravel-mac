@@ -42,7 +42,7 @@
                                                     src="@if( $article->img != 'none' ) {{ "/$article->img" }} @else {{ asset('/img/none.jpg') }} @endif">
                                             </td>
                                             <td>
-                                                <a href="{{ route('single.article', $article->slug) }}">View Article</a>
+                                                <a href="{{ route('dashboard.single.article', $article->slug) }}">View Article</a>
                                             </td>
                                             <td>
                                                 <a href="{{ route('wpadmin.articles.edit',  $article->id) }}" class="btn btn-info">Edit</a>
